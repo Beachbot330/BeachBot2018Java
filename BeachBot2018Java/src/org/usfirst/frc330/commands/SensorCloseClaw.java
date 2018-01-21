@@ -48,12 +48,13 @@ public class SensorCloseClaw extends BBCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        return Robot.grabber.isCubePresent();
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
+    	Robot.grabber.closeClaw();
     }
 
     // Called when another command which requires one or more of the same

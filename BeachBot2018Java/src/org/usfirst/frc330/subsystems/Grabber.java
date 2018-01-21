@@ -87,6 +87,8 @@ public class Grabber extends Subsystem {
     public void closeClaw() {
     	pincher.set(DoubleSolenoid.Value.kReverse);
     }
-
+    public boolean isCubePresent() {
+    	return sensor.get();
+    }
 }
 
