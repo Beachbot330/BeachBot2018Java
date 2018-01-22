@@ -14,9 +14,9 @@ package org.usfirst.frc330.subsystems;
 
 import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.commands.*;
-import org.usfirst.frc330.constants.ArmConst;
 import org.usfirst.frc330.constants.LiftConst;
 import org.usfirst.frc330.util.CSVLoggable;
+import org.usfirst.frc330.util.CSVLogger;
 import org.usfirst.frc330.util.Logger;
 import org.usfirst.frc330.util.Logger.Severity;
 
@@ -77,12 +77,12 @@ public class Lift extends Subsystem {
         CSVLoggable temp = new CSVLoggable(true) {
 			public double get() { return getPosition(); }
 		};
-		Robot.csvLogger.add("LiftPosition", temp);
+		CSVLogger.getInstance().add("LiftPosition", temp);
 		
 		temp = new CSVLoggable(true) {
 			public double get() { return getOutput(); }
 		};
-		Robot.csvLogger.add("LiftOutput", temp);
+		CSVLogger.getInstance().add("LiftOutput", temp);
 		
 		//TODO Log lift setpoint
 		

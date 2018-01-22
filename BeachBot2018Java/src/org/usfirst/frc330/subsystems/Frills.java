@@ -70,6 +70,16 @@ public class Frills extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+    
+    
+    
+    //Camera Functions ----------------------------------------------------
+    //TODO implement frills.initDriverCamera();  (See 2017 Code)
+    //TODO Implement the other camera functions as well
+    public void initDriverCamera() {
+    	
+    }
+    //  </Camera Functions> -----------------------------------------------
 
 }
 
