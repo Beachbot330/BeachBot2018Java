@@ -14,6 +14,8 @@ package org.usfirst.frc330.subsystems;
 
 import org.usfirst.frc330.commands.*;
 import org.usfirst.frc330.constants.LiftConst;
+import org.usfirst.frc330.util.Logger;
+import org.usfirst.frc330.util.Logger.Severity;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.command.Subsystem;
