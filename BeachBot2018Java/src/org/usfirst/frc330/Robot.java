@@ -126,7 +126,18 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void disabledInit(){
-    	//TODO copy over code from 2017 (and update it of course!)
+    	//VERIFY copy over code from 2017 (and update it of course!) -mf
+    	Logger.getInstance().println("Disabled Init",true);
+		Scheduler.getInstance().removeAll();
+		Robot.grabber.closeClaw();
+		Robot.chassis.disengagePTO();
+		Robot.lift.stopLift();
+		//Robot.pickup.gearRelease();
+		Robot.climber.lockPlatforms();
+		Robot.arm.stopArm();
+		Robot.arm.stopWrist();
+		Robot.grabber.pickupOff();
+		Robot.chassis.stopDrive();
     }
 
     @Override

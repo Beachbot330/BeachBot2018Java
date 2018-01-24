@@ -183,6 +183,11 @@ public class Lift extends Subsystem {
     public void setLiftAbsoluteTolerance(double absvalue) {
     	tolerance = absvalue;
 	}
+
+	public void stopLift() {
+		// TODO create stopLift method -mf
+		
+	}
     
 }
 

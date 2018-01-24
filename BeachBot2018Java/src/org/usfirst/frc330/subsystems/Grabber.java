@@ -90,5 +90,10 @@ public class Grabber extends Subsystem {
     public boolean isCubePresent() {
     	return sensor.get();
     }
+
+	public void pickupOff() {
+		// TODO create pickupOff method -MF
+		
+	}
 }
 
