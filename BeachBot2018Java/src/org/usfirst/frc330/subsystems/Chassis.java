@@ -166,10 +166,15 @@ public class Chassis extends Subsystem {
         tankDrive(0, 0);  
     }
 
-	public void disengagePTO() {
-		// TODO create disengagePTO method - mf
-		
+    //------------------------------------
+    // Set methods
+    //------------------------------------
+	public void setPTOengaged() {
+		pTO.set(true);
 	}
-	// TODO add engagePTO method -ap
+	
+	public void setPTOdisengaged() {
+		pTO.set(false);
+	}
 }
 
