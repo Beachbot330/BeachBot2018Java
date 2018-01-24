@@ -157,14 +157,19 @@ public class Lift extends Subsystem {
     	return 0;
     }
     
-    //TODO implement getSetpoint
-    
+    //VERIFY implement getSetpoint -JB
+    public double getSetpoint() {
+    	return lift.getClosedLoopTarget(0);
+    }
     
     //------------------------------------------------------------------------------
     // SET Methods
     //------------------------------------------------------------------------------
 
-    //TODO Implement setPosition(double setpoint)
+    //VERIFY Implement setPosition(double setpoint) -JB
+    public void setPosition(double setpoint) {
+    	lift.set(setpoint);
+    }
     
     //------------------------------------------------------------------------------
     // Support Methods
@@ -186,6 +191,8 @@ public class Lift extends Subsystem {
 
 	public void stopLift() {
 		// TODO create stopLift method -mf
+		
+		
 		
 	}
     
