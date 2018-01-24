@@ -107,7 +107,7 @@ public class Robot extends TimedRobot {
         //Logger.getInstance().println("CAN Talon Firmware Version: " + RobotMap.shooterShooter.GetFirmwareVersion(), Severity.INFO);
         
 
-        if (isPracticeRobot())
+        if (getIsPracticeRobot())
         	Logger.getInstance().println("Practice Robot Detected",true);
         else
         	Logger.getInstance().println("Competition Robot Detected",true);
@@ -183,10 +183,9 @@ public class Robot extends TimedRobot {
     }
     
     // -----------------------------------------------------------
-    // Other Methods
+    // Get Methods
     // -----------------------------------------------------------
-    //TODO implement isPracticeRobot. Make sure to add the DIO in RobotBuilder
-    public boolean isPracticeRobot() {
-    	return true;
+    public boolean getIsPracticeRobot() {
+    	return frills.getIsPracticeRobot();
     }
 }
