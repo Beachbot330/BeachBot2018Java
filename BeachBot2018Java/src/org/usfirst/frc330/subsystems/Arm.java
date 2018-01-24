@@ -13,6 +13,8 @@ package org.usfirst.frc330.subsystems;
 
 
 import org.usfirst.frc330.commands.*;
+import org.usfirst.frc330.util.Logger;
+
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -68,12 +70,14 @@ public class Arm extends Subsystem {
     }
 
 	public void stopArm() {
-		// TODO create stopArm method -mf
+		elbow.disable();
+		Logger.getInstance().println("Arm disabled", Logger.Severity.INFO);
 		
 	}
 
 	public void stopWrist() {
-		// TODO create stopWrist method -mf
+		wrist.disable();
+		Logger.getInstance().println("Wrist disabled", Logger.Severity.INFO);
 		
 	}
 

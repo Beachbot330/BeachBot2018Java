@@ -186,6 +186,8 @@ public class Lift extends Subsystem {
 
 	public void stopLift() {
 		// TODO create stopLift method -mf
+		lift.disable();
+		Logger.getInstance().println("Lift disabled", Logger.Severity.INFO);
 		
 	}
     
