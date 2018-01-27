@@ -211,8 +211,8 @@ public class Lift extends Subsystem {
 	}
 
 	public boolean getLiftOnTarget() {
-		// TODO Auto-generated method stub
-		return false;
+		double error = lift.getClosedLoopError(0);
+    	return (Math.abs(error) < tolerance);
 	}
     
 }
