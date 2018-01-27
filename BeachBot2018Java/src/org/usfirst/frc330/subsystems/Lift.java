@@ -65,7 +65,7 @@ public class Lift extends Subsystem {
         lift.setInverted(false); //set if the motor direction does not match the sensor direction
         setPIDConstants(LiftConst.proportional, LiftConst.integral, LiftConst.derivative, true);
         setLiftAbsoluteTolerance(LiftConst.tolerance);
-        // VERIFY Port the following block: -JB
+        // TODO Joey: I don't see you setting the lower and upper limits. You enable the limits, but don't set them
 		//      setLowerSoftLimit(ArmConst.limitLowerAngle);
 		//    	setUpperSoftLimit(ArmConst.limitUpperAngle);
 		//    	armL.enableForwardSoftLimit(true);
@@ -94,7 +94,11 @@ public class Lift extends Subsystem {
 		};
 		CSVLogger.getInstance().add("LiftOutput", temp);
 		
-		//TODO Log lift setpoint
+		temp = new CSVLoggable(true) {
+			public double get() { return getSetpoint(); }
+		};
+		CSVLogger.getInstance().add("LiftSetpoint", temp);
+		//VERIFY Log lift setpoint
 		
     }
 
@@ -159,7 +163,6 @@ public class Lift extends Subsystem {
     	return lift.getMotorOutputVoltage();
     }
     
-    //VERIFY implement getSetpoint -JB
     public double getSetpoint() {
     	return lift.getClosedLoopTarget(0);
     }
@@ -168,7 +171,8 @@ public class Lift extends Subsystem {
     // SET Methods
     //------------------------------------------------------------------------------
 
-    //VERIFY Implement setPosition(double setpoint) -JB
+    //TODO Joey: set has a single parameter and double parameter option. Use the double parameter option
+    // and set it to controlMode: position (see 2016 arm if you want an example)
     public void setPosition(double setpoint) {
     	lift.set(setpoint);
     }
