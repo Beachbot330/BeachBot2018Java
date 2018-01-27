@@ -48,7 +48,7 @@ public class Defense extends BBCommandGroup {
     	
     	//goal is to quickly become compact
     	addParallel(new SetArmAngle(-60.0)); //lower arm to lowest level
-    	addSequential(new SetHandAngle(90.0)); //raise hand to 90 angle
+    	addParallel(new SetHandAngle(90.0)); //raise hand to 90 angle
     	addSequential(new SetLiftPosition(0.0)); //lower lift
     	
     } 
