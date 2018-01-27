@@ -79,21 +79,21 @@ public class Arm extends Subsystem {
         
         //		Joey's notes							all time outs estimated to 10 ms
         												//Device,pidIdx,timeoutMS
-        elbow.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-        elbow.setInverted(false);
-        elbow.setSensorPhase(false);
+        armL.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+        armL.setInverted(false);
+        armL.setSensorPhase(false);
         setPIDConstantsArm(ArmConst.proportional, ArmConst.integral, ArmConst.derivative,true);
         setArmAbsoluteTolerance(ArmConst.tolerance);
         /*
         setLowerSoftLimit(ArmConst.limitLowerAngle);
 		setUpperSoftLimit(ArmConst.limitUpperAngle);
 		*/
-		elbow.configForwardSoftLimitEnable(true, 10);
-		elbow.configReverseSoftLimitEnable(false, 10);
-		elbow.setNeutralMode(NeutralMode.Brake);
+		armL.configForwardSoftLimitEnable(true, 10);
+		armL.configReverseSoftLimitEnable(false, 10);
+		armL.setNeutralMode(NeutralMode.Brake);
 		//create constants for these two in ArmConst
-		elbow.configOpenloopRamp(ArmConst.VoltageRampRate, 10);
-		elbow.configNominalOutputForward(ArmConst.MaxOutputVoltage, 10);
+		armL.configOpenloopRamp(ArmConst.VoltageRampRate, 10);
+		armL.configNominalOutputForward(ArmConst.MaxOutputVoltage, 10);
 		
 		
 		wrist.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
@@ -152,7 +152,7 @@ public class Arm extends Subsystem {
 	//VERIFY implement getArmAngle -JB
     public double getArmAngle()
 	{
-		return (-convertRotationsToDegrees(elbow.getSelectedSensorPosition(0)));
+		return (-convertRotationsToDegrees(armL.getSelectedSensorPosition(0)));
 	} 
     
 	
@@ -172,7 +172,7 @@ public class Arm extends Subsystem {
 	
 	//VERIFY implement get armOutput -JB
     public double getArmOutput() {
-		return elbow.getMotorOutputVoltage()/elbow.getBusVoltage();
+		return armL.getMotorOutputVoltage()/armL.getBusVoltage();
 	}
 	
 	//VERIFY implement getWristAngle -JB
@@ -205,12 +205,12 @@ public class Arm extends Subsystem {
 	//VERIFY Implement setArmOutput -JB
     public void setArm(double output) {
     //	changeControlMode(ControlMode.PercentOutput);
-    	elbow.set(ControlMode.PercentOutput, output);
+    	armL.set(ControlMode.PercentOutput, output);
     }
     //VERIFY Implement setArmAngle -JB
     public void setArmAngle(double position) {
-    	elbow.set(ControlMode.Position, position);
-    	elbow.set(convertDegreesToRotations(position));
+    	armL.set(ControlMode.Position, position);
+    	armL.set(convertDegreesToRotations(position));
     //	if (SCtable != null)
     //		SCtable.putNumber("setpoint", position);
     }
@@ -221,15 +221,15 @@ public class Arm extends Subsystem {
    	{
        	if(timeout) {
        		//assume using main PID loop (index 0)
-       		elbow.config_kP(0, P, 10);
-       		elbow.config_kI(0, I, 10);
-       		elbow.config_kD(0, D, 10);
+       		armL.config_kP(0, P, 10);
+       		armL.config_kI(0, I, 10);
+       		armL.config_kD(0, D, 10);
        	}
        	else {
    	    	//assume using main PID loop (index 0)
-   			elbow.config_kP(0, P, 0);
-   			elbow.config_kI(0, I, 0);
-   			elbow.config_kD(0, D, 0);
+   			armL.config_kP(0, P, 0);
+   			armL.config_kI(0, I, 0);
+   			armL.config_kD(0, D, 0);
        	}
        	
            Logger.getInstance().println("Lift PID set to: " + P + ", " + I + ", " + D, Severity.INFO);
@@ -237,7 +237,7 @@ public class Arm extends Subsystem {
     
     //VERIFY IMplement setMaxArmOutput -JB
     public void setMaxArmOutput(double percentOut){
-    	elbow.configNominalOutputForward(percentOut,10);
+    	armL.configNominalOutputForward(percentOut,10);
     	Logger.getInstance().println("Max Arm output set to: " + percentOut, Severity.INFO);
     }
     
@@ -289,7 +289,7 @@ public class Arm extends Subsystem {
 	// Other Methods
 	//--------------------------------------------------------------------
 	public void stopArm() {
-		elbow.disable();
+		armL.disable();
 		Logger.getInstance().println("Arm disabled", Logger.Severity.INFO);
 		//TODO Makena: See 2016 code for an example of what else needs to be added
 	}
@@ -313,7 +313,7 @@ public class Arm extends Subsystem {
 	    		inertiaCounter--;
 				setArm(0);
 	    	}
-	    	else if ( elbow.getControlMode() != ControlMode.Position) {
+	    	else if ( armL.getControlMode() != ControlMode.Position) {
 				angle = getArmAngle();
 				
 				
