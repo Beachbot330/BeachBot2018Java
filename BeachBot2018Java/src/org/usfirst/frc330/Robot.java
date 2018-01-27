@@ -165,12 +165,17 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+        //VERIFY copy over code from 2017 (and update it of course!)
+        Logger.getInstance().println("Teleop Init", true);
+    	Logger.getInstance().updateDate();
+    	CSVLogger.getInstance().updateDate();
+    	buzzer.enable(1.25);
+    	Robot.climber.lockPlatforms();
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        //TODO copy over code from 2017 (and update it of course!)
     }
 
     /**

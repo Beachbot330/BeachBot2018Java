@@ -94,7 +94,11 @@ public class Lift extends Subsystem {
 		};
 		CSVLogger.getInstance().add("LiftOutput", temp);
 		
-		//TODO Log lift setpoint
+		temp = new CSVLoggable(true) {
+			public double get() { return getSetpoint(); }
+		};
+		CSVLogger.getInstance().add("LiftSetpoint", temp);
+		//VERIFY Log lift setpoint
 		
     }
 
