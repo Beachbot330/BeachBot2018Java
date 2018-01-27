@@ -160,6 +160,7 @@ public class Robot extends TimedRobot {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
         //TODO copy over code from 2017 (and update it of course!)
+        
     }
 
     /**
@@ -167,8 +168,13 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousPeriodic() {
+    	chassis.calcXY();
+
         Scheduler.getInstance().run();
-        //TODO copy over code from 2017 (and update it of course!)
+        //VERIFY copy over code from 2017 (and update it of course!)-JB
+        chassis.pidDriveAuto();
+    	CSVLogger.getInstance().writeData();
+		buzzer.update();
     }
 
     @Override
