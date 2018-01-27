@@ -20,7 +20,7 @@ public class SetLiftPosition extends BBCommand {
 	
 	double position;
     public SetLiftPosition() {
-    	this.position = position;
+    	
         requires(Robot.lift);
 
     }
