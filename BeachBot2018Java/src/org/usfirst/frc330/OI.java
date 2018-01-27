@@ -12,6 +12,7 @@
 package org.usfirst.frc330;
 
 import org.usfirst.frc330.commands.*;
+import org.usfirst.frc330.commands.commandgroups.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
