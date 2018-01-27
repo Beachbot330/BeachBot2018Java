@@ -151,14 +151,16 @@ public class Lift extends Subsystem {
     // GET Methods
     //------------------------------------------------------------------------------
     
-    //TODO Implement getPosition()
+    double tempInfo;
     public double getPosition() {
-    	return 0;
+    	tempInfo = lift.getSelectedSensorPosition(0);
+    	return tempInfo*LiftConst.positionScaler;
+    	//arg 0 is primary PID
     }
     
-    //TODO Implement getOutput()
+    //VERIFY Implement getOutput() -MF
     public double getOutput() {
-    	return 0;
+    	return lift.getMotorOutputVoltage();
     }
     
     public double getSetpoint() {
@@ -194,7 +196,7 @@ public class Lift extends Subsystem {
 	}
 
 	public void stopLift() {
-		// TODO create stopLift method -mf
+		// VERIFY create stopLift method -mf
 		lift.disable();
 		Logger.getInstance().println("Lift disabled", Logger.Severity.INFO);
 		
