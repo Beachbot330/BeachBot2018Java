@@ -19,7 +19,7 @@ import org.usfirst.frc330.Robot;
 public class SetLiftPosition extends BBCommand {
 	
 	double position;
-    public SetLiftPosition() {
+    public SetLiftPosition(double position) {
     	
         requires(Robot.lift);
 

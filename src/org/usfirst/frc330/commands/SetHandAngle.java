@@ -20,7 +20,7 @@ import org.usfirst.frc330.Robot;
 public class SetHandAngle extends BBCommand {
 
 	double angle;
-    public SetHandAngle() {
+    public SetHandAngle(double angle){
 
     	this.angle = angle;
         requires(Robot.arm);
