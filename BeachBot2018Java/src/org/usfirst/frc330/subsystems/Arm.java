@@ -194,9 +194,17 @@ public class Arm extends Subsystem {
 	
 	//TODO IMplement getLowerWristLimitTripped, getUpperWristLimitTripped
     
-    //TODO Implement getArmOnTarget
+    //VERIFY Implement getArmOnTarget - MF
+    public boolean getArmOnTarget() {
+    	double error = armL.getClosedLoopError(0);
+    	return (Math.abs(error) < tolerance);
+    }
     
-    //TODO IMplement getWristOnTarget
+    //VERIFY Implement getHandOnTarget - MF
+	public boolean getHandOnTarget() {
+		double error = wrist.getClosedLoopError(0);
+    	return (Math.abs(error) < tolerance);
+	}
 	
 	//--------------------------------------------------------------------
 	// Set Methods
@@ -276,6 +284,11 @@ public class Arm extends Subsystem {
            Logger.getInstance().println("Lift PID set to: " + P + ", " + I + ", " + D, Severity.INFO);
    	}
     
+    double tolerance = 0;
+    public void setArmAbsoluteTolerance(double absvalue) {
+    	tolerance = absvalue;
+	}
+    
     
     
     //VERIFY IMplement setMaxWristOutput -JB
@@ -326,10 +339,7 @@ public class Arm extends Subsystem {
 	    	} 
 	    	
 	    }
-	    double tolerance = 0;
-	    public void setArmAbsoluteTolerance(double absvalue) {
-	    	tolerance = absvalue;
-		}
+
 	    /*
 	    private void setLowerSoftLimit(double lowerAngle) {
 	    //	Arm.setForwardSoftLimit(convertDegreesToRotations(lowerAngle));
@@ -356,6 +366,8 @@ public class Arm extends Subsystem {
 	    private double convertRotationsToDegrees(double rotations) {
 	    	return (rotations * ArmConst.maxAngleDegrees);
 	    }
+
+
 	    
 }
 
