@@ -32,21 +32,9 @@ public final class WristConst {
 														feedForward, MaxOutputVoltage, MaxOutputVoltage, "default");
 	
 	// Angles
-	public static final double limitLowerAngle   		=  2.0;  //AP 1-26
-	public static final double pickupAngle		 		=  3.5;  //JR 2-28 
-	public static final double pickupAngleDef			=  5.0;  //AP 4/1
-	public static final double lowBar            		=  3.0;  //AP 3-11
-	public static final double defenseStance			= 25.0;  //AP 3-19
-	public static final double lowLimitNeutral			= 30.0;  //JR 3-15
-	public static final double armSafeLimit	     		= 50.0;  //AP 1-26
-	public static final double defaultNeutral	        = 55.0;  //AP 3-11    moved from 60 to 55 to protect stinger
-	public static final double highLimitNeutral         = 60.0;  // JR 3-15 
-	public static final double safeToDeployPortcullis   = 60.0;  // JR 2-27 
-	public static final double shootAngleRamp    		= 89.5;  	 //AP 4-28 adjusted for new arm bends and welds, was 87
-	public static final double shootAngleFloor   		= 89.5;    //AP 4-28
-	public static final double safeToDeployLowerClimber = 95.0;  //AP 3/10
-	public static final double safeToDeployUpperClimber = 108.0; //AP 3/10 (could be reduced to 105
-	public static final double limitUpperAngle   		= 113.0; //AP 1-26
+	public static final double   pickUp					= 0.0; //JB 1-27
+	public static final double  Defense					= 90.0; //JB 1-27
+	
 	
 	// Encoder Stuff
 	public static final int    maxAngleDegrees   		= 72;    //JM 2-10

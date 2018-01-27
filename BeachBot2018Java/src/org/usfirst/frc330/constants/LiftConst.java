@@ -17,9 +17,11 @@ public final class LiftConst {
 	public static final double integral         		= 0.000; // WAG
 	public static final double derivative        		= 1.0;   // WAG
 	
-	// Poitions
-	public static final double limitLower   		=  2.0;  // WAG
-	public static final double limitUpper   		= 113.0; //WAG
+	// Positions
+	public static final double limitLower   			=  2.0;  	// WAG
+	public static final double limitUpper   			= 113.0; 	//WAG
+	public static final double positionScaler  			= 0	; 		//Needs Value -MF
+	
 	
 	// Encoder Stuff - from 2016... remove?
 	public static final int    maxAngleDegrees   		= 72;    //JM 2-10
