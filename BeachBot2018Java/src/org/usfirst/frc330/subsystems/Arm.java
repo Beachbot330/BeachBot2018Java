@@ -149,11 +149,11 @@ public class Arm extends Subsystem {
 	// Get Methods
 	//--------------------------------------------------------------------
 	
-	//TODO implement getArmAngle\
+	//VERIFY implement getArmAngle -JB
     public double getArmAngle()
 	{
 		return (-convertRotationsToDegrees(elbow.getSelectedSensorPosition(0)));
-	} //joey was here
+	} 
     
 	
 	//TODO Implement getArmLowerLimit, getArmUpperLimit
@@ -170,22 +170,22 @@ public class Arm extends Subsystem {
     
     */
 	
-	//TODO implement get armOutput
+	//VERIFY implement get armOutput -JB
     public double getArmOutput() {
 		return elbow.getMotorOutputVoltage()/elbow.getBusVoltage();
 	}
 	
-	//TODO implement getWristAngle
+	//VERIFY implement getWristAngle -JB
     public double getWristAngle()
 	{
 		return (-convertRotationsToDegrees(wrist.getSelectedSensorPosition(0)));
-	} //joey was here
+	} 
     
 	
 	//TODO Implement getWristLowerLimit, getWristUpperLimit
 	
 	
-	//TODO implement getWristOUtput
+	//VERIFY implement getWristOUtput - JB
     public double getWristOutput() {
   		return wrist.getMotorOutputVoltage()/wrist.getBusVoltage();
   	}
@@ -202,14 +202,12 @@ public class Arm extends Subsystem {
 	// Set Methods
 	//--------------------------------------------------------------------
 	
-	//TODO Implement setArmOutput
-  //WARNING SET(MODE,VALUE);  ---VALUE UNKNOWN
+	//VERIFY Implement setArmOutput -JB
     public void setArm(double output) {
     //	changeControlMode(ControlMode.PercentOutput);
     	elbow.set(ControlMode.PercentOutput, output);
     }
-    //WARNING SET(MODE,VALUE);  ---VALUE UNKNOWN
-    //TODO Implement setArmAngle
+    //VERIFY Implement setArmAngle -JB
     public void setArmAngle(double position) {
     	elbow.set(ControlMode.Position, position);
     	elbow.set(convertDegreesToRotations(position));
@@ -218,7 +216,7 @@ public class Arm extends Subsystem {
     }
     
     
-    //TODO Implement setArmPIDConstants
+    //VERIFY Implement setArmPIDConstants -JB
     public void setPIDConstantsArm (double P, double I, double D, boolean timeout)
    	{
        	if(timeout) {
@@ -237,21 +235,21 @@ public class Arm extends Subsystem {
            Logger.getInstance().println("Lift PID set to: " + P + ", " + I + ", " + D, Severity.INFO);
    	}
     
-    //TODO IMplement setMaxArmOutput
+    //VERIFY IMplement setMaxArmOutput -JB
     public void setMaxArmOutput(double percentOut){
     	elbow.configNominalOutputForward(percentOut,10);
     	Logger.getInstance().println("Max Arm output set to: " + percentOut, Severity.INFO);
     }
     
-    //TODO Implement setWristOutput
-  //WARNING SET(MODE,VALUE);  ---VALUE UNKNOWN
+    //VERIFY Implement setWristOutput -JB
+  
     public void setWrist(double output) {
     //	changeControlMode(ControlMode.PercentOutput);
-    	wrist.set(ControlMode.PercentOutput, 0);
+    	wrist.set(ControlMode.PercentOutput, output);
     	wrist.set(output);
     }
     
-    //TODO Implement setWristAngle
+    //VERIFY Implement setWristAngle -JB
     public void setWristAngle(double position) {
     	wrist.set(ControlMode.Position, 0);
     	wrist.set(convertDegreesToRotations(position));
@@ -259,7 +257,7 @@ public class Arm extends Subsystem {
     //		SCtable.putNumber("setpoint", position);
     }
     
-    //TODO Implement setWristPIDConstants
+    //VERIFY Implement setWristPIDConstants -JB
     public void setPIDConstantsWrist (double P, double I, double D, boolean timeout)
    	{
        	if(timeout) {
@@ -280,7 +278,7 @@ public class Arm extends Subsystem {
     
     
     
-    //TODO IMplement setMaxWristOutput
+    //VERIFY IMplement setMaxWristOutput -JB
     public void setMaxWristOutput(double percentOut){
     	wrist.configNominalOutputForward(percentOut,10);
     	Logger.getInstance().println("Max wrist output set to: " + percentOut, Severity.INFO);
@@ -301,7 +299,7 @@ public class Arm extends Subsystem {
 		Logger.getInstance().println("Wrist disabled", Logger.Severity.INFO);
 	}
 	
-	//TODO Implement manualArm
+	//VERIFY Implement manualArm -JB
 	 int inertiaCounter;
 	    public void manualArm() {	
 	    	double gamepadCommand = -Robot.oi.armGamePad.getY();

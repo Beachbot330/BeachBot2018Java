@@ -101,12 +101,12 @@ public class Chassis extends Subsystem {
         leftDriveOutput = new DummyPIDOutput();
         rightDriveOutput = new DummyPIDOutput();
     	
-        //TODO Create ChassisConst file and put in default values to make this code valid
+        //VERIFY Create ChassisConst file and put in default values to make this code valid - JB
         //TODO make the period of the PIDControllers 0.02 seconds (50 hz)
         
         gyroPID = new MultiPIDController(ChassisConst.GyroTurnLow, gyroSource,gyroOutput,"Gyro");
-        leftDrivePID = new MultiPIDController(ChassisConst.DriveLow, driveTrainEncoderL,leftDriveOutput,"LeftDrive");
-        rightDrivePID = new MultiPIDController(ChassisConst.DriveLow, driveTrainEncoderR,rightDriveOutput, "RightDrive");
+        leftDrivePID = new MultiPIDController(ChassisConst.DriveLow, driveEncoderLeft,leftDriveOutput,"LeftDrive");
+        rightDrivePID = new MultiPIDController(ChassisConst.DriveLow, driveEncoderRight,rightDriveOutput, "RightDrive");
         
         //TODO Find a non-deprecated function to use for this
         gyroPID.setToleranceBuffer(ChassisConst.gyroTolerancebuffer);
@@ -122,14 +122,14 @@ public class Chassis extends Subsystem {
         double distanceperpulse = Math.PI*ChassisConst.wheelDiameter/pulsePerRevolutionLeft /
         		ChassisConst.encoderGearRatio/ChassisConst.gearRatio * ChassisConst.Fudgefactor;
 
-        //TODO Fix these lines of code
-        driveTrainEncoderR.setReverseDirection(true);
-        driveTrainEncoderL.setDistancePerPulse(distanceperpulse);
+        //VERIFY Fix these lines of code -JB
+        driveEncoderRight.setReverseDirection(true);
+        driveEncoderLeft.setDistancePerPulse(distanceperpulse);
         
         distanceperpulse = Math.PI*ChassisConst.wheelDiameter/pulsePerRevolutionRight /
         		ChassisConst.encoderGearRatio/ChassisConst.gearRatio * ChassisConst.Fudgefactor;
         
-        driveTrainEncoderR.setDistancePerPulse(distanceperpulse);
+        driveEncoderRight.setDistancePerPulse(distanceperpulse);
         
         //TODO update to the latest RobotBuilderExtensions so that the deprecated addSensor code below is no longer used.
         
