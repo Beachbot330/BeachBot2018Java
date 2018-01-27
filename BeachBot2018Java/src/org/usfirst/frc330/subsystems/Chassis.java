@@ -187,7 +187,8 @@ public class Chassis extends Subsystem {
         // Logging
         //-----------------------------------------------------------------------
         
-        //TODO Finish logging. See 2017 for examples -EJO
+        //TODO Finish logging. See 2017 for examples -EJO 
+        //Joe: instead of logging left&right Drive1,2,3, log leftDrive and rightDrive. Don't need to log pitch & roll.
         CSVLoggable temp = new CSVLoggable(true) {
 			public double get() { return driveEncoderLeft.getDistance(); }
     	};
@@ -345,6 +346,7 @@ public class Chassis extends Subsystem {
 		 prevRightEncoderDistance = rightEncoderDistance;
 	}
 	
+	//TODO replace all the code in getAngle with the navX getAngle and replace the code in setGyroComp with the NavX SetAngleAdjustment
 	// Function Name: getAngle()
     // Purpose: Return angle relative to 0 instead of -/+ 180 degrees
     public double getAngle()
