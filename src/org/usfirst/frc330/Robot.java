@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj.util.WPILibVersion;
 
 import org.usfirst.frc330.commands.*;
 import org.usfirst.frc330.subsystems.*;
+//import org.usfirst.frc330.subsystems.Frills.Alarm;
 import org.usfirst.frc330.util.BeachbotLibVersion;
 import org.usfirst.frc330.util.Buzzer;
 import org.usfirst.frc330.util.CSVLogger;
@@ -143,9 +144,16 @@ public class Robot extends TimedRobot {
     @Override
     public void disabledPeriodic() {
         Scheduler.getInstance().run();
-        //TODO copy over code from 2017 (and update it of course!)
-    }
-
+        //VERIFY copy over code from 2017 (and update it of course!) -JB
+        chassis.calcXY();
+    	CSVLogger.getInstance().writeData();
+    	Logger.getInstance().updateDate();
+    	CSVLogger.getInstance().updateDate();
+    	buzzer.update();
+    	//if (frills.getAlarmLEDs() == Alarm.SLOW && !Robot.chassis.isGyroCalibrating()) {
+    	//	frills.setAlarmLED(Alarm.OFF);
+    	}
+    
     @Override
     public void autonomousInit() {
         autonomousCommand = chooser.getSelected();
@@ -184,8 +192,14 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        //TODO copy over code from 2017 (and update it of course!)
-    }
+        //VERIFY copy over code from 2017 (and update it of course!) -JB
+            chassis.calcXY();
+            Scheduler.getInstance().run();
+            chassis.pidDrive();
+        	CSVLogger.getInstance().writeData();
+        	buzzer.update();
+        }
+    
     
     // -----------------------------------------------------------
     // Get Methods
@@ -193,4 +207,6 @@ public class Robot extends TimedRobot {
     public boolean getIsPracticeRobot() {
     	return frills.getIsPracticeRobot();
     }
+    //other
+    
 }

@@ -24,6 +24,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import org.usfirst.frc330.wpilibj.DummyPIDOutput;
 import org.usfirst.frc330.wpilibj.MultiPIDController;
@@ -365,10 +366,8 @@ return y;
 }
 public double getPressure()
 {
-	if (Robot.isPracticeRobot())  //TODO may not be necessary to account for different pressure sensors
+
 		return (50*pressureSensor.getAverageVoltage() -25);
-	return 37.5*(pressureSensor.getAverageVoltage()- 0.5);
-	
 }
 
 	//TODO replace all the code in getAngle with the navX getAngle and replace the code in setGyroComp with the NavX SetAngleAdjustment
@@ -497,6 +496,35 @@ public double getPressure()
 	public void setPTOdisengaged() {
 		pTO.set(false);
 	}
-
+	//Other 
+	public boolean isGyroCalibrating() {
+		return navX.isCalibrating();
+	}
+	 public void pidDrive()
+	    {
+	        double left, right;
+	        if (DriverStation.getInstance().isDisabled())
+	        {
+	            stopDrive();
+	        }
+	        else
+	        {
+	            left = this.left+leftDriveOutput.getOutput() + gyroOutput.getOutput();
+	            right = this.right+rightDriveOutput.getOutput() - gyroOutput.getOutput();
+	            drive(left, right);
+	            this.left = 0;
+	            this.right = 0;
+	        }
+	        }
+	        private void drive(double left, double right)
+	        {
+	            leftDrive1.set(-left);
+	            leftDrive2.set(-left);
+	            leftDrive3.set(-left);
+	            
+	            rightDrive1.set(right);
+	            rightDrive2.set(right);
+	            rightDrive3.set(right);
+	        }
 }
 
