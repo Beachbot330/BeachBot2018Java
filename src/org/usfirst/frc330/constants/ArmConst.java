@@ -41,6 +41,7 @@ public final class ArmConst {
 	public static final double minArm                   = -60.0; //MF 1/27 WAG
 	public static final double medArm                   =  0.0; //MF 1/27 WAG
 	public static final double switchArm                = 0.0; // MF 1/27 WAG needs value
+	public static final double climbPosition			= 90.0; // wag -EJO 1/27
 	
 	// Encoder Stuff
 	public static final int    maxAngleDegrees   		= 72;    //JM 2-10
