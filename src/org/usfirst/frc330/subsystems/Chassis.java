@@ -547,5 +547,21 @@ public double getPressure()
 	            rightDrive2.set(right);
 	            rightDrive3.set(right);
 	        }
+	        public void resetPosition()
+	        {
+	        	driveEncoderLeft.reset();
+	        	driveEncoderRight.reset();
+	            navX.zeroYaw();
+	            fFirstUse = true;
+	            ctrRollOver = 0;
+	            setXY(0,0);
+	            this.prevLeftEncoderDistance = 0;
+	            this.prevRightEncoderDistance = 0;
+	        } /* End resetPosition */
+	        public void setXY(double x, double y)
+	        {
+	            this.x = x;
+	            this.y = y;
+	        } /* End setXY */
 }
 
