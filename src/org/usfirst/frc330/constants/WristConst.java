@@ -34,9 +34,9 @@ public final class WristConst {
 	// Angles
 	public static final double pickUp					=  0.0;  //JB 1-27
 	public static final double Defense					=  90.0; //JB 1-27
-	public static final double leveledWrist             =  0.0;  //MF 1/17 WAG
-	public static final double maxWrist                 =  90.0; //MF 1/17 WAG
-	public static final double minWrist                 = -90.0; //MF 1/17 WAG
+	public static final double leveledWrist             =  0.0;  //MF 1/27 WAG
+	public static final double maxWrist                 =  90.0; //MF 1/27 WAG
+	public static final double minWrist                 = -90.0; //MF 1/27 WAG
 	
 	// Encoder Stuff
 	public static final int    maxAngleDegrees   		= 72;    //JM 2-10
