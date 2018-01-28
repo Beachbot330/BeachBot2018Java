@@ -8,6 +8,11 @@ import org.usfirst.frc330.wpilibj.PIDGains;
 public final class ChassisConst {
 	private ChassisConst(){}
 	
+	// Length
+	public static final double liftToFrame				  = 26; 	// (inches) EJO 1/28
+	public static final double liftToFramRear			  = 6.5; 	// (inches) EJO 1/28
+	public static final double maxExtension				  = 16;  	// (inches) EJO 1/28
+	
 	// PID MaxOutputs
 	public static final double backupThrottle       	  = 0.5;
 	public static final double defaultMaxOutput     	  = 0.8;

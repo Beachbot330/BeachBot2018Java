@@ -12,6 +12,9 @@ import org.usfirst.frc330.wpilibj.PIDGains;
 public final class WristConst {
 	
 	private WristConst(){}
+	
+	// Length
+	public static final double length					= 19; 	 // (inches) EJO 1/28
 
 	// Tolerance
 	public static final double tolerance        		= 5.0;

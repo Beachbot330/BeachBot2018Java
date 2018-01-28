@@ -14,6 +14,9 @@ import org.usfirst.frc330.wpilibj.PIDGains;
 public final class ArmConst {
 	
 	private ArmConst(){}
+	
+	// Length
+	public static final double length					= 38.5;  // (inches) EJO 1/28 
 
 	// Tolerance
 	public static final double tolerance        		= 5.0;
