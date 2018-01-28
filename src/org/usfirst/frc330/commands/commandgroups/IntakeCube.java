@@ -57,11 +57,13 @@ public class IntakeCube extends BBCommandGroup {
     	
     	//lower lift and arm to intake position
     	addParallel(new SetLiftPosition(LiftConst.intakePosition));
-    	addSequential(new SetArmAngle(ArmConst.intakePosition));
+    	addParallel(new SetArmAngle(ArmConst.intakePosition));
     	//turn on rollers and sensor WHILE arm and lift are getting into position
-    	addSequential(new RollerOn());
+    	addParallel(new RollerOn());
     	addSequential(new SensorCloseClaw());
     	// Once everything above has been completed and the cube is in the grabber...
+    	//turn off rollers
+    	addSequential(new RollerOff());
     	// DEFENSE MODE!  
     	addSequential(new Defense());
     } 
