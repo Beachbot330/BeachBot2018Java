@@ -214,26 +214,6 @@ public class Chassis extends Subsystem {
 			public double get() { return driveEncoderRight.getRate(); }  		
     	};
     	CSVLogger.getInstance().add("DriveTrainRateR", temp);    	
-
-    	temp = new CSVLoggable() {
-			public double get() { return leftDrive1.get(); }  		
-    	};
-    	CSVLogger.getInstance().add("DriveTrainLeft1", temp);
-    	
-    	temp = new CSVLoggable() {
-			public double get() { return rightDrive1.get(); }  		
-    	};
-    	CSVLogger.getInstance().add("DriveTrainRight1", temp);
-    	
-    	temp = new CSVLoggable() {
-			public double get() { return leftDrive2.get(); }  		
-    	};
-    	CSVLogger.getInstance().add("DriveTrainLeft2", temp);
-    	
-    	temp = new CSVLoggable() {
-			public double get() { return rightDrive2.get(); }  		
-    	};
-    	CSVLogger.getInstance().add("DriveTrainRight2", temp);
     	
     	temp = new CSVLoggable() {
 			public double get() { return leftDrive3.get(); }  		
