@@ -31,7 +31,7 @@ public class SetHandAngle extends BBCommand {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-    	Robot.wrist.setAngle(angle);
+    	Robot.hand.setAngle(angle);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -42,7 +42,7 @@ public class SetHandAngle extends BBCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return Robot.arm.getHandOnTarget();
+        return Robot.hand.getHandOnTarget();
     }
 
     // Called once after isFinished returns true
