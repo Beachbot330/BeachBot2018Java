@@ -12,6 +12,7 @@
 package org.usfirst.frc330.commands;
 import edu.wpi.first.wpilibj.command.BBCommand;
 import org.usfirst.frc330.Robot;
+import org.usfirst.frc330.constants.*;
 
 /**
  *
@@ -43,6 +44,13 @@ public class HandLevel extends BBCommand {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+    	double armAngleDeg = Robot.arm.getArmAngle();
+    	double armAngleRad = Math.toRadians(armAngleDeg);
+    	double angleInRad;
+    	angleInRad = (ChassisConst.liftToFrame + ChassisConst.maxExtension + (Math.sin(90 + armAngle) * ArmConst.length)) / WristConst.length;
+    	//calculate angle of wrist to see if it is outside the perimeter
+    	double currentAngleRad = Math.acos(angleInRad);
+    	double currentAngleDeg = Math.toDegrees(currentAngleRad);
     }
 
     // Make this return true when this Command no longer needs to run execute()
