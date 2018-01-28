@@ -304,6 +304,21 @@ public class Arm extends Subsystem {
 	public void stopArm() {
 		armL.disable();
 		Logger.getInstance().println("Arm disabled", Logger.Severity.INFO);
+		
+		/*{
+			if (armL.isEnabled())
+			{
+				armL.reset();
+			}
+			armL.enable();
+			changeControlMode(TalonControlMode.PercentVbus);
+			armL.set(0);
+		}
+	    
+	    public boolean isEnable() {
+			return armL.isEnabled();
+		}
+		*/
 		//TODO Makena: See 2016 code for an example of what else needs to be added
 	}
 
