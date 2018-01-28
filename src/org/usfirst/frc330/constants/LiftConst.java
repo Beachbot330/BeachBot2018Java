@@ -23,7 +23,7 @@ public final class LiftConst {
 	public static final double positionScaler  			= 0	; 		//Needs Value -MF
 	public static final double climbPosition 			= 0; //needs value -EJO
 	public static final double maxPosition				= 100.0; //wag -EJO
-	public static final double minPositon				= 0.0; //wag -EJO
+	public static final double minPosition				= 0.0; //wag -EJO
 	public static final double enemyScalePosition		= 90.0; //wag -EJO
 	public static final double ownedScalePosition		= 30.0; //wag -EJO
 	public static final double switchDropoffPosition	= 10.0; //wag -EJO
