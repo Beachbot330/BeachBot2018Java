@@ -34,7 +34,7 @@ public final class ArmConst {
 														feedForward, MaxOutputVoltage, MaxOutputVoltage, "default");
 	
 	// Angles
-	public static final double pickUp  					= -60;   //WAG JB 1/27
+	public static final double intakePosition  			= -60;   //WAG JB 1/27
 	public static final double Defense 					= -60;   //WAG JB 1/27
 	public static final double leveledArm               =  0.0;  //MF 1/27 WAG
 	public static final double maxArm                   =  90.0; //MF 1/27 WAG

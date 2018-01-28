@@ -13,6 +13,7 @@ package org.usfirst.frc330.commands.commandgroups;
 
 import edu.wpi.first.wpilibj.command.BBCommandGroup;
 import org.usfirst.frc330.commands.*;
+import org.usfirst.frc330.constants.*;
 import org.usfirst.frc330.subsystems.*;
 import org.usfirst.frc330.Robot;
 
@@ -55,8 +56,8 @@ public class IntakeCube extends BBCommandGroup {
     	addSequential(new OpenClaw());
     	
     	//lower lift and arm to intake position
-    	addParallel(new SetLiftPosition(0.0));
-    	addSequential(new SetArmAngle(-60.0));
+    	addParallel(new SetLiftPosition(LiftConst.intakePosition));
+    	addSequential(new SetArmAngle(ArmConst.intakePosition));
     	//turn on rollers and sensor WHILE arm and lift are getting into position
     	addSequential(new RollerOn());
     	addSequential(new SensorCloseClaw());
