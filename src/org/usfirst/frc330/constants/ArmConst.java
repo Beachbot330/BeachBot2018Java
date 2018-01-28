@@ -37,7 +37,7 @@ public final class ArmConst {
 	public static final double intakePosition  			= -60;   //WAG JB 1/27
 	public static final double Defense 					= -60;   //WAG JB 1/27
 	public static final double leveledArm               =  0.0;  //MF 1/27 WAG
-	public static final double maxArm                   =  90.0; //MF 1/27 WAG
+	public static final double maxArm                   =  160.0; //EJO 1/28 WAG
 	public static final double minArm                   = -60.0; //MF 1/27 WAG
 	public static final double medArm                   =  0.0; //MF 1/27 WAG
 	public static final double switchArm                = 0.0; // MF 1/27 WAG needs value
