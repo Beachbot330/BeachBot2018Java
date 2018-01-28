@@ -105,7 +105,7 @@ public class Hand extends Subsystem {
    			wrist.config_kD(0, D, 0);
        	}
        	
-           Logger.getInstance().println("Lift PID set to: " + P + ", " + I + ", " + D, Severity.INFO);
+           Logger.getInstance().println("Wrist PID set to: " + P + ", " + I + ", " + D, Severity.INFO);
    	}
     double tolerance = 0;
   //VERIFY Implement getHandOnTarget - MF
