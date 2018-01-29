@@ -172,10 +172,11 @@ public class Lift extends Subsystem {
     // SET Methods
     //------------------------------------------------------------------------------
 
-    //TODO Joey: set has a single parameter and double parameter option. Use the double parameter option
+    //VERIFY Joey: set has a single parameter and double parameter option. Use the double parameter option -JB
     // and set it to controlMode: position (see 2016 arm if you want an example)
     public void setPosition(double setpoint) {
-    	lift.set(setpoint);
+    	//lift.set(setpoint);
+    	lift.set(ControlMode.Position, setpoint);
     }
     
     //------------------------------------------------------------------------------
