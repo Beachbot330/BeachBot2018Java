@@ -342,69 +342,71 @@ public double getPressure()
 		return (50*pressureSensor.getAverageVoltage() -25);
 }
 
-	//TODO replace all the code in getAngle with the navX getAngle and replace the code in setGyroComp with the NavX SetAngleAdjustment
+	//VERIFY replace all the code in getAngle with the navX getAngle and replace the code in setGyroComp with the NavX SetAngleAdjustment -JB
 	// Function Name: getAngle()
     // Purpose: Return angle relative to 0 instead of -/+ 180 degrees
     public double getAngle()
-    {
-
-    	// First case
-    	// Old reading: +150 degrees
-    	// New reading: +170 degrees
-    	// Difference:  (170 - 150) = +20 degrees
-    	
-    	// Second case
-    	// Old reading: -20 degrees
-    	// New reading: -50 degrees
-    	// Difference : (-50 - -20) = -30 degrees 
-    	
-    	// Third case
-    	// Old reading: +179 degrees
-    	// New reading: -179 degrees
-    	// Difference:  (-179 - 179) = -358 degrees
-    	
-    	// Fourth case
-    	// Old reading: -179  degrees
-    	// New reading: +179 degrees
-    	// Difference:  (+150 - -60) = +358 degrees
-    	
-    	// Declare variables
-    	double difference = 0.0;
-    	double gyroVal    = 0.0;
-    	
-    	// Retrieve current yaw value from gyro
-    	double yawVal     = navX.getYaw();
-        
-    	// Has gyro_prevVal been previously set?
-    	// If not, return do not calculate, return current value
-    	if( !fFirstUse )
-    	{
-    		// Determine count for rollover counter
-    		difference = yawVal - gyro_prevVal;
-
-	    	// Clockwise past +180 degrees
-    		// If difference > 180*, increment rollover counter
-	    	if( difference < -180.0 ) {
-	    		ctrRollOver++;
-	   		
-	    	// Counter-clockwise past -180 degrees\
-	    	// If difference > 180*, decrement rollover counter
-	    	}
-	    	else if ( difference > 180.0 ) {
-	    		ctrRollOver--;
-	    	} 
-    	}
-    	
-    	// Mark gyro_prevVal as being used
-    	fFirstUse = false;
-    		
-    	// Calculate value to return back to calling function
-    	// e.g. +720 degrees or -360 degrees
-    	gyroVal = yawVal + (360.0 * ctrRollOver);
-    	gyro_prevVal = yawVal;
-    	
-    	return gyroVal + gyroComp;
-    } /* End getAngle() */
+    {  	
+    	return navX.getAngle();
+    }
+//    	// First case
+//    	// Old reading: +150 degrees
+//    	// New reading: +170 degrees
+//    	// Difference:  (170 - 150) = +20 degrees
+//    	
+//    	// Second case
+//    	// Old reading: -20 degrees
+//    	// New reading: -50 degrees
+//    	// Difference : (-50 - -20) = -30 degrees 
+//    	
+//    	// Third case
+//    	// Old reading: +179 degrees
+//    	// New reading: -179 degrees
+//    	// Difference:  (-179 - 179) = -358 degrees
+//    	
+//    	// Fourth case
+//    	// Old reading: -179  degrees
+//    	// New reading: +179 degrees
+//    	// Difference:  (+150 - -60) = +358 degrees
+//    	
+//    	// Declare variables
+//    	double difference = 0.0;
+//    	double gyroVal    = 0.0;
+//    	
+//    	// Retrieve current yaw value from gyro
+//    	double yawVal     = navX.getYaw();
+//        
+//    	// Has gyro_prevVal been previously set?
+//    	// If not, return do not calculate, return current value
+//    	if( !fFirstUse )
+//    	{
+//    		// Determine count for rollover counter
+//    		difference = yawVal - gyro_prevVal;
+//
+//	    	// Clockwise past +180 degrees
+//    		// If difference > 180*, increment rollover counter
+//	    	if( difference < -180.0 ) {
+//	    		ctrRollOver++;
+//	   		
+//	    	// Counter-clockwise past -180 degrees\
+//	    	// If difference > 180*, decrement rollover counter
+//	    	}
+//	    	else if ( difference > 180.0 ) {
+//	    		ctrRollOver--;
+//	    	} 
+//    	}
+//    	
+//    	// Mark gyro_prevVal as being used
+//    	fFirstUse = false;
+//    		
+//    	// Calculate value to return back to calling function
+//    	// e.g. +720 degrees or -360 degrees
+//    	gyroVal = yawVal + (360.0 * ctrRollOver);
+//    	gyro_prevVal = yawVal;
+//    	
+//    	return gyroVal + gyroComp;
+//    } /* End getAngle() */
+    
     public void pidDriveAuto()
     {
         double left, right, gyroValue, gyroMin;
@@ -427,16 +429,18 @@ public double getPressure()
             this.right = 0;
         }
     } /* End pidDriveAuto() */
+    
     double gyroComp = 0;
     
     public void setGyroComp(double compensation) {
-    	gyroComp = compensation;
+    	navX.setAngleAdjustment(compensation);    	
+//    	gyroComp = compensation;
+    	
     }
-    
+       
     public double getGyroComp() {
     	return gyroComp;
-    }
-    
+    }    
 
     @Override
     public void periodic() {
