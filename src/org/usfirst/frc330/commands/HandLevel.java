@@ -44,13 +44,15 @@ public class HandLevel extends BBCommand {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
+    	double rightAngleDegInRad = Math.toRadians(90.0);
     	double armAngleDeg = Robot.arm.getArmAngle();
     	double armAngleRad = Math.toRadians(armAngleDeg);
-    	double angleInRad;
-    	angleInRad = (ChassisConst.liftToFrame + ChassisConst.maxExtension + (Math.sin(90 + armAngle) * ArmConst.length)) / WristConst.length;
+    	double angleInRad = ((ChassisConst.liftToFrame + ChassisConst.maxExtension - (Math.sin(rightAngleDegInRad + armAngleRad) * ArmConst.length))) / WristConst.length;
     	//calculate angle of wrist to see if it is outside the perimeter
     	double currentAngleRad = Math.acos(angleInRad);
-    	double currentAngleDeg = Math.toDegrees(currentAngleRad);
+    	double currentAngleDeg = Math.toDegrees(currentAngleRad); //TODO check if the above code is correct
+    	
+    	//TODO use currentAngleDeg to keep wrist within perimeter (keeping the hand level) (duh) (the name of the command)
     }
 
     // Make this return true when this Command no longer needs to run execute()
