@@ -193,8 +193,9 @@ public class Chassis extends Subsystem {
         // Logging
         //-----------------------------------------------------------------------
         
-        //TODO Finish logging. See 2017 for examples -EJO 
+        //TODO Finish logging. See 2017 for examples
         //Joe: instead of logging left&right Drive1,2,3, log leftDrive and rightDrive. Don't need to log pitch & roll.
+        //VERIFY above (ldrive, rdrive, remove pitch & roll)
         CSVLoggable temp = new CSVLoggable(true) {
 			public double get() { return driveEncoderLeft.getDistance(); }
     	};
@@ -216,14 +217,14 @@ public class Chassis extends Subsystem {
     	CSVLogger.getInstance().add("DriveTrainRateR", temp);    	
     	
     	temp = new CSVLoggable() {
-			public double get() { return leftDrive3.get(); }  		
+			public double get() { return leftDrive.get(); }  		
     	};
-    	CSVLogger.getInstance().add("DriveTrainLeft3", temp);
+    	CSVLogger.getInstance().add("DriveTrainLeft", temp);
     	
     	temp = new CSVLoggable() {
-			public double get() { return rightDrive3.get(); }  		
+			public double get() { return rightDrive.get(); }  		
     	};
-    	CSVLogger.getInstance().add("DriveTrainRight3", temp);
+    	CSVLogger.getInstance().add("DriveTrainRight", temp);
     	
     	temp = new CSVLoggable(true) {
 			public double get() { return getAngle(); }  		
@@ -277,15 +278,6 @@ public class Chassis extends Subsystem {
     	};  
     	CSVLogger.getInstance().add("Shifter", temp);
     	
-    	temp = new CSVLoggable(true) {
-			public double get() { return navX.getPitch(); }  		
-    	};  
-    	CSVLogger.getInstance().add("ChassisPitch", temp);
-    	
-    	temp = new CSVLoggable(true) {
-			public double get() { return navX.getRoll(); }  		
-    	};  
-    	CSVLogger.getInstance().add("ChassisRoll", temp);
     	//TODO JOE Import Working driveWaypoint code 
 //    	temp = new CSVLoggable(true) {
 //			public double get() { 
