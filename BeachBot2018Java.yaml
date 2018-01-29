@@ -330,7 +330,7 @@ Children:
           validators: *id008
           value: '3'
       Base: Talon SRX
-      Name: Intake
+      Name: IntakeLeft
     - Children: []
       Properties:
         Forward PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
@@ -371,6 +371,16 @@ Children:
           value: '4'
       Base: Digital Input
       Name: Sensor
+    - Children: []
+      Properties:
+        CAN ID: !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id007
+          default: '2'
+          name: CAN ID
+          validators: *id008
+          value: '10'
+      Base: Talon SRX
+      Name: IntakeRight
     Properties:
       Send to SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Send to SmartDashboard, validators: null, value: true}
@@ -1258,15 +1268,15 @@ Children:
       Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Run When Disabled, validators: null, value: false}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id028 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id028
+        value: []
       Commands: !!robotbuilder.data.properties.ListProperty
-        default: &id029 []
+        default: []
         name: Commands
         validators: *id027
-        value: *id029
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
