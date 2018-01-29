@@ -40,6 +40,7 @@ public final class WristConst {
 	public static final double leveledWrist             =  0.0;  //MF 1/27 WAG
 	public static final double maxWrist                 =  90.0; //MF 1/27 WAG
 	public static final double minWrist                 = -90.0; //MF 1/27 WAG
+	public static final double portalPosition			=  90.0; //EJO 1/28
 	
 	// Encoder Stuff
 	public static final int    maxAngleDegrees   		= 72;    //JM 2-10
