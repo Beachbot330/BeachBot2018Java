@@ -42,6 +42,6 @@ public final class LiftConst {
 
 	public static final double VoltageRampRate			= 1.23;	//WAG  JB
 	public static final double MaxOutputPercent			= 1;	//WAG  JB
-	public static final int	   timeOutMS				= 0;	//WAG  JB
+	public static final int	   timeOutMS				= 10;	//WAG  JB
 	
 }	

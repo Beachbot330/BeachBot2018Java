@@ -66,7 +66,7 @@ public class Lift extends Subsystem {
         lift.setInverted(false); //set if the motor direction does not match the sensor direction
         setPIDConstants(LiftConst.proportional, LiftConst.integral, LiftConst.derivative, true);
         setLiftAbsoluteTolerance(LiftConst.tolerance);
-        // TODO Joey: I don't see you setting the lower and upper limits. You enable the limits, but don't set them
+        // VERIFY Joey -JB: I don't see you setting the lower and upper limits. You enable the limits, but don't set them
 		//      setLowerSoftLimit(ArmConst.limitLowerAngle);
 		//    	setUpperSoftLimit(ArmConst.limitUpperAngle);
 		//    	armL.enableForwardSoftLimit(true);
@@ -74,7 +74,8 @@ public class Lift extends Subsystem {
 		//    	armL.enableBrakeMode(true);
 		//    	armL.setVoltageRampRate(ArmConst.VoltageRampRate);
 		//    	armL.configMaxOutputVoltage(ArmConst.MaxOutputVoltage);
-        
+        setLowerSoftLimit(LiftConst.lowerLimit);
+        setUpperSoftLimit(LiftConst.upperLimit);
         lift.configForwardSoftLimitEnable(true,0);
         lift.configReverseSoftLimitEnable(true, 0);
         lift.setNeutralMode(NeutralMode.Brake);
@@ -215,6 +216,14 @@ public class Lift extends Subsystem {
 		double error = lift.getClosedLoopError(0);
     	return (Math.abs(error) < tolerance);
 	}
-    
+	
+	public void setLowerSoftLimit(double limitVal) {
+		
+	}
+	
+	public void setUpperSoftLimit(double limitVal) {
+		
+	}
+	
 }
 

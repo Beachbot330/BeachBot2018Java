@@ -1,4 +1,4 @@
-// Robot Chassic Constants
+// Robot Chassis Constants
 //copied from 2016 to 2018 chassis const - JB
 
 package org.usfirst.frc330.constants;
