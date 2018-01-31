@@ -10,7 +10,7 @@ public final class LiftConst {
 	private LiftConst(){}
 
 	// Tolerance
-	public static final double tolerance        		= 5.0;
+	public static final double tolerance        		= 5.0;  // WAG
 
 	// PID Constants
 	public static final double proportional      		= 1.0;   // WAG
@@ -18,20 +18,19 @@ public final class LiftConst {
 	public static final double derivative        		= 1.0;   // WAG
 	
 	// Positions
-	public static final double limitLower   			= 2.0;  	// WAG
-	public static final double limitUpper   			= 113.0; 	//WAG
-	public static final double positionScaler  			= 0	; 		//Needs Value -MF
-	public static final double climbPosition 			= 0; //needs value -EJO
-	public static final double maxPosition				= 100.0; //wag -EJO
-	public static final double minPosition				= 0.0; //wag -EJO
-	public static final double medPosition              = 50; //MF 1/27 WAG
-	public static final double switchPosition           = 0; //MF 1/27 WAG Needs value
-	public static final double enemyScalePosition		= 90.0; //wag -EJO
-	public static final double ownedScalePosition		= 30.0; //wag -EJO
-	public static final double switchDropoffPosition	= 10.0; //wag -EJO
-	public static final double intakePosition			= 0.0; //wag -EJO
-	public static final double portalPosition			= 20.0; //wag -EJO
-	public static final double defensePosition			= 0.0; //wag -EJO
+	public static final double lowerLimit				=  1.0; //AP 1-30-2018 WAG
+	public static final double defensePosition			=  1.0; //wag -EJO
+	
+	public static final double intakePosition			=  1.0; //wag -EJO
+	public static final double scaleDropoffMin			=  1.0; //AP 1-30-2018 
+	public static final double intakePortalPosition		=  7.0; //AP 1-30-2018
+	public static final double scaleDropoffMid          =  4.0; //AP 1-30-2018
+	public static final double switchDropoff			= 20.0; //AP 1-30-2018
+	public static final double scaleDropoffMax			= 30.0; //wag -EJO
+	
+	public static final double climbPosition 			= 30.0; //needs value -EJO
+	
+	public static final double upperLimit				= 30.0; //AP 1-30-2018 WAG
 	
 	
 	// Encoder Stuff - from 2016... remove?
@@ -39,6 +38,7 @@ public final class LiftConst {
 	public static final int    maxEncoderCounts  		= -4096; //AP 2-20
 	public static final int    minQuadrant       		= 0;     //JM 2-10
 	public static final int    maxQuadrant       		= 4;     //JM 2-10
+	public static final double positionScaler  			= 0	; 	//Needs Value -MF
 
 	public static final double VoltageRampRate			= 1.23;	//WAG  JB
 	public static final double MaxOutputPercent			= 1;	//WAG  JB

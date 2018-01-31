@@ -34,7 +34,7 @@ public class dropoffPositionSwitch extends BBCommandGroup {
     	addParallel(new SetArmAngle(ArmConst.switchArm));
     	addParallel(new SetHandAngle(WristConst.leveledWrist));
     	//set lift position to switch position
-    	addSequential(new SetLiftPosition(LiftConst.switchPosition));
+    	addSequential(new SetLiftPosition(LiftConst.switchDropoff));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

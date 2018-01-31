@@ -34,7 +34,7 @@ public class dropoffPositionMed extends BBCommandGroup {
     	addParallel(new SetArmAngle(ArmConst.medArm));
     	addParallel(new SetHandAngle(WristConst.leveledWrist));
     	//set lift position to mid position
-    	addSequential(new SetLiftPosition(LiftConst.medPosition));
+    	addSequential(new SetLiftPosition(LiftConst.scaleDropoffMid));
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());

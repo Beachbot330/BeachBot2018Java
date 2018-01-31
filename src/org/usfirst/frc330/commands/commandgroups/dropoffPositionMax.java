@@ -35,7 +35,7 @@ public class dropoffPositionMax extends BBCommandGroup {
     	addParallel(new SetArmAngle(ArmConst.maxArm));
     	addParallel(new SetHandAngle(WristConst.leveledWrist));
     	//figure out what max lift position
-    	addSequential(new SetLiftPosition(LiftConst.maxPosition));
+    	addSequential(new SetLiftPosition(LiftConst.scaleDropoffMax));
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
