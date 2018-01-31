@@ -15,6 +15,7 @@ package org.usfirst.frc330.subsystems;
 import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.commands.*;
 import org.usfirst.frc330.constants.ChassisConst;
+import org.usfirst.frc330.constants.ChassisConst.Devices;
 import org.usfirst.frc330.util.CSVLoggable;
 import org.usfirst.frc330.util.CSVLogger;
 
@@ -407,6 +408,42 @@ public double getPressure()
 //    	return gyroVal + gyroComp;
 //    } /* End getAngle() */
     
+    public String getNavXFirmware() {
+    	return navX.getFirmwareVersion();
+    }
+    
+    public int getTalonFirmware(Devices type){
+    	int fv = 0;
+    	
+    	switch (type) {
+    		case DRIVETRAIN_LEFT1:
+    			fv = leftDrive1.getFirmwareVersion();
+    			break;
+    		case DRIVETRAIN_LEFT2:
+    			fv = leftDrive2.getFirmwareVersion();
+    			break;		
+    		case DRIVETRAIN_LEFT3:
+    			fv = leftDrive3.getFirmwareVersion();
+    			break;
+    		case DRIVETRAIN_RIGHT1:
+    			fv = rightDrive1.getFirmwareVersion();
+        		break;
+    		case DRIVETRAIN_RIGHT2:
+    			fv = rightDrive2.getFirmwareVersion();
+        		break;
+    		case DRIVETRAIN_RIGHT3:
+    			fv = rightDrive3.getFirmwareVersion();
+        		break;
+    		default:
+    			break;
+    	}
+    	
+    	return fv;
+    	
+    }
+    
+    
+    
     public void pidDriveAuto()
     {
         double left, right, gyroValue, gyroMin;
@@ -539,5 +576,6 @@ public double getPressure()
 	            this.x = x;
 	            this.y = y;
 	        } /* End setXY */
+
 }
 
