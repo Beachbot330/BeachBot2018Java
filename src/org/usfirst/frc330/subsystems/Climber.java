@@ -77,12 +77,14 @@ public class Climber extends Subsystem {
 
 
 	public void lockPlatforms() {
-		platforms.set(DoubleSolenoid.Value.kForward);
+		
+		platforms.set(true);
 		Logger.getInstance().println("Locking platform", Logger.Severity.INFO);
 	}
 	
 	public void unlockPlatforms() {
-		platforms.set(DoubleSolenoid.Value.kReverse);
+		
+		platforms.set(false);
 		Logger.getInstance().println("Unlocking platform", Logger.Severity.INFO);
 	}
 
