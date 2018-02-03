@@ -313,13 +313,13 @@ public class Arm extends Subsystem {
 
 	    
 	    private void setLowerSoftLimit(double lowerAngle) {
-	    	// TODO Allen: do you want to convert degree double to int? -JB
-	    	//armL.configForwardSoftLimitThreshold(convertDegreesToRotations(lowerAngle), ArmConst.defaultTimeout);
+	    	// VERIFY -JB
+	    	armL.configForwardSoftLimitThreshold(convertDegreesToTicks(lowerAngle), (int)ArmConst.defaultTimeout);
 	    }
 	    
 	    private void setUpperSoftLimit(double upperAngle) {
-	    	// TODO Allen: do you want to convert degree double to int? -JB
-	    	//armL.configReverseSoftLimitThreshold(convertDegreesToRotations(upperAngle), ArmConst.defaultTimeout);
+	    	// VERIFY -JB
+	    	armL.configReverseSoftLimitThreshold(convertDegreesToTicks(upperAngle), (int)ArmConst.defaultTimeout);
 	    }
 	    	
 	    
