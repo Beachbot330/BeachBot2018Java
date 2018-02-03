@@ -12,6 +12,7 @@
 package org.usfirst.frc330.subsystems;
 
 
+import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.commands.*;
 import org.usfirst.frc330.util.Logger;
 
@@ -84,11 +85,6 @@ public class Climber extends Subsystem {
     	ratchet.set(false);
     	Logger.getInstance().println("Unlocking ratchet", Logger.Severity.INFO);
     }
-    
-    public void climbHeld() {
-    	
-    }
-
 
 	public void lockPlatforms() {
 		
