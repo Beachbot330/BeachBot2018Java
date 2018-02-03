@@ -26,6 +26,7 @@ public class dropoffPositionLow extends BBCommandGroup {
     public dropoffPositionLow() {
     	
     	addParallel(new SetArmAngle(ArmConst.minArm));
+    	//TODO MAKENA create a second function for setting the wrist angle relative to the ground
     	addParallel(new SetHandAngle(WristConst.leveledWrist));
     	addSequential(new SetLiftPosition(LiftConst.scaleDropoffMin));
  
