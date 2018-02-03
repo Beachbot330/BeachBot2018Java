@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 
+import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -126,8 +127,17 @@ public class Hand extends Subsystem {
   		return wrist.getMotorOutputVoltage()/wrist.getBusVoltage();
   	}
     
-    //TODO Implement getWristLowerLimit, getWristUpperLimit
-	
+    //VERIFY Implement getWristLowerLimit, getWristUpperLimit -JB
+    public double getWristLowerLimit()
+	{
+		return (convertTicksToDegrees((int)wrist.configGetParameter(ParamEnum.eForwardSoftLimitThreshold, 0, 0)));
+
+	}
+    public double getUpperLimit()
+	{
+		return (convertTicksToDegrees((int)wrist.configGetParameter(ParamEnum.eReverseSoftLimitThreshold, 0, 0)));
+
+	}
 	
 	//TODO IMplement getLowerWristLimitTripped, getUpperWristLimitTripped
     
