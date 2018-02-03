@@ -22,6 +22,8 @@ import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import org.usfirst.frc330.wpilibj.BBDoubleSolenoid;
 
@@ -104,8 +106,13 @@ public class Grabber extends Subsystem {
     	pincher.set(DoubleSolenoid.Value.kReverse);
     }
     public boolean isCubePresent() {
-    	return sensor.get();
-    }
+        // in development 
+    	// TODO: Algorithm needs to be developed
+    	//       to figure out which sensor
+    	//       input signals that it is "present"
+    	return false;
+    } 
+    
     //TODO verify direction for roller on/off and rollerreverse on/off -EJO
     public void RollerOn() {
     	intakeLeft.set(WristConst.leftIntakeFullPower);
