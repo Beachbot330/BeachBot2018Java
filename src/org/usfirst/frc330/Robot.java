@@ -135,7 +135,7 @@ public class Robot extends TimedRobot {
     	Logger.getInstance().println("Disabled Init",true);
 		Scheduler.getInstance().removeAll();
 		Robot.grabber.closeClaw();
-		Robot.chassis.setPTOdisengaged();
+		//Robot.chassis.setPTOdisengaged();
 		Robot.lift.stopLift();
 		//Robot.pickup.gearRelease();
 		Robot.climber.lockPlatforms();
