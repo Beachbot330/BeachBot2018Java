@@ -72,7 +72,7 @@ public class Hand extends Subsystem {
 		
 		
     }
-  //TODO Implement getWristLowerLimit, getWristUpperLimit
+  
     
     
   //VERIFY Implement setWristOutput -JB
