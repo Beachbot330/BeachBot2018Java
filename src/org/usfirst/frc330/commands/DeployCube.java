@@ -37,7 +37,7 @@ public class DeployCube extends BBCommand {
 
     // Called just before this Command runs the first time
     @Override
-    protected void initialize() {
+    protected void initialize() { //TODO ask shane what he wants this to do. make cmdgroup if needed -EJO
     }
 
     // Called repeatedly when this Command is scheduled to run
