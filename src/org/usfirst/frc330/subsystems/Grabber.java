@@ -104,6 +104,18 @@ public class Grabber extends Subsystem {
     	intakeLeft.stopMotor();
     	intakeRight.stopMotor();
     }
+    public void RollerReverse() {
+    	intakeLeft.setInverted(true);
+    	intakeRight.setInverted(true);
+    	intakeLeft.set(WristConst.leftIntakeFullPower);
+    	intakeRight.set(WristConst.rightIntakeFullPower);
+    }
+    public void RollerReverseOff() {
+    	intakeLeft.stopMotor();
+    	intakeRight.stopMotor();
+    	intakeLeft.setInverted(false);
+    	intakeRight.setInverted(false);
+    }
     //----------------------------------------
     // Other methods
     //----------------------------------------
