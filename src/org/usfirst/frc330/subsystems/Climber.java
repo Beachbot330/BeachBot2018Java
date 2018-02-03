@@ -74,6 +74,20 @@ public class Climber extends Subsystem {
         // Put code here to be run every loop
 
     }
+    
+    public void lockRatchet() {
+    	ratchet.set(true);
+    	Logger.getInstance().println("Locking ratchet", Logger.Severity.INFO);
+    }
+    
+    public void unlockRatchet() {
+    	ratchet.set(false);
+    	Logger.getInstance().println("Unlocking ratchet", Logger.Severity.INFO);
+    }
+    
+    public void climbHeld() {
+    	
+    }
 
 
 	public void lockPlatforms() {
