@@ -12,6 +12,8 @@
 package org.usfirst.frc330.commands.commandgroups;
 
 import edu.wpi.first.wpilibj.command.BBCommandGroup;
+
+import org.usfirst.frc330.commands.RelativeWristPosition;
 import org.usfirst.frc330.commands.SetArmAngle;
 import org.usfirst.frc330.commands.SetHandAngle;
 import org.usfirst.frc330.commands.SetLiftPosition;
@@ -26,8 +28,8 @@ public class dropoffPositionLow extends BBCommandGroup {
     public dropoffPositionLow() {
     	
     	addParallel(new SetArmAngle(ArmConst.minArm));
-    	//TODO MAKENA create a second function for setting the wrist angle relative to the ground
-    	addParallel(new SetHandAngle(WristConst.leveledWrist));
+    	//VERIFY MAKENA create a second function for setting the wrist angle relative to the ground
+    	addParallel(new RelativeWristPosition(WristConst.leveledWrist)); //keeps hard level in relation to the floor
     	addSequential(new SetLiftPosition(LiftConst.scaleDropoffMin));
  
     } 
