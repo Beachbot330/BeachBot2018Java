@@ -515,17 +515,7 @@ public double getPressure()
        
         tankDrive(0, 0);  
     }
-
-    //------------------------------------
-    // Set methods
-    //------------------------------------
-	public void setPTOengaged() {
-		pTO.set(true);
-	}
 	
-	public void setPTOdisengaged() {
-		pTO.set(false);
-	}
 	//Other 
 	public boolean isGyroCalibrating() {
 		return navX.isCalibrating();
