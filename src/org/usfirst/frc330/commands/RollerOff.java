@@ -37,7 +37,8 @@ public class RollerOff extends BBCommand {
 
     // Called just before this Command runs the first time
     @Override
-    protected void initialize() { //TODO Eli: set up this stuff
+    protected void initialize() { //VERIFY Eli: set up this stuff -ejo 2/2
+    	Robot.grabber.RollerOff();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -48,7 +49,7 @@ public class RollerOff extends BBCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

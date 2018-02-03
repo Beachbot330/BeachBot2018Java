@@ -14,6 +14,8 @@ package org.usfirst.frc330.subsystems;
 
 import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.commands.*;
+import org.usfirst.frc330.constants.WristConst;
+
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -93,6 +95,14 @@ public class Grabber extends Subsystem {
     }
     public boolean isCubePresent() {
     	return sensor.get();
+    }
+    public void RollerOn() {
+    	intakeLeft.set(WristConst.leftIntakeFullPower);
+    	intakeRight.set(WristConst.rightIntakeFullPower);
+    }
+    public void RollerOff() {
+    	intakeLeft.stopMotor();
+    	intakeRight.stopMotor();
     }
     //----------------------------------------
     // Other methods

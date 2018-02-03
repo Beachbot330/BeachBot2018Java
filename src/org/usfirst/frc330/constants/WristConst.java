@@ -15,6 +15,10 @@ public final class WristConst {
 	
 	// Length
 	public static final double length					= 19; 	 // (inches) EJO 1/28
+	
+	//Speed
+	public static final double leftIntakeFullPower		= 10;    // (not sure of untis) EJO 2/2/18
+	public static final double rightIntakeFullPower		= 10;	 // (not sure of units) EJO 2/2/18
 
 	// Tolerance
 	public static final double tolerance        		= 5.0;
