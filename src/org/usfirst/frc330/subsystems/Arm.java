@@ -27,6 +27,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 
+import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -169,18 +170,20 @@ public class Arm extends Subsystem {
     
 	
 	//TODO Implement getArmLowerLimit, getArmUpperLimit
-    /*
+    
     public double getLowerLimit()
 	{
-		return (convertTicksToDegrees(Arm.getForwardSoftLimit()));
+		return (convertTicksToDegrees((int)armL.configGetParameter(ParamEnum.eForwardSoftLimitThreshold, 0, 0)));
+
 	}
     public double getUpperLimit()
 	{
-		return (convertTicksToDegrees(Arm.getReverseSoftLimit()));
+		return (convertTicksToDegrees((int)armL.configGetParameter(ParamEnum.eReverseSoftLimitThreshold, 0, 0)));
+
 	}
     
     
-    */
+    
 	
 	//VERIFY implement get armOutput -JB
     public double getArmOutput() {
