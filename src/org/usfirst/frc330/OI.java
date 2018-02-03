@@ -57,7 +57,6 @@ public class OI {
     public JoystickButton shiftLow_1;
     public Joystick driverL;
     public JoystickButton shiftHigh_1;
-    public JoystickButton climb_1;
     public Joystick driverR;
     public Joystick armGamePad;
 
@@ -70,8 +69,6 @@ public class OI {
         
         driverR = new Joystick(1);
         
-        climb_1 = new JoystickButton(driverR, 2);
-        climb_1.whileHeld(new ClimbHeld());
         shiftHigh_1 = new JoystickButton(driverR, 1);
         shiftHigh_1.whenPressed(new ShiftHigh());
         driverL = new Joystick(0);
@@ -95,7 +92,6 @@ public class OI {
         SmartDashboard.putData("RollerOff", new RollerOff());
         SmartDashboard.putData("RollerReverse", new RollerReverse());
         SmartDashboard.putData("RollerReverseOff", new RollerReverseOff());
-        SmartDashboard.putData("ClimbHeld", new ClimbHeld());
         SmartDashboard.putData("DeployCube", new DeployCube());
         SmartDashboard.putData("IntakeCube", new IntakeCube());
         SmartDashboard.putData("dropoffPositionSwitch", new dropoffPositionSwitch());
