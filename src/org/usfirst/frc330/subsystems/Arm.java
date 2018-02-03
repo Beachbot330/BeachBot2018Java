@@ -266,24 +266,19 @@ public class Arm extends Subsystem {
 	// Other Methods
 	//--------------------------------------------------------------------
 	public void stopArm() {
-		armL.disable();
+		if (armL.isEnable())
+		{
+			armL.reset();
+		}
+		armL.enable();
+		changeControlMode(TalonControlMode.PercentVbus);
+		armL.set(0);
+		
+		
+		// armL.disable(); 
 		Logger.getInstance().println("Arm disabled", Logger.Severity.INFO);
 		
-		/*{
-			if (armL.isEnabled())
-			{
-				armL.reset();
-			}
-			armL.enable();
-			changeControlMode(TalonControlMode.PercentVbus);
-			armL.set(0);
-		}
-	    
-	    public boolean isEnable() {
-			return armL.isEnabled();
-		}
-		*/
-		//TODO Makena: See 2016 code for an example of what else needs to be added
+		//TODO Makena: See 2016  code for an example of what else needs to be added
 	}
 
 	
@@ -342,6 +337,7 @@ public class Arm extends Subsystem {
 	    private double convertRotationsToDegrees(double rotations) {
 	    	return (rotations * ArmConst.maxAngleDegrees);
 	    }
+	    
 
 
 	    
