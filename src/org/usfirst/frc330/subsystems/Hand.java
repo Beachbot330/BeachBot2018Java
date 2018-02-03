@@ -161,21 +161,21 @@ public class Hand extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    //TODO change below code to be wrist, not arm
+    //VERIFY change below code to be wrist, not arm -ejo
     private int convertDegreesToTicks(double degrees) {
-    	return (int)(degrees * ArmConst.maxEncoderCounts / ArmConst.maxAngleDegrees + 0.5);
+    	return (int)(degrees * WristConst.maxEncoderCounts / WristConst.maxAngleDegrees + 0.5);
     }
     
     private double convertTicksToDegrees(int ticks) {
-    	return (ticks * ArmConst.maxAngleDegrees / ArmConst.maxEncoderCounts);
+    	return (ticks * WristConst.maxAngleDegrees / WristConst.maxEncoderCounts);
     }
     
     private double convertDegreesToRotations(double degrees) {
-    	return (-degrees / ArmConst.maxAngleDegrees);
+    	return (-degrees / WristConst.maxAngleDegrees);
     }
     
     private double convertRotationsToDegrees(double rotations) {
-    	return (rotations * ArmConst.maxAngleDegrees);
+    	return (rotations * WristConst.maxAngleDegrees);
     }
 
 }
