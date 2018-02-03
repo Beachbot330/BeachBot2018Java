@@ -266,9 +266,8 @@ public class Arm extends Subsystem {
 	//--------------------------------------------------------------------
 	// Other Methods
 	//--------------------------------------------------------------------
-	/* this code has errors
-	 * public void stopArm() {
-		if (armL.isEnable())
+	 public void stopArm() {
+		/*if (armL.isEnable())
 		{
 			armL.reset();
 		}
@@ -278,8 +277,8 @@ public class Arm extends Subsystem {
 		
 		
 		// armL.disable(); 
-		Logger.getInstance().println("Arm disabled", Logger.Severity.INFO);
-		*/
+		Logger.getInstance().println("Arm disabled", Logger.Severity.INFO); */
+	 }
 		
 		//TODO Makena: See 2016  code for an example of what else needs to be added
 
