@@ -169,7 +169,7 @@ public class Arm extends Subsystem {
 	} 
     
 	
-	//TODO Implement getArmLowerLimit, getArmUpperLimit
+	//VERIFY Implement getArmLowerLimit, getArmUpperLimit -JB
     
     public double getLowerLimit()
 	{
