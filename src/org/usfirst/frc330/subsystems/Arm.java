@@ -304,12 +304,12 @@ public class Arm extends Subsystem {
 				angle = getArmAngle();
 				
 				
-//				if (angle < getLowerLimit())
-//					angle = getLowerLimit();
-//				else if (angle > getUpperLimit())
-//					angle = getUpperLimit();
+				if (angle < getLowerLimit())
+					angle = getLowerLimit();
+				else if (angle > getUpperLimit())
+					angle = getUpperLimit();
 
-				//setArmAngle(angle);
+				setArmAngle(angle);
 	    	} 
 	    	
 	    }
