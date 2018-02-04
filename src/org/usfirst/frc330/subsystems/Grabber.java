@@ -100,12 +100,26 @@ public class Grabber extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+    public int getSensorLOutput() {
+    	return sensorL.getValue();
+    }
+    
+    public int getSensorCOutput() {
+    	return sensorC.getValue();
+    }
+    
+    public int getSensorROutput() {
+    	return sensorR.getValue();
+    }
+    
     public void openClaw() {
     	pincher.set(DoubleSolenoid.Value.kForward);
     }
+    
     public void closeClaw() {
     	pincher.set(DoubleSolenoid.Value.kReverse);
     }
+    
     public boolean isCubePresent() {
         // in development 
     	// TODO: Algorithm needs to be developed
