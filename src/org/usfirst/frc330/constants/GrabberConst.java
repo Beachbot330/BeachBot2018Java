@@ -19,6 +19,7 @@ public final class GrabberConst {
 	//Roller Speed
 	public static final double leftRollerMaxSpeed						= 10.0;		//wag (units unknown) EJO 2.4.18
 	public static final double rightRollerMaxSpeed						= 10.0;		//wag (units unknown) EJO 2.4.18
+	
 	//Sensor
 	public static final double centerSensorPosition						= 9.5; 		//(inches) EJO 2.4.18
 	public static final double otherSensorDistanceFromCenter			= 4.0; 		//(inches) EJO 2.4.18

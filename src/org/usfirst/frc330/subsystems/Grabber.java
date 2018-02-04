@@ -14,6 +14,7 @@ package org.usfirst.frc330.subsystems;
 
 import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.commands.*;
+import org.usfirst.frc330.constants.GrabberConst;
 import org.usfirst.frc330.constants.WristConst;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -115,16 +116,16 @@ public class Grabber extends Subsystem {
     
     //TODO verify direction for roller on/off and rollerreverse on/off -EJO
     public void RollerOn() {
-    	intakeLeft.set(WristConst.leftIntakeFullPower);
-    	intakeRight.set(WristConst.rightIntakeFullPower);
+    	intakeLeft.set(GrabberConst.leftRollerMaxSpeed);
+    	intakeRight.set(GrabberConst.rightRollerMaxSpeed);
     }
     public void RollerOff() {
     	intakeLeft.stopMotor();
     	intakeRight.stopMotor();
     }
     public void RollerReverse() {
-    	intakeLeft.set((WristConst.leftIntakeFullPower * -1));
-    	intakeRight.set((WristConst.rightIntakeFullPower * -1));
+    	intakeLeft.set((GrabberConst.leftRollerMaxSpeed * -1)); //the negative one is to make it rotate the other way
+    	intakeRight.set((GrabberConst.rightRollerMaxSpeed * -1));
     }
     public void RollerReverseOff() {
     	intakeLeft.stopMotor();
