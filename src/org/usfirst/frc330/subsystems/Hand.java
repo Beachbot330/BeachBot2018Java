@@ -133,7 +133,7 @@ public class Hand extends Subsystem {
 		return (convertTicksToDegrees((int)wrist.configGetParameter(ParamEnum.eForwardSoftLimitThreshold, 0, 0)));
 
 	}
-    public double getUpperLimit()
+    public double getWristUpperLimit()
 	{
 		return (convertTicksToDegrees((int)wrist.configGetParameter(ParamEnum.eReverseSoftLimitThreshold, 0, 0)));
 
