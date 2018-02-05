@@ -269,23 +269,24 @@ public class Arm extends Subsystem {
 	//--------------------------------------------------------------------
 	// Other Methods
 	//--------------------------------------------------------------------
-	 public void stopArm() {
-		/*if (armL.isEnable())
+    
+    // VERIFY:stopArm -JB
+	public void stopArm() {
+		if (armL.isAlive())
 		{
-			armL.reset();
+			armL.setIntegralAccumulator(0.0, 0, 0);
 		}
-		armL.enable();
-		changeControlMode(TalonControlMode.PercentVbus);
 		armL.set(0);
+		armL.disable(); 
+		Logger.getInstance().println("Arm disabled", Logger.Severity.INFO); 
+	}
+	//VERIFY:isEnable - JB
+	public boolean isEnable() {
+		return armL.isAlive();
+	}
 		
-		
-		// armL.disable(); 
-		Logger.getInstance().println("Arm disabled", Logger.Severity.INFO); */
-	 }
-		
-		//TODO Makena: See 2016  code for an example of what else needs to be added
+	//TODO Makena: See 2016  code for an example of what else needs to be added
 
-	
 	//VERIFY Implement manualArm -JB
 	 int inertiaCounter;
 	    public void manualArm() {	
