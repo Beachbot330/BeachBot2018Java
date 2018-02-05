@@ -101,7 +101,7 @@ public class Grabber extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public int getSensorLOutput() {
-    	return sensorL.getValue();
+    	return sensorL.getValue(); //can be changed if needed
     }
     
     public int getSensorCOutput() {
