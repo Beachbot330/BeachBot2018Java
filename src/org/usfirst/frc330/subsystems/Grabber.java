@@ -121,14 +121,29 @@ public class Grabber extends Subsystem {
     }
     
     public boolean isCubePresent() {
+    	int sL = getSensorLOutput();
+    	int sC = getSensorCOutput();
+    	int sR = getSensorROutput();
         // in development 
     	// TODO: Algorithm needs to be developed
     	//       to figure out which sensor
     	//       input signals that it is "present"
-    	return false;
-    } 
+    	if(getAngleBetweenSensors(sL, sC) == getAngleBetweenSensors(sR, sC)) { //if two angles are the same
+    		return true;
+    	} else if((getAngleBetweenSensors(sL, sC) * -1) == getAngleBetweenSensors(sR, sC)) {
+    		return true;
+    	}
+    	else return false;
+    }
     
-    //TODO verify direction for roller on/off and rollerreverse on/off -EJO
+    private double getAngleBetweenSensors(int sideOutput, int centerOutput) {
+    	if(sideOutput == GrabberConst.sensorMaxLength || centerOutput == GrabberConst.sensorMaxLength) return -361.0;
+    	double y = centerOutput - sideOutput;
+		double x = GrabberConst.distanceBetweenSensors;
+		return Math.atan2(y, x);
+	}
+
+	//TODO verify direction for roller on/off and rollerreverse on/off -EJO
     public void RollerOn() {
     	intakeLeft.set(GrabberConst.leftRollerMaxSpeed);
     	intakeRight.set(GrabberConst.rightRollerMaxSpeed);
