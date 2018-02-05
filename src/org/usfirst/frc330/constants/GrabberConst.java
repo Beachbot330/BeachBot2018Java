@@ -21,9 +21,10 @@ public final class GrabberConst {
 	public static final double rightRollerMaxSpeed						= 10.0;		//wag (units unknown) EJO 2.4.18
 	
 	//Sensor
-	public static final double centerSensorPosition						= 9.5; 		//(inches) EJO 2.4.18
-	public static final double distanceBetweenSensors					= 4.0; 		//(inches) EJO 2.4.18
-	public static final double sensorMinLength							= 4.0; 		//(cm) EJO 2.4.18
-	public static final double sensorMaxLength							= 30.0;		//(cm) EJO 2.4.18
+	public static final double centerSensorPosition						= 9.5; 				//(inches) EJO 2.4.18
+	public static final double distanceBetweenSensors					= 4.0; 				//(inches) EJO 2.4.18
+	public static final double sensorMinLength							= 1.5748031496; 	//(inches) EJO 2.4.18
+	public static final double sensorMaxLength							= 11.811023622;		//(inches) EJO 2.4.18
+	public static final double sensorOutputTolerance					= 0.25;				//wag (inches) EJO 2.4.18
 	
 }	
