@@ -110,11 +110,11 @@ public class Chassis extends Subsystem {
         rightDriveOutput = new DummyPIDOutput();
     	
         //VERIFY Create ChassisConst file and put in default values to make this code valid - JB
-        //TODO make the period of the PIDControllers 0.02 seconds (50 hz)
+        //VERIFY make the period of the PIDControllers 0.02 seconds (50 hz) -JB
         
-        gyroPID = new MultiPIDController(ChassisConst.GyroTurnLow, gyroSource,gyroOutput,"Gyro");
-        leftDrivePID = new MultiPIDController(ChassisConst.DriveLow, driveEncoderLeft,leftDriveOutput,"LeftDrive");
-        rightDrivePID = new MultiPIDController(ChassisConst.DriveLow, driveEncoderRight,rightDriveOutput, "RightDrive");
+        gyroPID = new MultiPIDController(ChassisConst.GyroTurnLow, gyroSource,gyroOutput, 0.02,"Gyro");
+        leftDrivePID = new MultiPIDController(ChassisConst.DriveLow, driveEncoderLeft,leftDriveOutput, 0.02,"LeftDrive");
+        rightDrivePID = new MultiPIDController(ChassisConst.DriveLow, driveEncoderRight,rightDriveOutput, 0.02, "RightDrive");
         
         //TODO Find a non-deprecated function to use for this
         gyroPID.setToleranceBuffer(ChassisConst.gyroTolerancebuffer);
