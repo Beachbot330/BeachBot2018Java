@@ -120,7 +120,7 @@ public class Grabber extends Subsystem {
     	pincher.set(DoubleSolenoid.Value.kReverse);
     }
     
-    public boolean isCubePresent() {
+    public boolean hasCube() {
     	int sL = getSensorLOutput();
     	int sC = getSensorCOutput();
     	int sR = getSensorROutput();
