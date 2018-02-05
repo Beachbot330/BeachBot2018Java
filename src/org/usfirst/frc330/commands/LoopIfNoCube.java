@@ -40,7 +40,7 @@ public class LoopIfNoCube extends BBCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-    	return !Robot.grabber.isCubePresent();
+    	return !Robot.grabber.hasCube();
     }
 
     // Called once after isFinished returns true
