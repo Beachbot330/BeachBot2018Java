@@ -124,6 +124,7 @@ public class Grabber extends Subsystem {
     	int sL = getSensorLOutput();
     	int sC = getSensorCOutput();
     	int sR = getSensorROutput();
+    	if(!checkSensorInput(sL, sR, sC)) return false;
         // in development 
     	// TODO: Algorithm needs to be developed
     	//       to figure out which sensor
@@ -134,6 +135,21 @@ public class Grabber extends Subsystem {
     		return true;
     	}
     	else return false;
+    }
+    
+    private boolean checkSensorInput(int leftSensorOutput, int rightSensorOutput, int centerSensorOutput) {
+    	boolean Lstatus;
+    	boolean Rstatus;
+    	boolean Cstatus;
+    	if(leftSensorOutput > GrabberConst.sensorMaxLength) Lstatus = false;
+    	else Lstatus = true;
+    	if(rightSensorOutput > GrabberConst.sensorMaxLength) Rstatus = false;
+    	else Rstatus = true;
+    	if(centerSensorOutput > GrabberConst.sensorMaxLength) Cstatus = false;
+    	else Cstatus = true;
+    	if(!Lstatus && !Rstatus && !Cstatus) return false; //TODO Eli: finish this l8r
+    	
+		return false;
     }
     
     private double getAngleBetweenSensors(int sideOutput, int centerOutput) {
