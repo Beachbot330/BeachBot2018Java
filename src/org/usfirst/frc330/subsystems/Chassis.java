@@ -22,6 +22,7 @@ import org.usfirst.frc330.util.CSVLogger;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.filters.LinearDigitalFilter;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -116,8 +117,8 @@ public class Chassis extends Subsystem {
         leftDrivePID = new MultiPIDController(ChassisConst.DriveLow, driveEncoderLeft,leftDriveOutput, 0.02,"LeftDrive");
         rightDrivePID = new MultiPIDController(ChassisConst.DriveLow, driveEncoderRight,rightDriveOutput, 0.02, "RightDrive");
         
-        //TODO Find a non-deprecated function to use for this
-        gyroPID.setToleranceBuffer(ChassisConst.gyroTolerancebuffer);
+        //VERIFY Find a non-deprecated function to use for this -JB
+        LinearDigitalFilter.movingAverage(gyroSource, ChassisConst.gyroTolerancebuffer);
         
         SmartDashboard.putData("gyroPID", gyroPID);
         SmartDashboard.putData("leftDrivePID", leftDrivePID);
