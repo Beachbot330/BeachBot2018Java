@@ -126,8 +126,8 @@ public class Grabber extends Subsystem {
     	int sC = getSensorCOutput();
     	int sR = getSensorROutput();
     	if(getNumberOfSensorsReceivingInput(sL, sR, sC) == 0 || getNumberOfSensorsReceivingInput(sL, sR, sC) == 1) return false; //if only 1 or 2 sensors are receiving input, we do not have cube
-    	else if(getNumberOfSensorsReceivingInput(sL, sR, sC) == 2) return isDistanceWithinTwelveInches();
-    	else if(getNumberOfSensorsReceivingInput(sL, sR, sC) == 3) return compareAngles(getAngleBetweenSensors(sL, sC), getAngleBetweenSensors(sR, sC));
+    	else if(getNumberOfSensorsReceivingInput(sL, sR, sC) == 2) return isDistanceWithinTwelveInches(sL, sR, sC); //if the distance is within 12in, we have cube
+    	else if(getNumberOfSensorsReceivingInput(sL, sR, sC) == 3) return compareAngles(getAngleBetweenSensors(sL, sC), getAngleBetweenSensors(sR, sC)); //compare angles to see if we have cube
         // in development 
     	// TODO: Algorithm needs to be developed
     	//       to figure out which sensor
@@ -135,15 +135,34 @@ public class Grabber extends Subsystem {
     	return false;
     }
     
-    private boolean isDistanceWithinTwelveInches() {
+    private boolean isDistanceWithinTwelveInches(int leftSensorDistance, int rightSensorDistance, int centerSensorDistance) {
+    	boolean Lstatus;
+    	boolean Rstatus;
+    	boolean Cstatus;
+    	if(leftSensorDistance > GrabberConst.sensorMaxLength) Lstatus = false;
+    	else Lstatus = true;
+    	if(rightSensorDistance > GrabberConst.sensorMaxLength) Rstatus = false;
+    	else Rstatus = true;
+    	if(centerSensorDistance > GrabberConst.sensorMaxLength) Cstatus = false;
+    	else Cstatus = true;
+    	return false;
+    }
+    
+    private boolean isAngleWithinTwelveInches(double shallowAngle) {
+    	//TODO: formula needs to be developed & implemented -ejo
     	return false;
     }
     
     private boolean compareAngles(double angle1, double angle2) {
+    	if(angle1 == angle2) return true; 										//if angles are =, we have cube 
+    	if(angle1 > angle2) return isAngleWithinTwelveInches(angle2);			//if shallow angle is within 12in, we have cube
+    	if(angle2 > angle1) return isAngleWithinTwelveInches(angle1);			//if shallow angle is within 12in, we have cube
+    	if((angle1 * -1) == angle2) return isAngleWithinTwelveInches(angle1);	//if shallow angle is within 12in, we have cube
     	return false;
     }
     
     private int getNumberOfSensorsReceivingInput(int leftSensorOutput, int rightSensorOutput, int centerSensorOutput) {
+    	//create an object to track WHICH sensors are receiving input?
     	boolean Lstatus;
     	boolean Rstatus;
     	boolean Cstatus;
