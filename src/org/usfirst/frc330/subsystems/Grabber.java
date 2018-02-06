@@ -125,17 +125,12 @@ public class Grabber extends Subsystem {
     	int sC = getSensorCOutput();
     	int sR = getSensorROutput();
     	if(getNumberOfSensorsReceivingInput(sL, sR, sC) == 0 || getNumberOfSensorsReceivingInput(sL, sR, sC) == 1) return false; //if only 1 or 2 sensors are receiving input, we do not have cube
-    	if(getNumberOfSensorsReceivingInput(sL, sR, sC) == 1)
+    	else if(getNumberOfSensorsReceivingInput(sL, sR, sC) == 2) return isDistanceWithinTwelveInches(sL, sC, sR)
+    	else if(getNumberOfSensorsReceivingInput(sL, sR, sC) == 3) return compareAngles(getAngleBetweenSensors(sL, sC), getAngleBetweenSensors(sR, sC));
         // in development 
     	// TODO: Algorithm needs to be developed
     	//       to figure out which sensor
     	//       input signals that it is "present"
-    	if(getAngleBetweenSensors(sL, sC) == getAngleBetweenSensors(sR, sC)) { //if two angles are the same
-    		return true;
-    	} else if((getAngleBetweenSensors(sL, sC) * -1) == getAngleBetweenSensors(sR, sC)) {
-    		return true;
-    	}
-    	else return false;
     }
     
     private int getNumberOfSensorsReceivingInput(int leftSensorOutput, int rightSensorOutput, int centerSensorOutput) {
