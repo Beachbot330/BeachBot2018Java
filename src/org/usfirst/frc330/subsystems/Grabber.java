@@ -124,7 +124,8 @@ public class Grabber extends Subsystem {
     	int sL = getSensorLOutput();
     	int sC = getSensorCOutput();
     	int sR = getSensorROutput();
-    	if(!checkSensorInput(sL, sR, sC)) return false;
+    	if(getNumberOfSensorsReceivingInput(sL, sR, sC) == 0 || getNumberOfSensorsReceivingInput(sL, sR, sC) == 1) return false; //if only 1 or 2 sensors are receiving input, we do not have cube
+    	if(getNumberOfSensorsReceivingInput(sL, sR, sC) == 1)
         // in development 
     	// TODO: Algorithm needs to be developed
     	//       to figure out which sensor
@@ -137,7 +138,7 @@ public class Grabber extends Subsystem {
     	else return false;
     }
     
-    private boolean checkSensorInput(int leftSensorOutput, int rightSensorOutput, int centerSensorOutput) {
+    private int getNumberOfSensorsReceivingInput(int leftSensorOutput, int rightSensorOutput, int centerSensorOutput) {
     	boolean Lstatus;
     	boolean Rstatus;
     	boolean Cstatus;
@@ -147,9 +148,17 @@ public class Grabber extends Subsystem {
     	else Rstatus = true;
     	if(centerSensorOutput > GrabberConst.sensorMaxLength) Cstatus = false;
     	else Cstatus = true;
-    	if(!Lstatus && !Rstatus && !Cstatus) return false; //TODO Eli: finish this l8r
-    	
-		return false;
+    	if(!Lstatus && !Rstatus && !Cstatus) return 0; 		// no sensors are receiving input
+    	if(Lstatus || Rstatus || Cstatus) {					// any of the sensors are receiving input
+    		if(Lstatus && !Rstatus && !Cstatus) return 1;	// one sensor (L) is receiving input
+    		if(!Lstatus && Rstatus && !Cstatus) return 1;	// one sensor (R) is receiving input
+    		if(!Lstatus && !Rstatus && Cstatus) return 1;	// one sensor (C) is receiving input
+    		if(Lstatus && Rstatus && !Cstatus) return 2;	// two sensors (L & R) are receiving input
+    		if(Lstatus && !Rstatus && Cstatus) return 2;	// two sensors (L & C) are receiving input
+    		if(!Lstatus && Rstatus && Cstatus) return 2;	// two sensors (R & C) are receiving input
+        	if(Lstatus && Rstatus && Cstatus) return 3; 	// all sensors are receiving input
+    	} 
+    	return 0; //if none of above conditions are met, return 0
     }
     
     private double getAngleBetweenSensors(int sideOutput, int centerOutput) {
