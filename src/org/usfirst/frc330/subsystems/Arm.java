@@ -280,8 +280,6 @@ public class Arm extends Subsystem {
 		return armL.isAlive();
 	}
 		
-	//TODO Makena: See 2016  code for an example of what else needs to be added
-
 	//VERIFY Implement manualArm -JB
 	 int inertiaCounter;
 	    public void manualArm() {	
