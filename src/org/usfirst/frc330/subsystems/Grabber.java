@@ -141,8 +141,19 @@ public class Grabber extends Subsystem {
     }
     
     private boolean isDistanceWithinTwelveInches(int leftSensorDistance, int rightSensorDistance, int centerSensorDistance) {
-    	
-    	return false;
+    	if(sLstatus = false) leftSensorDistance = 99;
+    	if(sCstatus = false) centerSensorDistance = 99;
+    	if(sRstatus = false) rightSensorDistance = 99;
+    	if(!sLstatus) {
+    		if(centerSensorDistance < 12 && rightSensorDistance < 12) return true; 		//cube is within 12in
+    		else return false;
+     	} else if(!sCstatus) {
+     		if(leftSensorDistance < 12 && rightSensorDistance < 12) return true;		//cube is within 12in
+     		else return false;
+      	} else if(!sRstatus) {
+      		if(centerSensorDistance < 12 && leftSensorDistance < 12) return true;		//cube is within 12 in
+      		else return false;
+      	} else return false;
     }
     
     private boolean isAngleWithinTwelveInches(double shallowAngle) {
