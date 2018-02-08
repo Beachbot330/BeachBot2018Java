@@ -127,17 +127,18 @@ public class Grabber extends Subsystem {
     
     public boolean hasCube() { //TODO Allen: check everything that is here
     	
-    	int sL = getSensorLOutput();
+    	int sL = getSensorLOutput(); 
     	int sC = getSensorCOutput();
     	int sR = getSensorROutput();
-    	if(getSensorsReceivingInput(sL, sR, sC) == 0 || getSensorsReceivingInput(sL, sR, sC) == 1) return false; //if only 1 or 2 sensors are receiving input, we do not have cube
-    	else if(getSensorsReceivingInput(sL, sR, sC) == 2) return isDistanceWithinTwelveInches(sL, sR, sC); //if the distance is within 12in, we have cube
-    	else if(getSensorsReceivingInput(sL, sR, sC) == 3) return compareAngles(getAngleBetweenSensors(sL, sC), getAngleBetweenSensors(sR, sC)); //compare angles to see if we have cube
-        // in development 
+    	
+    	if(getSensorsReceivingInput(sL, sR, sC) == 0 || getSensorsReceivingInput(sL, sR, sC) == 1) return false; 									//if only 1 or 2 sensors are receiving input, we do not have cube
+    	else if(getSensorsReceivingInput(sL, sR, sC) == 2) return isDistanceWithinTwelveInches(sL, sR, sC); 										//if the distance is within 12in, we have cube
+    	else if(getSensorsReceivingInput(sL, sR, sC) == 3) return compareAngles(getAngleBetweenSensors(sL, sC), getAngleBetweenSensors(sR, sC)); 	//compare angles to see if we have cube
+    	else return false;
+    	// in development 
     	// TODO: eli: Algorithm needs to be developed
     	//       to figure out which sensor
     	//       input signals that it is "present"
-    	return false;
     }
     
     private boolean isDistanceWithinTwelveInches(int leftSensorDistance, int rightSensorDistance, int centerSensorDistance) {
@@ -181,10 +182,10 @@ public class Grabber extends Subsystem {
     		if(sLstatus && !sRstatus && !sCstatus) return 1;	// one sensor (L) is receiving input
     		if(!sLstatus && sRstatus && !sCstatus) return 1;	// one sensor (R) is receiving input
     		if(!sLstatus && !sRstatus && sCstatus) return 1;	// one sensor (C) is receiving input
-    		if(sLstatus && sRstatus && !sCstatus) return 2;	// two sensors (L & R) are receiving input
-    		if(sLstatus && !sRstatus && sCstatus) return 2;	// two sensors (L & C) are receiving input
-    		if(!sLstatus && sRstatus && sCstatus) return 2;	// two sensors (R & C) are receiving input
-        	if(sLstatus && sRstatus && sCstatus) return 3; 	// all sensors are receiving input
+    		if(sLstatus && sRstatus && !sCstatus) return 2;		// two sensors (L & R) are receiving input
+    		if(sLstatus && !sRstatus && sCstatus) return 2;		// two sensors (L & C) are receiving input
+    		if(!sLstatus && sRstatus && sCstatus) return 2;		// two sensors (R & C) are receiving input
+        	if(sLstatus && sRstatus && sCstatus) return 3; 		// all sensors are receiving input
     	} 
     	return 0; //if none of above conditions are met, return 0
     }
