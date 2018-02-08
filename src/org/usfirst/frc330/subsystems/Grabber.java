@@ -121,30 +121,27 @@ public class Grabber extends Subsystem {
     	pincher.set(DoubleSolenoid.Value.kReverse);
     }
     
-    public boolean hasCube() {
+    private static boolean sLstatus;
+    private static boolean sCstatus;
+    private static boolean sRstatus;
+    
+    public boolean hasCube() { //TODO Allen: check everything that is here
+    	
     	int sL = getSensorLOutput();
     	int sC = getSensorCOutput();
     	int sR = getSensorROutput();
-    	if(getNumberOfSensorsReceivingInput(sL, sR, sC) == 0 || getNumberOfSensorsReceivingInput(sL, sR, sC) == 1) return false; //if only 1 or 2 sensors are receiving input, we do not have cube
-    	else if(getNumberOfSensorsReceivingInput(sL, sR, sC) == 2) return isDistanceWithinTwelveInches(sL, sR, sC); //if the distance is within 12in, we have cube
-    	else if(getNumberOfSensorsReceivingInput(sL, sR, sC) == 3) return compareAngles(getAngleBetweenSensors(sL, sC), getAngleBetweenSensors(sR, sC)); //compare angles to see if we have cube
+    	if(getSensorsReceivingInput(sL, sR, sC) == 0 || getSensorsReceivingInput(sL, sR, sC) == 1) return false; //if only 1 or 2 sensors are receiving input, we do not have cube
+    	else if(getSensorsReceivingInput(sL, sR, sC) == 2) return isDistanceWithinTwelveInches(sL, sR, sC); //if the distance is within 12in, we have cube
+    	else if(getSensorsReceivingInput(sL, sR, sC) == 3) return compareAngles(getAngleBetweenSensors(sL, sC), getAngleBetweenSensors(sR, sC)); //compare angles to see if we have cube
         // in development 
-    	// TODO: Algorithm needs to be developed
+    	// TODO: eli: Algorithm needs to be developed
     	//       to figure out which sensor
     	//       input signals that it is "present"
     	return false;
     }
     
     private boolean isDistanceWithinTwelveInches(int leftSensorDistance, int rightSensorDistance, int centerSensorDistance) {
-    	boolean Lstatus;
-    	boolean Rstatus;
-    	boolean Cstatus;
-    	if(leftSensorDistance > GrabberConst.sensorMaxLength) Lstatus = false;
-    	else Lstatus = true;
-    	if(rightSensorDistance > GrabberConst.sensorMaxLength) Rstatus = false;
-    	else Rstatus = true;
-    	if(centerSensorDistance > GrabberConst.sensorMaxLength) Cstatus = false;
-    	else Cstatus = true;
+    	
     	return false;
     }
     
@@ -160,27 +157,23 @@ public class Grabber extends Subsystem {
     	if((angle1 * -1) == angle2) return isAngleWithinTwelveInches(angle1);	//if shallow angle is within 12in, we have cube
     	return false;
     }
-    
-    private int getNumberOfSensorsReceivingInput(int leftSensorOutput, int rightSensorOutput, int centerSensorOutput) {
-    	//create an object to track WHICH sensors are receiving input?
-    	boolean Lstatus;
-    	boolean Rstatus;
-    	boolean Cstatus;
-    	if(leftSensorOutput > GrabberConst.sensorMaxLength) Lstatus = false;
-    	else Lstatus = true;
-    	if(rightSensorOutput > GrabberConst.sensorMaxLength) Rstatus = false;
-    	else Rstatus = true;
-    	if(centerSensorOutput > GrabberConst.sensorMaxLength) Cstatus = false;
-    	else Cstatus = true;
-    	if(!Lstatus && !Rstatus && !Cstatus) return 0; 		// no sensors are receiving input
-    	if(Lstatus || Rstatus || Cstatus) {					// any of the sensors are receiving input
-    		if(Lstatus && !Rstatus && !Cstatus) return 1;	// one sensor (L) is receiving input
-    		if(!Lstatus && Rstatus && !Cstatus) return 1;	// one sensor (R) is receiving input
-    		if(!Lstatus && !Rstatus && Cstatus) return 1;	// one sensor (C) is receiving input
-    		if(Lstatus && Rstatus && !Cstatus) return 2;	// two sensors (L & R) are receiving input
-    		if(Lstatus && !Rstatus && Cstatus) return 2;	// two sensors (L & C) are receiving input
-    		if(!Lstatus && Rstatus && Cstatus) return 2;	// two sensors (R & C) are receiving input
-        	if(Lstatus && Rstatus && Cstatus) return 3; 	// all sensors are receiving input
+    	
+    private int getSensorsReceivingInput(int leftSensorOutput, int rightSensorOutput, int centerSensorOutput) {
+    	if(leftSensorOutput > GrabberConst.sensorMaxLength) sLstatus = false;
+    	else sLstatus = true;
+    	if(rightSensorOutput > GrabberConst.sensorMaxLength) sRstatus = false;
+    	else sRstatus = true;
+    	if(centerSensorOutput > GrabberConst.sensorMaxLength) sCstatus = false;
+    	else sCstatus = true;
+    	if(!sLstatus && !sRstatus && !sCstatus) return 0; 		// no sensors are receiving input
+    	if(sLstatus || sRstatus || sCstatus) {					// any of the sensors are receiving input
+    		if(sLstatus && !sRstatus && !sCstatus) return 1;	// one sensor (L) is receiving input
+    		if(!sLstatus && sRstatus && !sCstatus) return 1;	// one sensor (R) is receiving input
+    		if(!sLstatus && !sRstatus && sCstatus) return 1;	// one sensor (C) is receiving input
+    		if(sLstatus && sRstatus && !sCstatus) return 2;	// two sensors (L & R) are receiving input
+    		if(sLstatus && !sRstatus && sCstatus) return 2;	// two sensors (L & C) are receiving input
+    		if(!sLstatus && sRstatus && sCstatus) return 2;	// two sensors (R & C) are receiving input
+        	if(sLstatus && sRstatus && sCstatus) return 3; 	// all sensors are receiving input
     	} 
     	return 0; //if none of above conditions are met, return 0
     }
