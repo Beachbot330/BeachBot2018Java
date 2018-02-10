@@ -166,9 +166,10 @@ public class Grabber extends Subsystem {
     }
     
     private boolean isDistanceWithinTwelveInches(int leftSensorDistance, int rightSensorDistance, int centerSensorDistance) {
-    	if(sLstatus = false) leftSensorDistance = 99;
-    	if(sCstatus = false) centerSensorDistance = 99;
-    	if(sRstatus = false) rightSensorDistance = 99;
+//    	if(sLstatus = false) leftSensorDistance = 99;
+//    	if(sCstatus = false) centerSensorDistance = 99;
+//    	if(sRstatus = false) rightSensorDistance = 99;
+    	//not sure if above code is needed
     	if(!sLstatus) {
     		if(centerSensorDistance < 12 && rightSensorDistance < 12) return true; 		//cube is within 12in
     		else return false;
