@@ -149,7 +149,8 @@ public class Grabber extends Subsystem {
 		int hL = getSensorLOutput();
 		int hR = getSensorROutput();
 		int V = getSensorCOutput();
-		int sensorsReceivingInput = getSensorsReceivingInput(hL, hR, V);
+		updateSensorStatus(hL, hR, V);
+		int sensorsReceivingInput = getNumberOfSensorsReceivingInput();
 		
 		if(sensorsReceivingInput < 3) return false;
 		
@@ -166,10 +167,10 @@ public class Grabber extends Subsystem {
 		int sL = getSensorLOutput();
 		int sR = getSensorROutput();
 		int sC = getSensorCOutput();
-		int sensorsReceivingInput = getSensorsReceivingInput(sL, sR, sC); 		//this updates statuses
+		updateSensorStatus(sL, sR, sC);
+		int sensorsReceivingInput = getNumberOfSensorsReceivingInput(); 		//this updates statuses
 		
-		if(!sLstatus && !sRstatus && !sCstatus) return false;
-		else if(sLstatus && sRstatus) return true;
+		if(sLstatus && sRstatus) return true;
 		else if(sC < GrabberConst.centerSensorMaximumInnerDistance) return true;
 		else return false;
 	}
@@ -183,7 +184,8 @@ public class Grabber extends Subsystem {
     	int sL = getSensorLOutput(); 
     	int sC = getSensorCOutput();
     	int sR = getSensorROutput();
-    	int sensorsReceivingInput = getSensorsReceivingInput(sL, sR, sC);
+    	updateSensorStatus(sL, sR, sC);
+    	int sensorsReceivingInput = getNumberOfSensorsReceivingInput();
     	
     	switch(sensorsReceivingInput) {
 	    	case 2:
@@ -230,25 +232,22 @@ public class Grabber extends Subsystem {
     	if((angle1 * -1) == angle2) return isAngleWithinTwelveInches(angle1);	//if shallow angle is within 12in, we have cube
     	return false;
     }
-    	
-    private int getSensorsReceivingInput(int leftSensorOutput, int rightSensorOutput, int centerSensorOutput) {
+    
+    private void updateSensorStatus(int leftSensorOutput, int rightSensorOutput, int centerSensorOutput) {
     	if(leftSensorOutput > GrabberConst.sensorMaxLength) sLstatus = false;
     	else sLstatus = true;
     	if(rightSensorOutput > GrabberConst.sensorMaxLength) sRstatus = false;
     	else sRstatus = true;
     	if(centerSensorOutput > GrabberConst.sensorMaxLength) sCstatus = false;
     	else sCstatus = true;
-    	if(!sLstatus && !sRstatus && !sCstatus) return 0; 		// no sensors are receiving input
-    	if(sLstatus || sRstatus || sCstatus) {					// any of the sensors are receiving input
-    		if(sLstatus && !sRstatus && !sCstatus) return 1;	// one sensor (L) is receiving input
-    		if(!sLstatus && sRstatus && !sCstatus) return 1;	// one sensor (R) is receiving input
-    		if(!sLstatus && !sRstatus && sCstatus) return 1;	// one sensor (C) is receiving input
-    		if(sLstatus && sRstatus && !sCstatus) return 2;		// two sensors (L & R) are receiving input
-    		if(sLstatus && !sRstatus && sCstatus) return 2;		// two sensors (L & C) are receiving input
-    		if(!sLstatus && sRstatus && sCstatus) return 2;		// two sensors (R & C) are receiving input
-        	if(sLstatus && sRstatus && sCstatus) return 3; 		// all sensors are receiving input
-    	} 
-    	return 0; //if none of above conditions are met, return 0
+    }
+    
+    private int getNumberOfSensorsReceivingInput() { //make sure you call updateSensorStatus first!!!!!!!!!!!!!
+    	int numberOfSensorsReceivingInput = 0;
+    	if(sLstatus) numberOfSensorsReceivingInput++;
+    	if(sRstatus) numberOfSensorsReceivingInput++;
+    	if(sCstatus) numberOfSensorsReceivingInput++;
+    	return numberOfSensorsReceivingInput; 
     }
     
     private double getAngleBetweenSensors(int sideOutput, int centerOutput) {
