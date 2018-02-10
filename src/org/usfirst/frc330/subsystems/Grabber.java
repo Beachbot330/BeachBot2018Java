@@ -144,7 +144,26 @@ public class Grabber extends Subsystem {
 	public void pickupOff() {
 		intakeLeft.disable();
 	}
+	
+	public boolean hasCube2() { //hasCube w/ vertical and horizontal sensors
+		int hL = getSensorLOutput();
+		int hR = getSensorROutput();
+		int V = getSensorCOutput();
+		int sensorsReceivingInput = getSensorsReceivingInput(hL, hR, V);
+		
+		if(sensorsReceivingInput < 3) return false;
+		
+		if((hR + hL) < GrabberConst.horizontalSensorDifference) return false;
+		
+		if(V > GrabberConst.sensorMinimumOuterDistance) return false;
+		else if(V > GrabberConst.sensorMinimumOuterDistance) return true;
+		else if(V > GrabberConst.sensorMaximumInnerDistance) return false;
+		else if(V < GrabberConst.sensorMaximumInnerDistance) return true;
+		else return false;
+	}
     
+	
+	
     private static boolean sLstatus;
     private static boolean sCstatus;
     private static boolean sRstatus;
