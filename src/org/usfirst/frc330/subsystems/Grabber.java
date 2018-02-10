@@ -121,6 +121,30 @@ public class Grabber extends Subsystem {
     	pincher.set(DoubleSolenoid.Value.kReverse);
     }
     
+  //TODO verify direction for roller on/off and rollerreverse on/off -EJO
+    public void RollerOn() {
+    	intakeLeft.set(GrabberConst.leftRollerMaxSpeed);
+    	intakeRight.set(GrabberConst.rightRollerMaxSpeed);
+    }
+    public void RollerOff() {
+    	intakeLeft.stopMotor();
+    	intakeRight.stopMotor();
+    }
+    public void RollerReverse() {
+    	intakeLeft.set((GrabberConst.leftRollerMaxSpeed * -1)); //the negative one is to make it rotate the other way
+    	intakeRight.set((GrabberConst.rightRollerMaxSpeed * -1));
+    }
+    public void RollerReverseOff() {
+    	intakeLeft.stopMotor();
+    	intakeRight.stopMotor();
+    }
+    //----------------------------------------
+    // Other methods
+    //----------------------------------------
+	public void pickupOff() {
+		intakeLeft.disable();
+	}
+    
     private static boolean sLstatus;
     private static boolean sCstatus;
     private static boolean sRstatus;
@@ -195,30 +219,6 @@ public class Grabber extends Subsystem {
     	double y = centerOutput - sideOutput;
 		double x = GrabberConst.distanceBetweenSensors;
 		return Math.atan2(y, x);
-	}
-
-	//TODO verify direction for roller on/off and rollerreverse on/off -EJO
-    public void RollerOn() {
-    	intakeLeft.set(GrabberConst.leftRollerMaxSpeed);
-    	intakeRight.set(GrabberConst.rightRollerMaxSpeed);
-    }
-    public void RollerOff() {
-    	intakeLeft.stopMotor();
-    	intakeRight.stopMotor();
-    }
-    public void RollerReverse() {
-    	intakeLeft.set((GrabberConst.leftRollerMaxSpeed * -1)); //the negative one is to make it rotate the other way
-    	intakeRight.set((GrabberConst.rightRollerMaxSpeed * -1));
-    }
-    public void RollerReverseOff() {
-    	intakeLeft.stopMotor();
-    	intakeRight.stopMotor();
-    }
-    //----------------------------------------
-    // Other methods
-    //----------------------------------------
-	public void pickupOff() {
-		intakeLeft.disable();
 	}
 }
 
