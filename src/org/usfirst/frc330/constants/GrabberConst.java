@@ -34,6 +34,7 @@ public final class GrabberConst {
 	public static final double horizontalSensorDifference				= 7.0;				//(inches) EJO 2.10.18
 	public static final double sensorMinimumOuterDistance				= 11.0;				//wag (inches) EJO 2.10.18
 	public static final double sensorMaximumOuterDistance				= 12.0;				//wag (inches) EJO 2.10.18
-	public static final double sensorMaximumInnerDistance				= 2.0; 				//(inches) EJO 2.10.18
+	public static final double sensorMaximumInnerDistance				= 2.0; 				//wag (inches) EJO 2.10.18
+	public static final double centerSensorMaximumInnerDistance			= 3.0;				//wag (inches) EJO 2.10.18 
 	
 }	

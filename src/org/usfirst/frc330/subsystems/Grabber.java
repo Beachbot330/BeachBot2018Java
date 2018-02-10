@@ -162,7 +162,17 @@ public class Grabber extends Subsystem {
 		else return false;
 	}
     
-	
+	public boolean hasCube3() { //hasCube w/ canted sensors on rear of robot & center vertical sensor
+		int sL = getSensorLOutput();
+		int sR = getSensorROutput();
+		int sC = getSensorCOutput();
+		int sensorsReceivingInput = getSensorsReceivingInput(sL, sR, sC); 		//this updates statuses
+		
+		if(!sLstatus && !sRstatus && !sCstatus) return false;
+		else if(sLstatus && sRstatus) return true;
+		else if(sC < GrabberConst.centerSensorMaximumInnerDistance) return true;
+		else return false;
+	}
 	
     private static boolean sLstatus;
     private static boolean sCstatus;
