@@ -154,11 +154,15 @@ public class Grabber extends Subsystem {
     	int sL = getSensorLOutput(); 
     	int sC = getSensorCOutput();
     	int sR = getSensorROutput();
+    	int sensorsReceivingInput = getSensorsReceivingInput(sL, sR, sC);
     	
-    	if(getSensorsReceivingInput(sL, sR, sC) == 0 || getSensorsReceivingInput(sL, sR, sC) == 1) return false; 									//if only 1 or 2 sensors are receiving input, we do not have cube
-    	else if(getSensorsReceivingInput(sL, sR, sC) == 2) return isDistanceWithinTwelveInches(sL, sR, sC); 										//if the distance is within 12in, we have cube
-    	else if(getSensorsReceivingInput(sL, sR, sC) == 3) return compareAngles(getAngleBetweenSensors(sL, sC), getAngleBetweenSensors(sR, sC)); 	//compare angles to see if we have cube
-    	else return false;
+    	switch(sensorsReceivingInput) {
+	    	case 2:
+	    		return isDistanceWithinTwelveInches(sL, sR, sC);
+	    	case 3:
+	    		return compareAngles(getAngleBetweenSensors(sL, sC), getAngleBetweenSensors(sR, sC));
+	    	default: return false;
+    	}
     	// in development 
     	// TODO: eli: Algorithm needs to be developed
     	//       to figure out which sensor
@@ -171,13 +175,16 @@ public class Grabber extends Subsystem {
 //    	if(sRstatus = false) rightSensorDistance = 99;
     	//not sure if above code is needed
     	if(!sLstatus) {
-    		if(centerSensorDistance < 12 && rightSensorDistance < 12) return true; 		//cube is within 12in
+    		if(centerSensorDistance < GrabberConst.distanceWhenWeHaveCube 
+    		&& rightSensorDistance < GrabberConst.distanceWhenWeHaveCube) return true; 		//cube is within 12in
     		else return false;
      	} else if(!sCstatus) {
-     		if(leftSensorDistance < 12 && rightSensorDistance < 12) return true;		//cube is within 12in
+     		if(leftSensorDistance < GrabberConst.distanceWhenWeHaveCube 
+     		&& rightSensorDistance < GrabberConst.distanceWhenWeHaveCube) return true;		//cube is within 12in
      		else return false;
       	} else if(!sRstatus) {
-      		if(centerSensorDistance < 12 && leftSensorDistance < 12) return true;		//cube is within 12 in
+      		if(centerSensorDistance < GrabberConst.distanceWhenWeHaveCube 
+      		&& leftSensorDistance < GrabberConst.distanceWhenWeHaveCube) return true;		//cube is within 12 in
       		else return false;
       	} else return false;
     }
