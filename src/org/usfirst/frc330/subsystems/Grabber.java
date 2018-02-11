@@ -167,10 +167,10 @@ public class Grabber extends Subsystem {
 	    		double leftAngle = getAngleBetweenSensors(sL, sC);
 	    		double rightAngle = getAngleBetweenSensors(sR, sC);
 	    		
-	    		if(leftAngle == rightAngle) return true; 													//if angles are =, we have cube 
+	    		if(Math.abs(rightAngle - leftAngle) < GrabberConst.sensorAngleTolerance) return true; 													//if angles are =, we have cube 
 	    		else if(leftAngle > rightAngle) return isAngleWithinTwelveInches(rightAngle, sR);			//if shallow angle is within 12in, we have cube
 	    		else if(rightAngle > leftAngle) return isAngleWithinTwelveInches(leftAngle, sL);			//if shallow angle is within 12in, we have cube
-	    		else if((leftAngle * -1) == rightAngle) return isAngleWithinTwelveInches(leftAngle, sL);	//if shallow angle is within 12in, we have cube
+	    		else if(Math.abs((leftAngle * -1) - rightAngle) < GrabberConst.sensorAngleTolerance) return isAngleWithinTwelveInches(leftAngle, sL);	//if shallow angle is within 12in, we have cube
 	    		else return false;
     	}
     	else return false;
@@ -243,7 +243,6 @@ public class Grabber extends Subsystem {
     }
     
     private double getAngleBetweenSensors(int sideOutput, int centerOutput) {
-    	if(sideOutput == GrabberConst.sensorMaxLength || centerOutput == GrabberConst.sensorMaxLength) return -361.0;
     	double y = centerOutput - sideOutput;
 		double x = GrabberConst.distanceBetweenSensors;
 		return Math.atan2(y, x);

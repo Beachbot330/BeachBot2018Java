@@ -25,6 +25,7 @@ public final class GrabberConst {
 	public static final boolean	rightRollerInversionStatus				= true;			//needs to be checked EJO 2.5.18
 	
 	//Sensor
+	public static final double sensorAngleTolerance						= 5.0;				//wag (degrees) EJO 2.10.18
 	public static final double centerSensorPosition						= 9.5; 				//(inches) EJO 2.4.18
 	public static final double distanceBetweenSensors					= 4.0; 				//(inches) EJO 2.4.18
 	public static final double sensorMinLength							= 1.5748031496; 	//(inches) EJO 2.4.18
