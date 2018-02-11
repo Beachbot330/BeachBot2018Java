@@ -162,15 +162,15 @@ public class Grabber extends Subsystem {
     public boolean hasCube() { //TODO Allen: check everything that is here
     	int sensorsReceivingInput = getNumberOfSensorsReceivingInput();
     	
-    	if(sensorsReceivingInput == 2) return isDistanceWithinTwelveInches(sL, sR, sC);
+    	if(sensorsReceivingInput == 2) return  isDistanceWithinMaximumOuterDistance(sL, sR, sC);
     	else if(sensorsReceivingInput == 3) {
 	    		double leftAngle = getAngleBetweenSensors(sL, sC);
 	    		double rightAngle = getAngleBetweenSensors(sR, sC);
 	    		
 	    		if(Math.abs(rightAngle - leftAngle) < GrabberConst.sensorAngleTolerance) return true; 													//if angles are =, we have cube 
-	    		else if(leftAngle > rightAngle) return isAngleWithinTwelveInches(rightAngle, sR);			//if shallow angle is within 12in, we have cube
-	    		else if(rightAngle > leftAngle) return isAngleWithinTwelveInches(leftAngle, sL);			//if shallow angle is within 12in, we have cube
-	    		else if(Math.abs((leftAngle * -1) - rightAngle) < GrabberConst.sensorAngleTolerance) return isAngleWithinTwelveInches(leftAngle, sL);	//if shallow angle is within 12in, we have cube
+	    		else if(leftAngle > rightAngle) return  isAngleWithinMaximumOuterDistance(rightAngle, sR);			//if shallow angle is within 12in, we have cube
+	    		else if(rightAngle > leftAngle) return  isAngleWithinMaximumOuterDistance(leftAngle, sL);			//if shallow angle is within 12in, we have cube
+	    		else if(Math.abs((leftAngle * -1) - rightAngle) < GrabberConst.sensorAngleTolerance) return  isAngleWithinMaximumOuterDistance(leftAngle, sL);	//if shallow angle is within 12in, we have cube
 	    		else return false;
     	}
     	else return false;
@@ -201,24 +201,24 @@ public class Grabber extends Subsystem {
 	 // Private methods for hasCube
 	 // --------------------------- 
     
-    private boolean isDistanceWithinTwelveInches(int leftSensorDistance, int rightSensorDistance, int centerSensorDistance) {
+    private boolean isDistanceWithinMaximumOuterDistance(int leftSensorDistance, int rightSensorDistance, int centerSensorDistance) {
     	if(!sLstatus) {
-    		if(centerSensorDistance < GrabberConst.distanceWhenWeHaveCube 
-    		&& rightSensorDistance < GrabberConst.distanceWhenWeHaveCube) return true; 		//cube is within 12in
+    		if(centerSensorDistance < GrabberConst.sensorMaximumOuterDistance 
+    		&& rightSensorDistance < GrabberConst.sensorMaximumOuterDistance) return true; 		//cube is within 12in
     		else return false;
      	} else if(!sCstatus) {
-     		if(leftSensorDistance < GrabberConst.distanceWhenWeHaveCube 
-     		&& rightSensorDistance < GrabberConst.distanceWhenWeHaveCube) return true;		//cube is within 12in
+     		if(leftSensorDistance < GrabberConst.sensorMaximumOuterDistance 
+     		&& rightSensorDistance < GrabberConst.sensorMaximumOuterDistance) return true;		//cube is within 12in
      		else return false;
       	} else if(!sRstatus) {
-      		if(centerSensorDistance < GrabberConst.distanceWhenWeHaveCube 
-      		&& leftSensorDistance < GrabberConst.distanceWhenWeHaveCube) return true;		//cube is within 12 in
+      		if(centerSensorDistance < GrabberConst.sensorMaximumOuterDistance 
+      		&& leftSensorDistance < GrabberConst.sensorMaximumOuterDistance) return true;		//cube is within 12 in
       		else return false;
       	} else return false;
     }
     
-    private boolean isAngleWithinTwelveInches(double shallowAngle, int sensorDistance) {
-    	double sinInRad = Math.sin(shallowAngle);
+    private boolean isAngleWithinMaximumOuterDistance(double shallowAngle, int sensorDistance) {
+    	double sinInRad = Math.sin(Math.toRadians(shallowAngle));
     	double distance = (Math.toDegrees(sinInRad) * 13) + sensorDistance; 	//the distance is the hypotenuse (which is equal to box length)
     	
     	if(distance < GrabberConst.sensorMaximumOuterDistance) return true;
@@ -245,7 +245,7 @@ public class Grabber extends Subsystem {
     private double getAngleBetweenSensors(int sideOutput, int centerOutput) {
     	double y = centerOutput - sideOutput;
 		double x = GrabberConst.distanceBetweenSensors;
-		return Math.atan2(y, x);
+		return Math.toDegrees(Math.atan2(y, x));
 	}
 }
 
