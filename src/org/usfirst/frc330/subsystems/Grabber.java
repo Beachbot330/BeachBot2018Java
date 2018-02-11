@@ -196,6 +196,22 @@ public class Grabber extends Subsystem {
 		else if(sC < GrabberConst.centerSensorMaximumInnerDistance) return true;
 		else return false;
 	}
+	
+	public boolean hasCubeClose() {
+		int sensorsReceivingInput = getNumberOfSensorsReceivingInput();
+		
+		if(sensorsReceivingInput < 3) return false;
+		else if(sensorsReceivingInput == 3) {
+			double leftAngle = getAngleBetweenSensors(sL, sC);
+			double rightAngle = getAngleBetweenSensors(sR, sC);
+			
+			if(Math.abs(rightAngle - leftAngle) < GrabberConst.sensorAngleTolerance) return true; 													
+    		else if(leftAngle > rightAngle) return  isAngleWithinMaximumOuterDistance(rightAngle, sR);			
+    		else if(rightAngle > leftAngle) return  isAngleWithinMaximumOuterDistance(leftAngle, sL);			
+    		else if(Math.abs((leftAngle * -1) - rightAngle) < GrabberConst.sensorAngleTolerance) return  isAngleWithinMaximumOuterDistance(leftAngle, sL);
+    		else return false;
+		} else return false;
+	}
     
 	 // ---------------------------
 	 // Private methods for hasCube
