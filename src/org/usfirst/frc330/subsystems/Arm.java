@@ -202,7 +202,12 @@ public class Arm extends Subsystem {
 	    	return (int)(getArmAngle()/ArmConst.maxAngleDegrees);
 	 }
 	 public double getSetpoint() {
-	    	return convertRotationsToDegrees(-armL.getClosedLoopTarget(0));
+		 if(armL.getControlMode() != ControlMode.Disabled) {
+			 return convertRotationsToDegrees(-armL.getClosedLoopTarget(0));
+		 }
+		 else {
+			 return 0;
+		 }
 	    
 	}
 	//--------------------------------------------------------------------

@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 
+import com.ctre.CANTalon;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -192,7 +193,12 @@ public class Lift extends Subsystem {
     }
     
     public double getSetpoint() {
-    	return lift1.getClosedLoopTarget(0);
+    	if(lift1.getControlMode() != ControlMode.Disabled) {
+    		return lift1.getClosedLoopTarget(0);
+    	}
+    	else {
+    		return 0;
+    	}
     }
     
     //------------------------------------------------------------------------------
