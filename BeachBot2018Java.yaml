@@ -208,7 +208,7 @@ Children:
             validators: *id009
             value: '0'
           Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
-            name: Inverted, validators: null, value: false}
+            name: Inverted, validators: null, value: true}
         Base: Speed Controller
         Name: RightDrive1
       - Children: []
@@ -226,7 +226,7 @@ Children:
             validators: *id009
             value: '1'
           Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
-            name: Inverted, validators: null, value: false}
+            name: Inverted, validators: null, value: true}
         Base: Speed Controller
         Name: RightDrive2
       - Children: []
@@ -244,7 +244,7 @@ Children:
             validators: *id009
             value: '2'
           Inverted: !!robotbuilder.data.properties.BooleanProperty {default: false,
-            name: Inverted, validators: null, value: false}
+            name: Inverted, validators: null, value: true}
         Base: Speed Controller
         Name: RightDrive3
       Properties:
