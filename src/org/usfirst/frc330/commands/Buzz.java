@@ -16,17 +16,15 @@ import org.usfirst.frc330.Robot;
 /**
  *
  */
-public class ResetPosition extends BBCommand {
+public class Buzz extends BBCommand {
 
-    public ResetPosition() {
-
-        requires(Robot.chassis);
-        this.setRunWhenDisabled(true);
+    public Buzz() {
+    	this.setRunWhenDisabled(true);
 
     }
 
     protected void initialize() {
-    	Robot.chassis.resetPosition();
+    	Robot.buzzer.enable(60);
     }
 
 

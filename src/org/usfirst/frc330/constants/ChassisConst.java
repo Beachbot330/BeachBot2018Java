@@ -24,7 +24,7 @@ public final class ChassisConst {
 	
 	//Encoder Distance Constants
     public static final double wheelDiameter 			  = 6;
-    public static final double pulsePerRevolution 		  = 4096;
+    public static final double pulsePerRevolution 		  = 1024;
     public static final double encoderGearRatio 		  = 3;
     public static final double gearRatio 				  = 64.0/20.0;
     public static final double Fudgefactor 				  = 0.97;
