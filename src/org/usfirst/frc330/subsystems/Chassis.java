@@ -174,7 +174,7 @@ public class Chassis extends Subsystem {
         LinearDigitalFilter.movingAverage(gyroSource, ChassisConst.gyroTolerancebuffer);
         
         double pulsePerRevolutionLeft, pulsePerRevolutionRight;
-    	pulsePerRevolutionRight = ChassisConst.practicePulsePerRevolution;
+    	pulsePerRevolutionRight = ChassisConst.pulsePerRevolution;
     	pulsePerRevolutionLeft = ChassisConst.pulsePerRevolution;
         
         double distanceperpulse = Math.PI*ChassisConst.wheelDiameter/pulsePerRevolutionLeft /
