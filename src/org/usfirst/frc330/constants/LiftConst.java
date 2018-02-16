@@ -45,4 +45,7 @@ public final class LiftConst {
 	public static final double MaxOutputPercent			= 1;	//WAG  JB
 	public static final int	   timeOutMS				= 10;	//WAG  JB
 	
+	// Other
+	public static final double calibrationSpeed			= 0.10; //WAG AP 2/16/18
+	
 }	

@@ -51,4 +51,7 @@ public final class WristConst {
 	//Current
 	//public static final double currentLowerLimit = -50;
 	//public static final double currentUpperLimit = 50;
+	
+	// Other
+	public static final double calibrationSpeed			= 0.10; //WAG AP 2/16/18
 }	

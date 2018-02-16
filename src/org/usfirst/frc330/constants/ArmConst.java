@@ -52,5 +52,8 @@ public final class ArmConst {
 	public static final int    maxEncoderCounts  		= -4096; //AP WAG 1-30-18
 	public static final int    minQuadrant       		= 0;     //AP WAG 1-30-18
 	public static final int    maxQuadrant       		= 4;     //AP WAG 1-30-18
+	
+	// Other
+	public static final double calibrationSpeed			= 0.10; //WAG AP 2/16/18
 
 }	
