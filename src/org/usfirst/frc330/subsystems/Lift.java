@@ -14,13 +14,16 @@ package org.usfirst.frc330.subsystems;
 
 import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.commands.*;
+import org.usfirst.frc330.commands.commandgroups.Calibrate;
 import org.usfirst.frc330.constants.LiftConst;
+import org.usfirst.frc330.constants.WristConst;
 import org.usfirst.frc330.util.CSVLoggable;
 import org.usfirst.frc330.util.CSVLogger;
 import org.usfirst.frc330.util.Logger;
 import org.usfirst.frc330.util.Logger.Severity;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -214,6 +217,10 @@ public class Lift extends Subsystem {
     	}
     }
     
+    public boolean getCalibrated() {
+    	return calibrated;
+    }
+    
     //------------------------------------------------------------------------------
     // SET Methods
     //------------------------------------------------------------------------------
@@ -225,7 +232,7 @@ public class Lift extends Subsystem {
     		lift1.set(ControlMode.Position, setpoint);
     	}
     	else
-    		lift1.set(ControlMode.PercentOutput, LiftConst.calibrationSpeed);
+    		Scheduler.getInstance().add(new Calibrate());
     }
     
     //------------------------------------------------------------------------------
@@ -267,6 +274,12 @@ public class Lift extends Subsystem {
 	public void setUpperSoftLimit(double limitVal) {
 		
 	}
+	
+	public void calibrateMove() {
+    	if(!calibrated) {
+    		lift1.set(ControlMode.PercentOutput, LiftConst.calibrationSpeed);
+    	}
+    }
 	
 }
 

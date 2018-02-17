@@ -13,6 +13,7 @@ package org.usfirst.frc330.subsystems;
 
 
 import org.usfirst.frc330.commands.*;
+import org.usfirst.frc330.commands.commandgroups.Calibrate;
 import org.usfirst.frc330.constants.ArmConst;
 import org.usfirst.frc330.constants.LiftConst;
 import org.usfirst.frc330.constants.WristConst;
@@ -20,6 +21,7 @@ import org.usfirst.frc330.util.Logger;
 import org.usfirst.frc330.util.Logger.Severity;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -80,13 +82,20 @@ public class Hand extends Subsystem {
     }
   
     
-    
-  //VERIFY Implement setWristOutput -JB
+    public void calibrateMove() {
+    	if(!calibrated) {
+    		wrist.set(ControlMode.PercentOutput, WristConst.calibrationSpeed);
+    	}
+    }
     
     public void setWrist(double output) {
     //	changeControlMode(ControlMode.PercentOutput);
-    	wrist.set(ControlMode.PercentOutput, output);
-    	wrist.set(output);
+    	if(calibrated) {
+    		wrist.set(ControlMode.PercentOutput, output);
+    	}
+    	else {
+    		Scheduler.getInstance().add(new Calibrate());
+    	}
     }
     public void stopWrist() {
 		wrist.disable();
@@ -98,8 +107,9 @@ public class Hand extends Subsystem {
     	if(calibrated) {
     		wrist.set(ControlMode.Position, convertDegreesToRotations(position));
     	}
-    	else
-    		wrist.set(ControlMode.PercentOutput, WristConst.calibrationSpeed);
+    	else {
+    		Scheduler.getInstance().add(new Calibrate());
+    	}
     	
     }
     public void setPIDConstants (double P, double I, double D, boolean timeout)
@@ -166,6 +176,10 @@ public class Hand extends Subsystem {
 	{
 		return (-convertRotationsToDegrees(wrist.getSelectedSensorPosition(0)));
 	} 
+    
+    public boolean getCalibrated() {
+    	return calibrated;
+    }
     
     @Override
     public void initDefaultCommand() {

@@ -14,6 +14,7 @@ package org.usfirst.frc330.subsystems;
 
 import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.commands.*;
+import org.usfirst.frc330.commands.commandgroups.Calibrate;
 import org.usfirst.frc330.constants.ArmConst;
 import org.usfirst.frc330.constants.WristConst;
 import org.usfirst.frc330.util.CSVLoggable;
@@ -23,6 +24,7 @@ import org.usfirst.frc330.util.Logger.Severity;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
@@ -199,10 +201,9 @@ public class Arm extends Subsystem {
 		return armL.getMotorOutputVoltage()/armL.getBusVoltage();
 	}
 	
-    
-	
-	
-	
+    public boolean getCalibrated() {
+    	return calibrated;
+    }
 	
 	
     
@@ -233,7 +234,7 @@ public class Arm extends Subsystem {
         	armL.set(ControlMode.PercentOutput, output);
         }
         else {
-        	armL.set(ControlMode.PercentOutput, ArmConst.calibrationSpeed);
+        	Scheduler.getInstance().add(new Calibrate());
         }
     }
     //VERIFY Implement setArmAngle -JB
@@ -242,7 +243,7 @@ public class Arm extends Subsystem {
     		armL.set(ControlMode.Position, convertDegreesToRotations(position));
     	}
     	else {
-    		armL.set(ControlMode.PercentOutput, ArmConst.calibrationSpeed);
+    		Scheduler.getInstance().add(new Calibrate());
     	}
     }
     
@@ -360,7 +361,11 @@ public class Arm extends Subsystem {
 	    	return (rotations * ArmConst.maxAngleDegrees);
 	    }
 	    
-
+	    public void calibrateMove() {
+	    	if(!calibrated) {
+	    		armL.set(ControlMode.PercentOutput, ArmConst.calibrationSpeed);
+	    	}
+	    }
 
 	    
 }
