@@ -128,7 +128,16 @@ public class Lift extends Subsystem {
 			public double get() { return getSetpoint(); }
 		};
 		CSVLogger.getInstance().add("LiftSetpoint", temp);
-		//VERIFY Log lift setpoint
+
+		temp = new CSVLoggable(true) {
+			public double get() {
+				if( getCalibrated()) {
+					return 1.0;
+				}
+				else
+					return 0.0;}
+		};
+		CSVLogger.getInstance().add("LiftCalibrated", temp);
 		
     }
 
@@ -194,9 +203,7 @@ public class Lift extends Subsystem {
     
     double tempInfo;
     public double getPosition() {
-    	tempInfo = lift1.getSelectedSensorPosition(0);
-    	return tempInfo*LiftConst.positionScaler;
-    	//arg 0 is primary PID
+    	return convertTicksToInches(lift1.getSelectedSensorPosition(0)); //arg 0 is primary PID
     }
     
     //VERIFY Implement getOutput() -MF
@@ -235,7 +242,7 @@ public class Lift extends Subsystem {
     // Support Methods
     //------------------------------------------------------------------------------
     private double convertTicksToInches(int ticks) {
-    	return (ticks / LiftConst.ticksPerRev * LiftConst.inchesPerRev);
+    	return ((double)ticks / (double)LiftConst.ticksPerRev * LiftConst.inchesPerRev);
     }
     
     //Methods to check if the lift is on target
