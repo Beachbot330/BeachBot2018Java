@@ -35,10 +35,8 @@ public final class LiftConst {
 	
 	
 	// Encoder Stuff - from 2016... remove?
-	public static final int    maxAngleDegrees   		= 72;    //JM 2-10
-	public static final int    maxEncoderCounts  		= -4096; //AP 2-20
-	public static final int    minQuadrant       		= 0;     //JM 2-10
-	public static final int    maxQuadrant       		= 4;     //JM 2-10
+	public static final int    ticksPerRev		  		= 4096; //AP 2-20
+	public static final double inchesPerRev				= 3.997; //AP 2/17/18 
 	public static final double positionScaler  			= 0	; 	//Needs Value -MF
 
 	public static final double VoltageRampRate			= 1.23;	//WAG  JB
