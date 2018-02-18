@@ -22,10 +22,10 @@ public final class ArmConst {
 	public static final int    inertiaCounter	 		= 10;	 //AP WAG 1-30-18
 	
 	// PID Constants
-	public static final double proportional      		= 1.0;   // AP WAG 1-30-18
-	public static final double integral         		= 0.000; // AP WAG 1-30-18
-	public static final double derivative        		= 1.0;   // AP WAG 1-30-18
-	public static final double feedForward	     		= 0.0;   // AP WAG 1-30-18
+	public static final double proportional      		= 0.25;   // AP WAG 2-18-18
+	public static final double integral         		= 0.00; // AP WAG 1-30-18
+	public static final double derivative        		= 0.00;   // AP WAG 1-30-18
+	public static final double feedForward	     		= 0.00;   // AP WAG 1-30-18
 	public static final double VoltageRampRate   		= 48.0;  // AP WAG 1-30-18
 	public static final double MaxOutputVoltage  		= 12.0;  // AP WAG 1-30-18
 	public static final double MaxOutputPercent			= 1;	// AP 2/17/18 WAG
