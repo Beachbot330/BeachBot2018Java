@@ -11,6 +11,8 @@
 package org.usfirst.frc330.subsystems;
 
 import org.usfirst.frc330.constants.GrabberConst;
+import org.usfirst.frc330.util.CSVLoggable;
+import org.usfirst.frc330.util.CSVLogger;
 import org.usfirst.frc330.wpilibj.BBDoubleSolenoid;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -64,6 +66,64 @@ public class Grabber extends Subsystem {
         
         intakeLeft.setInverted(GrabberConst.leftRollerInversionStatus); 	//TODO check to see which intake needs to be inverted
         intakeRight.setInverted(GrabberConst.rightRollerInversionStatus);	//update GrabberConst with correct booleans
+        
+        //------------------------------------------------------------------------------
+        // Logging
+        //------------------------------------------------------------------------------
+        CSVLoggable temp = new CSVLoggable(true) {
+			public double get() { return getSensorLOutput(); }
+		};
+		CSVLogger.getInstance().add("GetSensorLOutput", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return getSensorROutput(); }
+		};
+		CSVLogger.getInstance().add("GetSensorROutput", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return getSensorCOutput(); }
+		};
+		CSVLogger.getInstance().add("GetSensorCOutput", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return AngleBetweenSensors; }			
+		};
+		CSVLogger.getInstance().add("AngleBetweenSensors", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return ExtrapolDistanceFromAngle; }			
+		};
+		CSVLogger.getInstance().add("ExtrapolatedDistanceFromAngle", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() {
+				if(hasCube())
+					return 1.0;			
+				else 
+					return 0.0;
+			}			
+		};
+		CSVLogger.getInstance().add("HasCube", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() {
+				if(hasCubeHorizontal())
+					return 1.0;			
+				else 
+					return 0.0;
+			}			
+		};
+		CSVLogger.getInstance().add("HasCubeHorizontal", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() {
+				if(hasCubeCanted())
+					return 1.0;			
+				else 
+					return 0.0;
+			}			
+		};
+		CSVLogger.getInstance().add("HasCubeCanted", temp);
     }
 
     @Override
@@ -206,9 +266,9 @@ public class Grabber extends Subsystem {
 		else return false;
 	}
     
-	 // ---------------------------
-	 // Private methods for hasCube
-	 // --------------------------- 
+	// ---------------------------
+	// Private methods for hasCube
+	// --------------------------- 
     
     private boolean isDistanceWithinMaximumOuterDistance(int leftSensorDistance, int rightSensorDistance, int centerSensorDistance) {
     	if(!sLstatus) {
@@ -228,14 +288,15 @@ public class Grabber extends Subsystem {
     	}
     }
     
+    double ExtrapolDistanceFromAngle;
+    
     private boolean isAngleWithinMaximumOuterDistance(double shallowAngle, int sensorDistance) {
     	double sinInRad = Math.sin(Math.toRadians(shallowAngle));
     	
     	//the distance is the hypotenuse (which is equal to box length)
-    	double distance = (Math.toDegrees(sinInRad) * 13) + sensorDistance; 	
+    	ExtrapolDistanceFromAngle = (Math.toDegrees(sinInRad) * 13) + sensorDistance; 		
     	
-    	if(distance < GrabberConst.sensorMaximumOuterDistance) return true;
-    	else return false;
+    	return ExtrapolDistanceFromAngle < GrabberConst.sensorMaximumOuterDistance;
     }
     
     private void updateSensorStatus(int leftSensorOutput, int rightSensorOutput, int centerSensorOutput) {
@@ -251,12 +312,17 @@ public class Grabber extends Subsystem {
     	if(sLstatus) numberOfSensorsReceivingInput++;
     	if(sRstatus) numberOfSensorsReceivingInput++;
     	if(sCstatus) numberOfSensorsReceivingInput++;
+    	
     	return numberOfSensorsReceivingInput; 
     }
+    
+    double AngleBetweenSensors;
     
     private double getAngleBetweenSensors(int sideOutput, int centerOutput) {
     	double y = centerOutput - sideOutput;
 		double x = GrabberConst.distanceBetweenSensors;
-		return Math.toDegrees(Math.atan2(y, x));
+		AngleBetweenSensors = Math.toDegrees(Math.atan2(y, x));
+		
+		return AngleBetweenSensors;
 	}
 }
