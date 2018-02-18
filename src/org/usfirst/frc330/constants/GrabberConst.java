@@ -1,11 +1,6 @@
 // Robot Grabber Constants
 
-
-
 package org.usfirst.frc330.constants;
-
-import org.usfirst.frc330.Robot;
-import org.usfirst.frc330.wpilibj.PIDGains;
 
 public final class GrabberConst {
 	
@@ -35,6 +30,5 @@ public final class GrabberConst {
 	public static final double sensorMinimumOuterDistance				= 11.0;				//wag (inches) EJO 2.10.18
 	public static final double sensorMaximumOuterDistance				= 12.0;				//wag (inches) EJO 2.10.18
 	public static final double sensorMaximumInnerDistance				= 2.0; 				//wag (inches) EJO 2.10.18
-	public static final double centerSensorMaximumInnerDistance			= 3.0;				//wag (inches) EJO 2.10.18 
-	
+	public static final double centerSensorMaximumInnerDistance			= 3.0;				//wag (inches) EJO 2.10.18 	
 }	

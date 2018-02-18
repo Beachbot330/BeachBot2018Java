@@ -1,10 +1,6 @@
 // Robot ARM Constants
 
-
-
 //COPIED FROM 2016 TO 2018 -jb
-
-
 
 package org.usfirst.frc330.constants;
 
@@ -46,7 +42,6 @@ public final class ArmConst {
 	public static final double climbPosition			=  90.0; // wag -EJO 1/27
 	public static final double maxArm                   = 160.0; //EJO 1/28 WAG
 	
-	
 	// Encoder Stuff
 	public static final int    maxAngleDegrees   		= 72;    //AP WAG 1-30-18
 	public static final int    maxEncoderCounts  		= -4096; //AP WAG 1-30-18
@@ -55,5 +50,4 @@ public final class ArmConst {
 	
 	// Other
 	public static final double calibrationSpeed			= 0.10; //WAG AP 2/16/18
-
 }	
