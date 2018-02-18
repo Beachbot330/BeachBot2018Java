@@ -22,7 +22,7 @@ public final class GrabberConst {
 	//Sensor
 	public static final double sensorAngleTolerance						= 5.0;				//wag (degrees) EJO 2.10.18
 	public static final double centerSensorPosition						= 9.5; 				//(inches) EJO 2.4.18
-	public static final double distanceBetweenSensors					= 4.0; 				//(inches) EJO 2.4.18
+	public static final double distanceBetweenSensors					= 1.0; 				//(inches) EJO 2.4.18
 	public static final double sensorMinLength							= 1.5748031496; 	//(inches) EJO 2.4.18
 	public static final double sensorMaxLength							= 11.811023622;		//(inches) EJO 2.4.18
 	public static final double sensorOutputTolerance					= 0.25;				//wag (inches) EJO 2.4.18\
