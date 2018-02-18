@@ -10,9 +10,9 @@ public final class LiftConst {
 	public static final double tolerance        		= 5.0;  // WAG
 
 	// PID Constants
-	public static final double proportional      		= 1.0;   // WAG
+	public static final double proportional      		= 0.2;   // AP 2/17/18
 	public static final double integral         		= 0.000; // WAG
-	public static final double derivative        		= 1.0;   // WAG
+	public static final double derivative        		= 0.0;   // WAG
 	
 	// Positions
 	public static final double lowerLimit				=  1.0; //AP 1-30-2018 WAG
