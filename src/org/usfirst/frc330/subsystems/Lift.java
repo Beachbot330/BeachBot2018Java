@@ -92,23 +92,20 @@ public class Lift extends Subsystem {
         lift1.setNeutralMode(NeutralMode.Brake);
         lift1.configOpenloopRamp(LiftConst.VoltageRampRate, LiftConst.timeOutMS);
         lift1.configPeakOutputForward(LiftConst.MaxOutputPercent, LiftConst.timeOutMS);
-        lift1.configPeakOutputReverse(LiftConst.MaxOutputPercent, LiftConst.timeOutMS);
+        lift1.configPeakOutputReverse(-LiftConst.MaxOutputPercent, LiftConst.timeOutMS);
 
         lift2.set(ControlMode.Follower, lift1.getDeviceID());
-        lift2.configForwardSoftLimitEnable(true,0);
-        lift2.configReverseSoftLimitEnable(true, 0);
+        lift2.configForwardSoftLimitEnable(false,0);
+        lift2.configReverseSoftLimitEnable(false, 0);
+        lift2.setInverted(true);
         lift2.setNeutralMode(NeutralMode.Brake);
-        lift2.configOpenloopRamp(LiftConst.VoltageRampRate, LiftConst.timeOutMS);
-        lift2.configPeakOutputForward(LiftConst.MaxOutputPercent, LiftConst.timeOutMS);
-        lift2.configPeakOutputReverse(LiftConst.MaxOutputPercent, LiftConst.timeOutMS);
+
         
         lift3.set(ControlMode.Follower, lift1.getDeviceID());
-        lift3.configForwardSoftLimitEnable(true,0);
-        lift3.configReverseSoftLimitEnable(true, 0);
+        lift3.configForwardSoftLimitEnable(false,0);
+        lift3.configReverseSoftLimitEnable(false, 0);
         lift3.setNeutralMode(NeutralMode.Brake);
-        lift3.configOpenloopRamp(LiftConst.VoltageRampRate, LiftConst.timeOutMS);
-        lift3.configPeakOutputForward(LiftConst.MaxOutputPercent, LiftConst.timeOutMS);
-        lift3.configPeakOutputReverse(LiftConst.MaxOutputPercent, LiftConst.timeOutMS);
+
          
         
         //------------------------------------------------------------------------------
@@ -161,8 +158,8 @@ public class Lift extends Subsystem {
     			lift1.setSelectedSensorPosition(0, 0, 0);
     			lift1.disable();
     			calibrated = true;
-    			lift1.configForwardSoftLimitThreshold(inchesToTicks(LiftConst.lowerLimit), 0);
-    	        lift1.configReverseSoftLimitThreshold(inchesToTicks(LiftConst.upperLimit), 0);
+    			lift1.configForwardSoftLimitThreshold(inchesToTicks(LiftConst.upperLimit), 0);
+    	        lift1.configReverseSoftLimitThreshold(inchesToTicks(LiftConst.lowerLimit), 0);
     			lift1.configForwardSoftLimitEnable(true,0);
     	        lift1.configReverseSoftLimitEnable(true, 0);
     		}
@@ -203,7 +200,7 @@ public class Lift extends Subsystem {
     
     double tempInfo;
     public double getPosition() {
-    	return convertTicksToInches(lift1.getSelectedSensorPosition(0)); //arg 0 is primary PID
+    	return ticksToInches(lift1.getSelectedSensorPosition(0)); //arg 0 is primary PID
     }
     
     //VERIFY Implement getOutput() -MF
@@ -213,7 +210,7 @@ public class Lift extends Subsystem {
     
     public double getSetpoint() {
     	if(lift1.getControlMode() != ControlMode.Disabled) {
-    		return lift1.getClosedLoopTarget(0);
+    		return ticksToInches(lift1.getClosedLoopTarget(0));
     	}
     	else {
     		return 0;
@@ -232,7 +229,7 @@ public class Lift extends Subsystem {
     // and set it to controlMode: position (see 2016 arm if you want an example)
     public void setLiftPosition(double setpoint) {
     	if(calibrated) {
-    		lift1.set(ControlMode.Position, setpoint);
+    		lift1.set(ControlMode.Position, inchesToTicks(setpoint));
     	}
     	else
     		Scheduler.getInstance().add(new Calibrate());
@@ -241,13 +238,13 @@ public class Lift extends Subsystem {
     //------------------------------------------------------------------------------
     // Support Methods
     //------------------------------------------------------------------------------
-    private double convertTicksToInches(int ticks) {
+    private double ticksToInches(int ticks) {
     	return ((double)ticks / (double)LiftConst.ticksPerRev * LiftConst.inchesPerRev);
     }
     
     //Methods to check if the lift is on target
     public boolean onLiftTarget() {
-    	double error = convertTicksToInches(lift1.getClosedLoopError(0));
+    	double error = ticksToInches(lift1.getClosedLoopError(0));
         return (Math.abs(error) < tolerance);
     }
     
