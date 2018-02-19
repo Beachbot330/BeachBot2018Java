@@ -10,6 +10,7 @@ public final class GrabberConst {
 	public static final double maxLengthBetweenRollers					= 19.0;		//(inches) EJO 2.4.18
 	public static final double minLengthBetweenRollers					= 10.0;		//(inches) EJO 2.4.18
 	public static final double rollerLength								= 13.0;		//(inches) EJO 2.4.18
+	public static final double maxBoxLengthSensor						= 10.0;		//(inches) BT 2.4.18
 	
 	//Roller Speed
 	public static final double leftRollerMaxSpeed						= 10.0;		//wag (units unknown) EJO 2.4.18
