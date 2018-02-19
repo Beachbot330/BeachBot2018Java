@@ -47,7 +47,7 @@ public class HandLevel extends BBCommand {
     	double rightAngleDegInRad = Math.toRadians(90.0);
     	double armAngleDeg = Robot.arm.getArmAngle();
     	double armAngleRad = Math.toRadians(armAngleDeg);
-    	double angleInRad = ((ChassisConst.liftToFrame + ChassisConst.maxExtension - (Math.sin(rightAngleDegInRad + armAngleRad) * ArmConst.length))) / WristConst.length;
+    	double angleInRad = ((ChassisConst.liftToFrame + ChassisConst.maxExtension - (Math.sin(rightAngleDegInRad + armAngleRad) * ArmConst.length))) / HandConst.length;
     	//calculate angle of wrist to see if it is outside the perimeter
     	double currentAngleRad = Math.acos(angleInRad);
     	double currentAngleDeg = Math.toDegrees(currentAngleRad); //TODO check if the above code is correct

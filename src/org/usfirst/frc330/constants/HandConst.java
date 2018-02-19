@@ -6,9 +6,9 @@ package org.usfirst.frc330.constants;
 
 import org.usfirst.frc330.wpilibj.PIDGains;
 
-public final class WristConst {
+public final class HandConst {
 	
-	private WristConst(){}
+	private HandConst(){}
 	
 	// Length
 	public static final double length					= 19.0; 	 // (inches) EJO 1/28
@@ -23,15 +23,15 @@ public final class WristConst {
 	
 	// PID Constants
 	public static final double proportional      		= 1.0;   // JR 2/23
-	public static final double integral         		= 0.000; // JR 2/23
-	public static final double derivative        		= 1.0;   // JR 2/23
+	public static final double integral         		= 0.00; // JR 2/23
+	public static final double derivative        		= 0.00;   // AP 2/18/18
 	public static final double feedForward	     		= 0.0;   // JR 2/23
 	public static final double VoltageRampRate   		= 48.0;  // AP 3-15
 	public static final double MaxOutputVoltage  		= 12.0;   // AP 3-15
 	public static final PIDGains fullPID = new PIDGains(proportional, integral, derivative, 
 														feedForward, MaxOutputVoltage, MaxOutputVoltage, "default");
 	
-	// Angles
+	// Angles relative to ground
 	public static final double pickUp					=  0.0;  //JB 1-27
 	public static final double Defense					=  90.0; //JB 1-27
 	public static final double leveledWrist             =  0.0;  //MF 1/27 WAG
@@ -39,16 +39,16 @@ public final class WristConst {
 	public static final double minWrist                 = -90.0; //MF 1/27 WAG
 	public static final double portalPosition			=  90.0; //EJO 1/28
 	
+	// Angles relative to arm (encoder)
+	public static final double encLowerLimit			= -144.0; // AP 2/18/18
+	public static final double encLimitSwitch			=  144.0; // AP 2/18/18
+	public static final double encUpperLimit			=  144.0; // AP 2/18/18
+	
 	// Encoder Stuff
-	public static final int    maxAngleDegrees   		= 72;    //JM 2-10
-	public static final int    maxEncoderCounts  		= -4096; //AP 2-20
-	public static final int    minQuadrant       		= 0;     //JM 2-10
-	public static final int    maxQuadrant       		= 4;     //JM 2-10
-
-	//Current
-	//public static final double currentLowerLimit = -50;
-	//public static final double currentUpperLimit = 50;
+	public static final int    ticksPerEncoderRev  		= 4096;  //AP 2/18/18
+	public static final double gearRatio				= 4.125;  //AP 2/18/18
 	
 	// Other
 	public static final double calibrationSpeed			= 0.10; //WAG AP 2/16/18
+	public static final int  CAN_Timeout				= 10; //AP 2/18/18
 }	
