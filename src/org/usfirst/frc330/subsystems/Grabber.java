@@ -101,10 +101,6 @@ public class Grabber extends Subsystem {
 		};
 		CSVLogger.getInstance().add("FullAngleBetweenSensors", temp);
 		
-		temp = new CSVLoggable(true) {
-			public double get() { return ExtrapolDistanceFromAngle; }			
-		};
-		CSVLogger.getInstance().add("ExtrapolatedDistanceFromAngle", temp);
 		
 		temp = new CSVLoggable(true) {
 			public double get() { 
