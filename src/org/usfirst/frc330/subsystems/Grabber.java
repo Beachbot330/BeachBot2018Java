@@ -107,9 +107,40 @@ public class Grabber extends Subsystem {
 		CSVLogger.getInstance().add("ExtrapolatedDistanceFromAngle", temp);
 		
 		temp = new CSVLoggable(true) {
-			public double get() { return extrapolDistance; }			
+			public double get() { 
+				if(!sRstatus) return 0.0;
+				else return 1.0;
+			}			
 		};
-		CSVLogger.getInstance().add("ExtrapolatedDistance", temp);
+		CSVLogger.getInstance().add("SensorRStatus", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { 
+				if(!sCstatus) return 0.0;
+				else return 1.0;
+			}			
+		};
+		CSVLogger.getInstance().add("SensorCStatus", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { 
+				if(!sLstatus) return 0.0;
+				else return 1.0;
+			}			
+		};
+		CSVLogger.getInstance().add("SensorLStatus", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { 
+				return getNumberOfSensorsReceivingInput();
+			}			
+		};
+		CSVLogger.getInstance().add("Sensors Receiving Input", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return ExtrapolDistanceFromAngle; }			
+		};
+		CSVLogger.getInstance().add("ExtrapolatedDistanceFromAngle", temp);
 		
 		temp = new CSVLoggable(true) {
 			public double get() {
