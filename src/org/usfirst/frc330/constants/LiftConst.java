@@ -31,11 +31,11 @@ public final class LiftConst {
 	public static final double upperLimit				= 26.2; //AP 2-17-2018
 		
 	// Encoder Stuff - from 2016... remove?
-	public static final int    ticksPerRev		  		= 4096; //AP 2-20
+	public static final int    ticksPerRev		  		= 4096;  //AP 2/17/18
 	public static final double inchesPerRev				= 3.997; //AP 2/17/18 
 
 	public static final double VoltageRampRate			= 1.23;	//WAG  JB
-	public static final double MaxOutputPercent			= 1;	//WAG  JB
+	public static final double MaxOutputPercent			= 1;	// AP 2/17/18
 	public static final int	   timeOutMS				= 10;	//WAG  JB
 	
 	// Other

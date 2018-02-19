@@ -120,7 +120,7 @@ public class Robot extends TimedRobot {
         	Logger.getInstance().println("Competition Robot Detected",true);
         // </Logging> ----------------------------------------------------------
         
-        buzzer.enable(0.75);
+        buzzer.enable(0.4);
         
         SmartDashboard.putData("Auto mode", chooser);
     }
@@ -145,14 +145,11 @@ public class Robot extends TimedRobot {
     @Override
     public void disabledPeriodic() {
         Scheduler.getInstance().run();
-        //VERIFY copy over code from 2017 (and update it of course!) -JB
         chassis.calcXY();
     	CSVLogger.getInstance().writeData();
     	Logger.getInstance().updateDate();
     	CSVLogger.getInstance().updateDate();
     	buzzer.update();
-    	//if (frills.getAlarmLEDs() == Alarm.SLOW && !Robot.chassis.isGyroCalibrating()) {
-    	//	frills.setAlarmLED(Alarm.OFF);
     	}
     
     @Override
