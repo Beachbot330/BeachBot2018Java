@@ -81,7 +81,7 @@ public class Arm extends Subsystem {
 		armL.setNeutralMode(NeutralMode.Brake);
 		
 		//create constants for these two in ArmConst
-		armL.configOpenloopRamp(ArmConst.VoltageRampRate, ArmConst.CAN_Timeout);
+		armL.configOpenloopRamp(0, ArmConst.CAN_Timeout);
 		armL.configPeakOutputForward(ArmConst.MaxOutputPercent, ArmConst.CAN_Timeout);
         armL.configPeakOutputReverse(-ArmConst.MaxOutputPercent, ArmConst.CAN_Timeout);
 		

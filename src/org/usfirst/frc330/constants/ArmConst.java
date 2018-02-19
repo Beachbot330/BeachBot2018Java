@@ -33,17 +33,17 @@ public final class ArmConst {
 														feedForward, MaxOutputVoltage, MaxOutputVoltage, "default");
 	
 	// Angles
-	public static final double lowerLimit               = -60.0; //MF 1/27 WAG
-	public static final double dropoffLow				= -60.0; //AP 2/18/18 WAG
-	public static final double intakePosition  			= -60.0; //WAG JB 1/27
-	public static final double Defense 					= -60.0; //WAG JB 1/27
-	public static final double portalPosition			= -60.0; //EJO 1/28
+	public static final double lowerLimit               = -54.0; //MF 1/27 WAG
+	public static final double limitSwitchAngle			= -54.0; // AP 2/18/18 WAG
+	public static final double dropoffLow				= -54.0; //AP 2/18/18 WAG
+	public static final double intakePosition  			= -54.0; //WAG JB 1/27
+	public static final double Defense 					= -54.0; //WAG JB 1/27
+	public static final double portalPosition			= -54.0; //EJO 1/28
 	public static final double leveledArm               =   0.0; //MF 1/27 WAG
 	public static final double medArm                   =   0.0; //MF 1/27 WAG
 	public static final double switchArm                =   0.0; // MF 1/27 WAG needs value
 	public static final double climbPosition			=  90.0; // wag -EJO 1/27
 	public static final double dropoffHigh				=  90.0; // AP WAG 2/18/18
-	public static final double limitSwitchAngle			= 160.0; // AP 2/18/18 WAG
 	public static final double upperLimit               = 160.0; //EJO 1/28 WAG
 	
 	// Encoder Stuff
@@ -51,6 +51,6 @@ public final class ArmConst {
 	public static final double gearRatio		  		= 15 ; //AP 2/17/18 
 	
 	// Other
-	public static final double calibrationSpeed			= 0.10; //WAG AP 2/16/18
+	public static final double calibrationSpeed			= 0.5; //WAG AP 2/16/18
 	public static final int    CAN_Timeout				= 10; // AP 2/18/18
 }	

@@ -50,7 +50,7 @@ public class IntakePortal extends BBCommandGroup {
     	//move the lift to portal position, lower arm to portal positon, raise wrist to portal position
     	addParallel(new SetLiftPosition(LiftConst.intakePortalPosition));
     	addParallel(new SetArmAngle(ArmConst.portalPosition));
-    	addSequential(new SetHandAngle(WristConst.portalPosition));
+    	addSequential(new SetHandAngle(HandConst.portalPosition));
     	
     	//open grabber, turn on rollers, turn on sensor to close grabber when cube is detected
     	addParallel(new OpenClaw());

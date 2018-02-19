@@ -49,7 +49,7 @@ public class FlipWrist extends BBCommandGroup {
     	
     	//we want to flip the arm and the wrist behind the robot
     	addParallel(new SetArmAngle(ArmConst.upperLimit));
-;    	addSequential(new SetHandAngle(WristConst.maxWrist));
+;    	addSequential(new SetHandAngle(HandConst.maxWrist));
  
     } 
 }
