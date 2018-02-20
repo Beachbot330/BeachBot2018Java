@@ -38,7 +38,7 @@ public class ShiftHigh extends BBCommand {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-    	Robot.chassis.ShiftHigh();
+    	Robot.chassis.shiftHigh();
     }
 
     // Called repeatedly when this Command is scheduled to run

@@ -107,12 +107,12 @@ public class Robot extends TimedRobot {
         //VERIFY Port the following two lines of code -JB:
        
         Logger.getInstance().println("NavX Firmware Version:      " + chassis.getNavXFirmware(), Severity.INFO);
-        Logger.getInstance().println("CAN Talon leftDrive1 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_LEFT1), Severity.INFO);
-        Logger.getInstance().println("CAN Talon leftDrive2 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_LEFT2), Severity.INFO);
-        Logger.getInstance().println("CAN Talon leftDrive3 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_LEFT3), Severity.INFO);
-        Logger.getInstance().println("CAN Talon rightDrive1 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_RIGHT1), Severity.INFO);
-        Logger.getInstance().println("CAN Talon rightDrive2 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_RIGHT2), Severity.INFO);
-        Logger.getInstance().println("CAN Talon rightDrive3 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_RIGHT3), Severity.INFO);
+//        Logger.getInstance().println("CAN Talon leftDrive1 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_LEFT1), Severity.INFO);
+//        Logger.getInstance().println("CAN Talon leftDrive2 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_LEFT2), Severity.INFO);
+//        Logger.getInstance().println("CAN Talon leftDrive3 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_LEFT3), Severity.INFO);
+//        Logger.getInstance().println("CAN Talon rightDrive1 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_RIGHT1), Severity.INFO);
+//        Logger.getInstance().println("CAN Talon rightDrive2 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_RIGHT2), Severity.INFO);
+//        Logger.getInstance().println("CAN Talon rightDrive3 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_RIGHT3), Severity.INFO);
 
         if (getIsPracticeRobot())
         	Logger.getInstance().println("Practice Robot Detected",true);

@@ -10,11 +10,17 @@
 
 package org.usfirst.frc330.subsystems;
 
+import java.util.ArrayList;
+
+import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.commands.*;
+import org.usfirst.frc330.commands.drivecommands.Waypoint;
 import org.usfirst.frc330.constants.ChassisConst;
 import org.usfirst.frc330.constants.ChassisConst.Devices;
 import org.usfirst.frc330.util.CSVLoggable;
 import org.usfirst.frc330.util.CSVLogger;
+import org.usfirst.frc330.util.Logger;
+import org.usfirst.frc330.util.Logger.Severity;
 
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -277,14 +283,13 @@ public class Chassis extends Subsystem {
     	};  
     	CSVLogger.getInstance().add("Shifter", temp);
     	
-    	//TODO JOE Import Working driveWaypoint code 
-//    	temp = new CSVLoggable(true) {
-//			public double get() { 
-//				if (path == null) 
-//					return -1;
-//				return getNextWaypointNumber(); }  		
-//    	};  
-//    	CSVLogger.getInstance().add("NextWaypointNumber", temp);
+    	temp = new CSVLoggable(true) {
+			public double get() { 
+				if (path == null) 
+					return -1;
+				return getNextWaypointNumber(); }  		
+    	};  
+    	CSVLogger.getInstance().add("NextWaypointNumber", temp);
     }
 
     @Override
@@ -334,105 +339,14 @@ public class Chassis extends Subsystem {
 	public double getPressure() {
 		return (50*pressureSensor.getAverageVoltage() -25);
 	}
-
-	//VERIFY replace all the code in getAngle with the navX getAngle and replace the code in setGyroComp with the NavX SetAngleAdjustment -JB
-	// Function Name: getAngle()
-    // Purpose: Return angle relative to 0 instead of -/+ 180 degrees
 	
     public double getAngle() {  	
     	return navX.getAngle();
     }
     
-//    	// First case
-//    	// Old reading: +150 degrees
-//    	// New reading: +170 degrees
-//    	// Difference:  (170 - 150) = +20 degrees
-//    	
-//    	// Second case
-//    	// Old reading: -20 degrees
-//    	// New reading: -50 degrees
-//    	// Difference : (-50 - -20) = -30 degrees 
-//    	
-//    	// Third case
-//    	// Old reading: +179 degrees
-//    	// New reading: -179 degrees
-//    	// Difference:  (-179 - 179) = -358 degrees
-//    	
-//    	// Fourth case
-//    	// Old reading: -179  degrees
-//    	// New reading: +179 degrees
-//    	// Difference:  (+150 - -60) = +358 degrees
-//    	
-//    	// Declare variables
-//    	double difference = 0.0;
-//    	double gyroVal    = 0.0;
-//    	
-//    	// Retrieve current yaw value from gyro
-//    	double yawVal     = navX.getYaw();
-//        
-//    	// Has gyro_prevVal been previously set?
-//    	// If not, return do not calculate, return current value
-//    	if( !fFirstUse )
-//    	{
-//    		// Determine count for rollover counter
-//    		difference = yawVal - gyro_prevVal;
-//
-//	    	// Clockwise past +180 degrees
-//    		// If difference > 180*, increment rollover counter
-//	    	if( difference < -180.0 ) {
-//	    		ctrRollOver++;
-//	   		
-//	    	// Counter-clockwise past -180 degrees\
-//	    	// If difference > 180*, decrement rollover counter
-//	    	}
-//	    	else if ( difference > 180.0 ) {
-//	    		ctrRollOver--;
-//	    	} 
-//    	}
-//    	
-//    	// Mark gyro_prevVal as being used
-//    	fFirstUse = false;
-//    		
-//    	// Calculate value to return back to calling function
-//    	// e.g. +720 degrees or -360 degrees
-//    	gyroVal = yawVal + (360.0 * ctrRollOver);
-//    	gyro_prevVal = yawVal;
-//    	
-//    	return gyroVal + gyroComp;
-//    } /* End getAngle() */
-    
     public String getNavXFirmware() {
     	return navX.getFirmwareVersion();
-    }
-    
-    public int getTalonFirmware(Devices type){
-    	int fv = 0;
-    	//below code was removed because sparks do not have firmware version
-    	/*switch (type) {
-    		case DRIVETRAIN_LEFT1:
-    			fv = leftDrive1.getFirmwareVersion();
-    			break;
-    		case DRIVETRAIN_LEFT2:
-    			fv = leftDrive2.getFirmwareVersion();
-    			break;		
-    		case DRIVETRAIN_LEFT3:
-    			fv = leftDrive3.getFirmwareVersion();
-    			break;
-    		case DRIVETRAIN_RIGHT1:
-    			fv = rightDrive1.getFirmwareVersion();
-        		break;
-    		case DRIVETRAIN_RIGHT2:
-    			fv = rightDrive2.getFirmwareVersion();
-        		break;
-    		case DRIVETRAIN_RIGHT3:
-    			fv = rightDrive3.getFirmwareVersion();
-        		break;
-    		default:
-    			break;
-    	}*/
-    	
-    	return fv;  	
-    }   
+    }  
     
     public void pidDriveAuto()
     {
@@ -479,11 +393,11 @@ public class Chassis extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    public void ShiftHigh() {
+    public void shiftHigh() {
     	shifters.set(DoubleSolenoid.Value.kForward);
     }
     
-    public void ShiftLow() {
+    public void shiftLow() {
     	shifters.set(DoubleSolenoid.Value.kReverse);
     }
     
@@ -552,4 +466,107 @@ public class Chassis extends Subsystem {
         this.x = x;
         this.y = y;
     } /* End setXY */
+
+	public double getLeftDistance() 
+	{
+		return driveEncoderLeft.getDistance();
+	}
+
+	public double getRightDistance() {
+		return driveEncoderRight.getDistance();
+	}
+	
+    //Path methods
+	ArrayList<Waypoint> path;
+	int currentWaypoint = 0;
+	
+	public void setPath(ArrayList<Waypoint> path) {
+		if ((path == null)) {
+			Logger.getInstance().println("Null path in setPath", Severity.ERROR);
+			Logger.getInstance().printStackTrace(new NullPointerException());
+		}
+		this.path = path;
+		currentWaypoint = 0;
+	}
+
+	public int getNextWaypointNumber() {
+		return currentWaypoint;
+	}
+	
+	public Waypoint getNextWaypoint() {
+		return path.get(getNextWaypointNumber());
+	}
+	
+	public void incrementWaypoint() {
+		if (currentWaypoint + 1 < path.size()) {
+			currentWaypoint++;
+		}
+		else {
+			Logger.getInstance().println("Attempt to increment waypoint past path", Severity.ERROR);
+			Logger.getInstance().printStackTrace(new IndexOutOfBoundsException());
+		}
+	}
+	
+	public double getDistanceToEnd() {
+		return getDistanceToWaypoint(path.get(path.size()-1));
+	}
+	
+	public double getAngleToWaypoint(Waypoint waypt) {
+		double deltaX = waypt.getX() - getX();
+        double deltaY = waypt.getY() - getY();
+        
+		return Math.toDegrees(Math.atan2(deltaX, deltaY));
+	}
+
+	public double getAngleToNextWaypoint() {
+		return getAngleToWaypoint(getNextWaypoint());
+	}
+	
+	public double getDistanceBetweenWaypoints(Waypoint cur, Waypoint to) {
+		double deltaX = to.getX() - cur.getX();
+        double deltaY = to.getY() - cur.getY();
+        
+        return Math.sqrt(deltaX*deltaX+deltaY*deltaY);
+	}
+	
+	public double getDistanceToWaypoint(Waypoint waypt) {
+		Waypoint currentLocation = new Waypoint(Robot.chassis.getX(), Robot.chassis.getY(), Robot.chassis.getAngle());
+        return getDistanceBetweenWaypoints(currentLocation, waypt);
+	}
+	
+	public double getDistanceToNextWaypoint() {
+		return getDistanceToWaypoint(getNextWaypoint());
+	}
+	
+	public int getCurrentWaypointNumber() {
+		return currentWaypoint;
+	}
+	
+	public Waypoint getCurrentWaypoint() {
+		return path.get(currentWaypoint);
+	}
+	
+	public int getPreviousWaypointNumber() {
+		if (currentWaypoint - 1 >= 0) {
+			return currentWaypoint - 1;
+		}
+		else {
+			Logger.getInstance().println("Attempt to get negative previous waypoint", Severity.ERROR);
+			return currentWaypoint;
+		}
+	}
+	
+	public Waypoint getPreviousWaypoint() {
+		if (currentWaypoint - 1 >= 0) {
+			return path.get(currentWaypoint - 1);
+		}
+		else {
+			Logger.getInstance().println("Attempt to get negative previous waypoint", Severity.ERROR);
+			return path.get(currentWaypoint);
+		}
+	}
+	
+	public int getLastWaypointNumber() {
+		return path.size()-1;
+	}
 }
