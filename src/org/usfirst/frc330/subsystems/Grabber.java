@@ -372,7 +372,6 @@ public class Grabber extends Subsystem {
     //			  UNUSED
     //--------------------------------
     
-//	//TODO Allen: check everything that is here
 //  public boolean hasCube() { 
 //  	int sensorsReceivingInput = getNumberOfSensorsReceivingInput();
 //  	
@@ -408,12 +407,11 @@ public class Grabber extends Subsystem {
 //	}
 //  
 //	//hasCube w/ angled sensors on rear of robot & center vertical sensor
-//	public boolean hasCubeCanted() { 	
-//		if(sLstatus && sRstatus) return true;
-//		else if(sC < GrabberConst.centerSensorMaximumInnerDistance) return true;
-//		else return false;
-//		return false;
-//	}
+	public boolean hasCubeCanted() { 	
+		if(sLstatus && sRstatus) return true;
+		else if(sC < GrabberConst.centerSensorMaximumInnerDistance) return true;
+		else return false;
+	}
 //    
 //  private boolean isDistanceWithinMaximumOuterDistance(double leftSensorDistance, double rightSensorDistance, double centerSensorDistance) {
 //	if(!sLstatus) {
