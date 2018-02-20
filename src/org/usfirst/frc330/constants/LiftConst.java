@@ -36,7 +36,9 @@ public final class LiftConst {
 
 	public static final double VoltageRampRate			= 1.23;	//WAG  JB
 	public static final double MaxOutputPercent			= 1;	// AP 2/17/18
-	public static final int	   timeOutMS				= 10;	//WAG  JB
+	public static final int    CAN_Timeout				= 10; //AP 2/18/18
+	public static final int    CAN_Timeout_No_Wait      = 0;  // JR 2/19/18
+	public static final int    CAN_Status_Frame_13_Period = 20; //JR 2/19/19
 	
 	// Other
 	public static final double calibrationSpeed			= 0.10; //WAG AP 2/16/18
