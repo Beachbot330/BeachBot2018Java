@@ -273,7 +273,7 @@ public class Grabber extends Subsystem {
 	
 	double leftAngle, rightAngle, fullAngle;
 	
-	//Note, hasCubeClose uses isAngleWithingMaximumOuterDistance, but doesn't return the result.
+	//Note, hasCubeClose uses isAngleWithinMaximumOuterDistance, but doesn't return the result.
 	//Can remove once certain which method to use
 	public boolean hasCubeClose() {
 		int sensorsReceivingInput = getNumberOfSensorsReceivingInput();
