@@ -14,6 +14,8 @@ import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.commands.*;
 import org.usfirst.frc330.commands.commandgroups.Calibrate;
 import org.usfirst.frc330.constants.HandConst;
+import org.usfirst.frc330.util.CSVLoggable;
+import org.usfirst.frc330.util.CSVLogger;
 import org.usfirst.frc330.util.Logger;
 import org.usfirst.frc330.util.Logger.Severity;
 
@@ -70,6 +72,34 @@ public class Hand extends Subsystem {
 		
 		//set feedback frame so that getClosedLoopError comes faster then 160ms
         wrist.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, HandConst.CAN_Status_Frame_13_Period, HandConst.CAN_Timeout);
+        
+        
+        CSVLoggable temp = new CSVLoggable(true) {
+			public double get() { return getHandAngle(); }
+		};
+		CSVLogger.getInstance().add("HandAngle", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return getHandAngleFromArm(); }
+		};
+		CSVLogger.getInstance().add("HandAngleFromArm", temp);
+
+		temp = new CSVLoggable(true) {
+			public double get() { return getWristOutput(); }
+		};
+		CSVLogger.getInstance().add("HandOutput", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() {
+				if( getCalibrated()) {
+					return 1.0;
+				}
+				else
+					return 0.0;}
+		};
+		
+		CSVLogger.getInstance().add("HandCalibrated", temp);	
+    
     }
     
     public void calibrateMove() {

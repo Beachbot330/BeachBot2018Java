@@ -442,13 +442,13 @@ public class Chassis extends Subsystem {
 	}
 	
     private void drive(double left, double right) {
-        leftDrive1.set(-left);
-        leftDrive2.set(-left);
-        leftDrive3.set(-left);
+        leftDrive1.set(left);
+        leftDrive2.set(left);
+        leftDrive3.set(left);
         
-        rightDrive1.set(right);
-        rightDrive2.set(right);
-        rightDrive3.set(right);
+        rightDrive1.set(-right);
+        rightDrive2.set(-right);
+        rightDrive3.set(-right);
     }
     
     public void resetPosition() {
