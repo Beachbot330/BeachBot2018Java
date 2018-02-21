@@ -145,7 +145,7 @@ public class Arm extends Subsystem {
     public void periodic() {
         // Calibrate the first time the limit switch is pressed
     	if(!calibrated) {
-    		if(limitSwitch.get()) {
+    		if(!limitSwitch.get()) {
     			armL.setSelectedSensorPosition(degreesToTicks(ArmConst.limitSwitchAngle), 0, ArmConst.CAN_Timeout_No_Wait);
     			armL.disable();
     			calibrated = true;

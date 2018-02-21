@@ -148,7 +148,7 @@ public class Lift extends Subsystem {
     public void periodic() {
     	// Calibrate the first time the limit switch is pressed
     	if(!calibrated) {
-    		if(limitSwitch.get()) {
+    		if(!limitSwitch.get()) {
     			lift1.setSelectedSensorPosition(0, 0, LiftConst.CAN_Timeout);
     			lift1.disable();
     			calibrated = true;
