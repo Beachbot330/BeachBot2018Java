@@ -22,14 +22,18 @@ public final class GrabberConst {
 	
 	//Sensor
 	public static final double sensorAngleTolerance						= 5.0;				//wag (degrees) EJO 2.10.18
-	public static final double centerSensorPosition						= 9.5; 				//(inches) EJO 2.4.18
-	public static final double distanceBetweenSensors					= 1.0; 				//(inches) EJO 2.4.18
+	public static final double centerSensorPosition						= 18.5; 			//(inches) EJO 2.4.18
+	public static final double distanceBetweenSensors					= 1.25; 			//(inches) EJO 2.4.18
 	public static final double sensorMinLength							= 1.5748031496; 	//(inches) EJO 2.4.18
 	public static final double sensorMaxLength							= 11.811023622;		//(inches) EJO 2.4.18
 	public static final double sensorOutputTolerance					= 0.25;				//wag (inches) EJO 2.4.18\
 	public static final double horizontalSensorDifference				= 7.0;				//(inches) EJO 2.10.18
 	public static final double sensorMinimumOuterDistance				= 11.0;				//wag (inches) EJO 2.10.18
-	public static final double sensorMaximumOuterDistance				= 12.0;				//wag (inches) EJO 2.10.18
+	public static final double sensorMaximumOuterDistance				= 11.5;				//(inches) EJO 2.20.18
 	public static final double sensorMaximumInnerDistance				= 2.0; 				//wag (inches) EJO 2.10.18
-	public static final double centerSensorMaximumInnerDistance			= 3.0;				//wag (inches) EJO 2.10.18 	
+	public static final double centerSensorMaximumInnerDistance			= 4.0;				//wag (inches) EJO 2.10.18
+	
+	public static final double kalmanProcessNoise						= 0.5;				//(inches) 14ft/sec*12in/ft/50samples per second + 0.5 JDR 2/24/18
+	public static final double kalmanSensorNoise						= 1.0;				//(inches) Based on observed data JDR 2/24/18
+	public static final double kalmanEstimatedError						= 100;				//(inches) //JDR 2/24/18
 }	

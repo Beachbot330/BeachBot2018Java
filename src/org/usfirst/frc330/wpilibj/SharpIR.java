@@ -127,4 +127,12 @@ public class SharpIR extends SensorBase implements Sendable {
 		this.exp = exp;
 	}
 	
+	public double getNoise() {
+		double distance = getDistance();
+		if (distance < 13) {
+			return 1.0;
+		}
+		else return distance * 0.1;
+	}
+	
 }
