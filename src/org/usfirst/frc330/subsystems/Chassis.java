@@ -16,7 +16,6 @@ import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.commands.*;
 import org.usfirst.frc330.commands.drivecommands.Waypoint;
 import org.usfirst.frc330.constants.ChassisConst;
-import org.usfirst.frc330.constants.ChassisConst.Devices;
 import org.usfirst.frc330.util.CSVLoggable;
 import org.usfirst.frc330.util.CSVLogger;
 import org.usfirst.frc330.util.Logger;
