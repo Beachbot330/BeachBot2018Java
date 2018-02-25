@@ -346,7 +346,11 @@ public class Chassis extends Subsystem {
     
     public String getNavXFirmware() {
     	return navX.getFirmwareVersion();
-    }  
+    }
+    
+    public double getSpeed() {
+    	return (driveEncoderLeft.getRate() + driveEncoderRight.getRate()) / 2;
+    }
     
     public void pidDriveAuto()
     {
