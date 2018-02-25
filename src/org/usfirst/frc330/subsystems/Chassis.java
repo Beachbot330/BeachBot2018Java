@@ -337,7 +337,10 @@ public class Chassis extends Subsystem {
 	}
 	
 	public double getPressure() {
-		return (50*pressureSensor.getAverageVoltage() -25);
+		double pressure;
+		pressure = 35*(pressureSensor.getAverageVoltage() - 0.5);
+		//SmartDashboard.putNumber("Pressure Gauge", pressure);
+		return (pressure);
 	}
 	
     public double getAngle() {  	
