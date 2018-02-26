@@ -119,7 +119,7 @@ public class OI {
         SmartDashboard.putData("ResetPosition", new ResetPosition());
         SmartDashboard.putData("DashboardArmMove", new DashboardArmMove());
         SmartDashboard.putNumber("DashboardArmMoveSetpoint", 0.0);
-        SmartDashboard.putData("DashboardHandMove", new DashboardArmMove());
+        SmartDashboard.putData("DashboardHandMove", new DashboardHandMove());
         SmartDashboard.putNumber("DashboardHandMoveSetpoint", 0.0);
     }
 

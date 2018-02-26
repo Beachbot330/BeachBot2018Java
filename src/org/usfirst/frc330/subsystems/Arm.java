@@ -13,6 +13,7 @@ package org.usfirst.frc330.subsystems;
 import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.commands.commandgroups.Calibrate;
 import org.usfirst.frc330.constants.ArmConst;
+import org.usfirst.frc330.constants.HandConst;
 import org.usfirst.frc330.constants.LiftConst;
 import org.usfirst.frc330.util.CSVLoggable;
 import org.usfirst.frc330.util.CSVLogger;
@@ -80,10 +81,12 @@ public class Arm extends Subsystem {
 		armL.configReverseSoftLimitEnable(false, ArmConst.CAN_Timeout);
 		armL.setNeutralMode(NeutralMode.Brake);
 		
-		//create constants for these two in ArmConst
 		armL.configOpenloopRamp(0, ArmConst.CAN_Timeout);
 		armL.configPeakOutputForward(ArmConst.MaxOutputPercent, ArmConst.CAN_Timeout);
         armL.configPeakOutputReverse(-ArmConst.MaxOutputPercent, ArmConst.CAN_Timeout);
+        
+        armL.configNominalOutputForward(0, HandConst.CAN_Timeout);	
+		armL.configNominalOutputReverse(0, HandConst.CAN_Timeout);
         
         //set feedback frame so that getClosedLoopError comes faster then 160ms
         armL.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, ArmConst.CAN_Status_Frame_13_Period, ArmConst.CAN_Timeout);
@@ -106,16 +109,6 @@ public class Arm extends Subsystem {
 			public double get() { return getSetpoint(); }
 		};
 		CSVLogger.getInstance().add("ArmSetpoint", temp);
-
-		temp = new CSVLoggable(true) {
-			public double get() { return getLowerLimit(); }
-		};
-		CSVLogger.getInstance().add("ArmLowerLimit", temp);
-		
-		temp = new CSVLoggable(true) {
-			public double get() { return getUpperLimit(); }
-		};
-		CSVLogger.getInstance().add("ArmUpperLimit", temp);	
 		
 		temp = new CSVLoggable(true) {
 			public double get() { 
@@ -255,7 +248,8 @@ public class Arm extends Subsystem {
     
     //VERIFY IMplement setMaxArmOutput -JB
     public void setMaxArmOutput(double percentOut){
-    	armL.configNominalOutputForward(percentOut,ArmConst.CAN_Timeout_No_Wait);
+    	armL.configPeakOutputForward(percentOut,ArmConst.CAN_Timeout_No_Wait);
+    	armL.configPeakOutputReverse(percentOut,ArmConst.CAN_Timeout_No_Wait);
     	Logger.getInstance().println("Max Arm output set to: " + percentOut, Severity.INFO);
     }
      

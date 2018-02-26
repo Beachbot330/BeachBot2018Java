@@ -12,6 +12,7 @@ package org.usfirst.frc330.subsystems;
 
 import org.usfirst.frc330.commands.*;
 import org.usfirst.frc330.commands.commandgroups.Calibrate;
+import org.usfirst.frc330.constants.HandConst;
 import org.usfirst.frc330.constants.LiftConst;
 import org.usfirst.frc330.util.CSVLoggable;
 import org.usfirst.frc330.util.CSVLogger;
@@ -87,6 +88,8 @@ public class Lift extends Subsystem {
         lift1.configOpenloopRamp(LiftConst.VoltageRampRate, LiftConst.CAN_Timeout);
         lift1.configPeakOutputForward(LiftConst.MaxOutputPercent, LiftConst.CAN_Timeout);
         lift1.configPeakOutputReverse(-LiftConst.MaxOutputPercent, LiftConst.CAN_Timeout);
+        lift1.configNominalOutputForward(0, LiftConst.CAN_Timeout);	
+		lift1.configNominalOutputReverse(0, LiftConst.CAN_Timeout);
 
         lift2.set(ControlMode.Follower, lift1.getDeviceID());
         lift2.configForwardSoftLimitEnable(false, LiftConst.CAN_Timeout_No_Wait);
@@ -98,6 +101,8 @@ public class Lift extends Subsystem {
         lift3.configForwardSoftLimitEnable(false, LiftConst.CAN_Timeout_No_Wait);
         lift3.configReverseSoftLimitEnable(false, LiftConst.CAN_Timeout_No_Wait);
         lift3.setNeutralMode(NeutralMode.Brake);
+        
+        
         
         //set feedback frame so that getClosedLoopError comes faster then 160ms
         lift1.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, LiftConst.CAN_Status_Frame_13_Period, LiftConst.CAN_Timeout);

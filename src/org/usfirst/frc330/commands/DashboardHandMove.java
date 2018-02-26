@@ -35,7 +35,7 @@ public class DashboardHandMove extends BBCommand {
     }
 
     protected boolean isFinished() {
-        return false;
+        return Robot.hand.getHandOnTarget();
     }
 
     protected void end() {

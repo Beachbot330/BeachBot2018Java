@@ -22,11 +22,11 @@ public final class HandConst {
 	public static final int    inertiaCounter	 		= 10;	 //JR 2-28 (loops after manual control before starting position control)
 	
 	// PID Constants
-	public static final double proportional      		= 1.0;   // JR 2/23
+	public static final double proportional      		= 0.5;   // AP 2/25/18
 	public static final double integral         		= 0.00; // JR 2/23
 	public static final double derivative        		= 0.00;   // AP 2/18/18
 	public static final double feedForward	     		= 0.0;   // JR 2/23
-	public static final double VoltageRampRate   		= 48.0;  // AP 3-15
+	public static final double VoltageRampRate   		= 0.0;  // AP 3-15
 	public static final double MaxOutputVoltage  		= 12.0;   // AP 3-15
 	public static final PIDGains fullPID = new PIDGains(proportional, integral, derivative, 
 														feedForward, MaxOutputVoltage, MaxOutputVoltage, "default");
