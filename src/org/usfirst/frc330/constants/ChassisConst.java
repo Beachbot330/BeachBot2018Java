@@ -41,29 +41,5 @@ public final class ChassisConst {
     public static final PIDGains GyroTurnHigh  = new PIDGains(0.030,0,0.050,0,1,1, "GyroTurnHigh"); //AP 3-18
     public static final PIDGains GyroDriveLow  = new PIDGains(0.010,0,0.000,0,1,1, "GyroDriveLow");
     public static final PIDGains GyroDriveHigh = new PIDGains(0.005,0,0.001,0,1,1, "GyroDriveHigh"); //AP 3-18
-    
-    // Used for Frills for PDP
-    public enum Devices {
-        DRIVETRAIN_LEFT1 (0),
-        DRIVETRAIN_LEFT2 (1),
-        DRIVETRAIN_LEFT3 (2),
-        DRIVETRAIN_RIGHT1 (3),
-        DRIVETRAIN_RIGHT2 (4),
-        DRIVETRAIN_RIGHT3 (5),
-        ARM_LEFT (6),
-        ARM_RIGHT (7),
-        PICKUP_LEFT (8),
-        PICKUP_RIGHT (9),
-        TURRET (10); 
-        
-        private int value;
-        
-        private Devices(int value) {
-        	this.value = value;
-        }
-        
-        public int getValue() {
-        	return value;
-        }
-    };    
+       
 }

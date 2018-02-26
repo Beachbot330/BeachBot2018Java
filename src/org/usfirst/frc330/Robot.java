@@ -102,22 +102,21 @@ public class Robot extends TimedRobot {
         // ---------------------------------------------------------------------
         CSVLogger.getInstance().writeHeader();
         
-        Logger.getInstance().println("BeachbotLib Version:        " + BeachbotLibVersion.Version, Severity.INFO);
-        Logger.getInstance().println("WPILib Version: "             + WPILibVersion.Version, Severity.INFO);
-        //VERIFY Port the following two lines of code -JB:
-       
-        Logger.getInstance().println("NavX Firmware Version:      " + chassis.getNavXFirmware(), Severity.INFO);
-//        Logger.getInstance().println("CAN Talon leftDrive1 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_LEFT1), Severity.INFO);
-//        Logger.getInstance().println("CAN Talon leftDrive2 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_LEFT2), Severity.INFO);
-//        Logger.getInstance().println("CAN Talon leftDrive3 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_LEFT3), Severity.INFO);
-//        Logger.getInstance().println("CAN Talon rightDrive1 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_RIGHT1), Severity.INFO);
-//        Logger.getInstance().println("CAN Talon rightDrive2 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_RIGHT2), Severity.INFO);
-//        Logger.getInstance().println("CAN Talon rightDrive3 Firmware Version: " + chassis.getTalonFirmware(ChassisConst.Devices.DRIVETRAIN_RIGHT3), Severity.INFO);
+        Logger.getInstance().println("BeachbotLib Version:                " + BeachbotLibVersion.Version, Severity.INFO);
+        Logger.getInstance().println("WPILib Version:                     " + WPILibVersion.Version, Severity.INFO);
+        Logger.getInstance().println("NavX Firmware Version:              " + chassis.getNavXFirmware(), Severity.INFO);
+        Logger.getInstance().println("Talon ArmL Firmware Version:        " + arm.getArmLFirmwareVersion(), Severity.INFO);
+        Logger.getInstance().println("Talon IntakeLeft Firmware Version:  " + grabber.getIntakeLeftFirmwareVersion(), Severity.INFO);
+        Logger.getInstance().println("Talon IntakeRight Firmware Version: " + grabber.getIntakeRightFirmwareVersion(), Severity.INFO);
+        Logger.getInstance().println("Talon Wrist Firmware Version:       " + hand.getWristFirmwareVersion(), Severity.INFO);
+        Logger.getInstance().println("Talon Lift1 Firmware Version:       " + lift.getLift1FirwareVersion(), Severity.INFO);
+        Logger.getInstance().println("Talon Lift2 Firmware Version:       " + lift.getLift2FirwareVersion(), Severity.INFO);
+        Logger.getInstance().println("Talon Lift3 Firmware Version:       " + lift.getLift3FirwareVersion(), Severity.INFO);
 
         if (getIsPracticeRobot())
-        	Logger.getInstance().println("Practice Robot Detected",true);
+        	Logger.getInstance().println("Practice Robot Detected",Severity.DEBUG);
         else
-        	Logger.getInstance().println("Competition Robot Detected",true);
+        	Logger.getInstance().println("Competition Robot Detected",Severity.DEBUG);
         // </Logging> ----------------------------------------------------------
         
         buzzer.enable(0.4);
