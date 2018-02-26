@@ -269,6 +269,11 @@ public class Hand extends Subsystem {
     private double ticksToDegrees(int ticks) {
     	return (ticks * 360.0 / HandConst.ticksPerEncoderRev / HandConst.gearRatio);
     }
+
+	public double getWristFirmwareVersion() {
+		int firmwareVersion = wrist.getFirmwareVersion();
+		return ((firmwareVersion & 0xFF00) >> 8) + (firmwareVersion & 0xFF) / 100;
+	}
     
     
 }
