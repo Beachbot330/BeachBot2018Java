@@ -77,7 +77,8 @@ public class Lift extends Subsystem {
         
         // Setup CAN Talons
         lift1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, LiftConst.CAN_Timeout);
-        lift1.setInverted(false); // Set true if the motor direction does not match the sensor direction
+        lift1.setInverted(true); // Set true if the motor direction does not match the sensor direction
+        lift1.setSensorPhase(true);
         setPIDConstants(LiftConst.proportional, LiftConst.integral, LiftConst.derivative, true);
         setLiftAbsoluteTolerance(LiftConst.tolerance);
         
@@ -98,13 +99,14 @@ public class Lift extends Subsystem {
         lift2.set(ControlMode.Follower, lift1.getDeviceID());
         lift2.configForwardSoftLimitEnable(false, LiftConst.CAN_Timeout_No_Wait);
         lift2.configReverseSoftLimitEnable(false, LiftConst.CAN_Timeout_No_Wait);
-        lift2.setInverted(true);
+        lift2.setInverted(false);
         lift2.setNeutralMode(NeutralMode.Brake);
         
         lift3.set(ControlMode.Follower, lift1.getDeviceID());
         lift3.configForwardSoftLimitEnable(false, LiftConst.CAN_Timeout_No_Wait);
         lift3.configReverseSoftLimitEnable(false, LiftConst.CAN_Timeout_No_Wait);
         lift3.setNeutralMode(NeutralMode.Brake);
+        lift3.setInverted(true);
         
         
         

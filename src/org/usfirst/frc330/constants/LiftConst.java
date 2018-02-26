@@ -41,5 +41,5 @@ public final class LiftConst {
 	public static final int    CAN_Status_Frame_13_Period = 20; //JR 2/19/19
 	
 	// Other
-	public static final double calibrationSpeed			= 0.10; //WAG AP 2/16/18
+	public static final double calibrationSpeed			= -0.10; //WAG AP 2/16/18
 }	

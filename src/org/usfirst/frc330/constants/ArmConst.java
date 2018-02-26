@@ -51,7 +51,7 @@ public final class ArmConst {
 	public static final double gearRatio		  		= 15 ; //AP 2/17/18 
 	
 	// Other
-	public static final double calibrationSpeed			= 0.1; //WAG JR 2/19/18
+	public static final double calibrationSpeed			= -0.1; //WAG JR 2/19/18
 	public static final int    CAN_Timeout				= 10; // AP 2/18/18
 	public static final int    CAN_Timeout_No_Wait      = 0;  // JR 2/19/18
 	public static final int    CAN_Status_Frame_13_Period = 20; //JR 2/19/19
