@@ -107,6 +107,7 @@ public class OI {
         SmartDashboard.putData("Defense", new Defense());
         SmartDashboard.putData("ClimbReady", new ClimbReady());
         SmartDashboard.putData("FlipWrist", new FlipWrist());
+        SmartDashboard.putData("HandLevel", new HandLevel());
         SmartDashboard.putData("IntakePortal", new IntakePortal());
         SmartDashboard.putData("UnlockRatchet", new UnlockRatchet());
         SmartDashboard.putData("LockRatchet", new LockRatchet());

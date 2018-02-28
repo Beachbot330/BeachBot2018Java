@@ -40,8 +40,8 @@ public class LiftStepUp extends BBCommand {
     @Override
     protected void initialize() {
     	Robot.buzzer.enable(0.1);
-    	//Robot.lift.setLiftPosition(Robot.lift.getPosition() + 5);
-    	Robot.lift.setLiftPosition(LiftConst.upperLimit);
+    	Robot.lift.setLiftPosition(Robot.lift.getPosition() + 5);
+    	//Robot.lift.setLiftPosition(LiftConst.upperLimit);
     }
 
     // Called repeatedly when this Command is scheduled to run

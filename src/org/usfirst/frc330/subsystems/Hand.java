@@ -276,7 +276,7 @@ public class Hand extends Subsystem {
 
 	public double getWristFirmwareVersion() {
 		int firmwareVersion = wrist.getFirmwareVersion();
-		return ((firmwareVersion & 0xFF00) >> 8) + (firmwareVersion & 0xFF) / 100;
+		return ((firmwareVersion & 0xFF00) >> 8) + (firmwareVersion & 0xFF) / 100.0;
 	}
     
     

@@ -53,7 +53,7 @@ public class HandLevel extends BBCommand {
     	double currentAngleDeg = Math.toDegrees(currentAngleRad); //TODO check if the above code is correct
     	
     	//if(Robot.hand.getCalibrated()) {
-    	//	Robot.hand.setAngle(0.0);
+    		Robot.hand.setAngle(0);
     	//}
     	
     	//TODO use currentAngleDeg to keep wrist within perimeter (keeping the hand level) (duh) (the name of the command)

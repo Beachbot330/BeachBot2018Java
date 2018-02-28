@@ -320,6 +320,6 @@ public class Arm extends Subsystem {
     
     public double getArmLFirmwareVersion() {
 		int firmwareVersion = armL.getFirmwareVersion();
-		return ((firmwareVersion & 0xFF00) >> 8) + (firmwareVersion & 0xFF) / 100;
+		return ((firmwareVersion & 0xFF00) >> 8) + (firmwareVersion & 0xFF) / 100.0;
 	}
 }

@@ -475,12 +475,12 @@ public class Grabber extends Subsystem {
 
 	public double getIntakeLeftFirmwareVersion() {
 		int firmwareVersion = intakeLeft.getFirmwareVersion();
-		return ((firmwareVersion & 0xFF00) >> 8) + (firmwareVersion & 0xFF) / 100;
+		return ((firmwareVersion & 0xFF00) >> 8) + (firmwareVersion & 0xFF) / 100.0;
 	}
 	
 	public double getIntakeRightFirmwareVersion() {
 		int firmwareVersion = intakeRight.getFirmwareVersion();
-		return ((firmwareVersion & 0xFF00) >> 8) + (firmwareVersion & 0xFF) / 100;
+		return ((firmwareVersion & 0xFF00) >> 8) + (firmwareVersion & 0xFF) / 100.0;
 	}
 	
 	
