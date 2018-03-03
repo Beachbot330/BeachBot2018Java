@@ -11,6 +11,8 @@
 
 package org.usfirst.frc330.commands;
 import edu.wpi.first.wpilibj.command.BBCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.constants.*;
 import org.usfirst.frc330.util.Logger;
@@ -47,31 +49,34 @@ public class HandLevel extends BBCommand {
     protected void execute() {
     	// totalExtension is our length from the lift, if the hand were to be level
     	double totalExtension = Math.cos(Math.toRadians(Robot.arm.getArmAngle()))*ArmConst.length + HandConst.length;
+    	//Logger.getInstance().println("totalExtension: " + totalExtension, Logger.Severity.DEBUG);
     	// maxAllowable is the longest totalExtension that does not violate the rules
     	double maxAllowable = ChassisConst.liftToFrame + ChassisConst.maxExtension - HandConst.framePerimeterSafety;
+    	//Logger.getInstance().println("maxAllowable: " + maxAllowable, Logger.Severity.DEBUG);
 
     	//Calculate hand angle
     	double lengthContrArm = Math.sin(Math.toRadians(90 + Robot.arm.getArmAngle())) * ArmConst.length;
+    	//Logger.getInstance().println("lengthContrArm: " + lengthContrArm, Logger.Severity.DEBUG);
     	double lengthContrHand = maxAllowable - lengthContrArm;
     	double handAngle = Math.toDegrees(Math.acos(lengthContrHand/HandConst.length));
+    	//Logger.getInstance().println("handAngle: " + handAngle, Logger.Severity.DEBUG);
+    	
+    	SmartDashboard.putNumber("lengthContrArm", lengthContrArm);
+    	SmartDashboard.putNumber("lengthContrHand", lengthContrHand);
+    	SmartDashboard.putNumber("targetWristAngle", handAngle);
     	
     	// First Case - No rule violation
     	if(totalExtension < maxAllowable) {
-    		Logger.getInstance().println("Hand leveled to 0 degrees. Total Extension: " + totalExtension, Logger.Severity.DEBUG);
+    		Logger.getInstance().println("Hand leveled to 0 degrees", Logger.Severity.DEBUG);
     		Robot.hand.setAngle(0.0);
     	}
     	
-    	// Second Case - Would violate, hand pointing down
-    	else if(Robot.hand.getHandAngle() < 0) {
-    		Logger.getInstance().println("Hand below level" , Logger.Severity.DEBUG);
-    		Robot.hand.setAngle(-handAngle);
-    	}
-    	
-    	//Third Case - Would violate, hand pointing up
+    	// Second Case - Would violate
     	else {
-    		Logger.getInstance().println("Hand above level" , Logger.Severity.DEBUG);
+    		//Logger.getInstance().println("Hand below level" , Logger.Severity.DEBUG);
     		Robot.hand.setAngle(handAngle);
     	}
+    	
     	
     	
     }
@@ -79,7 +84,7 @@ public class HandLevel extends BBCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return true; //Update this to false once it is confirmed that everything is working
+        return false;
     }
 
     // Called once after isFinished returns true

@@ -277,7 +277,7 @@ public class Arm extends Subsystem {
 		return armL.isAlive();
 	}
 		
-	//VERIFY Implement manualArm -JB
+
 	int inertiaCounter;
 	
     public void manualArm() {	
@@ -285,7 +285,7 @@ public class Arm extends Subsystem {
     	double angle;
     	
     	if (Math.abs(gamepadCommand) > ArmConst.gamepadDeadZone) {
-    		setArm(gamepadCommand/Math.abs(gamepadCommand)*Math.pow(gamepadCommand, 2));
+    		setArm(gamepadCommand/Math.abs(gamepadCommand)*Math.pow(gamepadCommand, 2)*0.4); //scaled to 0.2 max
     		inertiaCounter = ArmConst.inertiaCounter;
     	}
     	else if (inertiaCounter > 0) {
@@ -294,12 +294,6 @@ public class Arm extends Subsystem {
     	}
     	else if ( armL.getControlMode() != ControlMode.Position) {
 			angle = getArmAngle();
-						
-			if (angle < getLowerLimit())
-				angle = getLowerLimit();
-			else if (angle > getUpperLimit())
-				angle = getUpperLimit();
-
 			setArmAngle(angle);
     	}  	
     }

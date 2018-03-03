@@ -27,9 +27,7 @@ public final class HandConst {
 	public static final double derivative        		= 0.00;   // AP 2/18/18
 	public static final double feedForward	     		= 0.0;   // JR 2/23
 	public static final double VoltageRampRate   		= 0.0;  // AP 3-15
-	public static final double MaxOutputVoltage  		= 12.0;   // AP 3-15
-	public static final PIDGains fullPID = new PIDGains(proportional, integral, derivative, 
-														feedForward, MaxOutputVoltage, MaxOutputVoltage, "default");
+	public static final double MaxOutputPercent			= 0.4;	// TEMPORARY AP 3/3/18
 	
 	// Angles relative to ground
 	public static final double pickUp					=  0.0;  //JB 1-27
