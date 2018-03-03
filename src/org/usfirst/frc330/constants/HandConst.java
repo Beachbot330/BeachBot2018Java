@@ -30,9 +30,11 @@ public final class HandConst {
 	public static final double MaxOutputPercent			= 0.4;	// TEMPORARY AP 3/3/18
 	
 	// Angles relative to ground
-	public static final double pickUp					=  0.0;  //JB 1-27
+	public static final double pickUp					=  10.0;  //AP 3/3/18
 	public static final double Defense					=  90.0; //JB 1-27
+	public static final double switchDropoff			= 30.0; //AP 3/3/18
 	public static final double leveledWrist             =  0.0;  //MF 1/27 WAG
+	public static final double scaleDropoff				= 10.0; //AP 3/3/18
 	public static final double maxWrist                 =  90.0; //MF 1/27 WAG
 	public static final double minWrist                 = -90.0; //MF 1/27 WAG
 	public static final double portalPosition			=  90.0; //EJO 1/28

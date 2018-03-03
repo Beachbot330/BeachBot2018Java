@@ -18,11 +18,11 @@ public final class LiftConst {
 	public static final double lowerLimit				=  1.0; //AP 1-30-2018 WAG
 	public static final double defensePosition			=  1.0; //wag -EJO
 	
-	public static final double intakePosition			=  1.0; //wag -EJO
+	public static final double intakePosition			=  0.5; //AP 3/3/18
 	public static final double scaleDropoffMin			=  1.0; //AP 1-30-2018 
 	public static final double intakePortalPosition		=  7.0; //AP 1-30-2018
 	public static final double scaleDropoffMid          =  4.0; //AP 1-30-2018
-	public static final double switchDropoff			= 20.0; //AP 1-30-2018
+	public static final double switchDropoff			= 15.5; //AP 3/3/18
 	public static final double scaleDropoffMax			= 26.2; //AP 2-17-2018
 	
 	public static final double climbCenterPosition		= 26.2; //AP 2-17-2018 WAG

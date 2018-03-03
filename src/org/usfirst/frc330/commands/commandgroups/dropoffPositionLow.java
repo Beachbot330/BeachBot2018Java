@@ -27,10 +27,10 @@ public class dropoffPositionLow extends BBCommandGroup {
 	//VERIFY -mf
     public dropoffPositionLow() {
     	
-    	addParallel(new SetArmAngle(ArmConst.dropoffLow));
+    	addParallel(new SetLiftPosition(LiftConst.scaleDropoffMin));
+    	addSequential(new SetArmAngle(ArmConst.dropoffLow));
     	//VERIFY MAKENA create a second function for setting the wrist angle relative to the ground
-    	addParallel(new RelativeWristPosition(HandConst.leveledWrist)); //keeps hand level in relation to the floor
-    	addSequential(new SetLiftPosition(LiftConst.scaleDropoffMin));
+    	addParallel(new RelativeWristPosition(HandConst.scaleDropoff)); //keeps hand level in relation to the floor
  
     } 
 }
