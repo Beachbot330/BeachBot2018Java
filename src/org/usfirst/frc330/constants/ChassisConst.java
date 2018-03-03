@@ -10,8 +10,8 @@ public final class ChassisConst {
 	private ChassisConst(){}
 	
 	// Length
-	public static final double liftToFrame				  = 26; 	// (inches) EJO 1/28
-	public static final double liftToFramRear			  = 6.5; 	// (inches) EJO 1/28
+	public static final double liftToFrame				  = 25.75; 	// (inches) EJO 1/28
+	public static final double liftToFramRear			  = 6.75; 	// (inches) EJO 1/28
 	public static final double maxExtension				  = 16;  	// (inches) EJO 1/28
 	
 	// PID MaxOutputs

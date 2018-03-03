@@ -11,7 +11,7 @@ public final class ArmConst {
 	private ArmConst(){}
 	
 	// Length
-	public static final double length					= 38.5;  // (inches) EJO 1/28 
+	public static final double length					= 35;  // (inches) AP 3/3/18 
 
 	// Tolerance
 	public static final double tolerance        		= 5.0;
@@ -19,7 +19,7 @@ public final class ArmConst {
 	public static final double gamepadDeadZone   		= 0.10;  //AP WAG 1-30-18
 	public static final double pickupTolerance	 		= 5.0; 	 //AP WAG 1-30-18
 	public static final double defaultTimeout	 		= 5.0;	 //AP WAG 1-30-18
-	public static final int    inertiaCounter	 		= 10;	 //AP WAG 1-30-18
+	public static final int    inertiaCounter	 		= 0;	 //AP 3/3/18
 	
 	// PID Constants
 	public static final double proportional      		= 0.25;   // AP WAG 2-18-18
@@ -27,10 +27,7 @@ public final class ArmConst {
 	public static final double derivative        		= 0.00;   // AP WAG 1-30-18
 	public static final double feedForward	     		= 0.00;   // AP WAG 1-30-18
 	public static final double VoltageRampRate   		= 48.0;  // AP WAG 1-30-18
-	public static final double MaxOutputVoltage  		= 12.0;  // AP WAG 1-30-18
-	public static final double MaxOutputPercent			= 1;	// AP 2/17/18 WAG
-	public static final PIDGains fullPID = new PIDGains(proportional, integral, derivative, 
-														feedForward, MaxOutputVoltage, MaxOutputVoltage, "default");
+	public static final double MaxOutputPercent			= 0.4;	// TEMPORARY AP 3/3/18
 	
 	// Angles
 	public static final double lowerLimit               = -54.0; //MF 1/27 WAG

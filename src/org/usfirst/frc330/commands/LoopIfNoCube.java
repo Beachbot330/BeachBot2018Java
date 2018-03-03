@@ -50,7 +50,7 @@ public class LoopIfNoCube extends BBCommand {
     protected void end() {
     	Logger.getInstance().println("Has Cube: " + Robot.grabber.hasCubeClose(), Severity.INFO);
     	Logger.getInstance().println("LeftSensor: " + Robot.grabber.getSensorLDistance(), Severity.INFO);
-    	Logger.getInstance().println("CenterSensor: " + Robot.grabber.getSensorCOutput(), Severity.INFO);
+    	Logger.getInstance().println("CenterSensor: " + Robot.grabber.getSensorCDistance(), Severity.INFO);
     	Logger.getInstance().println("RightSensor: " + Robot.grabber.getSensorRDistance(), Severity.INFO);
     }
 

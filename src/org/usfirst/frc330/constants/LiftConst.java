@@ -11,8 +11,8 @@ public final class LiftConst {
 
 	// PID Constants
 	public static final double proportional      		= 0.2;   // AP 2/17/18
-	public static final double integral         		= 0.000; // WAG
-	public static final double derivative        		= 0.0;   // WAG
+	public static final double integral         		= 0.000; // AP 3/3/18
+	public static final double derivative        		= 0.0;   // AP 3/3/18
 	
 	// Positions
 	public static final double lowerLimit				=  1.0; //AP 1-30-2018 WAG
@@ -34,7 +34,7 @@ public final class LiftConst {
 	public static final double inchesPerRev				= 3.997; //AP 2/17/18 
 
 	public static final double VoltageRampRate			= 1.23;	//WAG  JB
-	public static final double MaxOutputPercent			= 1;	// AP 2/17/18
+	public static final double MaxOutputPercent			= 0.4;	// TEMPORARY AP 3/3/18
 	public static final int    CAN_Timeout				= 10; //AP 2/18/18
 	public static final int    CAN_Timeout_No_Wait      = 0;  // JR 2/19/18
 	public static final int    CAN_Status_Frame_13_Period = 20; //JR 2/19/19

@@ -77,6 +77,9 @@ public class Hand extends Subsystem {
 		wrist.configNominalOutputForward(0, HandConst.CAN_Timeout);	
 		wrist.configNominalOutputReverse(0, HandConst.CAN_Timeout);	
 		
+		wrist.configPeakOutputForward(HandConst.MaxOutputPercent, HandConst.CAN_Timeout);
+        wrist.configPeakOutputReverse(-HandConst.MaxOutputPercent, HandConst.CAN_Timeout);
+		
 		wrist.configForwardLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, HandConst.CAN_Timeout);
 		wrist.configReverseLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, HandConst.CAN_Timeout);
 		
