@@ -13,6 +13,7 @@ package org.usfirst.frc330.commands;
 import edu.wpi.first.wpilibj.command.BBCommand;
 import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.constants.*;
+import org.usfirst.frc330.util.Logger;
 
 /**
  *
@@ -44,25 +45,41 @@ public class HandLevel extends BBCommand {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	double rightAngleDegInRad = Math.toRadians(90.0);
-    	double armAngleDeg = Robot.arm.getArmAngle();
-    	double armAngleRad = Math.toRadians(armAngleDeg);
-    	double angleInRad = ((ChassisConst.liftToFrame + ChassisConst.maxExtension - (Math.sin(rightAngleDegInRad + armAngleRad) * ArmConst.length))) / HandConst.length;
-    	//calculate angle of wrist to see if it is outside the perimeter
-    	double currentAngleRad = Math.acos(angleInRad);
-    	double currentAngleDeg = Math.toDegrees(currentAngleRad); //TODO check if the above code is correct
+    	// totalExtension is our length from the lift, if the hand were to be level
+    	double totalExtension = Math.cos(Math.toRadians(Robot.arm.getArmAngle()))*ArmConst.length + HandConst.length;
+    	// maxAllowable is the longest totalExtension that does not violate the rules
+    	double maxAllowable = ChassisConst.liftToFrame + ChassisConst.maxExtension - HandConst.framePerimeterSafety;
+
+    	//Calculate hand angle
+    	double lengthContrArm = Math.sin(Math.toRadians(90 + Robot.arm.getArmAngle())) * ArmConst.length;
+    	double lengthContrHand = maxAllowable - lengthContrArm;
+    	double handAngle = Math.toDegrees(Math.acos(lengthContrHand/HandConst.length));
     	
-    	//if(Robot.hand.getCalibrated()) {
-    	//	Robot.hand.setAngle(0);
-    	//}
+    	// First Case - No rule violation
+    	if(totalExtension < maxAllowable) {
+    		Logger.getInstance().println("Hand leveled to 0 degrees. Total Extension: " + totalExtension, Logger.Severity.DEBUG);
+    		Robot.hand.setAngle(0.0);
+    	}
     	
-    	//TODO use currentAngleDeg to keep wrist within perimeter (keeping the hand level) (duh) (the name of the command)
+    	// Second Case - Would violate, hand pointing down
+    	else if(Robot.hand.getHandAngle() < 0) {
+    		Logger.getInstance().println("Hand below level" , Logger.Severity.DEBUG);
+    		Robot.hand.setAngle(-handAngle);
+    	}
+    	
+    	//Third Case - Would violate, hand pointing up
+    	else {
+    		Logger.getInstance().println("Hand above level" , Logger.Severity.DEBUG);
+    		Robot.hand.setAngle(handAngle);
+    	}
+    	
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return false;
+        return true; //Update this to false once it is confirmed that everything is working
     }
 
     // Called once after isFinished returns true
