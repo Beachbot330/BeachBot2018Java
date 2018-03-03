@@ -122,6 +122,11 @@ public class Lift extends Subsystem {
 		CSVLogger.getInstance().add("LiftPosition", temp);
 		
 		temp = new CSVLoggable(true) {
+			public double get() { return getVelocity();}
+		};
+		CSVLogger.getInstance().add("Lift Velocity", temp);
+		
+		temp = new CSVLoggable(true) {
 			public double get() { return getOutput(); }
 		};
 		CSVLogger.getInstance().add("LiftOutput", temp);
@@ -205,6 +210,10 @@ public class Lift extends Subsystem {
     
     public double getPosition() {
     	return ticksToInches(lift1.getSelectedSensorPosition(0)); //arg 0 is primary PID
+    }
+    
+    public double getVelocity() {
+    	return lift1.getSelectedSensorVelocity(0);
     }
     
     //VERIFY Implement getOutput() -MF

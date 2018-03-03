@@ -24,7 +24,7 @@ public class RelativeWristPosition extends BBCommand {
     	TargetAngle = targetAngle;
 
         requires(Robot.hand);
-        requires(Robot.arm);
+        //requires(Robot.arm);
 
     }
 
