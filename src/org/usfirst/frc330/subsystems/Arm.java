@@ -90,8 +90,8 @@ public class Arm extends Subsystem {
         armL.configNominalOutputForward(0, HandConst.CAN_Timeout);	
 		armL.configNominalOutputReverse(0, HandConst.CAN_Timeout);
 		
-		armL.configForwardLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, 0);
-		armL.configReverseLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, 0);
+		armL.configForwardLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, ArmConst.CAN_Timeout);
+		armL.configReverseLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, ArmConst.CAN_Timeout);
         
         //set feedback frame so that getClosedLoopError comes faster then 160ms
         armL.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, ArmConst.CAN_Status_Frame_13_Period, ArmConst.CAN_Timeout);

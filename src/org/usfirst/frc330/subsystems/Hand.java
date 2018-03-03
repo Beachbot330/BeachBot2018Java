@@ -77,8 +77,8 @@ public class Hand extends Subsystem {
 		wrist.configNominalOutputForward(0, HandConst.CAN_Timeout);	
 		wrist.configNominalOutputReverse(0, HandConst.CAN_Timeout);	
 		
-		wrist.configForwardLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, 0);
-		wrist.configReverseLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, 0);
+		wrist.configForwardLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, HandConst.CAN_Timeout);
+		wrist.configReverseLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, HandConst.CAN_Timeout);
 		
 		//set feedback frame so that getClosedLoopError comes faster then 160ms
         wrist.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, HandConst.CAN_Status_Frame_13_Period, HandConst.CAN_Timeout);
