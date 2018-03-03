@@ -4,6 +4,8 @@
 package org.usfirst.frc330.commands;
 import edu.wpi.first.wpilibj.command.BBCommand;
 import org.usfirst.frc330.Robot;
+import org.usfirst.frc330.util.Logger;
+import org.usfirst.frc330.util.Logger.Severity;
 
 /**
  *
@@ -40,13 +42,16 @@ public class LoopIfNoCube extends BBCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-    	//return !Robot.grabber.hasCube();
-    	return false;
+    	return Robot.grabber.hasCubeClose();
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
+    	Logger.getInstance().println("Has Cube: " + Robot.grabber.hasCubeClose(), Severity.INFO);
+    	Logger.getInstance().println("LeftSensor: " + Robot.grabber.getSensorLDistance(), Severity.INFO);
+    	Logger.getInstance().println("CenterSensor: " + Robot.grabber.getSensorCOutput(), Severity.INFO);
+    	Logger.getInstance().println("RightSensor: " + Robot.grabber.getSensorRDistance(), Severity.INFO);
     }
 
     // Called when another command which requires one or more of the same
