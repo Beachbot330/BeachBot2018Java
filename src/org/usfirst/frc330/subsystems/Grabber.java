@@ -258,7 +258,7 @@ public class Grabber extends Subsystem {
     
     public double getSensorCOutput() {
     	centerKalman.setParameters(Robot.chassis.getSpeed() + GrabberConst.kalmanProcessNoise, grabberIRCenter.getNoise());
-    	return leftKalman.getFilteredValue(grabberIRCenter.getDistance());
+    	return centerKalman.getFilteredValue(grabberIRCenter.getDistance());
     }
     
     public double getSensorROutput() {
