@@ -13,7 +13,6 @@ package org.usfirst.frc330.subsystems;
 import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.commands.*;
 import org.usfirst.frc330.commands.commandgroups.Calibrate;
-import org.usfirst.frc330.constants.ArmConst;
 import org.usfirst.frc330.constants.HandConst;
 import org.usfirst.frc330.util.CSVLoggable;
 import org.usfirst.frc330.util.CSVLogger;
@@ -78,11 +77,11 @@ public class Hand extends Subsystem {
 		wrist.configNominalOutputForward(0, HandConst.CAN_Timeout);	
 		wrist.configNominalOutputReverse(0, HandConst.CAN_Timeout);	
 		
-		wrist.configPeakOutputForward(HandConst.MaxOutputPercent, ArmConst.CAN_Timeout);
-        wrist.configPeakOutputReverse(-HandConst.MaxOutputPercent, ArmConst.CAN_Timeout);
+		wrist.configPeakOutputForward(HandConst.MaxOutputPercent, HandConst.CAN_Timeout);
+        wrist.configPeakOutputReverse(-HandConst.MaxOutputPercent, HandConst.CAN_Timeout);
 		
-		wrist.configForwardLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, 0);
-		wrist.configReverseLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, 0);
+		wrist.configForwardLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, HandConst.CAN_Timeout);
+		wrist.configReverseLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, HandConst.CAN_Timeout);
 		
 		//set feedback frame so that getClosedLoopError comes faster then 160ms
         wrist.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, HandConst.CAN_Status_Frame_13_Period, HandConst.CAN_Timeout);

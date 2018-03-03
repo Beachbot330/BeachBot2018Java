@@ -97,18 +97,16 @@ public class Lift extends Subsystem {
 		lift1.configReverseLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, 0);
 
         lift2.set(ControlMode.Follower, lift1.getDeviceID());
-        lift2.configForwardSoftLimitEnable(false, LiftConst.CAN_Timeout_No_Wait);
-        lift2.configReverseSoftLimitEnable(false, LiftConst.CAN_Timeout_No_Wait);
+        lift2.configForwardSoftLimitEnable(false, LiftConst.CAN_Timeout);
+        lift2.configReverseSoftLimitEnable(false, LiftConst.CAN_Timeout);
         lift2.setInverted(false);
         lift2.setNeutralMode(NeutralMode.Brake);
         
         lift3.set(ControlMode.Follower, lift1.getDeviceID());
-        lift3.configForwardSoftLimitEnable(false, LiftConst.CAN_Timeout_No_Wait);
-        lift3.configReverseSoftLimitEnable(false, LiftConst.CAN_Timeout_No_Wait);
+        lift3.configForwardSoftLimitEnable(false, LiftConst.CAN_Timeout);
+        lift3.configReverseSoftLimitEnable(false, LiftConst.CAN_Timeout);
         lift3.setNeutralMode(NeutralMode.Brake);
         lift3.setInverted(true);
-        
-        
         
         //set feedback frame so that getClosedLoopError comes faster then 160ms
         lift1.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, LiftConst.CAN_Status_Frame_13_Period, LiftConst.CAN_Timeout);
