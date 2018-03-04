@@ -237,8 +237,8 @@ public class Arm extends Subsystem {
        	if(timeout) {
        		//assume using main PID loop (index 0)
        		armL.config_kP(0, P, ArmConst.CAN_Timeout);
-       		armL.config_kI(0, I, ArmConst.CAN_Timeout_No_Wait);
-       		armL.config_kD(0, D, ArmConst.CAN_Timeout_No_Wait);
+       		armL.config_kI(0, I, ArmConst.CAN_Timeout);
+       		armL.config_kD(0, D, ArmConst.CAN_Timeout);
        	}
        	else {
    	    	//assume using main PID loop (index 0)

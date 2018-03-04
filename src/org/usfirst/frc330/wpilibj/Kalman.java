@@ -41,7 +41,7 @@ public class Kalman {
 		this.estimatedMeasurement = intial_value; //x will hold the iterated filtered value
 	}
 
-	public double getFilteredValue(double measurement) {
+	public double updateFilteredValue(double measurement) {
 		/* Updates and gets the current measurement value */
 		//prediction update
 		//omit x = x
@@ -52,6 +52,10 @@ public class Kalman {
 		estimatedMeasurement = estimatedMeasurement + kalmanGain * (measurement - estimatedMeasurement);
 		estimatedError = (1 - kalmanGain) * estimatedError;
 
+		return estimatedMeasurement;
+	}
+	
+	public double getFilteredValue() {
 		return estimatedMeasurement;
 	}
 
