@@ -67,13 +67,11 @@ public class HandLevel extends BBCommand {
     	
     	// First Case - No rule violation
     	if(totalExtension < maxAllowable) {
-    		Logger.getInstance().println("Hand leveled to 0 degrees", Logger.Severity.DEBUG);
     		Robot.hand.setAngle(0.0);
     	}
     	
     	// Second Case - Would violate
     	else {
-    		//Logger.getInstance().println("Hand below level" , Logger.Severity.DEBUG);
     		Robot.hand.setAngle(handAngle);
     	}
     	

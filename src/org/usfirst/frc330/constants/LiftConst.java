@@ -8,6 +8,7 @@ public final class LiftConst {
 
 	// Tolerance
 	public static final double tolerance        		= 5.0;  // WAG
+	public static final double defaultTimeout			= 3.0;  //AP WAG 3/4/18
 
 	// PID Constants
 	public static final double proportional      		= 0.2;   // AP 2/17/18
@@ -31,9 +32,11 @@ public final class LiftConst {
 	
 	public static final double upperLimit				= 26.2; //AP 2-17-2018
 		
+	//Encoder Settings
 	public static final int    ticksPerRev		  		= 4096;  //AP 2/17/18
 	public static final double inchesPerRev				= 3.997; //AP 2/17/18 
 
+	//Talon SRX Settings
 	public static final double VoltageRampRate			= 1.23;	//WAG  JB
 	public static final double MaxOutputPercent			= 0.4;	// TEMPORARY AP 3/3/18
 	public static final int    CAN_Timeout				= 10; //AP 2/18/18
@@ -42,4 +45,5 @@ public final class LiftConst {
 	
 	// Other
 	public static final double calibrationSpeed			= -0.10; //WAG AP 2/16/18
+	public static final double stepSize					= 5.0; //AP 3/4/18 --in inches
 }	
