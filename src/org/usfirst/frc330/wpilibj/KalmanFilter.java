@@ -7,7 +7,7 @@ package org.usfirst.frc330.wpilibj;
  * @author Joe
  *
  */
-public class KalmanFilter {
+public class KalmanFilter implements Filter {
 
 	//Kalman filter variables
 	private  double processNoise; //process noise covariance
@@ -41,6 +41,10 @@ public class KalmanFilter {
 		this.estimatedMeasurement = intial_value; //x will hold the iterated filtered value
 	}
 
+	/* (non-Javadoc)
+	 * @see org.usfirst.frc330.wpilibj.Filter#updateFilteredValue(double)
+	 */
+	@Override
 	public double updateFilteredValue(double measurement) {
 		/* Updates and gets the current measurement value */
 		//prediction update
@@ -55,6 +59,10 @@ public class KalmanFilter {
 		return estimatedMeasurement;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.usfirst.frc330.wpilibj.Filter#getFilteredValue()
+	 */
+	@Override
 	public double getFilteredValue() {
 		return estimatedMeasurement;
 	}
