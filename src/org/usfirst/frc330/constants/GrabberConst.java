@@ -33,4 +33,6 @@ public final class GrabberConst {
 	public static final double kalmanProcessNoise						= 0.5;				//(inches) 14ft/sec*12in/ft/50samples per second + 0.5 JDR 2/24/18
 	public static final double kalmanSensorNoise						= 1.0;				//(inches) Based on observed data JDR 2/24/18
 	public static final double kalmanEstimatedError						= 100;				//(inches) //JDR 2/24/18
+
+	public static final int    medianSamples							= 5;				//JDR 3/4/2018
 }	
