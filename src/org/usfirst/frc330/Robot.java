@@ -132,7 +132,6 @@ public class Robot extends TimedRobot {
     public void disabledInit(){
     	Logger.getInstance().println("Disabled Init", Severity.INFO);
 		Scheduler.getInstance().removeAll();
-		Robot.grabber.closeClaw();
 		Robot.lift.stopLift();
 		Robot.climber.lockPlatforms();
 		Robot.arm.stopArm();

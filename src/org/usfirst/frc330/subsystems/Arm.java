@@ -87,8 +87,8 @@ public class Arm extends Subsystem {
 		armL.configPeakOutputForward(ArmConst.MaxOutputPercent, ArmConst.CAN_Timeout);
         armL.configPeakOutputReverse(-ArmConst.MaxOutputPercent, ArmConst.CAN_Timeout);
         
-        armL.configNominalOutputForward(0, HandConst.CAN_Timeout);	
-		armL.configNominalOutputReverse(0, HandConst.CAN_Timeout);
+        armL.configNominalOutputForward(0, ArmConst.CAN_Timeout);	
+		armL.configNominalOutputReverse(0, ArmConst.CAN_Timeout);
 		
 		armL.configForwardLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, ArmConst.CAN_Timeout);
 		armL.configReverseLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, ArmConst.CAN_Timeout);

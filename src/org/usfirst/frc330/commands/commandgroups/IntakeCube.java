@@ -12,6 +12,8 @@
 package org.usfirst.frc330.commands.commandgroups;
 
 import edu.wpi.first.wpilibj.command.BBCommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
+
 import org.usfirst.frc330.commands.*;
 import org.usfirst.frc330.constants.*;
 import org.usfirst.frc330.subsystems.*;
@@ -42,9 +44,11 @@ public class IntakeCube extends BBCommandGroup {
     	
     	addSequential(new SetHandAngle(HandConst.pickUp));
     	//turn on rollers and sensor WHILE arm and lift are getting into position
-    	addParallel(new RollerOn());
+    	addSequential(new RollerOn());
+    	addSequential(new WaitCommand(0.25));
     	addSequential(new SensorCloseClaw());
     	// Once everything above has been completed and the cube is in the grabber...
+    	addSequential(new WaitCommand(0.5));
     	//turn off rollers
     	addSequential(new RollerOff());
     	// DEFENSE MODE!  
