@@ -13,26 +13,32 @@ package org.usfirst.frc330.commands;
 import edu.wpi.first.wpilibj.command.BBCommand;
 import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.constants.*;
+import org.usfirst.frc330.util.Logger;
 
 /**
  *
  */
 public class RelativeWristPosition extends BBCommand {
+	
 	double TargetAngle;
-    public RelativeWristPosition(double targetAngle) {
-    	
+    
+	public RelativeWristPosition(double targetAngle) {
     	TargetAngle = targetAngle;
-
         requires(Robot.hand);
-        //requires(Robot.arm);
-
     }
+	
+	public RelativeWristPosition(double targetAngle, double timeout) {
+		this(targetAngle);
+		this.setTimeout(timeout);
+	}
 
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+    	Logger.getInstance().println("Start angle relative to ground: " + Robot.hand.getHandAngle(), Logger.Severity.INFO);
     	double calculatedAngle = TargetAngle + (90 - Robot.arm.getArmAngle());
     	Robot.hand.setAngle(calculatedAngle);
+    	Logger.getInstance().println("New Setpoint: " + calculatedAngle, Logger.Severity.INFO);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -44,18 +50,20 @@ public class RelativeWristPosition extends BBCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return Robot.hand.getHandOnTarget();
+        return Robot.hand.getHandOnTarget() || this.isTimedOut();
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
+    	Logger.getInstance().println("End position: " + Robot.hand.getHandAngle(), Logger.Severity.INFO);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+    	this.end();
     }
 }
 
