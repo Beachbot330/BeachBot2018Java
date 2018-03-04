@@ -13,9 +13,7 @@ package org.usfirst.frc330.commands.commandgroups;
 
 import edu.wpi.first.wpilibj.command.BBCommandGroup;
 
-import org.usfirst.frc330.commands.SetArmAngle;
-import org.usfirst.frc330.commands.SetHandAngle;
-import org.usfirst.frc330.commands.SetLiftPosition;
+import org.usfirst.frc330.commands.*;
 import org.usfirst.frc330.constants.ArmConst;
 import org.usfirst.frc330.constants.LiftConst;
 import org.usfirst.frc330.constants.HandConst;
@@ -29,6 +27,7 @@ public class dropoffPositionSwitch extends BBCommandGroup {
 
     public dropoffPositionSwitch() {
 
+    	addSequential(new SetHandAngleRelArm(HandConst.encFrameSafe));
     	addSequential(new SetArmAngle(ArmConst.switchArm));
     	addSequential(new SetHandAngle(HandConst.switchDropoff));
     	//set lift position to switch position

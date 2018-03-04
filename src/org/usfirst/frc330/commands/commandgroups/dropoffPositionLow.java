@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.BBCommandGroup;
 import org.usfirst.frc330.commands.RelativeWristPosition;
 import org.usfirst.frc330.commands.SetArmAngle;
 import org.usfirst.frc330.commands.SetHandAngle;
+import org.usfirst.frc330.commands.SetHandAngleRelArm;
 import org.usfirst.frc330.commands.SetLiftPosition;
 import org.usfirst.frc330.constants.ArmConst;
 import org.usfirst.frc330.constants.LiftConst;
@@ -27,10 +28,11 @@ public class dropoffPositionLow extends BBCommandGroup {
 	//VERIFY -mf
     public dropoffPositionLow() {
     	
+    	addSequential(new SetHandAngleRelArm(HandConst.encFrameSafe));
     	addParallel(new SetLiftPosition(LiftConst.scaleDropoffMin));
     	addSequential(new SetArmAngle(ArmConst.dropoffLow));
     	//VERIFY MAKENA create a second function for setting the wrist angle relative to the ground
-    	addParallel(new RelativeWristPosition(HandConst.scaleDropoff)); //keeps hand level in relation to the floor
+    	addParallel(new SetHandAngle(HandConst.scaleDropoff)); //keeps hand level in relation to the floor
  
     } 
 }

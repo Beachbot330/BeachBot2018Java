@@ -273,7 +273,7 @@ public class Lift extends Subsystem {
 	}
 
 	public boolean getLiftOnTarget() {
-		double error = lift1.getClosedLoopError(0);
+		double error = getSetpoint() - getPosition();
     	return (Math.abs(error) < tolerance);
 	}
 	

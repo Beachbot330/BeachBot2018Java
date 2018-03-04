@@ -12,6 +12,7 @@
 package org.usfirst.frc330.commands;
 import edu.wpi.first.wpilibj.command.BBCommand;
 import org.usfirst.frc330.Robot;
+import org.usfirst.frc330.util.Logger;
 
 /**
  *
@@ -22,7 +23,7 @@ public class SetLiftPosition extends BBCommand {
     public SetLiftPosition(double position) {
     	
         requires(Robot.lift);
-
+        this.position = position;
     }
 
     // Called just before this Command runs the first time
@@ -45,11 +46,14 @@ public class SetLiftPosition extends BBCommand {
     // Called once after isFinished returns true
     @Override
     protected void end() {
+    	Logger.getInstance().println("Setpoint: " + Robot.lift.getSetpoint(), Logger.Severity.INFO);
+    	Logger.getInstance().println("Final Position: " + Robot.lift.getPosition(), Logger.Severity.INFO);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+    	this.end();
     }
 }

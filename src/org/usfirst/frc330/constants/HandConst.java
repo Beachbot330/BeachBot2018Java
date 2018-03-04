@@ -14,7 +14,7 @@ public final class HandConst {
 	public static final double length					= 19.0; 	 // (inches) EJO 1/28
 
 	// Tolerance
-	public static final double tolerance        		= 5.0;
+	public static final double defaultTolerance  		= 5.0;
 	public static final double deadZone			 		= 0.05;  //AP 2-20
 	public static final double gamepadDeadZone   		= 0.10;  //AP 2-27
 	public static final double pickupTolerance	 		= 5.0; 	 //AP 2-6 (WAG)
@@ -22,25 +22,27 @@ public final class HandConst {
 	public static final int    inertiaCounter	 		= 10;	 //JR 2-28 (loops after manual control before starting position control)
 	
 	// PID Constants
-	public static final double proportional      		= 0.5;   // AP 2/25/18
+	public static final double proportional      		= 4.0;   // AP 3/3/18
 	public static final double integral         		= 0.00; // JR 2/23
 	public static final double derivative        		= 0.00;   // AP 2/18/18
 	public static final double feedForward	     		= 0.0;   // JR 2/23
 	public static final double VoltageRampRate   		= 0.0;  // AP 3-15
-	public static final double MaxOutputPercent			= 0.4;	// TEMPORARY AP 3/3/18
+	public static final double MaxOutputPercent			= 0.5;	// TEMPORARY AP 3/3/18
+	public static final double slopAdjust				= 3.0;
 	
 	// Angles relative to ground
 	public static final double pickUp					=  10.0;  //AP 3/3/18
 	public static final double Defense					=  90.0; //JB 1-27
 	public static final double switchDropoff			= 30.0; //AP 3/3/18
 	public static final double leveledWrist             =  0.0;  //MF 1/27 WAG
-	public static final double scaleDropoff				= 10.0; //AP 3/3/18
+	public static final double scaleDropoff				=  0.0; //AP 3/3/18
 	public static final double maxWrist                 =  90.0; //MF 1/27 WAG
 	public static final double minWrist                 = -90.0; //MF 1/27 WAG
 	public static final double portalPosition			=  90.0; //EJO 1/28
 	
 	// Angles relative to arm (encoder)
 	public static final double encLowerLimit			= -144.0; // AP 2/18/18
+	public static final double encFrameSafe				=  138.0; // AP 3/3/18
 	public static final double encLimitSwitch			=  144.0; // AP 2/18/18
 	public static final double encUpperLimit			=  144.0; // AP 2/18/18
 	
@@ -49,7 +51,7 @@ public final class HandConst {
 	public static final double gearRatio				= 4.125;  //AP 2/18/18
 	
 	// Other
-	public static final double calibrationSpeed			= 0.15; //WAG AP 2/16/18
+	public static final double calibrationSpeed			= 0.25; //WAG AP 2/16/18
 	public static final int  CAN_Timeout				= 10; //AP 2/18/18
 	public static final int  CAN_Timeout_No_Wait        = 0;  // JR 2/19/18
 	public static final int  CAN_Status_Frame_13_Period = 20; //JR 2/19/19

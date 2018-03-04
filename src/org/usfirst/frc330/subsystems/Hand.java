@@ -67,7 +67,7 @@ public class Hand extends Subsystem {
 		wrist.setSensorPhase(false);
 		
 		setPIDConstants(HandConst.proportional,HandConst.integral,HandConst.derivative,true);
-		setHandAbsoluteTolerance(HandConst.tolerance);
+		setHandAbsoluteTolerance(HandConst.defaultTolerance);
 		
 		wrist.configForwardSoftLimitEnable(false, HandConst.CAN_Timeout); //Set these false until calibrated
 		wrist.configReverseSoftLimitEnable(false, HandConst.CAN_Timeout);
@@ -206,7 +206,7 @@ public class Hand extends Subsystem {
     
     public void setAngle(double angleRelativeToGround) {
     	double absAngle; 
-    	absAngle = angleRelativeToGround - Robot.arm.getArmAngle();
+    	absAngle = angleRelativeToGround + HandConst.slopAdjust - Robot.arm.getArmAngle();
     	setAngleFromArm(absAngle);
     }
     
@@ -262,8 +262,12 @@ public class Hand extends Subsystem {
     
     //VERIFY Implement getHandOnTarget - MF
   	public boolean getHandOnTarget() {
-  		int error = wrist.getClosedLoopError(0);
-      	return (Math.abs(ticksToDegrees(error)) < tolerance);
+  		double error = this.getSetpointRelArm() - this.getHandAngleFromArm();
+      	return (Math.abs(error) < tolerance);
+  	}
+  	
+  	public double getSetpointRelArm() {
+  		return ticksToDegrees(wrist.getClosedLoopTarget(0));
   	}
     
     //--------------------------------------------------------------------

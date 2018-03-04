@@ -12,6 +12,7 @@
 package org.usfirst.frc330.commands;
 import edu.wpi.first.wpilibj.command.BBCommand;
 import org.usfirst.frc330.Robot;
+import org.usfirst.frc330.util.Logger;
 
 /**
  *
@@ -32,6 +33,7 @@ public class SetArmAngle extends BBCommand {
     @Override
     protected void initialize() {
     	Robot.arm.setArmAngle(angle);
+    	Logger.getInstance().println("Setting arm angle to: " + angle, Logger.Severity.INFO);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -42,12 +44,18 @@ public class SetArmAngle extends BBCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return Robot.arm.getArmOnTarget() && Robot.arm.getSetpoint() == angle;
+    	if(Math.abs(Robot.arm.getSetpoint() - angle)<1.0) {
+    		return Robot.arm.getArmOnTarget();
+    	}
+    	else
+    		return false;
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
+    	Logger.getInstance().println("Final Setpoint: " + Robot.arm.getSetpoint(), Logger.Severity.INFO);
+    	Logger.getInstance().println("Final arm angle: " + Robot.arm.getArmAngle(), Logger.Severity.INFO);
     }
 
     // Called when another command which requires one or more of the same

@@ -194,10 +194,9 @@ public class Arm extends Subsystem {
     	return calibrated;
     }	
     
-    //VERIFY Implement getArmOnTarget - MF
     public boolean getArmOnTarget() {
-    	int error = armL.getClosedLoopError(0);
-    	return (Math.abs(ticksToDegrees(error)) < tolerance);
+    	double error = this.getSetpoint() - this.getArmAngle();
+    	return (Math.abs(error) < tolerance);
     }
     
 	public double getSetpoint() {
