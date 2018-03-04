@@ -21,14 +21,12 @@ public final class GrabberConst {
 	public static final boolean	rightRollerInversionStatus				= false;			//JDR 3/3/2018
 	
 	//Sensor
-	public static final double sensorAngleTolerance						= 5.0;				//wag (degrees) EJO 2.10.18
 	public static final double distanceBetweenSensors					= 1.0; 				//(inches) EJO 2.4.18
+	public static final double sensorMaximumInnerDistance				= 2.2; 				//(inches) JR 3.3.18
 	public static final double sensorMinLength							= 1.5748031496; 	//(inches) EJO 2.4.18
 	public static final double sensorMaxLength							= 15.0;				//(inches) JR 3.3.18
-	public static final double sensorOutputTolerance					= 0.25;				//wag (inches) EJO 2.4.18
-	public static final double sensorMaximumOuterDistance				= 14.0;				//(inches) JR 3.3.18
-	public static final double sensorMaximumInnerDistance				= 2.0; 				//wag (inches) EJO 2.10.18
-	public static final double centerSensorMaximumInnerDistance			= 6.0;				//JR 3.3.18
+	public static final double sensorMaximumOuterDistance				= 12.0 + sensorMaximumInnerDistance;	//(inches) JR 3.3.18
+	public static final double centerSensorMaximumInnerDistance			= 2.8 + sensorMaximumInnerDistance;		//(inches) JR 3.3.18
 	
 	public static final double kalmanProcessNoise						= 0.5;				//(inches) 14ft/sec*12in/ft/50samples per second + 0.5 JDR 2/24/18
 	public static final double kalmanSensorNoise						= 1.0;				//(inches) Based on observed data JDR 2/24/18

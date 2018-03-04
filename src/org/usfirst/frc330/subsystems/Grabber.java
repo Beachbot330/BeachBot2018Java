@@ -269,17 +269,17 @@ public class Grabber extends Subsystem {
     	pincher.set(DoubleSolenoid.Value.kForward);
     }
     
-    public void RollerOn() {
+    public void rollerOn() {
     	intakeLeft.set(GrabberConst.rollerMaxSpeed);
     	intakeRight.set(GrabberConst.rollerMaxSpeed);
     }
     
-    public void RollerOff() {
+    public void rollerOff() {
     	intakeLeft.stopMotor();
     	intakeRight.stopMotor();
     }
     
-    public void RollerReverse() {
+    public void rollerReverse() {
     	intakeLeft.set((GrabberConst.rollerDeploySpeed)); //the negative one is to make it rotate the other way
     	intakeRight.set((GrabberConst.rollerDeploySpeed));
     }

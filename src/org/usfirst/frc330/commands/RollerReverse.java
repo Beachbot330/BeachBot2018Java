@@ -38,7 +38,7 @@ public class RollerReverse extends BBCommand {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() { //VERIFY this is set up properly -ejo 2/2
-    	Robot.grabber.RollerReverse();
+    	Robot.grabber.rollerReverse();
     }
 
     // Called repeatedly when this Command is scheduled to run

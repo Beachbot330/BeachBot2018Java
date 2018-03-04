@@ -38,7 +38,7 @@ public class RollerOff extends BBCommand {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() { //VERIFY Eli: set up this stuff -ejo 2/2
-    	Robot.grabber.RollerOff();
+    	Robot.grabber.rollerOff();
     }
 
     // Called repeatedly when this Command is scheduled to run
