@@ -227,11 +227,6 @@ public class Grabber extends Subsystem {
     	intakeRight.set((GrabberConst.rightRollerMaxSpeed * -1));
     }
     
-    public void RollerReverseOff() {
-    	intakeLeft.stopMotor();
-    	intakeRight.stopMotor();
-    }
-    
 	public void pickupOff() {
 		intakeLeft.disable();
 	}

@@ -97,7 +97,6 @@ public class OI {
         SmartDashboard.putData("RollerOn", new RollerOn());
         SmartDashboard.putData("RollerOff", new RollerOff());
         SmartDashboard.putData("RollerReverse", new RollerReverse());
-        SmartDashboard.putData("RollerReverseOff", new RollerReverseOff());
         SmartDashboard.putData("DeployCube", new DeployCube());
         SmartDashboard.putData("IntakeCube", new IntakeCube());
         SmartDashboard.putData("dropoffPositionSwitch", new dropoffPositionSwitch());
