@@ -7,7 +7,7 @@ package org.usfirst.frc330.wpilibj;
  * @author Joe
  *
  */
-public class Kalman {
+public class KalmanFilter {
 
 	//Kalman filter variables
 	private  double processNoise; //process noise covariance
@@ -16,7 +16,7 @@ public class Kalman {
 	private  double estimatedError; //estimation error covariance
 	private  double kalmanGain; //kalman gain
 
-	public  Kalman(double process_noise, double sensor_noise, double estimated_error, double intial_value) {
+	public  KalmanFilter(double process_noise, double sensor_noise, double estimated_error, double intial_value) {
 		/* The variables are x for the filtered value, q for the process noise, 
 	         r for the sensor noise, p for the estimated error and k for the Kalman Gain. 
 	         The state of the filter is defined by the values of these variables.
