@@ -89,8 +89,8 @@ public class Grabber extends Subsystem {
 		intakeRight.setNeutralMode(NeutralMode.Brake);
 		
 		intakeLeft.configOpenloopRamp(0, HandConst.CAN_Timeout);
-		intakeLeft.configPeakOutputForward(HandConst.MaxOutputPercent, HandConst.CAN_Timeout);
-        intakeLeft.configPeakOutputReverse(-HandConst.MaxOutputPercent, HandConst.CAN_Timeout);
+		intakeLeft.configPeakOutputForward(GrabberConst.MaxOutputPercent, HandConst.CAN_Timeout);
+        intakeLeft.configPeakOutputReverse(-GrabberConst.MaxOutputPercent, HandConst.CAN_Timeout);
         
         intakeRight.configOpenloopRamp(0, HandConst.CAN_Timeout);
 		intakeRight.configPeakOutputForward(HandConst.MaxOutputPercent, HandConst.CAN_Timeout);

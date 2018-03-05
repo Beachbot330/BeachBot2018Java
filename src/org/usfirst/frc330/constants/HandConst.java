@@ -26,7 +26,7 @@ public final class HandConst {
 	public static final double derivative        		= 0.00;   // AP 2/18/18
 	public static final double feedForward	     		= 0.0;   // JR 2/23
 	public static final double VoltageRampRate   		= 0.0;  // AP 3-15
-	public static final double MaxOutputPercent			= 1.0;	// TEMPORARY AP 3/3/18
+	public static final double MaxOutputPercent			= 0.5;	// TEMPORARY AP 3/3/18
 	public static final double slopAdjust				= 3.0;
 	
 	// Angles relative to ground
