@@ -46,8 +46,8 @@ public class SetLiftPosition extends BBCommand {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-    	Logger.getInstance().println("Setpoint: " + Robot.lift.getSetpoint(), Logger.Severity.INFO);
-    	Logger.getInstance().println("Final Position: " + Robot.lift.getPosition(), Logger.Severity.INFO);
+    	Logger.getInstance().println("Lift Setpoint: " + Robot.lift.getSetpoint(), Logger.Severity.INFO);
+    	Logger.getInstance().println("Lift Final Position: " + Robot.lift.getPosition(), Logger.Severity.INFO);
     }
 
     // Called when another command which requires one or more of the same

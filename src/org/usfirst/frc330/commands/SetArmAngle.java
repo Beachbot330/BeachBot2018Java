@@ -22,11 +22,8 @@ public class SetArmAngle extends BBCommand {
 	double angle;
 	
     public SetArmAngle(double angle) {
-
     	this.angle = angle;
         requires(Robot.arm);
-
-    
     }
 
     // Called just before this Command runs the first time
@@ -54,7 +51,7 @@ public class SetArmAngle extends BBCommand {
     // Called once after isFinished returns true
     @Override
     protected void end() {
-    	Logger.getInstance().println("Final Setpoint: " + Robot.arm.getSetpoint(), Logger.Severity.INFO);
+    	Logger.getInstance().println("Final arm Setpoint: " + Robot.arm.getSetpoint(), Logger.Severity.INFO);
     	Logger.getInstance().println("Final arm angle: " + Robot.arm.getArmAngle(), Logger.Severity.INFO);
     }
 
@@ -62,5 +59,6 @@ public class SetArmAngle extends BBCommand {
     // subsystems is scheduled to run
     @Override
     protected void interrupted() {
+    	end();
     }
 }
