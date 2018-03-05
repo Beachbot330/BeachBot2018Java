@@ -220,7 +220,7 @@ public class Lift extends Subsystem {
     }
     
     public double getSetpoint() {
-    	if(lift1.getControlMode() != ControlMode.Disabled) {
+    	if(lift1.getControlMode() == ControlMode.Position || lift1.getControlMode() == ControlMode.Velocity) {
     		return ticksToInches(lift1.getClosedLoopTarget(0));
     	}
     	else {
