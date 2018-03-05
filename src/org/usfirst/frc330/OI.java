@@ -97,7 +97,7 @@ public class OI {
         killAll_7 = new JoystickButton(armGamePad, 7);
         killAll_7.whenPressed(new KillAll());
         scaleTallDropoff_6 = new JoystickButton(armGamePad, 6);
-        scaleTallDropoff_6.whileHeld(new dropoffPositionMax());
+        scaleTallDropoff_6.whenPressed(new dropoffPositionMax());
         scaleDropoffRear_5 = new JoystickButton(armGamePad, 5);
         scaleDropoffRear_5.whenPressed(new DropoffPositionRear());
         scaleMidDropoff_4 = new JoystickButton(armGamePad, 4);
