@@ -16,6 +16,7 @@ import org.usfirst.frc330.constants.GrabberConst;
 import org.usfirst.frc330.constants.HandConst;
 import org.usfirst.frc330.util.CSVLoggable;
 import org.usfirst.frc330.util.CSVLogger;
+import org.usfirst.frc330.util.Logger;
 import org.usfirst.frc330.wpilibj.BBDoubleSolenoid;
 import org.usfirst.frc330.wpilibj.KalmanFilter;
 import org.usfirst.frc330.wpilibj.MedianFilter;
@@ -286,6 +287,15 @@ public class Grabber extends Subsystem {
     
 	public void pickupOff() {
 		intakeLeft.disable();
+	}
+	
+	public void stopGrabber() {
+		if (intakeLeft.isAlive()) {		
+			intakeLeft.setIntegralAccumulator(0.0, 0, 0);
+		}
+		intakeLeft.set(0);
+		intakeLeft.disable();
+		Logger.getInstance().println("Grabber disabled", Logger.Severity.INFO);
 	}
 	
 	// ----------------

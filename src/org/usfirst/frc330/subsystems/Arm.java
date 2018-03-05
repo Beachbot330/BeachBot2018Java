@@ -261,7 +261,6 @@ public class Arm extends Subsystem {
 	// Other Methods
 	//--------------------------------------------------------------------
     
-    // VERIFY:stopArm -JB
 	public void stopArm() {
 		if (armL.isAlive())		
 			armL.setIntegralAccumulator(0.0, 0, 0);
@@ -271,7 +270,7 @@ public class Arm extends Subsystem {
 		Logger.getInstance().println("Arm disabled", Logger.Severity.INFO); 
 	}
 	
-	//VERIFY:isEnable - JB
+
 	public boolean isEnable() {
 		return armL.isAlive();
 	}
