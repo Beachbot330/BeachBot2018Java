@@ -35,9 +35,9 @@ public final class HandConst {
 	public static final double switchDropoff			= 30.0; //AP 3/3/18
 	public static final double leveledWrist             =  0.0;  //MF 1/27 WAG
 	public static final double scaleDropoff				=  0.0; //AP 3/3/18
-	public static final double maxWrist                 =  90.0; //MF 1/27 WAG
 	public static final double minWrist                 = -90.0; //MF 1/27 WAG
 	public static final double portalPosition			=  90.0; //EJO 1/28
+	public static final double rearLevel				= 180.0; //AP 3/4/18
 	
 	// Angles relative to arm (encoder)
 	public static final double encLowerLimit			= -144.0; // AP 2/18/18

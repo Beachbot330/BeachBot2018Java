@@ -41,6 +41,7 @@ public final class ArmConst {
 	public static final double switchArm                = -54.0; // AP 3/3/18
 	public static final double climbPosition			=  90.0; // wag -EJO 1/27
 	public static final double dropoffHigh				=  90.0; // AP WAG 2/18/18
+	public static final double vertical					=  90.0; // AP 3/4/18
 	public static final double upperLimit               = 160.0; //EJO 1/28 WAG
 	
 	// Encoder Stuff
