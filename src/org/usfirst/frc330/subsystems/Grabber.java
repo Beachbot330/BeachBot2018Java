@@ -315,6 +315,12 @@ public class Grabber extends Subsystem {
 		if (sensorsReceivingInput < 3)
 			return false;
 		
+		//If cube is within max inner distance, robot has cube
+		if (sL < GrabberConst.centerSensorMaximumInnerDistance &&
+		   sC < GrabberConst.centerSensorMaximumInnerDistance &&
+		   sR < GrabberConst.centerSensorMaximumInnerDistance)
+			return true;
+		
 		leftAngle = getAngleBetweenSensors(getSensorLDistance(), getSensorCDistance(), GrabberConst.distanceBetweenSensors);
 	    rightAngle = getAngleBetweenSensors(getSensorCDistance(), getSensorRDistance(), GrabberConst.distanceBetweenSensors);
 	    
