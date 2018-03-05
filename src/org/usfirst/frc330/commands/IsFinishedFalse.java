@@ -12,44 +12,32 @@
 package org.usfirst.frc330.commands;
 import edu.wpi.first.wpilibj.command.BBCommand;
 import org.usfirst.frc330.Robot;
+import org.usfirst.frc330.util.Logger;
 
 /**
  *
  */
-public class ManualLift extends BBCommand {
-
-
-    public ManualLift() {
-
-        requires(Robot.lift);
+public class IsFinishedFalse extends BBCommand {
+	
+    public IsFinishedFalse() {
+    	this.setRunWhenDisabled(true);
     }
 
-    @Override
     protected void initialize() {
     }
 
-    // Called repeatedly when this Command is scheduled to run
-    @Override
+
     protected void execute() {
-    	if (Robot.lift.getCalibrated()) {
-    		Robot.lift.manualLift();
-    	}
     }
 
-    // Make this return true when this Command no longer needs to run execute()
-    @Override
     protected boolean isFinished() {
         return false;
     }
 
-    // Called once after isFinished returns true
-    @Override
     protected void end() {
     }
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    @Override
+
     protected void interrupted() {
     }
 }

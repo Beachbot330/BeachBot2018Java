@@ -16,7 +16,7 @@ public final class ArmConst {
 	// Tolerance
 	public static final double tolerance        		= 5.0;
 	public static final double deadZone			 		= 0.05;  //AP WAG 1-30-18
-	public static final double gamepadDeadZone   		= 0.10;  //AP WAG 1-30-18
+	public static final double gamepadDeadZone   		= 0.40;  //AP WAG 1-30-18
 	public static final double pickupTolerance	 		= 5.0; 	 //AP WAG 1-30-18
 	public static final double defaultTimeout	 		= 5.0;	 //AP WAG 1-30-18
 	public static final int    inertiaCounter	 		= 0;	 //AP 3/3/18
@@ -37,7 +37,7 @@ public final class ArmConst {
 	public static final double Defense 					= -54.0; //WAG JB 1/27
 	public static final double portalPosition			= -54.0; //EJO 1/28
 	public static final double leveledArm               =   0.0; //MF 1/27 WAG
-	public static final double medArm                   =   47.0; //MF 1/27 WAG
+	public static final double medArm                   =  72.0; //MF 1/27 WAG
 	public static final double switchArm                = -54.0; // AP 3/3/18
 	public static final double climbPosition			=  90.0; // wag -EJO 1/27
 	public static final double dropoffHigh				=  90.0; // AP WAG 2/18/18

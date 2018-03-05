@@ -14,7 +14,7 @@ public final class GrabberConst {
 	
 	//Roller Speed
 	public static final double rollerMaxSpeed							= 1.0;		//JR 3.3.18
-	public static final double rollerDeploySpeed						= -0.75;	//JR 3.3.18
+	public static final double rollerDeploySpeed						= -1.0;	//JR 3.3.18
 	public static final double MaxOutputPercent							= 1.0;
 	
 	//Roller Inversion

@@ -36,6 +36,7 @@ public class IntakePortal extends BBCommandGroup {
     	
     	//Defense mode
     	addSequential(new Defense());
+    	addSequential(new IsFinishedFalse());
  
     } 
 }

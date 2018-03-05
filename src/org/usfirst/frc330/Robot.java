@@ -138,6 +138,7 @@ public class Robot extends TimedRobot {
 		Robot.hand.stopWrist();
 		Robot.grabber.pickupOff();
 		Robot.chassis.stopDrive();
+		Robot.grabber.stopGrabber();
     }
 
     @Override

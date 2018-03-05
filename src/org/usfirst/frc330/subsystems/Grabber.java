@@ -290,11 +290,10 @@ public class Grabber extends Subsystem {
 	}
 	
 	public void stopGrabber() {
-		if (intakeLeft.isAlive()) {		
-			intakeLeft.setIntegralAccumulator(0.0, 0, 0);
-		}
 		intakeLeft.set(0);
+		intakeRight.set(0);
 		intakeLeft.disable();
+		intakeRight.disable();
 		Logger.getInstance().println("Grabber disabled", Logger.Severity.INFO);
 	}
 	

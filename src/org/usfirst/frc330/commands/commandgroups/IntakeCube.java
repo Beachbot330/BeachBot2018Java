@@ -36,8 +36,7 @@ public class IntakeCube extends BBCommandGroup {
     	//open grabber
     	addSequential(new OpenClaw());
     	
-    	//Hand Leveling so we don't violate our perimeter
-    	addParallel(new HandLevel());
+    	addSequential(new SetHandAngleRelArm(HandConst.encFrameSafe));
     	//lower lift and arm to intake position
     	addParallel(new SetLiftPosition(LiftConst.intakePosition));
     	addSequential(new SetArmAngle(ArmConst.intakePosition));
@@ -51,5 +50,6 @@ public class IntakeCube extends BBCommandGroup {
     	addSequential(new RollerUntilCube(0.5));
     	// DEFENSE MODE!  
     	addSequential(new Defense());
+    	addSequential(new IsFinishedFalse());
     } 
 }
