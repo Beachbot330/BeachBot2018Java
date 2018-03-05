@@ -200,7 +200,7 @@ public class Arm extends Subsystem {
     }
     
 	public double getSetpoint() {
-		if(armL.getControlMode() != ControlMode.Disabled) {
+		if(armL.getControlMode() == ControlMode.Position || armL.getControlMode() == ControlMode.Velocity) {
 			return ticksToDegrees(armL.getClosedLoopTarget(0));
 		}
 		else {
