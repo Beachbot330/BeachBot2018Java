@@ -47,7 +47,7 @@ public class IntakeCube extends BBCommandGroup {
     	addSequential(new WaitCommand(0.45));
     	addSequential(new SensorCloseClaw());
     	// Once everything above has been completed and the cube is in the grabber...
-    	addSequential(new RollerUntilCube(0.5));
+    	addSequential(new RollerUntilCube(0.25, 0.5));
     	// DEFENSE MODE!  
     	addSequential(new Defense());
     	addSequential(new IsFinishedFalse());
