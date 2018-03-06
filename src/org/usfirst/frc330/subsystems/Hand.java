@@ -97,6 +97,11 @@ public class Hand extends Subsystem {
 			public double get() { return getHandAngleFromArm(); }
 		};
 		CSVLogger.getInstance().add("HandAngleFromArm", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return getSetpoint(); }
+		};
+		CSVLogger.getInstance().add("HandSetpoint", temp);
 
 		temp = new CSVLoggable(true) {
 			public double get() { return getWristOutput(); }
@@ -263,6 +268,15 @@ public class Hand extends Subsystem {
     
     public boolean getCalibrated() {
     	return calibrated;
+    }
+    
+    public double getSetpoint() {
+    	if(wrist.getControlMode() == ControlMode.Position || wrist.getControlMode() == ControlMode.Velocity) {
+			return ticksToDegrees(wrist.getClosedLoopTarget(0));
+		}
+		else {
+			return 0;
+		}
     }
     
   //VERIFY implement getWristOUtput - JB

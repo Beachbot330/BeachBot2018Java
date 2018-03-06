@@ -42,7 +42,7 @@ public final class HandConst {
 	
 	// Angles relative to arm (encoder)
 	public static final double encLowerLimit			= -144.0; // AP 2/18/18
-	public static final double encFrameSafe				=  120.0; // AP 3/3/18
+	public static final double encFrameSafe				=  90.0; // AP 3/3/18
 	public static final double encLimitSwitch			=  144.0; // AP 2/18/18
 	public static final double encUpperLimit			=  144.0; // AP 2/18/18
 	
