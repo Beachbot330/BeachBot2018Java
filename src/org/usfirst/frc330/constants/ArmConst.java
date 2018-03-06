@@ -27,16 +27,17 @@ public final class ArmConst {
 	public static final double derivative        		= 0.00;   // AP WAG 1-30-18
 	public static final double feedForward	     		= 0.00;   // AP WAG 1-30-18
 	public static final double VoltageRampRate   		= 48.0;  // AP WAG 1-30-18
-	public static final double MaxOutputPercent			= 0.4;	// TEMPORARY AP 3/3/18
+	public static final double MaxOutputPercent			= 0.6;	// TEMPORARY AP 3/3/18
 	
 	// Angles
 	public static final double lowerLimit               = -54.0; //MF 1/27 WAG
 	public static final double limitSwitchAngle			= -54.0; // AP 2/18/18 WAG
 	public static final double dropoffLow				=  47.0; //AP 3/3/18
 	public static final double intakePosition  			= -54.0; //WAG JB 1/27
-	public static final double Defense 					= -54.0; //WAG JB 1/27
+	public static final double Defense 					= -50.0; //WAG JB 1/27
 	public static final double portalPosition			= -54.0; //EJO 1/28
 	public static final double leveledArm               =   0.0; //MF 1/27 WAG
+	public static final double safeAngle				=  50.0; //AP Any hand position above this is safe
 	public static final double medArm                   =  72.0; //MF 1/27 WAG
 	public static final double switchArm                = -54.0; // AP 3/3/18
 	public static final double climbPosition			=  90.0; // wag -EJO 1/27

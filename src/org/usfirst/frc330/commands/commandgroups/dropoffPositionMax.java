@@ -13,6 +13,7 @@ package org.usfirst.frc330.commands.commandgroups;
 
 import edu.wpi.first.wpilibj.command.BBCommandGroup;
 
+import org.usfirst.frc330.commands.CoordinatedMove;
 import org.usfirst.frc330.commands.SetArmAngle;
 import org.usfirst.frc330.commands.SetHandAngle;
 import org.usfirst.frc330.commands.SetHandAngleRelArm;
@@ -29,10 +30,11 @@ public class dropoffPositionMax extends BBCommandGroup {
 
     public dropoffPositionMax() {
 
-    	addSequential(new SetHandAngleRelArm(HandConst.encFrameSafe));
+    	//addSequential(new SetHandAngleRelArm(HandConst.encFrameSafe));
     	addParallel(new SetLiftPosition(LiftConst.scaleDropoffMax));
-    	addSequential(new SetArmAngle(ArmConst.dropoffHigh));
-    	addSequential(new SetHandAngle(HandConst.leveledWrist));
+    	//addSequential(new SetArmAngle(ArmConst.dropoffHigh));
+    	//addSequential(new SetHandAngle(HandConst.leveledWrist));
+    	addSequential(new CoordinatedMove(ArmConst.dropoffHigh, HandConst.leveledWrist));
     	//figure out what max lift position
     	
 

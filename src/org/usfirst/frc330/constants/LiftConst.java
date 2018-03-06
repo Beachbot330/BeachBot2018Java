@@ -16,10 +16,10 @@ public final class LiftConst {
 	public static final double derivative        		= 0.0;   // AP 3/3/18
 	
 	// Positions
-	public static final double lowerLimit				=  1.0; //AP 1-30-2018 WAG
-	public static final double defensePosition			=  1.0; //wag -EJO
+	public static final double lowerLimit				=  0.0; //AP 1-30-2018 WAG
+	public static final double defensePosition			=  0.0; //wag -EJO
 	
-	public static final double intakePosition			=  0.1; //AP 3/3/18
+	public static final double intakePosition			=  0.0; //AP 3/3/18
 	public static final double scaleDropoffMin			=  1.0; //AP 1-30-2018 
 	public static final double intakePortalPosition		=  7.0; //AP 1-30-2018
 	public static final double scaleDropoffMid          =  4.0; //AP 1-30-2018

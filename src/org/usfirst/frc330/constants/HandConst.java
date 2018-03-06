@@ -16,7 +16,7 @@ public final class HandConst {
 	// Tolerance
 	public static final double defaultTolerance  		= 5.0;
 	public static final double deadZone			 		= 0.05;  //AP 2-20
-	public static final double gamepadDeadZone   		= 0.10;  //AP 2-27
+	public static final double gamepadDeadZone   		= 0.20;  //AP 2-27
 	public static final double pickupTolerance	 		= 5.0; 	 //AP 2-6 (WAG)
 	public static final double defaultTimeout	 		= 5.0;	 //JR 2-28
 	
@@ -26,12 +26,13 @@ public final class HandConst {
 	public static final double derivative        		= 0.00;   // AP 2/18/18
 	public static final double feedForward	     		= 0.0;   // JR 2/23
 	public static final double VoltageRampRate   		= 0.0;  // AP 3-15
-	public static final double MaxOutputPercent			= 0.5;	// TEMPORARY AP 3/3/18
-	public static final double slopAdjust				= 3.0;
+	public static final double MaxOutputPercent			= 0.6;	// TEMPORARY AP 3/3/18
+	public static final double slopAdjust				= 6.0;
+	public static final double rearSlopAdjust			= 18.0;
 	
 	// Angles relative to ground
-	public static final double pickUp					=  -3.0;  //JDR 3/3/18
-	public static final double Defense					=  90.0; //JB 1-27
+	public static final double pickUp					=  -5.0;  //JDR 3/3/18
+	public static final double Defense					=  75.0; // AP 3/5/18
 	public static final double switchDropoff			= 30.0; //AP 3/3/18
 	public static final double leveledWrist             =  0.0;  //MF 1/27 WAG
 	public static final double scaleDropoff				=  0.0; //AP 3/3/18
@@ -41,7 +42,7 @@ public final class HandConst {
 	
 	// Angles relative to arm (encoder)
 	public static final double encLowerLimit			= -144.0; // AP 2/18/18
-	public static final double encFrameSafe				=  138.0; // AP 3/3/18
+	public static final double encFrameSafe				=  120.0; // AP 3/3/18
 	public static final double encLimitSwitch			=  144.0; // AP 2/18/18
 	public static final double encUpperLimit			=  144.0; // AP 2/18/18
 	

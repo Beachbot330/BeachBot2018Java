@@ -28,11 +28,15 @@ public class Defense extends BBCommandGroup {
     	
     	// Follow hand safety guidelines 
     	addSequential(new SetHandAngleRelArm(HandConst.encFrameSafe));
-    	//goal is to quickly become compact
+
     	addSequential(new SetArmAngle(ArmConst.Defense)); //lower arm to lowest level
     	addParallel(new SetHandAngle(HandConst.Defense)); //raise hand to 90 angle
     	addSequential(new SetLiftPosition(LiftConst.defensePosition)); //lower lift
+    	
     	addSequential(new RollerOff());
+    	
+    	//addSequential(new CoordinatedMove(ArmConst.Defense, HandConst.Defense));
+    	//addSequential(new SetLiftPosition(LiftConst.defensePosition));
     	
     } 
 }
