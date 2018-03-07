@@ -205,7 +205,7 @@ public class Arm extends Subsystem {
 			return ticksToDegrees(armL.getClosedLoopTarget(0));
 		}
 		else {
-			return 0;
+			return 999;
 		}
 	}
 	
@@ -213,7 +213,7 @@ public class Arm extends Subsystem {
 	// Set Methods
 	//--------------------------------------------------------------------
 	
-    public void setArm(double output) {
+    public void setArmThrottle(double output) {
         if(calibrated) {
         	armL.set(ControlMode.PercentOutput, output);
         }
@@ -224,7 +224,7 @@ public class Arm extends Subsystem {
     
     //VERIFY Implement setArmAngle -JB
     public void setArmAngle(double position) {
-    	if(calibrated) {
+    	if(calibrated && Robot.hand.getCalibrated()) {
     		armL.set(ControlMode.Position, degreesToTicks(position));
     	}
     	else {
@@ -284,12 +284,12 @@ public class Arm extends Subsystem {
     	double angle;
     	
     	if (Math.abs(gamepadCommand) > ArmConst.gamepadDeadZone) {
-    		setArm(gamepadCommand/Math.abs(gamepadCommand)*Math.pow(gamepadCommand, 2)*0.4); //scaled to 0.4 max
+    		setArmThrottle(gamepadCommand/Math.abs(gamepadCommand)*Math.pow(gamepadCommand, 2)*0.4); //scaled to 0.4 max
     		inertiaCounter = ArmConst.inertiaCounter;
     	}
     	else if (inertiaCounter > 0) {
     		inertiaCounter--;
-			setArm(0);
+			setArmThrottle(0);
     	}
     	else if ( armL.getControlMode() != ControlMode.Position) {
 			angle = getArmAngle();

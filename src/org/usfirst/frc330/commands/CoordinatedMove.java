@@ -45,8 +45,8 @@ public class CoordinatedMove extends BBCommand {
     	handSet = false;
     	bottomUp = false;
     	topDown = false;
-    	//Entire motion is above danger
-    	if(Robot.arm.getArmAngle() > ArmConst.safeAngle && armAngle > ArmConst.safeAngle) {
+    	//Entire motion is above/below danger
+    	if((Robot.arm.getArmAngle() > ArmConst.safeAngle && armAngle > ArmConst.safeAngle) || (Robot.arm.getArmAngle() < -ArmConst.safeAngle && armAngle < -ArmConst.safeAngle)) {
     		Robot.hand.setAngle(handAngleRelGround);
     		Robot.arm.setArmAngle(armAngle);
     		Logger.getInstance().println("Entire motion safe, setting final positions", Logger.Severity.INFO);
@@ -93,13 +93,15 @@ public class CoordinatedMove extends BBCommand {
     			CGforward = true;
     		}
     		else if(Robot.hand.getHandOnTarget() && !armSet) {
-    			Robot.arm.setArm(armAngle);
+    			Robot.arm.setArmAngle(armAngle);
     			Logger.getInstance().println("Now that the hand is stowed, lowering the arm", Logger.Severity.INFO);
     			armSet = true;
     		}
     		else if(Robot.arm.getArmOnTarget() && !handSet && armSet) {
-    			Robot.hand.setAngle(handAngleRelGround);
     			Logger.getInstance().println("Arm is on target, setting final hand position", Logger.Severity.INFO);
+    			Logger.getInstance().println("Arm Angle: " + Robot.arm.getArmAngle(), Logger.Severity.DEBUG);
+    			Robot.hand.setAngle(handAngleRelGround);
+    			
     			handSet = true;
     		}
     	}

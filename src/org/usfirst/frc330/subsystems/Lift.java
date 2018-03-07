@@ -252,7 +252,17 @@ public class Lift extends Subsystem {
     // and set it to controlMode: position (see 2016 arm if you want an example)
     public void setLiftPosition(double setpoint) {
     	if(calibrated) {
-    		lift1.set(ControlMode.Position, inchesToTicks(setpoint));
+    		if(setpoint > LiftConst.upperLimit) {
+    			lift1.set(ControlMode.Position, inchesToTicks(LiftConst.upperLimit));
+    			Logger.getInstance().println("Lift setpoint request above upper limit: " + setpoint, Logger.Severity.WARNING);
+    		}
+    		else if(setpoint < LiftConst.lowerLimit) {
+    			lift1.set(ControlMode.Position, inchesToTicks(LiftConst.lowerLimit));
+    			Logger.getInstance().println("Lift setpoint request below lower limit: " + setpoint, Logger.Severity.WARNING);
+    		}
+    		else {
+    			lift1.set(ControlMode.Position, inchesToTicks(setpoint));
+    		}
     	}
     	else {
     		Scheduler.getInstance().add(new Calibrate());

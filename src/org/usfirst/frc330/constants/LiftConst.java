@@ -21,7 +21,7 @@ public final class LiftConst {
 	
 	public static final double intakePosition			=  0.0; //AP 3/3/18
 	public static final double scaleDropoffMin			=  1.0; //AP 1-30-2018 
-	public static final double intakePortalPosition		=  7.0; //AP 1-30-2018
+	public static final double intakePortalPosition		=  2.0; //AP 1-30-2018
 	public static final double scaleDropoffMid          =  4.0; //AP 1-30-2018
 	public static final double scaleDropoffHigh         = 16.0; //JR 3-3-2018
 	public static final double switchDropoff			= 15.5; //AP 3-3-18
