@@ -26,7 +26,7 @@ public final class HandConst {
 	public static final double derivative        		= 0.00;   // AP 2/18/18
 	public static final double feedForward	     		= 0.0;   // JR 2/23
 	public static final double VoltageRampRate   		= 0.0;  // AP 3-15
-	public static final double MaxOutputPercent			= 0.6;	// TEMPORARY AP 3/3/18
+	public static final double MaxOutputPercent			= 0.8;	// TEMPORARY AP 3/3/18
 	public static final double slopAdjust				= 6.0;
 	public static final double rearSlopAdjust			= 18.0;
 	
@@ -51,7 +51,7 @@ public final class HandConst {
 	public static final double gearRatio				= 4.125;  //AP 2/18/18
 	
 	// Other
-	public static final double calibrationSpeed			= 0.25; //WAG AP 2/16/18
+	public static final double calibrationSpeed			= 0.45; //WAG AP 2/16/18
 	public static final int  CAN_Timeout				= 10; //AP 2/18/18
 	public static final int  CAN_Timeout_No_Wait        = 0;  // JR 2/19/18
 	public static final int  CAN_Status_Frame_13_Period = 20; //JR 2/19/19

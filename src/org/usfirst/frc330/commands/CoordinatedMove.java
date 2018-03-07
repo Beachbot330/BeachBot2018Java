@@ -82,6 +82,9 @@ public class CoordinatedMove extends BBCommand {
     			Robot.arm.setArmAngle(armAngle);
     			armSet = true;
     		}
+    		else if (Robot.arm.getArmAngle() > 0 && Robot.arm.getArmAngle() < ArmConst.safeAngle && !handSet && !Robot.arm.getArmOnTarget()) {
+    			Robot.hand.setAngle(90.0);
+    		}
     		else if(Robot.arm.getArmAngle() > ArmConst.safeAngle && !handSet && !Robot.arm.getArmOnTarget()) {
     			Robot.hand.setAngle(handAngleRelGround);
     		}

@@ -27,7 +27,7 @@ public final class ArmConst {
 	public static final double derivative        		= 0.00;   // AP WAG 1-30-18
 	public static final double feedForward	     		= 0.00;   // AP WAG 1-30-18
 	public static final double VoltageRampRate   		= 48.0;  // AP WAG 1-30-18
-	public static final double MaxOutputPercent			= 0.6;	// TEMPORARY AP 3/3/18
+	public static final double MaxOutputPercent			= 0.7;	// TEMPORARY AP 3/3/18
 	
 	// Angles
 	public static final double lowerLimit               = -54.0; //MF 1/27 WAG
