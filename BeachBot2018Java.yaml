@@ -722,7 +722,7 @@ Children:
           name: Command
           type: Command
           validators: *id033
-          value: DeployCube
+          value: OpenClaw
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id034
           default: whileHeld
@@ -730,7 +730,7 @@ Children:
           validators: null
           value: whenPressed
       Base: Joystick Button
-      Name: deployCube_2
+      Name: OpenClaw_2
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
         choices: &id035 ['0', '1', '2', '3', '4', '5']
