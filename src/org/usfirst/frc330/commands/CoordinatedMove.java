@@ -45,8 +45,12 @@ public class CoordinatedMove extends BBCommand {
     	handSet = false;
     	bottomUp = false;
     	topDown = false;
+    	
+    	Logger.getInstance().println("Coordinated Move, Arm Start: " + Robot.arm.getArmAngle(), Logger.Severity.INFO);
+    	Logger.getInstance().println("Coordinated Move, Arm Destination: " + armAngle, Logger.Severity.INFO);
+    	
     	//Entire motion is above/below danger
-    	if((Robot.arm.getArmAngle() > ArmConst.safeAngle && armAngle > ArmConst.safeAngle) || (Robot.arm.getArmAngle() < -ArmConst.safeAngle && armAngle < -ArmConst.safeAngle)) {
+    	if((Robot.arm.getArmAngle() >= ArmConst.safeAngle && armAngle >= ArmConst.safeAngle) || (Robot.arm.getArmAngle() <= -ArmConst.safeAngle && armAngle <= -ArmConst.safeAngle)) {
     		Robot.hand.setAngle(handAngleRelGround);
     		Robot.arm.setArmAngle(armAngle);
     		Logger.getInstance().println("Entire motion safe, setting final positions", Logger.Severity.INFO);
@@ -55,8 +59,10 @@ public class CoordinatedMove extends BBCommand {
     	}
     	//Coming from bottom
     	else if(armAngle > ArmConst.safeAngle) {
-    		Robot.hand.setAngleFromArm(HandConst.encFrameSafe); //Put the hand in a safe place
-    		Logger.getInstance().println("Moving from bottom towards top. Storing hand in safe location", Logger.Severity.INFO);
+    		if(Robot.hand.getHandAngleFromArm() < HandConst.encFrameSafe) { //If the hand is in an unsafe place
+    			Robot.hand.setAngleFromArm(HandConst.encFrameSafe); //Put the hand in a safe place
+    		}
+    		Logger.getInstance().println("Moving from bottom towards top. Storing hand in safe location (if needed)", Logger.Severity.INFO);
     		bottomUp = true;
     	}
     	//Coming from top
@@ -88,7 +94,9 @@ public class CoordinatedMove extends BBCommand {
     	}
     	else if (topDown) {
     		if (Robot.arm.getArmAngle() < (ArmConst.safeAngle + 10) && !CGforward) {
-    			Robot.hand.setAngleFromArm(HandConst.encFrameSafe); //Put the hand in a safe place
+    			if(Robot.hand.getHandAngleFromArm() < HandConst.encFrameSafe) { //If the hand is in an unsafe place
+    				Robot.hand.setAngleFromArm(HandConst.encFrameSafe); //Put the hand in a safe place
+    			}
     			Logger.getInstance().println("Now that the CG is forward, stowing the hand", Logger.Severity.INFO);
     			CGforward = true;
     		}
