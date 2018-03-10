@@ -26,7 +26,7 @@ public class Calibrate extends BBCommandGroup {
     public Calibrate() {
 
     	addSequential(new CalibrateWrist()); //Calibrate Wrist First
-    	addParallel(new CalibrateArm()); //Calibrate the other two at the same time
+    	addSequential(new CalibrateArm()); //Calibrate the other two at the same time
     	addSequential(new CalibrateLift());
     	
     } 

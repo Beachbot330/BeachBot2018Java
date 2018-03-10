@@ -22,7 +22,7 @@ public class Taller extends BBCommand {
 
     public Taller() {
 
-    	requires(Robot.lift);
+    	//requires(Robot.lift);
     }
 
     // Called just before this Command runs the first time

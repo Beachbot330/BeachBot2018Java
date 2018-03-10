@@ -124,11 +124,11 @@ public class Chassis extends Subsystem {
         driveEncoderRight = new Encoder(0, 1, false, EncodingType.k4X);
         addChild(driveEncoderRight);
         driveEncoderRight.setDistancePerPulse(1.0);
-        driveEncoderRight.setPIDSourceType(PIDSourceType.kRate);
+        driveEncoderRight.setPIDSourceType(PIDSourceType.kDisplacement);
         driveEncoderLeft = new Encoder(2, 3, false, EncodingType.k4X);
         addChild(driveEncoderLeft);
         driveEncoderLeft.setDistancePerPulse(1.0);
-        driveEncoderLeft.setPIDSourceType(PIDSourceType.kRate);
+        driveEncoderLeft.setPIDSourceType(PIDSourceType.kDisplacement);
         leftDrive1 = new Spark(3);
         addChild(leftDrive1);
         leftDrive1.setInverted(true);
@@ -162,7 +162,7 @@ public class Chassis extends Subsystem {
         //MultiPIDController(PIDGains gains, PIDSource source, PIDOutput output, double period, String name)
         //PIDController(double Kp, double Ki, double Kd, double Kf, PIDSource source, PIDOutput output, double period)
         gyroPID = new MultiPIDController(ChassisConst.GyroTurnLow, gyroSource,gyroOutput, 0.02,"Gyro");
-        leftDrivePID = new MultiPIDController(ChassisConst.DriveLow, driveEncoderLeft,leftDriveOutput, 0.02,"LeftDrive");
+        leftDrivePID = new MultiPIDController(ChassisConst.DriveLow, driveEncoderLeft, leftDriveOutput, 0.02,"LeftDrive");
         rightDrivePID = new MultiPIDController(ChassisConst.DriveLow, driveEncoderRight,rightDriveOutput, 0.02, "RightDrive");
         
         SmartDashboard.putData("gyroPID", gyroPID);
@@ -264,6 +264,11 @@ public class Chassis extends Subsystem {
 			public double get() { return getY(); }  		
     	};      	
     	CSVLogger.getInstance().add("ChassisY", temp);
+    	
+    	temp = new CSVLoggable(true) {
+    		public double get() {return leftDrivePID.getError(); }
+    	};
+    	CSVLogger.getInstance().add("leftDrivePID Error", temp);
     	
     	temp = new CSVLoggable(true) {
 			public double get() { return getPressure(); }  		
@@ -400,11 +405,11 @@ public class Chassis extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public void shiftHigh() {
-    	shifters.set(DoubleSolenoid.Value.kForward);
+    	shifters.set(DoubleSolenoid.Value.kReverse);
     }
     
     public void shiftLow() {
-    	shifters.set(DoubleSolenoid.Value.kReverse);
+    	shifters.set(DoubleSolenoid.Value.kForward);
     }
     
     public void tankDrive(Joystick leftJoystick, Joystick rightJoystick) {

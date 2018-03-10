@@ -32,7 +32,7 @@ public class  DriveDistance extends BBCommand {
     PIDGains gains;
     
     public DriveDistance(double distance, PIDGains gains) {
-        this(distance, 0, 15, false, gains);
+        this(distance, 5, 15, false, gains);
     }
     
     public DriveDistance(double distance, double tolerance, PIDGains gains)

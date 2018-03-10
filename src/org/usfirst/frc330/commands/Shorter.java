@@ -22,7 +22,7 @@ public class Shorter extends BBCommand {
 
     public Shorter() {
 
-    	requires(Robot.lift);
+    	//requires(Robot.lift);
     	
     }
 
