@@ -12,20 +12,28 @@
 package org.usfirst.frc330.autoCommands;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.BBCommand;
+import edu.wpi.first.wpilibj.command.Command;
+
 import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.autoCommands.CenterStart_Switch.SwitchPosition;
+import org.usfirst.frc330.commands.drivecommands.DriveDistance;
+import org.usfirst.frc330.constants.ChassisConst;
 import org.usfirst.frc330.util.Logger;
 import org.usfirst.frc330.util.Logger.Severity;
+import org.usfirst.frc330.wpilibj.PIDGains;
 
 /**
  *
  */
-public class CenterStart_Switch_Chooser extends BBCommand {
+public class Chooser_CenterStart_Switch extends BBCommand {
 	
 	String gameData;
+	Command leftSwitch, rightSwitch;
 	
-    public CenterStart_Switch_Chooser() {
+    public Chooser_CenterStart_Switch() {
     	this.setRunWhenDisabled(false);
+    	leftSwitch = new CenterStart_Switch(SwitchPosition.LEFT);
+    	rightSwitch = new CenterStart_Switch(SwitchPosition.RIGHT);
     }
 
     protected void initialize() {
@@ -37,24 +45,31 @@ public class CenterStart_Switch_Chooser extends BBCommand {
     	gameData = DriverStation.getInstance().getGameSpecificMessage();
 		if(gameData.length() > 0) {
 			if(gameData.charAt(0) == 'L') {
-				new CenterStart_Switch(SwitchPosition.LEFT).start();
+				leftSwitch.start();
 				Logger.getInstance().println("Our Switch is on the left", Severity.INFO);
 			}
 			else if (gameData.charAt(0) == 'R') {
-				new CenterStart_Switch(SwitchPosition.RIGHT).start();
+				rightSwitch.start();
 				Logger.getInstance().println("Our Switch is on the right", Severity.INFO);
 			}
 			else {
+				new DriveDistance(ChassisConst.driveStraightAuto, ChassisConst.defaultTolerance, 5.0, true, ChassisConst.DriveHigh).start();
 				Logger.getInstance().println("Unknown gameData: " + gameData, Severity.ERROR);
+				Logger.getInstance().println("Driving forward due to invalid data", Severity.ERROR);
 			}
 		}
     }
 
     protected boolean isFinished() {
-        return gameData.length() > 0;
+        return gameData.length() > 0 || isTimedOut();
     }
 
     protected void end() {
+    	if (isTimedOut()) {
+    		Logger.getInstance().println("No game data (or invalid data) received. Out of time, driving forward.", Severity.ERROR);
+    		new DriveDistance(ChassisConst.driveStraightAuto, ChassisConst.defaultTolerance, 5.0, true, ChassisConst.DriveHigh).start(); 
+    			//double distance, double tolerance, double timeout, boolean stopAtEnd, PIDGains gains
+    	}
     }
 
 
