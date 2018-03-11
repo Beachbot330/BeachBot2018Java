@@ -24,6 +24,15 @@ public class TurnGyroWaypoint extends TurnGyroAbs {
         this.y=y;
         
     }
+    
+    public TurnGyroWaypoint(Waypoint wp, boolean invertX, double tolerance, double timeout, PIDGains gains) {
+    	super(0,tolerance,timeout,false,true, gains);
+    	if (invertX)
+    		this.x = -wp.getX();
+    	else
+    		this.x = wp.getX();
+    	this.y = wp.getY();
+    }
 
     protected void initialize() {
         calcAngle(x, y);

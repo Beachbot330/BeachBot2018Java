@@ -19,6 +19,11 @@ public class TurnGyroWaypointBackward extends TurnGyroWaypoint {
     {
         super(x,y,tolerance,timeout, gains);       
     }
+    
+    public TurnGyroWaypointBackward(Waypoint wp, boolean invertX, double tolerance, double timeout, PIDGains gains)
+    {
+        super(wp,invertX,tolerance,timeout, gains);       
+    }
 
 
     protected void calcAngle(double x, double y) {

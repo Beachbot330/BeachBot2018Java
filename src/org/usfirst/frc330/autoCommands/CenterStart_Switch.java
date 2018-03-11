@@ -31,38 +31,27 @@ public class CenterStart_Switch extends BBCommandGroup {
 
     public CenterStart_Switch(SwitchPosition switchPosition) {
     	
+    	boolean invertX = (switchPosition == SwitchPosition.LEFT);
+    	
     	addSequential(new CloseClaw());
     	addSequential(new Calibrate());
     	addSequential(new ShiftHigh());
     	addSequential(new Defense());
-        addSequential(new DriveWaypoint(wp1.getX(), wp1.getY(), ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+        addSequential(new DriveWaypoint(wp1, false, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
         
         addSequential(new ShiftLow());
         
-        if(switchPosition == SwitchPosition.LEFT) {
-        	addSequential(new TurnGyroWaypoint(-wp2.getX(), wp2.getY(), ChassisConst.defaultTolerance, 5, ChassisConst.GyroTurnLow)); //(double x, double y, double tolerance, double timeout, PIDGains gains
-        	addSequential(new ShiftHigh());
-        	addSequential(new DriveWaypoint(-wp2.getX(), wp2.getY(), ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
-        }
-        else if (switchPosition == SwitchPosition.RIGHT) {
-        	addSequential(new TurnGyroWaypoint(wp2.getX(), wp2.getY(), ChassisConst.defaultTolerance, 5, ChassisConst.GyroTurnLow)); //(double x, double y, double tolerance, double timeout, PIDGains gains
-        	addSequential(new ShiftHigh());
-        	addSequential(new DriveWaypoint(wp2.getX(), wp2.getY(), ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
-        }
+        addSequential(new TurnGyroWaypoint(wp2, invertX, ChassisConst.defaultTolerance, 5, ChassisConst.GyroTurnLow)); //(double x, double y, double tolerance, double timeout, PIDGains gains
+        addSequential(new ShiftHigh());
+        addSequential(new DriveWaypoint(wp2, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+
         
         addSequential(new DropoffPositionSwitch());
         addSequential(new ShiftLow());
         
-        if(switchPosition == SwitchPosition.LEFT) {
-        	addSequential(new TurnGyroWaypoint(-wp3.getX(), wp3.getY(), ChassisConst.defaultTolerance, 5, ChassisConst.GyroTurnLow)); //(double x, double y, double tolerance, double timeout, PIDGains gains
-        	addSequential(new ShiftHigh());
-        	addSequential(new DriveWaypoint(-wp3.getX(), wp3.getY(), ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
-        }
-        else if (switchPosition == SwitchPosition.RIGHT) {
-        	addSequential(new TurnGyroWaypoint(wp3.getX(), wp3.getY(), ChassisConst.defaultTolerance, 5, ChassisConst.GyroTurnLow)); //(double x, double y, double tolerance, double timeout, PIDGains gains
-        	addSequential(new ShiftHigh());
-        	addSequential(new DriveWaypoint(wp3.getX(), wp3.getY(), ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
-        }
+        addSequential(new TurnGyroWaypoint(wp3, invertX, ChassisConst.defaultTolerance, 5, ChassisConst.GyroTurnLow)); //(double x, double y, double tolerance, double timeout, PIDGains gains
+        addSequential(new ShiftHigh());
+        addSequential(new DriveWaypoint(-wp3.getX(), wp3.getY(), ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
         
         addSequential(new OpenClaw());
     	

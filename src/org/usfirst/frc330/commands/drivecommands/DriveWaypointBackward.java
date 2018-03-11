@@ -5,8 +5,8 @@
 package org.usfirst.frc330.commands.drivecommands;
 
 import org.usfirst.frc330.Robot;
-import org.usfirst.frc330.constants.ChassisConst;
 import org.usfirst.frc330.util.Logger;
+import org.usfirst.frc330.util.Logger.Severity;
 /*
  * This will drive the robot forwards to a waypoint on the field based on its 
  * original starting position.
@@ -19,6 +19,11 @@ public class DriveWaypointBackward extends DriveWaypoint {
 	
 	public DriveWaypointBackward(double x, double y, double tolerance, double timeout, boolean stopAtEnd, PIDGains driveGains, PIDGains gyroGains){
         super(x, y, tolerance, timeout, stopAtEnd, driveGains, gyroGains);
+    }
+	
+    public DriveWaypointBackward(Waypoint wp, boolean invertX, double tolerance, double timeout, boolean stopAtEnd, PIDGains driveGains, PIDGains gyroGains) {
+    	super(wp, invertX, tolerance, timeout, stopAtEnd, driveGains, gyroGains);
+
     }
 
     protected void calcXY(double x, double y) {
@@ -34,6 +39,6 @@ public class DriveWaypointBackward extends DriveWaypoint {
             angle = angle-180;
         else
             angle = angle+180;
-        Logger.getInstance().println("Backward Angle: " + angle);
+        Logger.getInstance().println("Backward Angle: " + angle, Severity.INFO);
     }
 }

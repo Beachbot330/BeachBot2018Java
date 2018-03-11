@@ -5,7 +5,6 @@
 package org.usfirst.frc330.commands.drivecommands;
 
 import org.usfirst.frc330.Robot;
-import org.usfirst.frc330.constants.ChassisConst;
 import org.usfirst.frc330.util.Logger;
 import org.usfirst.frc330.util.Logger.Severity;
 import org.usfirst.frc330.wpilibj.PIDGains;
@@ -23,6 +22,15 @@ public class DriveWaypoint extends DriveDistanceAtAbsAngle_NoTurn {
         super(0,tolerance,0,timeout, stopAtEnd, driveGains, gyroGains);
         this.x=x;
         this.y=y;
+    }
+    
+    public DriveWaypoint(Waypoint wp, boolean invertX, double tolerance, double timeout, boolean stopAtEnd, PIDGains driveGains, PIDGains gyroGains) {
+    	super(0,tolerance,0,timeout, stopAtEnd, driveGains, gyroGains);
+    	if (invertX)
+    		this.x = -wp.getX();
+    	else
+    		this.x = wp.getX();
+    	this.y = wp.getY();
     }
 
     protected void initialize() {
@@ -69,8 +77,8 @@ public class DriveWaypoint extends DriveDistanceAtAbsAngle_NoTurn {
             while (robotAngle-calcAngle < -180)
                 calcAngle -= 360;
         }
-        Logger.getInstance().println("DriveWaypoint x: " + x + " y: " + y + " curX: " + curX + " curY: " + curY + " curAngle: " + robotAngle);
-        Logger.getInstance().println("DriveWaypoint distance: " + calcDistance + " angle: " + calcAngle);
+        Logger.getInstance().println("DriveWaypoint x: " + x + " y: " + y + " curX: " + curX + " curY: " + curY + " curAngle: " + robotAngle, Severity.INFO);
+        Logger.getInstance().println("DriveWaypoint distance: " + calcDistance + " angle: " + calcAngle, Severity.INFO);
         
         leftDistance = calcDistance;
         rightDistance = calcDistance;

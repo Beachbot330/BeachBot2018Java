@@ -48,14 +48,14 @@ public class NearNear extends BBCommandGroup {
     	addSequential(new ShiftHigh());
     	addParallel(new Defense());
     	
-    	addSequential(new DriveWaypointBackward(wp1.getX(), wp1.getY(), ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+    	addSequential(new DriveWaypointBackward(wp1, false, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	addSequential(new DropoffPositionRear());
     	addSequential(new Taller());
     	
     	addSequential(new ShiftLow());
-    	addSequential(new TurnGyroWaypointBackward(wp2.getX(), wp2.getY(), ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new TurnGyroWaypointBackward(wp2, false, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	addSequential(new ShiftHigh());
-    	addSequential(new DriveWaypointBackward(wp2.getX(), wp2.getY(), ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+    	addSequential(new DriveWaypointBackward(wp2, false, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	addSequential(new OpenClaw());
     	
     	addSequential(new WaitCommand(0.5));
@@ -65,9 +65,9 @@ public class NearNear extends BBCommandGroup {
     	addSequential(new Log("Before cube pickup"));
     	
     	addSequential(new ShiftLow());
-    	addSequential(new TurnGyroWaypoint(wp3.getX(), wp3.getY(), ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new TurnGyroWaypoint(wp3, false, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	addSequential(new ShiftHigh());
-    	addSequential(new DriveWaypoint(wp3.getX(), wp3.getY(), ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+    	addSequential(new DriveWaypoint(wp3, false, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	
     	addSequential(new Log("Cube picked up"));
     	
@@ -76,9 +76,9 @@ public class NearNear extends BBCommandGroup {
     	addSequential(new Taller());
     	
     	addSequential(new ShiftLow());
-    	addSequential(new TurnGyroWaypoint(wp4.getX(), wp4.getY(), ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new TurnGyroWaypoint(wp4, false, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	addSequential(new ShiftHigh());
-    	addSequential(new DriveWaypoint(wp4.getX(), wp4.getY(), ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+    	addSequential(new DriveWaypoint(wp4, false, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	
     	addSequential(new OpenClaw());
     	
