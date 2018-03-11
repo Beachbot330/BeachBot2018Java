@@ -15,6 +15,7 @@ import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.constants.ArmConst;
 import org.usfirst.frc330.constants.HandConst;
 import org.usfirst.frc330.util.Logger;
+import org.usfirst.frc330.util.Logger.Severity;
 
 /**
  *
@@ -82,13 +83,13 @@ public class CoordinatedMove extends BBCommand {
     			Robot.arm.setArmAngle(armAngle);
     			armSet = true;
     		}
-    		else if (Robot.arm.getArmAngle() > 0 && Robot.arm.getArmAngle() < ArmConst.safeAngle && !handSet && !Robot.arm.getArmOnTarget()) {
+    		else if (Robot.arm.getArmAngle() > 0 && Robot.arm.getArmAngle() < ArmConst.safeAngle && !handSet && !Robot.arm.getArmOnTarget() && armSet) {
     			Robot.hand.setAngle(90.0);
     		}
-    		else if(Robot.arm.getArmAngle() > ArmConst.safeAngle && !handSet && !Robot.arm.getArmOnTarget()) {
+    		else if(Robot.arm.getArmAngle() > ArmConst.safeAngle && !handSet && !Robot.arm.getArmOnTarget() && armSet) {
     			Robot.hand.setAngle(handAngleRelGround);
     		}
-    		else if(Robot.arm.getArmOnTarget() && !handSet && !Robot.arm.getArmOnTarget()){
+    		else if(Robot.arm.getArmOnTarget() && !handSet && Robot.arm.getArmOnTarget() && armSet){
     			Robot.hand.setAngle(handAngleRelGround);
     			Logger.getInstance().println("Arm at final position, setting final hand angle", Logger.Severity.INFO);
     			handSet = true;
@@ -99,11 +100,13 @@ public class CoordinatedMove extends BBCommand {
     		if (Robot.arm.getArmAngle() < (ArmConst.safeAngle + 10) && !CGforward) {
     			if(Robot.hand.getHandAngleFromArm() < HandConst.encFrameSafe) { //If the hand is in an unsafe place
     				Robot.hand.setAngleFromArm(HandConst.encFrameSafe); //Put the hand in a safe place
+    				Logger.getInstance().println("Now that the CG is forward, stowing the hand", Logger.Severity.INFO);
     			}
-    			Logger.getInstance().println("Now that the CG is forward, stowing the hand", Logger.Severity.INFO);
+    			else
+    				Logger.getInstance().println("Hand is already safe: " + Robot.hand.getHandAngleFromArm(), Logger.Severity.INFO);
     			CGforward = true;
     		}
-    		else if(Robot.hand.getHandOnTarget() && !armSet) {
+    		else if(Robot.hand.getHandOnTarget() && !armSet && CGforward) {
     			Robot.arm.setArmAngle(armAngle);
     			Logger.getInstance().println("Now that the hand is stowed, lowering the arm", Logger.Severity.INFO);
     			armSet = true;
@@ -124,13 +127,15 @@ public class CoordinatedMove extends BBCommand {
 
     protected void end() {
     	Logger.getInstance().println("Arm Setpoint: " + Robot.arm.getSetpoint(), Logger.Severity.INFO);
-    	Logger.getInstance().println("Hand Setpoint (rel ground): " + Robot.hand.getSetpoint(), Logger.Severity.INFO);
+    	Logger.getInstance().println("Hand Setpoint (rel arm): " + Robot.hand.getSetpoint(), Logger.Severity.INFO);
     	Logger.getInstance().println("Final Arm Angle: " + Robot.arm.getArmAngle(), Logger.Severity.INFO);
-    	Logger.getInstance().println("Final Hand Angle: " + Robot.hand.getHandAngle(), Logger.Severity.INFO);
+    	Logger.getInstance().println("Final Hand Angle: " + Robot.hand.getHandAngleFromArm(), Logger.Severity.INFO);
     }
 
 
     protected void interrupted() {
+    	Logger.getInstance().println("Arm on target: " + Robot.arm.getArmOnTarget(), Severity.WARNING);
+    	Logger.getInstance().println("Hand on target: " + Robot.hand.getHandOnTarget(), Severity.WARNING);
     	this.end();
     }
 }

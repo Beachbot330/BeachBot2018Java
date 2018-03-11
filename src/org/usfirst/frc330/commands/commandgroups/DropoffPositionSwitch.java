@@ -22,10 +22,10 @@ import org.usfirst.frc330.subsystems.*;
 /**
  *
  */
-public class dropoffPositionSwitch extends BBCommandGroup {
+public class DropoffPositionSwitch extends BBCommandGroup {
 
 
-    public dropoffPositionSwitch() {
+    public DropoffPositionSwitch() {
 
     	addSequential(new SetLiftPosition(LiftConst.switchDropoff));
     	addSequential(new CoordinatedMove(ArmConst.switchArm, HandConst.switchDropoff));

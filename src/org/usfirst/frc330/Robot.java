@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.util.WPILibVersion;
 
 import org.usfirst.frc330.autoCommands.*;
+import org.usfirst.frc330.autoCommands.Chooser_RightLeftStart.StartingPosition;
 import org.usfirst.frc330.commands.*;
 import org.usfirst.frc330.constants.ChassisConst;
 import org.usfirst.frc330.subsystems.*;
@@ -90,8 +91,9 @@ public class Robot extends TimedRobot {
 
         // Add commands to Autonomous Sendable Chooser
 
-        autoProgram.addDefault("Autonomous Command", new AutonomousCommand());
         autoProgram.addDefault("Do Nothing", new DoNothing());
+        autoProgram.addObject("CenterAuto", new Chooser_CenterStart_Switch());
+        autoProgram.addObject("RightSide", new Chooser_RightLeftStart(StartingPosition.RIGHT));
         
         //SimpleAuto
         autoProgram.addObject("Don't Pick This!", new AllenTest());

@@ -53,9 +53,9 @@ public class Chooser_CenterStart_Switch extends BBCommand {
 				Logger.getInstance().println("Our Switch is on the right", Severity.INFO);
 			}
 			else {
-				new DriveDistance(ChassisConst.driveStraightAuto, ChassisConst.defaultTolerance, 5.0, true, ChassisConst.DriveHigh).start();
+				//new DriveDistance(ChassisConst.driveStraightAuto, ChassisConst.defaultTolerance, 5.0, true, ChassisConst.DriveHigh).start();
 				Logger.getInstance().println("Unknown gameData: " + gameData, Severity.ERROR);
-				Logger.getInstance().println("Driving forward due to invalid data", Severity.ERROR);
+				//Logger.getInstance().println("Driving forward due to invalid data", Severity.ERROR);
 			}
 		}
     }
@@ -66,8 +66,8 @@ public class Chooser_CenterStart_Switch extends BBCommand {
 
     protected void end() {
     	if (isTimedOut()) {
-    		Logger.getInstance().println("No game data (or invalid data) received. Out of time, driving forward.", Severity.ERROR);
-    		new DriveDistance(ChassisConst.driveStraightAuto, ChassisConst.defaultTolerance, 5.0, true, ChassisConst.DriveHigh).start(); 
+    		Logger.getInstance().println("No game data (or invalid data) received.", Severity.ERROR);
+    		//new DriveDistance(ChassisConst.driveStraightAuto, ChassisConst.defaultTolerance, 5.0, true, ChassisConst.DriveHigh).start(); 
     			//double distance, double tolerance, double timeout, boolean stopAtEnd, PIDGains gains
     	}
     }

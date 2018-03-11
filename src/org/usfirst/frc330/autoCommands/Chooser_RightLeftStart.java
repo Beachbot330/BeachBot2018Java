@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.autoCommands.CenterStart_Switch.SwitchPosition;
 import org.usfirst.frc330.commands.drivecommands.DriveDistance;
+import org.usfirst.frc330.commands.drivecommands.DriveWaypointBackward;
 import org.usfirst.frc330.constants.ChassisConst;
 import org.usfirst.frc330.util.Logger;
 import org.usfirst.frc330.util.Logger.Severity;
@@ -56,9 +57,9 @@ public class Chooser_RightLeftStart extends BBCommand {
     	String positionCombo;
     	if(gameData.length() > 0) {
 	    	if (startingPosition == StartingPosition.LEFT)
-	    		positionCombo = "L" + gameData;
+	    		positionCombo = "L" + gameData.substring(0, 2);
 	    	else
-	    		positionCombo = "R" + gameData;
+	    		positionCombo = "R" + gameData.substring(0, 2) ;
 	    	switch(positionCombo) {
 		    	case "LLL":
 		    		nearNear.start();
@@ -86,7 +87,8 @@ public class Chooser_RightLeftStart extends BBCommand {
 		    		break;
 	    		default:
 	    			Logger.getInstance().println("Driving forward due to invalid data", Severity.ERROR);
-	    			new DriveDistance(ChassisConst.driveStraightAuto, ChassisConst.defaultTolerance, 5.0, true, ChassisConst.DriveHigh).start();
+	    			Logger.getInstance().println("positionCombo: " + positionCombo, Severity.DEBUG);
+	    			new DriveWaypointBackward(0, -ChassisConst.driveStraightAuto, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh).start();
 	    			break;
 	    	}
     	}    	
@@ -99,8 +101,7 @@ public class Chooser_RightLeftStart extends BBCommand {
     protected void end() {
     	if (isTimedOut()) {
     		Logger.getInstance().println("No game data (or invalid data) received. Out of time, driving forward.", Severity.ERROR);
-    		new DriveDistance(ChassisConst.driveStraightAuto, ChassisConst.defaultTolerance, 5.0, true, ChassisConst.DriveHigh).start(); 
-    			//double distance, double tolerance, double timeout, boolean stopAtEnd, PIDGains gains
+    		new DriveWaypointBackward(0, -ChassisConst.driveStraightAuto, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh).start();
     	}
     	else
     		Logger.getInstance().println("The game data we received: " + gameData, Severity.INFO);
