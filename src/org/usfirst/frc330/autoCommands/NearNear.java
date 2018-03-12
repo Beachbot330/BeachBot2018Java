@@ -35,27 +35,29 @@ public class NearNear extends BBCommandGroup {
 	// Defense
 	
 	Waypoint wp1 = new Waypoint(0, -182, 0);
-	Waypoint wp2 = new Waypoint(13, -256, 0); //Dropoff at scale
-	Waypoint wp3 = new Waypoint(43-12, -235, 0); //Drive to cube
-	Waypoint wp4 = new Waypoint(48-8, -205, 0); //Dropoff at switch
+	Waypoint wp2 = new Waypoint(29, -256, 0); //Dropoff at scale
+	Waypoint wp3 = new Waypoint(38, -212, 0); //Drive to cube
+	Waypoint wp4 = new Waypoint(40, -196, 0); //Dropoff at switch
 	Waypoint wp5 = new Waypoint(29, -244.7, 0); //TBD
 	
 
     public NearNear(StartingPosition pos) {
+    	
+    	boolean invertX = (pos == StartingPosition.LEFT);
     	
     	addSequential(new CloseClaw());
     	addSequential(new Calibrate());
     	addSequential(new ShiftHigh());
     	addParallel(new Defense());
     	
-    	addSequential(new DriveWaypointBackward(wp1, false, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+    	addSequential(new DriveWaypointBackward(wp1, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	addSequential(new DropoffPositionRear());
     	addSequential(new Taller());
     	
     	addSequential(new ShiftLow());
-    	addSequential(new TurnGyroWaypointBackward(wp2, false, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new TurnGyroWaypointBackward(wp2, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	addSequential(new ShiftHigh());
-    	addSequential(new DriveWaypointBackward(wp2, false, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+    	addSequential(new DriveWaypointBackward(wp2, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	addSequential(new OpenClaw());
     	
     	addSequential(new WaitCommand(0.5));
@@ -65,9 +67,9 @@ public class NearNear extends BBCommandGroup {
     	addSequential(new Log("Before cube pickup"));
     	
     	addSequential(new ShiftLow());
-    	addSequential(new TurnGyroWaypoint(wp3, false, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new TurnGyroWaypoint(wp3, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	addSequential(new ShiftHigh());
-    	addSequential(new DriveWaypoint(wp3, false, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+    	addSequential(new DriveWaypoint(wp3, invertX, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	
     	addSequential(new Log("Cube picked up"));
     	
@@ -76,21 +78,11 @@ public class NearNear extends BBCommandGroup {
     	addSequential(new Taller());
     	
     	addSequential(new ShiftLow());
-    	addSequential(new TurnGyroWaypoint(wp4, false, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new TurnGyroWaypoint(wp4, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	addSequential(new ShiftHigh());
-    	addSequential(new DriveWaypoint(wp4, false, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+    	addSequential(new DriveWaypoint(wp4, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	
     	addSequential(new OpenClaw());
-    	
-    	
-    	if (pos == StartingPosition.LEFT) {
-    		
-    	}
-    	else
-    	{
-    		
-    	}
-    	
        
     }
 }

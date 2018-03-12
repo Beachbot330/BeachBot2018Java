@@ -19,13 +19,13 @@ public class AllenTest extends BBCommandGroup {
     public AllenTest() {
     	
     	addSequential(new Calibrate());
-    	addSequential(new ShiftLow());
+    	addSequential(new ShiftHigh());
     	addSequential(new Defense());
     	//addSequential(new dropoffPositionSwitch());
         //addSequential(new DriveDistance(95, ChassisConst.DriveHigh));
         //addSequential(new OpenClaw());
-    	//addSequential(new DriveWaypointBackward(0, -120, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
-    	addSequential(new TurnGyroRel(90, ChassisConst.GyroTurnLow));
+    	addSequential(new DriveWaypointBackward(0, -60, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+    	//addSequential(new TurnGyroRel(90, ChassisConst.GyroTurnLow));
        
     }
 }

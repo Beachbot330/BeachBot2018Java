@@ -169,8 +169,7 @@ public class Robot extends TimedRobot {
         autonomousCommand = autoProgram.getSelected();
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
-        //VERIFY copy over code from 2017 (and update it of course!) -JB
-        autonomousCommand.start();
+
     	Logger.getInstance().println("Running Auto: " + autonomousCommand.getName(),true);    
     	
 	    if(Math.abs(Robot.chassis.getAngle()) > 0.2){
@@ -200,7 +199,13 @@ public class Robot extends TimedRobot {
     	Logger.getInstance().updateDate();
     	CSVLogger.getInstance().updateDate();
     	buzzer.enable(1.25);
-    	Robot.climber.lockPlatforms();
+		Robot.lift.stopLift();
+		Robot.climber.lockPlatforms();
+		Robot.arm.stopArm();
+		Robot.hand.stopWrist();
+		Robot.grabber.pickupOff();
+		Robot.chassis.stopDrive();
+		Robot.grabber.stopGrabber();
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
