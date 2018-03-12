@@ -35,15 +35,16 @@ public class Chooser_RightLeftStart extends BBCommand {
 	}
 	
 	String gameData;
-	Command nearNear, nearFar, farFar, farNear;
+	Command nearNear, nearFar, farFar, farNear, driveForward;
 	StartingPosition startingPosition;
 	
     public Chooser_RightLeftStart(StartingPosition pos) {
     	this.setRunWhenDisabled(false);
+    	driveForward = new DriveWaypointBackward(0, -ChassisConst.driveStraightAuto, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
     	nearNear = new NearNear(pos);
-    	nearFar = new DoNothing();
-    	farFar = new DoNothing();
-    	farNear = new DoNothing();
+    	nearFar = driveForward;
+    	farFar = new FarFar(pos);
+    	farNear = driveForward;
     	this.startingPosition = pos;
     }
 
@@ -88,7 +89,7 @@ public class Chooser_RightLeftStart extends BBCommand {
 	    		default:
 	    			Logger.getInstance().println("Driving forward due to invalid data", Severity.ERROR);
 	    			Logger.getInstance().println("positionCombo: " + positionCombo, Severity.DEBUG);
-	    			new DriveWaypointBackward(0, -ChassisConst.driveStraightAuto, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh).start();
+	    			driveForward.start();
 	    			break;
 	    	}
     	}    	

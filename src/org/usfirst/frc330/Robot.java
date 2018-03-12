@@ -94,6 +94,7 @@ public class Robot extends TimedRobot {
         autoProgram.addDefault("Do Nothing", new DoNothing());
         autoProgram.addObject("CenterAuto", new Chooser_CenterStart_Switch());
         autoProgram.addObject("RightSide", new Chooser_RightLeftStart(StartingPosition.RIGHT));
+        autoProgram.addObject("LeftSide", new Chooser_RightLeftStart(StartingPosition.LEFT));
         
         //SimpleAuto
         autoProgram.addObject("Don't Pick This!", new AllenTest());
