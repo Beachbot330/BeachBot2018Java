@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 /**
  *
  */
-public class FarFar extends BBCommandGroup {
+public class NearFar extends BBCommandGroup {
+
 	
 	Waypoint wp1 = new Waypoint(0,   -216, 0); //Turn to go down path
 	Waypoint wp2 = new Waypoint(212, -220, 0); //Drive to scale
@@ -23,7 +24,7 @@ public class FarFar extends BBCommandGroup {
 	Waypoint wp5 = new Waypoint(186, -193, 0); //Dropoff at switch
 	
 
-    public FarFar(StartingPosition pos) {
+    public NearFar(StartingPosition pos) {
     	
     	boolean invertX = (pos == StartingPosition.LEFT);
     	

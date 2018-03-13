@@ -39,7 +39,7 @@ public final class LiftConst {
 
 	//Talon SRX Settings
 	public static final double VoltageRampRate			= 1.23;	//WAG  JB
-	public static final double MaxOutputPercent			= 0.7;	// TEMPORARY AP 3/3/18
+	public static final double MaxOutputPercent			= 1.0;	// AP 3/12/18
 	public static final int    CAN_Timeout				= 10; //AP 2/18/18
 	public static final int    CAN_Timeout_No_Wait      = 0;  // JR 2/19/18
 	public static final int    CAN_Status_Frame_13_Period = 20; //JR 2/19/19
