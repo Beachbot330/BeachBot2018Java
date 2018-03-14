@@ -77,7 +77,7 @@ public class Arm extends Subsystem {
         armL.setInverted(false);
         armL.setSensorPhase(false);
         
-        setPIDConstantsArm(ArmConst.proportional, ArmConst.integral, ArmConst.derivative,true);
+        setPIDConstantsArm(ArmConst.proportional, ArmConst.integral, ArmConst.derivative, ArmConst.MaxOutputPercent, true);
         setArmAbsoluteTolerance(ArmConst.tolerance);
 		
 		armL.configForwardSoftLimitEnable(false, ArmConst.CAN_Timeout); // Disable limits until after calibration
@@ -85,8 +85,6 @@ public class Arm extends Subsystem {
 		armL.setNeutralMode(NeutralMode.Brake);
 		
 		armL.configOpenloopRamp(0, ArmConst.CAN_Timeout);
-		armL.configPeakOutputForward(ArmConst.MaxOutputPercent, ArmConst.CAN_Timeout);
-        armL.configPeakOutputReverse(-ArmConst.MaxOutputPercent, ArmConst.CAN_Timeout);
         
         armL.configNominalOutputForward(0, ArmConst.CAN_Timeout);	
 		armL.configNominalOutputReverse(0, ArmConst.CAN_Timeout);
@@ -232,20 +230,27 @@ public class Arm extends Subsystem {
     	}
     }
     
-    //VERIFY Implement setArmPIDConstants -JB
-    public void setPIDConstantsArm (double P, double I, double D, boolean timeout)
+    public void setPIDConstantsArm (double P, double I, double D, double maxOutput, boolean timeout)
    	{
+    	Logger.getInstance().println("Changing arm P: " + P, Severity.INFO);
+    	Logger.getInstance().println("Changing arm I: " + I, Severity.INFO);
+    	Logger.getInstance().println("Changing arm D: " + D, Severity.INFO);
+    	Logger.getInstance().println("Changing arm Max: " + maxOutput, Severity.INFO);
        	if(timeout) {
        		//assume using main PID loop (index 0)
        		armL.config_kP(0, P, ArmConst.CAN_Timeout);
        		armL.config_kI(0, I, ArmConst.CAN_Timeout);
        		armL.config_kD(0, D, ArmConst.CAN_Timeout);
+       		armL.configPeakOutputForward(maxOutput, ArmConst.CAN_Timeout);
+            armL.configPeakOutputReverse(-maxOutput, ArmConst.CAN_Timeout);
        	}
        	else {
    	    	//assume using main PID loop (index 0)
    			armL.config_kP(0, P, ArmConst.CAN_Timeout_No_Wait);
    			armL.config_kI(0, I, ArmConst.CAN_Timeout_No_Wait);
    			armL.config_kD(0, D, ArmConst.CAN_Timeout_No_Wait);
+   			armL.configPeakOutputForward(maxOutput, ArmConst.CAN_Timeout_No_Wait);
+            armL.configPeakOutputReverse(-maxOutput, ArmConst.CAN_Timeout_No_Wait);
        	}
        	
         Logger.getInstance().println("Lift PID set to: " + P + ", " + I + ", " + D, Severity.INFO);

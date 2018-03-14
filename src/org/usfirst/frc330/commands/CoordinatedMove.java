@@ -65,6 +65,8 @@ public class CoordinatedMove extends BBCommand {
     		}
     		Logger.getInstance().println("Moving from bottom towards top. Storing hand in safe location (if needed)", Logger.Severity.INFO);
     		bottomUp = true;
+    		//Increase ARM PID
+    		Robot.arm.setPIDConstantsArm(ArmConst.proportional, ArmConst.integral, ArmConst.derivative, ArmConst.MaxOutputPercentUP, false);
     	}
     	//Coming from top
     	else {
@@ -130,6 +132,8 @@ public class CoordinatedMove extends BBCommand {
     	Logger.getInstance().println("Hand Setpoint (rel arm): " + Robot.hand.getSetpoint(), Logger.Severity.INFO);
     	Logger.getInstance().println("Final Arm Angle: " + Robot.arm.getArmAngle(), Logger.Severity.INFO);
     	Logger.getInstance().println("Final Hand Angle: " + Robot.hand.getHandAngleFromArm(), Logger.Severity.INFO);
+    	//Reset ARM PID
+		Robot.arm.setPIDConstantsArm(ArmConst.proportional, ArmConst.integral, ArmConst.derivative, ArmConst.MaxOutputPercent, false);
     }
 
 
