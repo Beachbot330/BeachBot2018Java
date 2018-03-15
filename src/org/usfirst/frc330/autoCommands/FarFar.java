@@ -16,11 +16,11 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class FarFar extends BBCommandGroup {
 	
-	Waypoint wp1 = new Waypoint(0,   -216, 0); //Turn to go down path
-	Waypoint wp2 = new Waypoint(212, -220, 0); //Drive to scale
-	Waypoint wp3 = new Waypoint(200, -256, 0); //Dropoff at scale
-	Waypoint wp4 = new Waypoint(186, -208, 0); //Drive to cube
-	Waypoint wp5 = new Waypoint(186, -193, 0); //Dropoff at switch
+	Waypoint wp1 = new Waypoint(0,   -230, 0); //Turn to go down path
+	Waypoint wp2 = new Waypoint(212, -230, 0); //Drive to scale
+	Waypoint wp3 = new Waypoint(200, -256-18, 0); //Dropoff at scale
+	Waypoint wp4 = new Waypoint(186, -212-7, 0); //Drive to cube
+	Waypoint wp5 = new Waypoint(174, -196-16, 0); //Dropoff at switch
 	
 
     public FarFar(StartingPosition pos) {
