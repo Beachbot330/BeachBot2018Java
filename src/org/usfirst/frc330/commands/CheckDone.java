@@ -3,14 +3,15 @@ package org.usfirst.frc330.commands;
 
 
 import edu.wpi.first.wpilibj.command.BBCommand;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
 public class  CheckDone extends BBCommand {
 
-	BBCommand commandInstance;
-    public CheckDone(BBCommand commandInstance) {
+	Command commandInstance;
+    public CheckDone(Command commandInstance) {
     	
     	this.commandInstance = commandInstance;
     }

@@ -20,9 +20,10 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class FarNear extends BBCommandGroup {
 	
 	Waypoint wp1 = new Waypoint(0, -182, 0);
-	Waypoint wp2 = new Waypoint(29, -256-9-6, 0); //Dropoff at scale
+	Waypoint wp2 = new Waypoint(29, -256-18, 0); //Dropoff at scale
 	Waypoint wp3 = new Waypoint(38, -212-8, 0); //Drive to cube
-	Waypoint wp4 = new Waypoint(29, -256-9, 0); //Drive back to scale
+	Waypoint wp4 = new Waypoint(29-4, -256-7, 0); //Drive back to scale
+	Waypoint wp5 = new Waypoint(29+4, -256-20, 0); // Second drop off
 
     public FarNear(StartingPosition pos) {
     	
@@ -39,7 +40,9 @@ public class FarNear extends BBCommandGroup {
     	addSequential(new WaitCommand(0.5));
     	//addSequential(new DropoffPositionRear());
     	addSequential(new CheckDone(parallelCommand));
-    	addParallel(new DropoffPositionRear());
+    	
+    	BBCommandGroup parallelGroup = new DropoffPositionRear();
+    	addParallel(parallelGroup);
     	addSequential(new WaitCommand(0.1));
     	addSequential(new Taller());
     	
@@ -47,13 +50,18 @@ public class FarNear extends BBCommandGroup {
     	addSequential(new ShiftLow());
     	addSequential(new TurnGyroWaypointBackward(wp2, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	addSequential(new ShiftHigh());
+    	addSequential(new CheckDone(parallelGroup));
+    	addSequential(new SetHandAngle(190));
     	PIDGains tempDrive  = new PIDGains(0.050,0,0.70,0,0.7,ChassisConst.defaultMaxOutputStep, "DriveHigh"); //AP 3-12-18
     	addSequential(new DriveWaypointBackward(wp2, invertX, ChassisConst.defaultTolerance, 5, false, tempDrive, ChassisConst.GyroDriveHigh));
+    	//addSequential(new OpenClaw());
+    	addParallel(new DeployCube());
+    	addSequential(new WaitCommand(0.1));
     	addSequential(new OpenClaw());
     	
     	addSequential(new WaitCommand(0.5));
     	addParallel(new IntakeCube()); //Doesn't return until is has a cube
-    	addSequential(new WaitCommand(2.0)); //Can we shorten this?
+    	addSequential(new WaitCommand(0.5)); //Can we shorten this?
     	
     	//Go to pickup a cube
     	addSequential(new Log("Before cube pickup"));
@@ -77,8 +85,19 @@ public class FarNear extends BBCommandGroup {
     	addSequential(new WaitCommand(0.6));
     	addSequential(new DropoffPositionRear());
     	addSequential(new Taller());
-    	
     	addSequential(new CheckDone(parallelCommand));
+    	
+    	addSequential(new ShiftLow());
+    	addSequential(new TurnGyroWaypointBackward(wp5, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new WaitCommand(0.1));
+    	addSequential(new ShiftHigh());
+    	tempDrive  = new PIDGains(0.050,0,0.70,0,0.7,ChassisConst.defaultMaxOutputStep, "DriveHigh"); //AP 3-12-18
+    	addSequential(new DriveWaypointBackward(wp5, invertX, ChassisConst.defaultTolerance, 5, false, tempDrive, ChassisConst.GyroDriveHigh));
+    	addSequential(new WaitCommand(0.1));
+    	
+    	//addSequential(new SetHandAngle(190));
+    	//addParallel(new DeployCube());
+    	//addSequential(new WaitCommand(0.1));
     	addSequential(new OpenClaw());
        
     }
