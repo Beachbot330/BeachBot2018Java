@@ -32,12 +32,12 @@ public class CenterStart_Switch extends BBCommandGroup {
     	if((switchPosition == SwitchPosition.LEFT)) {
     		wp1 = new Waypoint(0-16,17,0);
     		wp2 = new Waypoint(58+12,58,0);
-    		wp3 = new Waypoint(58+12,99+6,0);
+    		wp3 = new Waypoint(58+12,99+12+18,0);
     	}
     	else {
     		wp1 = new Waypoint(0,17,0);
     		wp2 = new Waypoint(58-12,58,0);
-    		wp3 = new Waypoint(58-12,99+6,0);
+    		wp3 = new Waypoint(58-12,99+12+18,0);
     	}
     	
     	addSequential(new CloseClaw());
@@ -58,7 +58,7 @@ public class CenterStart_Switch extends BBCommandGroup {
         
         addSequential(new TurnGyroWaypoint(wp3, invertX, ChassisConst.defaultTolerance, 5, ChassisConst.GyroTurnLow)); //(double x, double y, double tolerance, double timeout, PIDGains gains
         addSequential(new ShiftHigh());
-        addSequential(new DriveWaypoint(wp3, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+        addSequential(new DriveWaypoint(wp3, invertX, ChassisConst.defaultTolerance, 2.0, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
         
         addSequential(new OpenClaw());
     	

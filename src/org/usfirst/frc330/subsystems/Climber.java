@@ -80,12 +80,12 @@ public class Climber extends Subsystem {
     }
 
 	public void lockPlatforms() {
-		platforms.set(true);
+		platforms.set(false);
 		Logger.getInstance().println("Locking platform", Logger.Severity.INFO);
 	}
 	
 	public void unlockPlatforms() {
-		platforms.set(false);
+		platforms.set(true);
 		Logger.getInstance().println("Unlocking platform", Logger.Severity.INFO);
 	}
 	
