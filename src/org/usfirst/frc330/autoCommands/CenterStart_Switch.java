@@ -16,13 +16,9 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class CenterStart_Switch extends BBCommandGroup {
 	
-	// Drive to (0,16)
-	// Drive to (55, 55)
-	// Drive to (56, 96)
-
-	Waypoint wp1 = new Waypoint(0,17,0);
-	Waypoint wp2 = new Waypoint(58,58,0);
-	Waypoint wp3 = new Waypoint(58,99,0);
+	Waypoint wp1;
+	Waypoint wp2;
+	Waypoint wp3;
 	
 	
 	public enum SwitchPosition{
@@ -32,6 +28,17 @@ public class CenterStart_Switch extends BBCommandGroup {
     public CenterStart_Switch(SwitchPosition switchPosition) {
     	
     	boolean invertX = (switchPosition == SwitchPosition.LEFT);
+    	
+    	if((switchPosition == SwitchPosition.LEFT)) {
+    		wp1 = new Waypoint(0-16,17,0);
+    		wp2 = new Waypoint(58-16,58,0);
+    		wp3 = new Waypoint(58-16,99,0);
+    	}
+    	else {
+    		wp1 = new Waypoint(0,17,0);
+    		wp2 = new Waypoint(58-16,58,0);
+    		wp3 = new Waypoint(58-16,99,0);
+    	}
     	
     	addSequential(new CloseClaw());
     	addSequential(new Calibrate());
@@ -51,7 +58,7 @@ public class CenterStart_Switch extends BBCommandGroup {
         
         addSequential(new TurnGyroWaypoint(wp3, invertX, ChassisConst.defaultTolerance, 5, ChassisConst.GyroTurnLow)); //(double x, double y, double tolerance, double timeout, PIDGains gains
         addSequential(new ShiftHigh());
-        addSequential(new DriveWaypoint(-wp3.getX(), wp3.getY(), ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+        addSequential(new DriveWaypoint(wp3, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
         
         addSequential(new OpenClaw());
     	

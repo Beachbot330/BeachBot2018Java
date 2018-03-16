@@ -24,6 +24,9 @@ public class NearNear extends BBCommandGroup {
 	Waypoint wp3 = new Waypoint(38, -212-8, 0); //Drive to cube
 	Waypoint wp4 = new Waypoint(40, -196-12, 0); //Dropoff at switch
 	
+	//Switch 296 Red right
+	//198, 196, 196, 195
+	
 
     public NearNear(StartingPosition pos) {
     	

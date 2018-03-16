@@ -53,7 +53,7 @@ public class FarFar extends BBCommandGroup {
     	
     	addSequential(new WaitCommand(0.5));
     	addParallel(new IntakeCube()); //Doesn't return until is has a cube
-    	addSequential(new WaitCommand(2.0));
+    	addSequential(new WaitCommand(0.5));
     	
     	addSequential(new Log("Before cube pickup"));
     	
