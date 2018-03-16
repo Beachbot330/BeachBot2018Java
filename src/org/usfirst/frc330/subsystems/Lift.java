@@ -244,6 +244,10 @@ public class Lift extends Subsystem {
     	return calibrated;
     }
     
+    public ControlMode getMode() {
+    	return lift1.getControlMode();
+    }
+    
     //------------------------------------------------------------------------------
     // SET Methods
     //------------------------------------------------------------------------------

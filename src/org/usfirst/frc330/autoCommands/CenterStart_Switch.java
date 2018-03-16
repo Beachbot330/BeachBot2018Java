@@ -31,13 +31,13 @@ public class CenterStart_Switch extends BBCommandGroup {
     	
     	if((switchPosition == SwitchPosition.LEFT)) {
     		wp1 = new Waypoint(0-16,17,0);
-    		wp2 = new Waypoint(58-16,58,0);
-    		wp3 = new Waypoint(58-16,99,0);
+    		wp2 = new Waypoint(58+12,58,0);
+    		wp3 = new Waypoint(58+12,99+6,0);
     	}
     	else {
     		wp1 = new Waypoint(0,17,0);
-    		wp2 = new Waypoint(58-16,58,0);
-    		wp3 = new Waypoint(58-16,99,0);
+    		wp2 = new Waypoint(58-12,58,0);
+    		wp3 = new Waypoint(58-12,99+6,0);
     	}
     	
     	addSequential(new CloseClaw());

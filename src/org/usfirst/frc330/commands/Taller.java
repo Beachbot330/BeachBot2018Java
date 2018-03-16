@@ -15,6 +15,8 @@ import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.constants.LiftConst;
 import org.usfirst.frc330.util.Logger;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
+
 /**
  *
  */
@@ -28,8 +30,16 @@ public class Taller extends BBCommand {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-    	Logger.getInstance().println("Current Setpoint: " + Robot.lift.getSetpoint(), Logger.Severity.INFO);
-    	Robot.lift.setLiftPosition(Robot.lift.getSetpoint() + LiftConst.stepSize);
+    	if(Robot.lift.getMode() == ControlMode.Position) {
+    		Logger.getInstance().println("Current Setpoint: " + Robot.lift.getSetpoint(), Logger.Severity.INFO);
+        	Robot.lift.setLiftPosition(Robot.lift.getSetpoint() + LiftConst.stepSize);
+    	}
+    	else {
+    		Logger.getInstance().println("Lift in mode: " + Robot.lift.getMode(), Logger.Severity.WARNING);
+    		Logger.getInstance().println("Current position: " + Robot.lift.getPosition(), Logger.Severity.INFO);
+        	Robot.lift.setLiftPosition(Robot.lift.getPosition() + LiftConst.stepSize);
+    	}
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
