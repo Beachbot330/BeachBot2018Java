@@ -20,8 +20,10 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class FarNear extends BBCommandGroup {
 	
 	Waypoint wp1 = new Waypoint(0, -182, 0);
-	Waypoint wp2 = new Waypoint(29, -256-18, 0); //Dropoff at scale
-	Waypoint wp3 = new Waypoint(38, -212-8, 0); //Drive to cube
+	//Waypoint wp2 = new Waypoint(29, -256-18, 0); //Dropoff at scale
+	Waypoint wp2 = new Waypoint(29, -256-18-4, 0);
+	//Waypoint wp3 = new Waypoint(38, -212-8, 0); //Drive to cube
+	Waypoint wp3 = new Waypoint(38, -212-8-1, 0);
 	Waypoint wp4 = new Waypoint(29-4, -256-7, 0); //Drive back to scale
 	Waypoint wp5 = new Waypoint(29+4, -256-20, 0); // Second drop off
 
@@ -52,7 +54,8 @@ public class FarNear extends BBCommandGroup {
     	addSequential(new ShiftHigh());
     	addSequential(new CheckDone(parallelGroup));
     	addSequential(new SetHandAngle(190));
-    	PIDGains tempDrive  = new PIDGains(0.050,0,0.70,0,0.7,ChassisConst.defaultMaxOutputStep, "DriveHigh"); //AP 3-12-18
+    	//PIDGains tempDrive  = new PIDGains(0.050,0,0.70,0,0.7,ChassisConst.defaultMaxOutputStep, "DriveHigh"); //AP 3-12-18
+    	PIDGains tempDrive  = new PIDGains(0.050,0,0.70,0,0.6,ChassisConst.defaultMaxOutputStep, "DriveHigh");
     	addSequential(new DriveWaypointBackward(wp2, invertX, ChassisConst.defaultTolerance, 5, false, tempDrive, ChassisConst.GyroDriveHigh));
     	//addSequential(new OpenClaw());
     	addParallel(new DeployCube());
