@@ -41,7 +41,7 @@ public class SensorlessPickupDown extends BBCommandGroup {
     	addSequential(new OpenClaw());
     	
     	addParallel(new SetLiftPosition(LiftConst.intakePosition));
-    	addSequential(new CoordinatedMove(ArmConst.intakePosition, HandConst.pickUp));
+    	addSequential(new CoordinatedMove(ArmConst.intakePosition, HandConst.e_pickup));
     	
     	addSequential(new RollerOn());
 

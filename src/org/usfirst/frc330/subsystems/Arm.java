@@ -211,6 +211,10 @@ public class Arm extends Subsystem {
 	// Set Methods
 	//--------------------------------------------------------------------
 	
+	public void setUncalibrated() {
+		this.calibrated = false;
+	}
+	
     public void setArmThrottle(double output) {
         if(calibrated) {
         	armL.set(ControlMode.PercentOutput, output);

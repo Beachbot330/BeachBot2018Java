@@ -32,6 +32,7 @@ public final class HandConst {
 	
 	// Angles relative to ground
 	public static final double pickUp					=  -5.0;  //JDR 3/3/18
+	public static final double e_pickup                 = -10; //MF 3/17/18
 	public static final double Defense					=  75.0; // AP 3/5/18
 	public static final double switchDropoff			= 30.0; //AP 3/3/18
 	public static final double leveledWrist             =  0.0;  //MF 1/27 WAG

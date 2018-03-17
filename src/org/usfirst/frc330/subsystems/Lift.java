@@ -251,6 +251,10 @@ public class Lift extends Subsystem {
     //------------------------------------------------------------------------------
     // SET Methods
     //------------------------------------------------------------------------------
+    
+    public void setUncalibrated() {
+		this.calibrated = false;
+	}
 
     //VERIFY Joey: set has a single parameter and double parameter option. Use the double parameter option -JB
     // and set it to controlMode: position (see 2016 arm if you want an example)

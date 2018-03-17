@@ -21,8 +21,10 @@ public class NearFar extends BBCommandGroup {
 	
 	Waypoint wp1 = new Waypoint(0,   -230, 0); //Turn to go down path
 	Waypoint wp2 = new Waypoint(212, -230, 0); //Drive to scale
-	Waypoint wp3 = new Waypoint(200, -256-18, 0); //Dropoff at scale
-	Waypoint wp4 = new Waypoint(186, -212-7, 0); //Drive to cube
+	//Waypoint wp3 = new Waypoint(200, -256-18, 0); //Dropoff at scale
+	Waypoint wp3 = new Waypoint(200, -256-18-5, 0); //Dropoff at scale
+	//Waypoint wp4 = new Waypoint(186, -212-7, 0); //Drive to cube
+	Waypoint wp4 = new Waypoint(186, -212-7-4, 0); //Drive to cube
 	Waypoint wp5 = new Waypoint(200+4, -256-7, 0); //Drive back to scale
 	Waypoint wp6 = new Waypoint(200+4, -256-20, 0); //Second scale dropoff
 	
@@ -51,7 +53,9 @@ public class NearFar extends BBCommandGroup {
     	addSequential(new Taller());
     	
     	addSequential(new ShiftHigh());
-    	addSequential(new DriveWaypointBackward(wp3, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+    	PIDGains driveMid     = new PIDGains(0.050,0,0.70,0,0.6,ChassisConst.defaultMaxOutputStep, "DriveHigh"); //AP 3-12-18
+    	addSequential(new DriveWaypointBackward(wp3, invertX, ChassisConst.defaultTolerance, 5, false, driveMid, ChassisConst.GyroDriveHigh));
+    	//addSequential(new DriveWaypointBackward(wp3, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	
     	addSequential(new OpenClaw());
     	

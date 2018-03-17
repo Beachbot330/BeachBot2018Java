@@ -180,6 +180,11 @@ public class Hand extends Subsystem {
     //--------------------------------------------------------------------
   	// Set Methods
   	//--------------------------------------------------------------------
+    
+    public void setUncalibrated() {
+		this.calibrated = false;
+	}
+    
     public void setHandAbsoluteTolerance(double absvalue) {
     	tolerance = absvalue;
 	}
