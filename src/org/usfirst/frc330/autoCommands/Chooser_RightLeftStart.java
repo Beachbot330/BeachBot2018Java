@@ -41,9 +41,11 @@ public class Chooser_RightLeftStart extends BBCommand {
     public Chooser_RightLeftStart(StartingPosition pos) {
     	this.setRunWhenDisabled(false);
     	driveForward = new DriveWaypointBackward(0, -ChassisConst.driveStraightAuto, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
-    	nearNear = new NearNear(pos);
-    	nearFar = driveForward;
-    	farFar = new FarFar(pos);
+    	//nearNear = new NearNear(pos);
+    	nearNear = new FarNear(pos);
+    	nearFar = new NearFar(pos);
+    	//farFar = new FarFar(pos);
+    	farFar = new NearFar(pos);
     	farNear = new FarNear(pos);
     	this.startingPosition = pos;
     }
