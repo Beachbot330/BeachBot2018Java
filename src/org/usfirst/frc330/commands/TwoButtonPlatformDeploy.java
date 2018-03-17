@@ -43,7 +43,7 @@ public class TwoButtonPlatformDeploy extends BBCommand {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	if(Robot.oi.driverR.getRawButton(5)) {
+    	if(Robot.oi.driverL.getRawButton(5)) {
     		Robot.climber.deployRollerCoaster();
     		Robot.climber.unlockPlatforms();
     	}
