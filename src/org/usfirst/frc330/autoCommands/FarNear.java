@@ -25,7 +25,7 @@ public class FarNear extends BBCommandGroup {
 	//Waypoint wp3 = new Waypoint(38, -212-8, 0); //Drive to cube
 	Waypoint wp3 = new Waypoint(38, -212-8-1, 0);
 	Waypoint wp4 = new Waypoint(29-4, -256-7, 0); //Drive back to scale
-	Waypoint wp5 = new Waypoint(29+4, -256-20, 0); // Second drop off
+	Waypoint wp5 = new Waypoint(29-1, -256-20, 0); // Second drop off
 
     public FarNear(StartingPosition pos) {
     	
