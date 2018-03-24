@@ -21,14 +21,19 @@ public final class HandConst {
 	public static final double defaultTimeout	 		= 5.0;	 //JR 2-28
 	
 	// PID Constants
-	public static final double proportional      		= 4.0;   // AP 3/3/18
+	//public static final double proportional      		= 4.0;   // AP 3/3/18
+	public static final double proportional      		= 2.0;   // TEMPORARY!
 	public static final double integral         		= 0.00; // JR 2/23
 	public static final double derivative        		= 0.00;   // AP 2/18/18
-	public static final double feedForward	     		= 0.0;   // JR 2/23
+	public static final double feedForward	     		= 0.85;   // AP 3/24/18 1024/Vmax
 	public static final double VoltageRampRate   		= 0.0;  // AP 3-15
 	public static final double MaxOutputPercent			= 0.8;	// Shane asked to reduce it 10% 3/15/18
 	public static final double slopAdjust				= 6.0;
 	public static final double rearSlopAdjust			= 18.0;
+	
+	// Motion Magic Constants
+	public static final int velocityLimit              = 1200;   //AP 3/24/18
+	public static final int accelLimit                 = 2400;   //AP 3/24/18
 	
 	// Angles relative to ground
 	public static final double pickUp					=  -5.0;  //JDR 3/3/18

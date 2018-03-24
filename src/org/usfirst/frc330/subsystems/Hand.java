@@ -15,6 +15,7 @@ import org.usfirst.frc330.commands.*;
 import org.usfirst.frc330.commands.commandgroups.Calibrate;
 import org.usfirst.frc330.constants.ArmConst;
 import org.usfirst.frc330.constants.HandConst;
+import org.usfirst.frc330.constants.LiftConst;
 import org.usfirst.frc330.util.CSVLoggable;
 import org.usfirst.frc330.util.CSVLogger;
 import org.usfirst.frc330.util.Logger;
@@ -67,7 +68,7 @@ public class Hand extends Subsystem {
 		wrist.setInverted(true);
 		wrist.setSensorPhase(false);
 		
-		setPIDConstants(HandConst.proportional,HandConst.integral,HandConst.derivative,true);
+		setPIDConstants(HandConst.proportional,HandConst.integral,HandConst.derivative, HandConst.feedForward, true);
 		setHandAbsoluteTolerance(HandConst.defaultTolerance);
 		
 		wrist.configForwardSoftLimitEnable(false, HandConst.CAN_Timeout); //Set these false until calibrated
@@ -83,6 +84,10 @@ public class Hand extends Subsystem {
 		
 		wrist.configForwardLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, HandConst.CAN_Timeout);
 		wrist.configReverseLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, HandConst.CAN_Timeout);
+		
+		//Magic Motion
+		wrist.configMotionCruiseVelocity(HandConst.velocityLimit, HandConst.CAN_Timeout);
+        wrist.configMotionAcceleration(HandConst.accelLimit, HandConst.CAN_Timeout);
 		
 		//set feedback frame so that getClosedLoopError comes faster then 160ms
         wrist.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, HandConst.CAN_Status_Frame_13_Period, HandConst.CAN_Timeout);
@@ -101,12 +106,17 @@ public class Hand extends Subsystem {
 		temp = new CSVLoggable(true) {
 			public double get() { return getSetpoint(); }
 		};
-		CSVLogger.getInstance().add("HandSetpoint", temp);
+		CSVLogger.getInstance().add("HandSetpointFromArm", temp);
 
 		temp = new CSVLoggable(true) {
 			public double get() { return getWristOutput(); }
 		};
 		CSVLogger.getInstance().add("HandOutput", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return getWristVelocity(); }
+		};
+		CSVLogger.getInstance().add("HandVelocity", temp);
 		
 		temp = new CSVLoggable(true) {
 			public double get() {
@@ -168,9 +178,9 @@ public class Hand extends Subsystem {
     	double position;
     	
     	if (Math.abs(gamepadCommand) > HandConst.gamepadDeadZone) {
-    		this.setWrist(gamepadCommand/Math.abs(gamepadCommand)*Math.pow(gamepadCommand, 2)*0.4); //scaled to 0.4 max
+    		this.setWristThrottle(gamepadCommand/Math.abs(gamepadCommand)*Math.pow(gamepadCommand, 2)*0.4); //scaled to 0.4 max
     	}
-    	else if (wrist.getControlMode() != ControlMode.Position) {
+    	else if (wrist.getControlMode() != ControlMode.MotionMagic) {
 			position = this.getHandAngle();
 			this.setAngle(position);
     	}  
@@ -195,25 +205,27 @@ public class Hand extends Subsystem {
     	Logger.getInstance().println("Max wrist output set to: " + percentOut, Severity.INFO);
     }
     
-    public void setPIDConstants (double P, double I, double D, boolean timeout)
+    public void setPIDConstants (double P, double I, double D, double F, boolean timeout)
    	{
        	if(timeout) {
        		//assume using main PID loop (index 0)
        		wrist.config_kP(0, P, HandConst.CAN_Timeout);
        		wrist.config_kI(0, I, HandConst.CAN_Timeout);
        		wrist.config_kD(0, D, HandConst.CAN_Timeout);
+       		wrist.config_kF(0, F, HandConst.CAN_Timeout);
        	}
        	else {
    	    	//assume using main PID loop (index 0)
    			wrist.config_kP(0, P, HandConst.CAN_Timeout_No_Wait);
    			wrist.config_kI(0, I, HandConst.CAN_Timeout_No_Wait);
    			wrist.config_kD(0, D, HandConst.CAN_Timeout_No_Wait);
+   			wrist.config_kF(0, F, HandConst.CAN_Timeout_No_Wait);
        	}
        	
-        Logger.getInstance().println("Wrist PID set to: " + P + ", " + I + ", " + D, Severity.INFO);
+        Logger.getInstance().println("Wrist PID set to: " + P + ", " + I + ", " + D + ", " + F, Severity.INFO);
    	}
     
-    public void setWrist(double output) {
+    public void setWristThrottle(double output) {
         //	changeControlMode(ControlMode.PercentOutput);
         	if(calibrated) {
         		wrist.set(ControlMode.PercentOutput, output);
@@ -241,7 +253,7 @@ public class Hand extends Subsystem {
     
     public void setAngleFromArm(double angle) {
     	if(calibrated) {
-    		wrist.set(ControlMode.Position, degreesToTicks(angle));
+    		wrist.set(ControlMode.MotionMagic, degreesToTicks(angle));
     	}
     	else {
     		Scheduler.getInstance().add(new Calibrate());
@@ -276,20 +288,18 @@ public class Hand extends Subsystem {
     }
     
     public double getSetpoint() {
-    	if(wrist.getControlMode() == ControlMode.Position || wrist.getControlMode() == ControlMode.Velocity) {
+    	if(wrist.getControlMode() == ControlMode.Position || wrist.getControlMode() == ControlMode.Velocity || wrist.getControlMode() == ControlMode.MotionMagic) {
 			return ticksToDegrees(wrist.getClosedLoopTarget(0));
 		}
 		else {
-			return 0;
+			return 999;
 		}
     }
     
-  //VERIFY implement getWristOUtput - JB
     public double getWristOutput() {
   		return wrist.getMotorOutputVoltage()/wrist.getBusVoltage();
   	}
     
-  //VERIFY Implement getWristLowerLimit, getWristUpperLimit -JB
     public double getWristLowerLimit() {
 		return (ticksToDegrees((int)wrist.configGetParameter(ParamEnum.eForwardSoftLimitThreshold, 0, HandConst.CAN_Timeout_No_Wait)));
 	}
@@ -298,7 +308,6 @@ public class Hand extends Subsystem {
 		return (ticksToDegrees((int)wrist.configGetParameter(ParamEnum.eReverseSoftLimitThreshold, 0, HandConst.CAN_Timeout_No_Wait)));
 	}
     
-    //VERIFY Implement getHandOnTarget - MF
   	public boolean getHandOnTarget() {
   		double error = this.getSetpointRelArm() - this.getHandAngleFromArm();
       	return (Math.abs(error) < tolerance);
@@ -306,6 +315,10 @@ public class Hand extends Subsystem {
   	
   	public double getSetpointRelArm() {
   		return ticksToDegrees(wrist.getClosedLoopTarget(0));
+  	}
+  	
+  	public double getWristVelocity() {
+  		return wrist.getSelectedSensorVelocity(0);
   	}
     
     //--------------------------------------------------------------------

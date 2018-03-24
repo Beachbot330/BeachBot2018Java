@@ -22,13 +22,18 @@ public final class ArmConst {
 	public static final int    inertiaCounter	 		= 0;	 //AP 3/3/18
 	
 	// PID Constants
+	//public static final double proportional      		= 0.25;   // AP WAG 2-18-18
 	public static final double proportional      		= 0.25;   // AP WAG 2-18-18
 	public static final double integral         		= 0.00; // AP WAG 1-30-18
-	public static final double derivative        		= 0.00;   // AP WAG 1-30-18
-	public static final double feedForward	     		= 0.00;   // AP WAG 1-30-18
+	public static final double derivative        		= 4.00;   // AP WAG 1-30-18
+	public static final double feedForward	     		= 0.45;   // AP WAG 1-30-18
 	public static final double VoltageRampRate   		= 48.0;  // AP WAG 1-30-18
-	public static final double MaxOutputPercent			= 0.7;	// TEMPORARY AP 3/3/18
+	public static final double MaxOutputPercent			= 0.8;	// AP 3/3/18
 	public static final double MaxOutputPercentUP		= 1.0;
+	
+	// Motion Magic Constants
+	public static final int velocityLimit              = 2300;   //AP 3/24/18
+	public static final int accelLimit                 = 4600;   //AP 3/24/18
 	
 	// Angles
 	public static final double lowerLimit               = -54.0; //MF 1/27 WAG

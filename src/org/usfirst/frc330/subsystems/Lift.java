@@ -81,7 +81,7 @@ public class Lift extends Subsystem {
         lift1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, LiftConst.CAN_Timeout);
         lift1.setInverted(true); // Set true if the motor direction does not match the sensor direction
         lift1.setSensorPhase(true);
-        setPIDConstants(LiftConst.proportional, LiftConst.integral, LiftConst.derivative, true);
+        setPIDConstants(LiftConst.proportional, LiftConst.integral, LiftConst.derivative, LiftConst.feedforward, true);
         setLiftAbsoluteTolerance(LiftConst.tolerance);
         
         // Limits are now set and enabled after calibration
@@ -97,7 +97,9 @@ public class Lift extends Subsystem {
 		lift1.configNominalOutputReverse(0, LiftConst.CAN_Timeout);
 		lift1.configForwardLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, 0);
 		lift1.configReverseLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, 0);
-
+        lift1.configMotionCruiseVelocity(LiftConst.velocityLimit, LiftConst.CAN_Timeout);
+        lift1.configMotionAcceleration(LiftConst.accelLimit, LiftConst.CAN_Timeout);
+		
         lift2.set(ControlMode.Follower, lift1.getDeviceID());
         lift2.configForwardSoftLimitEnable(false, LiftConst.CAN_Timeout);
         lift2.configReverseSoftLimitEnable(false, LiftConst.CAN_Timeout);
@@ -112,6 +114,8 @@ public class Lift extends Subsystem {
         
         //set feedback frame so that getClosedLoopError comes faster then 160ms
         lift1.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, LiftConst.CAN_Status_Frame_13_Period, LiftConst.CAN_Timeout);
+        lift1.setStatusFramePeriod(StatusFrameEnhanced.Status_10_MotionMagic, LiftConst.CAN_Status_Frame_10_Period, LiftConst.CAN_Timeout);
+
         
         //------------------------------------------------------------------------------
         // Logging
@@ -130,6 +134,16 @@ public class Lift extends Subsystem {
 			public double get() { return getOutput(); }
 		};
 		CSVLogger.getInstance().add("LiftOutput", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return getSecondOutput(); }
+		};
+		CSVLogger.getInstance().add("LiftOutput2", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return getThirdOutput(); }
+		};
+		CSVLogger.getInstance().add("LiftOutput3", temp);
 		
 		temp = new CSVLoggable(true) {
 			public double get() { return getSetpoint(); }
@@ -188,28 +202,30 @@ public class Lift extends Subsystem {
     	if (Math.abs(gamepadCommand) > ArmConst.gamepadDeadZone) {
     		this.setThrottle(gamepadCommand/Math.abs(gamepadCommand)*Math.pow(gamepadCommand, 2)*0.4); //scaled to 0.4 max
     	}
-    	else if (lift1.getControlMode() != ControlMode.Position) {
+    	else if (lift1.getControlMode() != ControlMode.Position && lift1.getControlMode() != ControlMode.MotionMagic) {
 			position = getPosition();
 			setLiftPosition(position);
     	}  	
     }
     
-    public void setPIDConstants (double P, double I, double D, boolean timeout)
+    public void setPIDConstants (double P, double I, double D, double F, boolean timeout)
 	{
     	if(timeout) {
     		//assume using main PID loop (index 0)
     		lift1.config_kP(0, P, LiftConst.CAN_Timeout);
     		lift1.config_kI(0, I, LiftConst.CAN_Timeout);
     		lift1.config_kD(0, D, LiftConst.CAN_Timeout);
+    		lift1.config_kF(0, F, LiftConst.CAN_Timeout);
     	}
     	else {
 	    	//assume using main PID loop (index 0)
 			lift1.config_kP(0, P, LiftConst.CAN_Timeout_No_Wait);
 			lift1.config_kI(0, I, LiftConst.CAN_Timeout_No_Wait);
 			lift1.config_kD(0, D, LiftConst.CAN_Timeout_No_Wait);
+			lift1.config_kF(0, F, LiftConst.CAN_Timeout_No_Wait);
     	}
 	
-        Logger.getInstance().println("Lift PID set to: " + P + ", " + I + ", " + D, Severity.INFO);
+        Logger.getInstance().println("Lift PIDF set to: " + P + ", " + I + ", " + D + ", " + F, Severity.INFO);
 	}
     
     //------------------------------------------------------------------------------
@@ -226,17 +242,24 @@ public class Lift extends Subsystem {
     	return lift1.getSelectedSensorVelocity(0);
     }
     
-    //VERIFY Implement getOutput() -MF
     public double getOutput() {
     	return lift1.getMotorOutputVoltage();
     }
     
+    public double getSecondOutput() {
+    	return lift1.getMotorOutputVoltage();
+    }
+    
+    public double getThirdOutput() {
+    	return lift1.getMotorOutputVoltage();
+    }
+    
     public double getSetpoint() {
-    	if(lift1.getControlMode() == ControlMode.Position || lift1.getControlMode() == ControlMode.Velocity) {
+    	if(lift1.getControlMode() == ControlMode.Position || lift1.getControlMode() == ControlMode.Velocity || Robot.lift.getMode() == ControlMode.MotionMagic) {
     		return ticksToInches(lift1.getClosedLoopTarget(0));
     	}
     	else {
-    		return 0;
+    		return 999;
     	}
     }
     
@@ -261,15 +284,15 @@ public class Lift extends Subsystem {
     public void setLiftPosition(double setpoint) {
     	if(calibrated) {
     		if(setpoint > LiftConst.upperLimit) {
-    			lift1.set(ControlMode.Position, inchesToTicks(LiftConst.upperLimit));
+    			lift1.set(ControlMode.MotionMagic, inchesToTicks(LiftConst.upperLimit));
     			Logger.getInstance().println("Lift setpoint request above upper limit: " + setpoint, Logger.Severity.WARNING);
     		}
     		else if(setpoint < LiftConst.lowerLimit) {
-    			lift1.set(ControlMode.Position, inchesToTicks(LiftConst.lowerLimit));
+    			lift1.set(ControlMode.MotionMagic, inchesToTicks(LiftConst.lowerLimit));
     			Logger.getInstance().println("Lift setpoint request below lower limit: " + setpoint, Logger.Severity.WARNING);
     		}
     		else {
-    			lift1.set(ControlMode.Position, inchesToTicks(setpoint));
+    			lift1.set(ControlMode.MotionMagic, inchesToTicks(setpoint));
     		}
     	}
     	else {
