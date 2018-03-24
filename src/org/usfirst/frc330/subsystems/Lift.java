@@ -192,7 +192,7 @@ public class Lift extends Subsystem {
     	if (Math.abs(gamepadCommand) > ArmConst.gamepadDeadZone) {
     		this.setThrottle(gamepadCommand/Math.abs(gamepadCommand)*Math.pow(gamepadCommand, 2)*0.4); //scaled to 0.4 max
     	}
-    	else if (lift1.getControlMode() != ControlMode.Position || lift1.getControlMode() != ControlMode.MotionMagic) {
+    	else if (lift1.getControlMode() != ControlMode.Position && lift1.getControlMode() != ControlMode.MotionMagic) {
 			position = getPosition();
 			setLiftPosition(position);
     	}  	
