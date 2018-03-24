@@ -11,10 +11,10 @@ public final class LiftConst {
 	public static final double defaultTimeout			= 3.0;  //AP WAG 3/4/18
 
 	// PID Constants
-	public static final double proportional      		= 0.3;   // JR 3/18/18 tuning for motion magic
+	public static final double proportional      		= 0.3;   // AP3/24/18
 	public static final double integral         		= 0.000; // AP 3/3/18
-	public static final double derivative        		= 15.0;   // AP 3/3/18
-	public static final double feedforward              = 0.5;   // JR 3/18/18 max velocity of 1600 F = 1023/1600
+	public static final double derivative        		= 15.0;   // AP 3/24/18
+	public static final double feedforward              = 0.5;   // AP 3/24/18
 	
 	// Motion Magic Constants
 	public static final int velocityLimit              = 2000;   //JR 3/18/18
