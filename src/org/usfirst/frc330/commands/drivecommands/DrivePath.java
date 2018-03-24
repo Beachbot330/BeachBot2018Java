@@ -3,6 +3,8 @@ package org.usfirst.frc330.commands.drivecommands;
 import java.util.ArrayList;
 
 import org.usfirst.frc330.Robot;
+import org.usfirst.frc330.util.CSVLoggable;
+import org.usfirst.frc330.util.CSVLogger;
 import org.usfirst.frc330.util.Logger;
 import org.usfirst.frc330.util.Logger.Severity;
 import org.usfirst.frc330.wpilibj.PIDGains;
@@ -10,14 +12,34 @@ import org.usfirst.frc330.wpilibj.PIDGains;
 public class DrivePath extends DriveWaypoint {
 	
 	double lookahead;
+	boolean invertX;
 	Waypoint currentLocation = new Waypoint(0,0,0);
 	ArrayList<Waypoint> path;
 	
-	public DrivePath(ArrayList<Waypoint> path, double lookahead, double tolerance, double timeout, boolean stopAtEnd, 
+	public DrivePath(ArrayList<Waypoint> path, boolean invertX, double lookahead, double tolerance, double timeout, boolean stopAtEnd, 
 			PIDGains driveGains, PIDGains gyroGains) {
 		super(0,0,tolerance,timeout,stopAtEnd, driveGains, gyroGains);
-		this.path = path;
+		Waypoint tempWaypoint;
+
 		this.lookahead = lookahead;
+		this.invertX = invertX;
+		if (invertX) {
+			for (int i = 0; i < path.size(); i++) {
+				tempWaypoint = path.get(i);
+				tempWaypoint.setX(-tempWaypoint.getX());
+				path.set(i, tempWaypoint);
+			}
+		}
+		this.path = path;
+		
+		CSVLoggable temp = new CSVLoggable(true) {
+			public double get() { return x; }
+    	};
+    	CSVLogger.getInstance().add("DrivePathX", temp);
+    	temp = new CSVLoggable(true) {
+			public double get() { return y; }
+    	};
+    	CSVLogger.getInstance().add("DrivePathY", temp);
 	}
 	
 	
@@ -27,9 +49,9 @@ public class DrivePath extends DriveWaypoint {
 		Robot.chassis.setPath(path);
 		updatePosition();
 		tempWaypoint = calcInterpWaypoint();
-		Logger.getInstance().println(tempWaypoint.toString(), Severity.INFO);
-		x = tempWaypoint.x;
-		y = tempWaypoint.y;
+		Logger.getInstance().println("First Waypoint: " + tempWaypoint.toString(), Severity.INFO);
+		x = tempWaypoint.getX();
+		y = tempWaypoint.getY();
 		super.initialize();
 	}
 
@@ -39,8 +61,8 @@ public class DrivePath extends DriveWaypoint {
 	protected void execute() {
 		updatePosition();
 		tempWaypoint = calcInterpWaypoint();
-		x = tempWaypoint.x;
-		y = tempWaypoint.y;
+		x = tempWaypoint.getX();
+		y = tempWaypoint.getY();
 		Logger.getInstance().println("CalcInterpWaypoint: " + tempWaypoint.toString(), Severity.INFO);
 		calcXY(x,y);
         leftSetpoint = leftDistance+Robot.chassis.getLeftDistance();

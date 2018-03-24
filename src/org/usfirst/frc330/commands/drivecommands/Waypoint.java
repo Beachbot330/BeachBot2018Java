@@ -2,7 +2,7 @@ package org.usfirst.frc330.commands.drivecommands;
 
 public class Waypoint {
 	
-	double x, y, heading;
+	private double x, y, heading;
 
 	public Waypoint(double x, double y, double heading) {
 		this.x = x;

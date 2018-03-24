@@ -99,7 +99,8 @@ public class Robot extends TimedRobot {
         autoProgram.addObject("LeftSide", new Chooser_RightLeftStart(StartingPosition.LEFT));
         
         //SimpleAuto
-        autoProgram.addObject("Don't Pick This!", new AllenTest());
+        autoProgram.addObject("Don't Pick This! Allen", new AllenTest());
+        autoProgram.addObject("Don't Pick This! Joe - Right",new JoeTest(StartingPosition.RIGHT));
         
         
         //Setup the buzzer
@@ -153,12 +154,11 @@ public class Robot extends TimedRobot {
     @Override
     public void disabledPeriodic() {
         Scheduler.getInstance().run();
-        chassis.calcXY();
     	CSVLogger.getInstance().writeData();
     	Logger.getInstance().updateDate();
     	CSVLogger.getInstance().updateDate();
     	buzzer.update();
-    	}
+    }
     
     @Override
     public void autonomousInit() {
@@ -187,10 +187,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousPeriodic() {
-    	chassis.calcXY();
-
         Scheduler.getInstance().run();
-        chassis.pidDriveAuto();
     	CSVLogger.getInstance().writeData();
 		buzzer.update();
     }
@@ -222,12 +219,8 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        //VERIFY copy over code from 2017 (and update it of course!) -JB
-            chassis.calcXY();
-            Scheduler.getInstance().run();
-            chassis.pidDrive();
-        	CSVLogger.getInstance().writeData();
-        	buzzer.update();
+        CSVLogger.getInstance().writeData();
+        buzzer.update();
     }
     
     
