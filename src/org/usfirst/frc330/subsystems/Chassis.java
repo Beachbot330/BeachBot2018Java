@@ -418,7 +418,7 @@ public class Chassis extends Subsystem {
     	}
     	else {
     		double scaleFactor = (1.10-0.65/68*Robot.getHeight());
-    		scaleFactor = Math.max(0.35, scaleFactor);
+    		scaleFactor = Math.max(0.40, scaleFactor);
     		left = -leftJoystick.getY() * scaleFactor;
     		right = -rightJoystick.getY() *scaleFactor;
     	}
