@@ -28,7 +28,7 @@ public final class ArmConst {
 	public static final double derivative        		= 4.00;   // AP WAG 1-30-18
 	public static final double feedForward	     		= 0.45;   // AP WAG 1-30-18
 	public static final double VoltageRampRate   		= 48.0;  // AP WAG 1-30-18
-	public static final double MaxOutputPercent			= 0.8;	// AP 3/3/18
+	public static final double MaxOutputPercent			= 1.0;	// AP 3/3/18
 	public static final double MaxOutputPercentUP		= 1.0;
 	
 	// Motion Magic Constants

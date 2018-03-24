@@ -72,8 +72,15 @@ public class CoordinatedMove extends BBCommand {
     	else {
     		Robot.arm.setArmAngle(ArmConst.safeAngle); //Move the arm towards the safe limit
     		Logger.getInstance().println("Moving from top towards bottom. Moving arm forward to preserve CG", Logger.Severity.INFO);
+    		if(Robot.hand.getHandAngleFromArm() < HandConst.encFrameSafe) { //If the hand is in an unsafe place
+				Robot.hand.setAngleFromArm(HandConst.encFrameSafe); //Put the hand in a safe place
+				Logger.getInstance().println("Now that the CG is forward, stowing the hand", Logger.Severity.INFO);
+			}
+			else
+				Logger.getInstance().println("Hand is already safe: " + Robot.hand.getHandAngleFromArm(), Logger.Severity.INFO);
+    		
     		topDown = true;
-    		CGforward = false;
+    		CGforward = true;
     	}
     }
 
@@ -99,16 +106,16 @@ public class CoordinatedMove extends BBCommand {
     		
     	}
     	else if (topDown) {
-    		if (Robot.arm.getArmAngle() < (ArmConst.safeAngle + 10) && !CGforward) {
-    			if(Robot.hand.getHandAngleFromArm() < HandConst.encFrameSafe) { //If the hand is in an unsafe place
-    				Robot.hand.setAngleFromArm(HandConst.encFrameSafe); //Put the hand in a safe place
-    				Logger.getInstance().println("Now that the CG is forward, stowing the hand", Logger.Severity.INFO);
-    			}
-    			else
-    				Logger.getInstance().println("Hand is already safe: " + Robot.hand.getHandAngleFromArm(), Logger.Severity.INFO);
-    			CGforward = true;
-    		}
-    		else if(Robot.hand.getHandOnTarget() && !armSet && CGforward) {
+//    		if (Robot.arm.getArmAngle() < (ArmConst.safeAngle + 10) && !CGforward) {
+//    			if(Robot.hand.getHandAngleFromArm() < HandConst.encFrameSafe) { //If the hand is in an unsafe place
+//    				Robot.hand.setAngleFromArm(HandConst.encFrameSafe); //Put the hand in a safe place
+//    				Logger.getInstance().println("Now that the CG is forward, stowing the hand", Logger.Severity.INFO);
+//    			}
+//    			else
+//    				Logger.getInstance().println("Hand is already safe: " + Robot.hand.getHandAngleFromArm(), Logger.Severity.INFO);
+//    			CGforward = true;
+//    		}
+    		if(Robot.hand.getHandOnTarget() && !armSet && CGforward) {
     			Robot.arm.setArmAngle(armAngle);
     			Logger.getInstance().println("Now that the hand is stowed, lowering the arm", Logger.Severity.INFO);
     			armSet = true;
