@@ -50,7 +50,8 @@ public class Shorter extends BBCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return Robot.lift.getLiftOnTarget();
+    	return true;
+    	//return Robot.lift.getLiftOnTarget();
     }
 
     // Called once after isFinished returns true

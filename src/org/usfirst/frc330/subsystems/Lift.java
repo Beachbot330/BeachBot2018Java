@@ -136,6 +136,16 @@ public class Lift extends Subsystem {
 		CSVLogger.getInstance().add("LiftOutput", temp);
 		
 		temp = new CSVLoggable(true) {
+			public double get() { return getSecondOutput(); }
+		};
+		CSVLogger.getInstance().add("LiftOutput2", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return getThirdOutput(); }
+		};
+		CSVLogger.getInstance().add("LiftOutput3", temp);
+		
+		temp = new CSVLoggable(true) {
 			public double get() { return getSetpoint(); }
 		};
 		CSVLogger.getInstance().add("LiftSetpoint", temp);
@@ -232,8 +242,15 @@ public class Lift extends Subsystem {
     	return lift1.getSelectedSensorVelocity(0);
     }
     
-    //VERIFY Implement getOutput() -MF
     public double getOutput() {
+    	return lift1.getMotorOutputVoltage();
+    }
+    
+    public double getSecondOutput() {
+    	return lift1.getMotorOutputVoltage();
+    }
+    
+    public double getThirdOutput() {
     	return lift1.getMotorOutputVoltage();
     }
     
