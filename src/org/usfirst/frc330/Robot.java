@@ -21,7 +21,9 @@ import edu.wpi.first.wpilibj.util.WPILibVersion;
 import org.usfirst.frc330.autoCommands.*;
 import org.usfirst.frc330.autoCommands.Chooser_RightLeftStart.StartingPosition;
 import org.usfirst.frc330.commands.*;
+import org.usfirst.frc330.constants.ArmConst;
 import org.usfirst.frc330.constants.ChassisConst;
+import org.usfirst.frc330.constants.HandConst;
 import org.usfirst.frc330.subsystems.*;
 //import org.usfirst.frc330.subsystems.Frills.Alarm;
 import org.usfirst.frc330.util.BeachbotLibVersion;
@@ -234,6 +236,13 @@ public class Robot extends TimedRobot {
     // -----------------------------------------------------------
     public boolean getIsPracticeRobot() {
     	return frills.getIsPracticeRobot();
+    }
+    
+    public static double getHeight() {
+    	double armContr = Math.sin(Math.toRadians(Robot.arm.getArmAngle())) * ArmConst.length;
+    	double handContr = Math.sin(Math.toRadians(Robot.hand.getHandAngle())) * HandConst.length;
+    	double liftContr = 40 + Robot.lift.getPosition();
+    	return liftContr + armContr + handContr;
     }
     //other   
 }
