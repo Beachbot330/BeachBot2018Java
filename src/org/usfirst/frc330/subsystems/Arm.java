@@ -77,7 +77,7 @@ public class Arm extends Subsystem {
         armL.setInverted(false);
         armL.setSensorPhase(false);
         
-        setPIDConstantsArm(ArmConst.proportional, ArmConst.integral, ArmConst.derivative, ArmConst.MaxOutputPercent, true);
+        setPIDConstantsArm(ArmConst.proportional, ArmConst.integral, ArmConst.derivative, ArmConst.feedForward, ArmConst.MaxOutputPercent, true);
         setArmAbsoluteTolerance(ArmConst.tolerance);
 		
 		armL.configForwardSoftLimitEnable(false, ArmConst.CAN_Timeout); // Disable limits until after calibration
@@ -91,6 +91,10 @@ public class Arm extends Subsystem {
 		
 		armL.configForwardLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, ArmConst.CAN_Timeout);
 		armL.configReverseLimitSwitchSource(RemoteLimitSwitchSource.Deactivated, LimitSwitchNormal.Disabled, 0, ArmConst.CAN_Timeout);
+		
+		//Magic Motion
+		armL.configMotionCruiseVelocity(ArmConst.velocityLimit, ArmConst.CAN_Timeout);
+        armL.configMotionAcceleration(ArmConst.accelLimit, ArmConst.CAN_Timeout);
         
         //set feedback frame so that getClosedLoopError comes faster then 160ms
         armL.setStatusFramePeriod(StatusFrameEnhanced.Status_13_Base_PIDF0, ArmConst.CAN_Status_Frame_13_Period, ArmConst.CAN_Timeout);
@@ -113,6 +117,11 @@ public class Arm extends Subsystem {
 			public double get() { return getSetpoint(); }
 		};
 		CSVLogger.getInstance().add("ArmSetpoint", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return getVelocity(); }
+		};
+		CSVLogger.getInstance().add("ArmVelocity", temp);
 		
 		temp = new CSVLoggable(true) {
 			public double get() { 
@@ -199,12 +208,16 @@ public class Arm extends Subsystem {
     }
     
 	public double getSetpoint() {
-		if(armL.getControlMode() == ControlMode.Position || armL.getControlMode() == ControlMode.Velocity) {
+		if(armL.getControlMode() == ControlMode.Position || armL.getControlMode() == ControlMode.Velocity || armL.getControlMode() == ControlMode.MotionMagic) {
 			return ticksToDegrees(armL.getClosedLoopTarget(0));
 		}
 		else {
 			return 999;
 		}
+	}
+	
+	public double getVelocity() {
+		return armL.getSelectedSensorVelocity(0);
 	}
 	
 	//--------------------------------------------------------------------
@@ -223,28 +236,29 @@ public class Arm extends Subsystem {
         	Scheduler.getInstance().add(new Calibrate());
         }
     }
-    
-    //VERIFY Implement setArmAngle -JB
+
     public void setArmAngle(double position) {
     	if(calibrated && Robot.hand.getCalibrated()) {
-    		armL.set(ControlMode.Position, degreesToTicks(position));
+    		armL.set(ControlMode.MotionMagic, degreesToTicks(position));
     	}
     	else {
     		Scheduler.getInstance().add(new Calibrate());
     	}
     }
     
-    public void setPIDConstantsArm (double P, double I, double D, double maxOutput, boolean timeout)
+    public void setPIDConstantsArm (double P, double I, double D, double F, double maxOutput, boolean timeout)
    	{
     	Logger.getInstance().println("Changing arm P: " + P, Severity.INFO);
     	Logger.getInstance().println("Changing arm I: " + I, Severity.INFO);
     	Logger.getInstance().println("Changing arm D: " + D, Severity.INFO);
+    	Logger.getInstance().println("Changing arm F: " + F, Severity.INFO);
     	Logger.getInstance().println("Changing arm Max: " + maxOutput, Severity.INFO);
        	if(timeout) {
        		//assume using main PID loop (index 0)
        		armL.config_kP(0, P, ArmConst.CAN_Timeout);
        		armL.config_kI(0, I, ArmConst.CAN_Timeout);
        		armL.config_kD(0, D, ArmConst.CAN_Timeout);
+       		armL.config_kF(0, F, ArmConst.CAN_Timeout);
        		armL.configPeakOutputForward(maxOutput, ArmConst.CAN_Timeout);
             armL.configPeakOutputReverse(-maxOutput, ArmConst.CAN_Timeout);
        	}
@@ -253,11 +267,10 @@ public class Arm extends Subsystem {
    			armL.config_kP(0, P, ArmConst.CAN_Timeout_No_Wait);
    			armL.config_kI(0, I, ArmConst.CAN_Timeout_No_Wait);
    			armL.config_kD(0, D, ArmConst.CAN_Timeout_No_Wait);
+   			armL.config_kF(0, F, ArmConst.CAN_Timeout_No_Wait);
    			armL.configPeakOutputForward(maxOutput, ArmConst.CAN_Timeout_No_Wait);
             armL.configPeakOutputReverse(-maxOutput, ArmConst.CAN_Timeout_No_Wait);
        	}
-       	
-        Logger.getInstance().println("Arm PID set to: " + P + ", " + I + ", " + D, Severity.INFO);
    	}
     
      
@@ -300,7 +313,7 @@ public class Arm extends Subsystem {
     		inertiaCounter--;
 			setArmThrottle(0);
     	}
-    	else if ( armL.getControlMode() != ControlMode.Position) {
+    	else if (armL.getControlMode() != ControlMode.MotionMagic) {
 			angle = getArmAngle();
 			setArmAngle(angle);
     	}  	

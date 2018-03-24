@@ -32,8 +32,8 @@ public final class HandConst {
 	public static final double rearSlopAdjust			= 18.0;
 	
 	// Motion Magic Constants
-	public static final int velocityLimit              = 1200;   //JR 3/18/18
-	public static final int accelLimit                 = 2400;   //JR 3/18/18
+	public static final int velocityLimit              = 1200;   //AP 3/24/18
+	public static final int accelLimit                 = 2400;   //AP 3/24/18
 	
 	// Angles relative to ground
 	public static final double pickUp					=  -5.0;  //JDR 3/3/18
