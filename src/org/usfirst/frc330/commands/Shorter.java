@@ -31,7 +31,7 @@ public class Shorter extends BBCommand {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-    	if(Robot.lift.getMode() == ControlMode.Position) {
+    	if(Robot.lift.getMode() == ControlMode.Position || Robot.lift.getMode() == ControlMode.MotionMagic) {
     		Logger.getInstance().println("Current Setpoint: " + Robot.lift.getSetpoint(), Logger.Severity.INFO);
         	Robot.lift.setLiftPosition(Robot.lift.getSetpoint() - LiftConst.stepSize);
     	}

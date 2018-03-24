@@ -257,7 +257,7 @@ public class Arm extends Subsystem {
             armL.configPeakOutputReverse(-maxOutput, ArmConst.CAN_Timeout_No_Wait);
        	}
        	
-        Logger.getInstance().println("Lift PID set to: " + P + ", " + I + ", " + D, Severity.INFO);
+        Logger.getInstance().println("Arm PID set to: " + P + ", " + I + ", " + D, Severity.INFO);
    	}
     
      

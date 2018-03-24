@@ -7,7 +7,7 @@ public final class LiftConst {
 	private LiftConst(){}
 
 	// Tolerance
-	public static final double tolerance        		= 5.0;  // WAG
+	public static final double tolerance        		= 1.0;  // AP&JR 3/23/18
 	public static final double defaultTimeout			= 3.0;  //AP WAG 3/4/18
 
 	// PID Constants

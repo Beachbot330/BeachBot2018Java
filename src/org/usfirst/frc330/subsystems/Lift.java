@@ -238,11 +238,11 @@ public class Lift extends Subsystem {
     }
     
     public double getSetpoint() {
-    	if(lift1.getControlMode() == ControlMode.Position || lift1.getControlMode() == ControlMode.Velocity) {
+    	if(lift1.getControlMode() == ControlMode.Position || lift1.getControlMode() == ControlMode.Velocity || Robot.lift.getMode() == ControlMode.MotionMagic) {
     		return ticksToInches(lift1.getClosedLoopTarget(0));
     	}
     	else {
-    		return 0;
+    		return 999;
     	}
     }
     
