@@ -39,6 +39,7 @@ import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -197,6 +198,11 @@ public class Chassis extends Subsystem {
         //-----------------------------------------------------------------------
         
         CSVLoggable temp = new CSVLoggable(true) {
+			public double get() { return RobotController.getBatteryVoltage(); }
+    	};
+    	CSVLogger.getInstance().add("BatteryVoltage", temp);
+        
+        temp = new CSVLoggable(true) {
 			public double get() { return driveEncoderLeft.getDistance(); }
     	};
     	CSVLogger.getInstance().add("DriveTrainDistanceL", temp);

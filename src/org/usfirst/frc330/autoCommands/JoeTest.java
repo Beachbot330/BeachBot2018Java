@@ -19,12 +19,12 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class JoeTest extends BBCommandGroup {
 
 	
-	Waypoint wp1 = new Waypoint(0,   230, 0); //Turn to go down path
-	Waypoint wp2 = new Waypoint(-212, 230, 0); //Drive to scale
-	Waypoint wp3 = new Waypoint(-200, 280, 0); //Dropoff at scale
-	Waypoint wp4 = new Waypoint(-186, 223, 0); //Drive to cube
-	Waypoint wp5 = new Waypoint(-204, 263, 0); //Drive back to scale
-	Waypoint wp6 = new Waypoint(-204, 276, 0); //Second scale dropoff
+	Waypoint wp1 = new Waypoint(0,   -230, 0); //Turn to go down path
+	Waypoint wp2 = new Waypoint(212, -230, 0); //Drive to scale
+	Waypoint wp3 = new Waypoint(200, -280, 0); //Dropoff at scale
+	Waypoint wp4 = new Waypoint(186, -223, 0); //Drive to cube
+	Waypoint wp5 = new Waypoint(204, -263, 0); //Drive back to scale
+	Waypoint wp6 = new Waypoint(204, -276, 0); //Second scale dropoff
 	
 	ArrayList<Waypoint> path1 = new ArrayList<Waypoint>();
 	
@@ -41,7 +41,7 @@ public class JoeTest extends BBCommandGroup {
     	addSequential(new ShiftHigh());
     	addParallel(new Defense());
     	
-    	addSequential(new DrivePath(path1, invertX, 60, ChassisConst.defaultTolerance, 5, false, ChassisConst.DrivePathHigh, ChassisConst.GyroPathHigh));
+    	addSequential(new DrivePathBackward(path1, invertX, 60, ChassisConst.defaultTolerance, 5, false, ChassisConst.DrivePathHigh, ChassisConst.GyroPathHigh));
 
     	
 //    	addSequential(new DropoffPositionRear());
