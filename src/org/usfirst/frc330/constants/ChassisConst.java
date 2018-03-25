@@ -44,8 +44,8 @@ public final class ChassisConst {
     public static final PIDGains GyroTurnHigh  = new PIDGains(0.030,0,0.000,0,1,1, "GyroTurnHigh"); //AP 3-9-18
     public static final PIDGains GyroDriveLow  = new PIDGains(0.010,0,0.000,0,1,1, "GyroDriveLow");
     public static final PIDGains GyroDriveHigh = new PIDGains(0.01,0,0.000,0,1,1, "GyroDriveHigh"); //AP 3-9-18
-    public static final PIDGains DrivePathHigh = new PIDGains(0.050,0,0.70,0,1.0,defaultMaxOutputStep, "DrivePathHigh"); //JR 3-24-18
-    public static final PIDGains GyroPathHigh  = new PIDGains(0.020,0,0.1,0,2.0,1, "GyroDriveHigh"); //JR 3-24-18
+    public static final PIDGains DrivePathHigh = new PIDGains(0.050,0,0.70,0,0.75,defaultMaxOutputStep, "DrivePathHigh"); //JR 3-24-18
+    public static final PIDGains GyroPathHigh  = new PIDGains(0.01,0,0.0,0,1.0,1, "GyroDriveHigh"); //JR 3-24-18
     
     //Drive distances
     public static final double driveStraightAuto     = 100;
