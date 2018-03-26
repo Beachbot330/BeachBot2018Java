@@ -49,12 +49,10 @@ public class FarNear extends BBCommandGroup {
     	//Finish driving away from wall
     	addSequential(new CheckDone(parallelCommand));
     	
-    	//Lift arm to sccale dropoff location
+    	//Lift arm to scale dropoff location
     	addParallel(new SetLiftPosition(LiftConst.scaleDropoffMid + 5));
-    	//addSequential(new WaitCommand(2.0));
     	parallelCommand = new CoordinatedMove(ArmConst.vertical, HandConst.rearLevel);
     	addParallel(parallelCommand);
-    	//addSequential(new WaitCommand(2.0));
     	
     	//Drive to Scale
     	addSequential(new ShiftLow());
@@ -72,7 +70,7 @@ public class FarNear extends BBCommandGroup {
     	
     	//Get into pickup position
     	addSequential(new WaitCommand(0.5));
-    	addParallel(new IntakeCube());
+    	addParallel(new IntakeCube()); //Doesn't return until is has a cube
     	addSequential(new WaitCommand(0.5)); //Can we shorten this?
     	
     	//Go to pickup a cube
@@ -83,8 +81,6 @@ public class FarNear extends BBCommandGroup {
     	addSequential(new DriveWaypoint(wp3, invertX, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	addSequential(new WaitCommand(1.0)); //Can we shorten this?
     	addSequential(new Log("Cube picked up"));
-    	
-    	
     	
     	//Return to scale and dropoff
     	addSequential(new ShiftLow());
@@ -97,7 +93,6 @@ public class FarNear extends BBCommandGroup {
     	parallelCommand = new DriveWaypointBackward(wp4, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
     	addParallel(parallelCommand);
     	addSequential(new WaitCommand(0.6));
-    	addSequential(new DropoffPositionRear());
     	addSequential(new CheckDone(parallelCommand));
     	
     	//Get into dropoff position
