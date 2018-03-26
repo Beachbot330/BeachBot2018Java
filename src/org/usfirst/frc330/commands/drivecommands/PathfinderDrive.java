@@ -28,8 +28,11 @@ public class PathfinderDrive extends BBCommand {
 		this.gyroP = gyroP;
 		
 		Waypoint[] points = new Waypoint[] {
-			    new Waypoint(0, 4, 0),
-			    new Waypoint(25, 4, 0)
+			    new Waypoint(2, 4, 0),
+			    new Waypoint(14, 4, 0),
+			    new Waypoint(19.75, 10, 90),
+			    new Waypoint(19.75, 19, 90),
+			    new Waypoint(24, 23, 0)
 			};
 
 		Trajectory.Config config = new Trajectory.Config(Trajectory.FitMethod.HERMITE_CUBIC, Trajectory.Config.SAMPLES_HIGH, 0.02, 10.0, 20.0, 25.9);
