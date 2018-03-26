@@ -94,7 +94,7 @@ public class CoordinatedMove extends BBCommand {
 
     protected void execute() {
     	if(bottomUp) {
-    		if (Robot.hand.getHandOnTarget() && !armSet) {
+    		if (Robot.hand.getHandOnTarget() && !armSet) { //Hand stowed
     			Logger.getInstance().println("Hand stowed. Safe to move arm up", Logger.Severity.INFO);
     			Robot.arm.setArmAngle(armAngle);
     			armSet = true;

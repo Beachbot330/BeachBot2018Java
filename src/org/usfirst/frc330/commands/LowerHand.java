@@ -12,7 +12,7 @@
 package org.usfirst.frc330.commands;
 import edu.wpi.first.wpilibj.command.BBCommand;
 import org.usfirst.frc330.Robot;
-import org.usfirst.frc330.constants.LiftConst;
+import org.usfirst.frc330.constants.HandConst;
 import org.usfirst.frc330.util.Logger;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -34,12 +34,12 @@ public class LowerHand extends BBCommand {
     protected void initialize() {
     	if(Robot.hand.getMode() == ControlMode.Position || Robot.hand.getMode() == ControlMode.MotionMagic) {
     		Logger.getInstance().println("Current Setpoint: " + Robot.hand.getSetpoint(), Logger.Severity.INFO);
-        	Robot.hand.setAngle(Robot.hand.getSetpoint() - LiftConst.stepSize);
+        	Robot.hand.setAngleFromArm(Robot.hand.getSetpoint() - HandConst.stepSize);
     	}
     	else {
     		Logger.getInstance().println("Hand in mode: " + Robot.hand.getMode(), Logger.Severity.WARNING);
     		Logger.getInstance().println("Current position: " + Robot.hand.getHandAngle(), Logger.Severity.INFO);
-        	Robot.hand.setAngle(Robot.hand.getHandAngle() - LiftConst.stepSize);
+        	Robot.hand.setAngleFromArm(Robot.hand.getHandAngle() - HandConst.stepSize);
     	}
     }
 
