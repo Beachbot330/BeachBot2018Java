@@ -27,6 +27,7 @@ public class CoordinatedMove extends BBCommand {
 	double handAngleRelGround;
 	boolean armSet, handSet, CGforward;
 	boolean bottomUp, topDown;
+	double absAngle;
 	
     public CoordinatedMove(double armAngle, double handAngleRelGround) {
     	this.setRunWhenDisabled(false);
@@ -52,14 +53,20 @@ public class CoordinatedMove extends BBCommand {
     	
     	//Entire motion is above/below danger
     	if((Robot.arm.getArmAngle() >= ArmConst.safeAngle && armAngle >= ArmConst.safeAngle) || (Robot.arm.getArmAngle() <= -ArmConst.safeAngle && armAngle <= -ArmConst.safeAngle)) {
-    		Robot.hand.setAngle(handAngleRelGround);
+    		if (handAngleRelGround > 90) {
+        		absAngle = handAngleRelGround - HandConst.rearSlopAdjust - armAngle;
+        	}
+        	else {
+        		absAngle = handAngleRelGround + HandConst.slopAdjust - armAngle;
+        	}
+    		Robot.hand.setAngleFromArm(absAngle);
     		Robot.arm.setArmAngle(armAngle);
     		Logger.getInstance().println("Entire motion safe, setting final positions", Logger.Severity.INFO);
     		armSet = true;
     		handSet = true;
     	}
     	//Coming from bottom
-    	else if(armAngle > ArmConst.safeAngle) {
+    	else if(armAngle >= ArmConst.safeAngle) {
     		if(Robot.hand.getHandAngleFromArm() < HandConst.encFrameSafe) { //If the hand is in an unsafe place
     			Robot.hand.setAngleFromArm(HandConst.encFrameSafe); //Put the hand in a safe place
     		}
