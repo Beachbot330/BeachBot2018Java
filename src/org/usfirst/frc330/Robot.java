@@ -221,8 +221,6 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void teleopPeriodic() {
-        Scheduler.getInstance().run();
-        //VERIFY copy over code from 2017 (and update it of course!) -JB
             chassis.calcXY();
             Scheduler.getInstance().run();
             chassis.pidDrive();
