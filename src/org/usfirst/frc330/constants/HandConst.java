@@ -62,4 +62,5 @@ public final class HandConst {
 	public static final int  CAN_Timeout_No_Wait        = 0;  // JR 2/19/18
 	public static final int  CAN_Status_Frame_13_Period = 20; //JR 2/19/19
 	public static final double framePerimeterSafety		= 2.0; //How much margin do we want?
+	public static final double stepSize					= 10.0; //AP 3/25/18
 }	

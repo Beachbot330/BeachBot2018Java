@@ -321,6 +321,10 @@ public class Hand extends Subsystem {
   		return wrist.getSelectedSensorVelocity(0);
   	}
     
+  	public ControlMode getMode() {
+    	return wrist.getControlMode();
+    }
+    
     //--------------------------------------------------------------------
   	// Other Methods
   	//--------------------------------------------------------------------
