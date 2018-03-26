@@ -12,6 +12,7 @@ import org.usfirst.frc330.util.Logger.Severity;
 import edu.wpi.first.wpilibj.command.BBCommand;
 import jaci.pathfinder.Pathfinder;
 import jaci.pathfinder.Trajectory;
+import jaci.pathfinder.followers.DistanceFollower;
 import jaci.pathfinder.followers.EncoderFollower;
 import jaci.pathfinder.modifiers.TankModifier;
 import jaci.pathfinder.Waypoint;
@@ -19,7 +20,7 @@ import jaci.pathfinder.Waypoint;
 public class PathfinderDrive extends BBCommand {
 	
 	Trajectory leftTraj, rightTraj;
-	EncoderFollower leftFollow, rightFollow;
+	DistanceFollower leftFollow, rightFollow;
 	double gyroP;
 
 	public PathfinderDrive(String path, double kP, double kI, double kD, double kV, double kA, double gyroP) {
@@ -43,14 +44,14 @@ public class PathfinderDrive extends BBCommand {
 		//myFile = new File(path + "_right_detailed.csv");
 		//rightTraj = Pathfinder.readFromCSV(myFile);
 		
-		leftFollow = new EncoderFollower(leftTraj);
-		rightFollow = new EncoderFollower(rightTraj);
+		leftFollow = new DistanceFollower(leftTraj);
+		rightFollow = new DistanceFollower(rightTraj);
 		
 		leftFollow.configurePIDVA(kP, kI, kD, kV, kA);
 		rightFollow.configurePIDVA(kP, kI, kD, kV, kA);
 		
-		leftFollow.configureEncoder(Robot.chassis.getLeftEncoderRaw(), (int)ChassisConst.pulsePerRevolution*4, ChassisConst.wheelDiameter/12.0);
-		rightFollow.configureEncoder(Robot.chassis.getRightEncoderRaw(), (int)ChassisConst.pulsePerRevolution*4, ChassisConst.wheelDiameter/12.0);
+		//leftFollow.configureEncoder(Robot.chassis.getLeftEncoderRaw(), (int)ChassisConst.pulsePerRevolution*4, ChassisConst.wheelDiameter/12.0);
+		//rightFollow.configureEncoder(Robot.chassis.getRightEncoderRaw(), (int)ChassisConst.pulsePerRevolution*4, ChassisConst.wheelDiameter/12.0);
 		
 		CSVLoggable temp = new CSVLoggable(true) {
 			public double get() { 
@@ -77,8 +78,8 @@ public class PathfinderDrive extends BBCommand {
 	@Override
 	protected void execute() {
 		double left, right, curAngle;
-		left = leftFollow.calculate(Robot.chassis.getLeftEncoderRaw());
-		right = rightFollow.calculate(Robot.chassis.getRightEncoderRaw());
+		left = leftFollow.calculate(Robot.chassis.getLeftDistance()/12);
+		right = rightFollow.calculate(Robot.chassis.getRightDistance()/12);
 		curAngle = Robot.chassis.getAngle();
 		
 		double desired_heading = Pathfinder.r2d(leftFollow.getHeading());
