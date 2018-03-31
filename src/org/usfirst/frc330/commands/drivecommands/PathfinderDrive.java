@@ -1,6 +1,11 @@
 package org.usfirst.frc330.commands.drivecommands;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.CopyOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 import org.usfirst.frc330.Robot;
 import org.usfirst.frc330.constants.ChassisConst;
@@ -42,10 +47,25 @@ public class PathfinderDrive extends BBCommand {
 		leftTraj = modifier.getLeftTrajectory();
 		rightTraj = modifier.getRightTrajectory();
 		
-		//File myFile = new File(path + "_left_detailed.csv");
-		//leftTraj = Pathfinder.readFromCSV(myFile);
-		//myFile = new File(path + "_right_detailed.csv");
-		//rightTraj = Pathfinder.readFromCSV(myFile);
+		File leftFile = new File("/home/lvuser/" + path + "_left_detailed.csv");
+		
+		Logger.getInstance().println(getClass().getResource(path + "_left_detailed.csv").toString(), true);
+		
+		File rightFile = new File("/home/lvuser/" + path + "_right_detailed.csv");
+		
+		try {
+		Files.copy(getClass().getResource(path + "_left_detailed.csv").openStream(), leftFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		Files.copy(getClass().getResource(path + "_right_detailed.csv").openStream(), rightFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException ex) {
+			Logger.getInstance().printStackTrace(ex);
+		}
+		
+		//File leftFile = new File("/home/lvuser/" + path + "_left_detailed.csv");
+		leftTraj = Pathfinder.readFromCSV(leftFile);
+		//Pathfinder.writeToCSV(myFile, leftTraj);
+		//File rightFile = new File("/home/lvuser/" + path + "_right_detailed.csv");
+		rightTraj = Pathfinder.readFromCSV(rightFile);
+		//Pathfinder.writeToCSV(rightFile, rightTraj);
 		
 		leftFollow = new DistanceFollower(leftTraj);
 		rightFollow = new DistanceFollower(rightTraj);

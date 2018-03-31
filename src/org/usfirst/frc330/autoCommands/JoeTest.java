@@ -24,7 +24,7 @@ public class JoeTest extends BBCommandGroup {
     	addSequential(new ShiftHigh());
     	addParallel(new Defense());
     	
-    	addSequential(new PathfinderDrive("Tune_15ft",1.0,0,0,1/13.5,0.04,ChassisConst.GyroDriveHigh.getP()*10));
+    	addSequential(new PathfinderDrive("crossauto",1.0,0,0,1/13.5,0.04,/*ChassisConst.GyroDriveHigh.getP()*10*/0.0));
    	
 //    	addSequential(new ShiftLow());
 //    	addSequential(new TurnGyroWaypointBackward(wp2, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
