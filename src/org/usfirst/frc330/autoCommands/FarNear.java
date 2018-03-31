@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class FarNear extends BBCommandGroup {
 	
 	Waypoint wp1 = new Waypoint(0, -182, 0);
-	Waypoint wp2 = new Waypoint(29, -256-22, 0); //Dropoff at scale
+	Waypoint wp2 = new Waypoint(29, -256-15, 0); //Dropoff at scale
 	Waypoint wp3 = new Waypoint(38-2, -212-9, 0); //Drive to second cube
 	Waypoint wp4 = new Waypoint(29-4, -256-7, 0); //Drive back to scale
 	Waypoint wp5 = new Waypoint(29+1, -256-20, 0); // Second drop off
@@ -58,7 +58,7 @@ public class FarNear extends BBCommandGroup {
     	addSequential(new ShiftLow());
     	addSequential(new TurnGyroWaypointBackward(wp2, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	addSequential(new ShiftHigh());
-    	PIDGains tempDrive  = new PIDGains(0.050,0,0.70,0,0.6,ChassisConst.defaultMaxOutputStep, "DriveHigh");
+    	PIDGains tempDrive  = new PIDGains(0.10, 0, 0.80, 0, 0.6, ChassisConst.defaultMaxOutputStep, "DriveHigh");
     	addSequential(new DriveWaypointBackward(wp2, invertX, ChassisConst.defaultTolerance, 5, false, tempDrive, ChassisConst.GyroDriveHigh));
     	
     	//Aim low and shoot cube
@@ -72,22 +72,25 @@ public class FarNear extends BBCommandGroup {
     	
     	//Get into pickup position
     	addSequential(new OpenClaw());
-    	addSequential(new RollerOn());
+    	//addSequential(new RollerOn());
     	addParallel(new SetLiftPosition(LiftConst.intakePosition));
-    	addParallel(new CoordinatedMove(ArmConst.intakePosition, HandConst.pickUp));
-    	//addSequential(new WaitCommand(0.5)); //Can we shorten this?
+    	addParallel(new CoordinatedMove(ArmConst.intakePosition, HandConst.pickUp-10));
     	
     	//Go to pickup a cube
     	//addSequential(new Log("Before cube pickup"));
     	addSequential(new ShiftLow());
     	addSequential(new TurnGyroWaypoint(wp3, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new RollerOn());
     	addSequential(new ShiftHigh());
     	addSequential(new WaitCommand(0.2));
     	addSequential(new DriveWaypoint(wp3, invertX, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	
     	//Grab the cube
-    	addSequential(new CloseClaw());
-    	addSequential(new WaitCommand(0.6));
+    	addParallel(new PredictiveCloseClaw(wp3, 5)); //Start closing 5 inches early
+    	addSequential(new WaitCommand(0.4));
+    	
+    	//addSequential(new CloseClaw());
+    	//addSequential(new WaitCommand(0.6));
     	//Optimization: fire close claw in parallel with driving
     	//addSequential(new Log("Cube picked up"));
     	
@@ -98,10 +101,12 @@ public class FarNear extends BBCommandGroup {
     	//Return to prep location
     	addSequential(new ShiftLow());
     	addSequential(new TurnGyroWaypointBackward(wp4, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
-    	addSequential(new RollerOff()); //Optimization, use a parallel wait command here
+    	//addSequential(new RollerOff()); //Optimization, use a parallel wait command here
     	addSequential(new ShiftHigh());
     	parallelCommand = new DriveWaypointBackward(wp4, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
     	addParallel(parallelCommand);
+    	addSequential(new WaitCommand(0.4));
+    	addSequential(new RollerOff());
     	addSequential(new CheckDone(parallelCommand));
     	
     	//Get into dropoff position
@@ -113,7 +118,7 @@ public class FarNear extends BBCommandGroup {
     	addSequential(new TurnGyroWaypointBackward(wp5, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	//addSequential(new WaitCommand(0.1));
     	addSequential(new ShiftHigh());
-    	tempDrive  = new PIDGains(0.050,0,0.70,0,0.8,ChassisConst.defaultMaxOutputStep, "DriveHigh"); //AP 3-12-18
+    	tempDrive  = new PIDGains(0.10, 0, 0.80, 0, 0.8,ChassisConst.defaultMaxOutputStep, "DriveHigh"); //AP 3-12-18
     	addSequential(new DriveWaypointBackward(wp5, invertX, ChassisConst.defaultTolerance, 5, false, tempDrive, ChassisConst.GyroDriveHigh));
     	addSequential(new WaitCommand(0.1));
     	
@@ -123,13 +128,14 @@ public class FarNear extends BBCommandGroup {
     	addParallel(new DeployCube());
     	addSequential(new WaitCommand(0.1));
     	addSequential(new OpenClaw());
+    	addSequential(new WaitCommand(0.4));
     	
     	
     	//Get into pickup position
     	addSequential(new OpenClaw());
     	addSequential(new RollerOn());
     	addParallel(new SetLiftPosition(LiftConst.intakePosition));
-    	addParallel(new CoordinatedMove(ArmConst.intakePosition, HandConst.pickUp));
+    	addParallel(new CoordinatedMove(ArmConst.intakePosition, HandConst.pickUp-10));
     	
     	//Go to pickup a new cube
     	addSequential(new ShiftLow());
@@ -138,8 +144,8 @@ public class FarNear extends BBCommandGroup {
     	addSequential(new DriveWaypoint(wp6, invertX, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
 
     	//Grab the cube
-    	addSequential(new CloseClaw());
-    	addSequential(new WaitCommand(0.6));
+    	addParallel(new PredictiveCloseClaw(wp6, 5)); //Start closing 5 inches early
+    	addSequential(new WaitCommand(0.4));
     	//Optimization: fire close claw in parallel with driving
     	//addSequential(new Log("Cube picked up"));
     	
@@ -152,9 +158,10 @@ public class FarNear extends BBCommandGroup {
     	parallelCommand = new DriveWaypointBackward(wp4, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
     	addParallel(parallelCommand);
     	addSequential(new WaitCommand(0.6));
-    	addSequential(new RollerOff());
+    	//addSequential(new RollerOff());
     	addSequential(new CoordinatedMove(ArmConst.vertical, HandConst.rearLevel));
     	addSequential(new CheckDone(parallelCommand));
+    	addSequential(new RollerOff());
     	
     	//Get into dropoff position
     	parallelCommand = new CoordinatedMove(ArmConst.vertical, HandConst.rearLevel);
