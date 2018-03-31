@@ -42,7 +42,7 @@ public class IntakeCube extends BBCommandGroup {
     	addParallel(new SetLiftPosition(LiftConst.intakePosition));
     	addSequential(new CoordinatedMove(ArmConst.intakePosition, HandConst.pickUp));
     	
-    	addSequential(new SetHandAngle(HandConst.pickUp));
+    	//addSequential(new SetHandAngle(HandConst.pickUp));
     	
     	
     	addSequential(new WaitCommand(0.45));
