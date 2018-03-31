@@ -145,7 +145,7 @@ public class Robot extends TimedRobot {
 		Robot.climber.lockPlatforms();
 		Robot.arm.stopArm();
 		Robot.hand.stopWrist();
-		Robot.grabber.pickupOff();
+		Robot.grabber.rollerOff();
 		Robot.chassis.stopDrive();
 		Robot.grabber.stopGrabber();
     }
@@ -206,7 +206,7 @@ public class Robot extends TimedRobot {
 		Robot.climber.lockPlatforms();
 		Robot.arm.stopArm();
 		Robot.hand.stopWrist();
-		Robot.grabber.pickupOff();
+		Robot.grabber.rollerOff();
 		Robot.chassis.stopDrive();
 		Robot.grabber.stopGrabber();
         // This makes sure that the autonomous stops running when
