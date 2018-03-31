@@ -7,6 +7,7 @@ import org.usfirst.frc330.commands.*;
 import org.usfirst.frc330.commands.commandgroups.*;
 import org.usfirst.frc330.commands.drivecommands.*;
 import org.usfirst.frc330.constants.ChassisConst;
+import org.usfirst.frc330.paths.PathfinderDrive;
 import org.usfirst.frc330.wpilibj.PIDGains;
 
 import edu.wpi.first.wpilibj.command.BBCommand;
@@ -24,7 +25,7 @@ public class JoeTest extends BBCommandGroup {
     	addSequential(new ShiftHigh());
     	addParallel(new Defense());
     	
-    	addSequential(new PathfinderDrive("crossauto",1.0,0,0,1/13.5,0.04,/*ChassisConst.GyroDriveHigh.getP()*10*/0.0));
+    	addSequential(new PathfinderDrive("Tune_Turn",1.0,0,0,1/12.5,0.03,ChassisConst.GyroDriveHigh.getP()*2/*0.0*/));
    	
 //    	addSequential(new ShiftLow());
 //    	addSequential(new TurnGyroWaypointBackward(wp2, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));

@@ -223,7 +223,7 @@ public class Chassis extends Subsystem {
     	CSVLogger.getInstance().add("DriveTrainRateR", temp);    	
     	
     	temp = new CSVLoggable() {
-			public double get() { return leftDrive.get(); }  		
+			public double get() { return -leftDrive.get(); }  		
     	};
     	CSVLogger.getInstance().add("DriveTrainLeft", temp);
     	

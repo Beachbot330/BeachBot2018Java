@@ -284,10 +284,6 @@ public class Grabber extends Subsystem {
     	intakeLeft.set((GrabberConst.rollerDeploySpeed)); //the negative one is to make it rotate the other way
     	intakeRight.set((GrabberConst.rollerDeploySpeed));
     }
-    
-	public void pickupOff() {
-		intakeLeft.disable();
-	}
 	
 	public void stopGrabber() {
 		intakeLeft.set(0);
