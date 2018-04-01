@@ -86,7 +86,7 @@ public class FarNear extends BBCommandGroup {
     	addSequential(new DriveWaypoint(wp3, invertX, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	
     	//Grab the cube
-    	addParallel(new PredictiveCloseClaw(wp3, 5)); //Start closing 5 inches early
+    	addParallel(new PredictiveCloseClaw(wp3, invertX, 5)); //Start closing 5 inches early
     	addSequential(new WaitCommand(0.4));
     	
     	//addSequential(new CloseClaw());
@@ -144,7 +144,7 @@ public class FarNear extends BBCommandGroup {
     	addSequential(new DriveWaypoint(wp6, invertX, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
 
     	//Grab the cube
-    	addParallel(new PredictiveCloseClaw(wp6, 5)); //Start closing 5 inches early
+    	addParallel(new PredictiveCloseClaw(wp6, invertX, 5)); //Start closing 5 inches early
     	addSequential(new WaitCommand(0.4));
     	//Optimization: fire close claw in parallel with driving
     	//addSequential(new Log("Cube picked up"));

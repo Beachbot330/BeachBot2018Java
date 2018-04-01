@@ -32,6 +32,10 @@ public class Flinger extends BBCommandGroup {
 
     public Flinger(StartingPosition pos) {
     	
+    	if (pos == StartingPosition.LEFT) {
+    		wp3.setX(wp3.getX() + 3);
+    		wp6.setX(wp6.getX() + 3);
+    	}
     	boolean invertX = (pos == StartingPosition.LEFT);
     	
     	addSequential(new CloseClaw());
@@ -76,7 +80,7 @@ public class Flinger extends BBCommandGroup {
     	addSequential(new DriveWaypoint(wp3, invertX, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	
     	//Grab the cube
-    	addParallel(new PredictiveCloseClaw(wp3, 5)); //Start closing 5 inches early
+    	addParallel(new PredictiveCloseClaw(wp3, invertX, 5)); //Start closing 5 inches early
     	addSequential(new WaitCommand(0.4));
     	
     	//Return to prep location
@@ -118,7 +122,7 @@ public class Flinger extends BBCommandGroup {
     	addSequential(new DriveWaypoint(wp6, invertX, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
 
     	//Grab the cube
-    	addParallel(new PredictiveCloseClaw(wp6, 5)); //Start closing 5 inches early
+    	addParallel(new PredictiveCloseClaw(wp6, invertX, 5)); //Start closing 5 inches early
     	addSequential(new WaitCommand(0.4));
     	addSequential(new Log("Third cube picked up"));
     	

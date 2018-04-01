@@ -23,11 +23,14 @@ public class PredictiveCloseClaw extends BBCommand {
 	Waypoint wp;
 	double distance;
 	
-    public PredictiveCloseClaw(Waypoint wp, double distance) {
+    public PredictiveCloseClaw(Waypoint wp, boolean invertX, double distance) {
     	this.setRunWhenDisabled(false);
     	this.wp = wp;
     	this.distance = distance;
     	requires(Robot.grabber);
+    	if(invertX) {
+    		this.wp.setX(-wp.getX());
+    	}
     }
 
     protected void initialize() {
