@@ -100,7 +100,7 @@ public class Robot extends TimedRobot {
         autoProgram.addObject("LeftSide", new Chooser_RightLeftStart(StartingPosition.LEFT));
         
         //SimpleAuto
-        autoProgram.addObject("Don't Pick This!", new AllenTest());
+        autoProgram.addObject("Don't Pick This!", new Flinger(StartingPosition.RIGHT));
         
         
         //Setup the buzzer
