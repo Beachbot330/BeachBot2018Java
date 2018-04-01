@@ -23,10 +23,13 @@ public class WaitForPosition extends BBCommand {
 	Waypoint wp;
 	double distance;
 	
-    public WaitForPosition(Waypoint wp, double distance) {
+    public WaitForPosition(Waypoint wp, boolean invertX, double distance) {
     	this.setRunWhenDisabled(false);
     	this.wp = wp;
     	this.distance = distance;
+    	if (invertX) {
+    		this.wp.setX(-wp.getX());
+    	}
     }
 
     protected void initialize() {

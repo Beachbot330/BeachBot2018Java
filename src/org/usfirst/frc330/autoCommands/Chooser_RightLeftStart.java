@@ -47,7 +47,8 @@ public class Chooser_RightLeftStart extends BBCommand {
     	nearFar = new NearFar(pos);
     	//farFar = new FarFar(pos);
     	farFar = new NearFar(pos);
-    	farNear = new FarNear(pos);
+    	//farNear = new FarNear(pos);
+    	farNear = new Flinger(pos);
     	this.startingPosition = pos;
     }
 
