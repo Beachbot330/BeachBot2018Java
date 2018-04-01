@@ -10,6 +10,7 @@
 
 package org.usfirst.frc330;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -157,15 +158,14 @@ public class Robot extends TimedRobot {
     	CSVLogger.getInstance().writeData();
     	Logger.getInstance().updateDate();
     	CSVLogger.getInstance().updateDate();
+    	SmartDashboard.putString("Selected Auto", autoProgram.getSelected().getName());
     	buzzer.update();
-    	}
+    }
     
     @Override
     public void autonomousInit() {
     	buzzer.enable(1.25);
     	Logger.getInstance().println("Autonomous Init",true);
-    	Logger.getInstance().updateDate();
-    	CSVLogger.getInstance().updateDate();
     	
     	Robot.chassis.resetPosition();
     	
@@ -173,12 +173,20 @@ public class Robot extends TimedRobot {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
 
-    	Logger.getInstance().println("Running Auto: " + autonomousCommand.getName(),true);    
+    	Logger.getInstance().println("Running Auto: " + autonomousCommand.getName(),true);
+    	Logger.getInstance().println("Game Data received: " + DriverStation.getInstance().getGameSpecificMessage(),true);
+    	Logger.getInstance().println("Event: " + DriverStation.getInstance().getEventName() + 
+    			" Match Type: " + DriverStation.getInstance().getMatchType() + " Match Number: " +
+    			DriverStation.getInstance().getMatchNumber(), true);
+
     	
 	    if(Math.abs(Robot.chassis.getAngle()) > 0.2){
 	    	Robot.chassis.resetPosition();
 	    	Logger.getInstance().println("Gyro failed to reset, retrying", Severity.ERROR);
 	    }
+	    
+    	Logger.getInstance().updateDate();
+    	CSVLogger.getInstance().updateDate();
     }
    
 
