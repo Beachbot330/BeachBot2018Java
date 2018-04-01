@@ -50,6 +50,7 @@ public class Chooser_RightLeftStart extends BBCommand {
     	//farNear = new FarNear(pos);
     	farNear = new Flinger(pos);
     	this.startingPosition = pos;
+    	this.setName(this.getName() + ": " + pos.toString());
     }
 
     protected void initialize() {
