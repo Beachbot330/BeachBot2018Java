@@ -29,7 +29,7 @@ public class NearFar extends BBCommandGroup {
 	Waypoint wp4 = new Waypoint(186, -223, 0); //Drive to cube
 	Waypoint wp5 = new Waypoint(204, -263, 0); //Drive back to scale
 	Waypoint wp6 = new Waypoint(204, -276, 0); //Second scale dropoff
-	Waypoint wp7 = new Waypoint(186+15, -223, 0); //Pickup third cube
+	Waypoint wp7 = new Waypoint(201, -223, 0); //Pickup third cube
 
     public NearFar(StartingPosition pos) {
     	
