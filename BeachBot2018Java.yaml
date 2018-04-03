@@ -1229,7 +1229,7 @@ Children:
           default: '1'
           name: Button
           validators: null
-          value: '10'
+          value: '9'
         Command: !!robotbuilder.data.properties.TypeSelectionProperty
           default: None
           name: Command
@@ -1243,7 +1243,7 @@ Children:
           validators: null
           value: whenPressed
       Base: Joystick Button
-      Name: PowerUpDropOff_10
+      Name: PowerUpDropOff_9
     - Children: []
       Properties:
         Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
@@ -1258,7 +1258,7 @@ Children:
           default: '1'
           name: Button
           validators: null
-          value: '9'
+          value: '10'
         Command: !!robotbuilder.data.properties.TypeSelectionProperty
           default: None
           name: Command
@@ -1272,7 +1272,7 @@ Children:
           validators: null
           value: whenPressed
       Base: Joystick Button
-      Name: LowerHand_9
+      Name: LowerHand_10
     Properties:
       Number: !!robotbuilder.data.properties.ChoicesProperty
         choices: *id035
@@ -2316,10 +2316,10 @@ Children:
       Requires: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Requires, type: Subsystem, validators: null, value: Hand}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id038 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id038
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
