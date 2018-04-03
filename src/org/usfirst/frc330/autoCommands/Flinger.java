@@ -55,16 +55,14 @@ public class Flinger extends BBCommandGroup {
     	addSequential(new ShiftLow());
     	addSequential(new TurnGyroWaypointBackward(wp2, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	addSequential(new ShiftHigh());
-    	PIDGains tempDrive  = new PIDGains(0.10, 0, 0.80, 0, 0.8, ChassisConst.defaultMaxOutputStep, "DriveHigh");
+    	//PIDGains tempDrive  = new PIDGains(0.10, 0, 0.80, 0, 0.8, ChassisConst.defaultMaxOutputStep, "DriveHigh");
     	parallelCommand = new DriveWaypointBackward(wp2, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
     	addParallel(parallelCommand);
     	
     	//Fling while driving
     	addSequential(new WaitForPosition(wp2, invertX, flingDistance));
     	addSequential(new ThrowCubeArm());
-    	
-    	//Aim low and shoot cube
-    	addSequential(new CheckDone(parallelCommand));
+    	addSequential(new CheckDone(parallelCommand)); //Check that we are done driving
     	   	
     	//Get into pickup position
     	addParallel(new SetLiftPosition(LiftConst.intakePosition));
@@ -103,7 +101,6 @@ public class Flinger extends BBCommandGroup {
     	addParallel(parallelCommand);
     	
     	addSequential(new ShiftHigh());
-    	tempDrive  = new PIDGains(0.10, 0, 0.80, 0, 0.8,ChassisConst.defaultMaxOutputStep, "DriveHigh"); //AP 3-12-18
     	addSequential(new DriveWaypointBackward(wp5, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	addSequential(new WaitCommand(0.1));
     	
@@ -145,7 +142,6 @@ public class Flinger extends BBCommandGroup {
     	
     	//Drive back
     	addSequential(new ShiftHigh());
-    	tempDrive  = new PIDGains(0.050,0,0.70,0,0.8,ChassisConst.defaultMaxOutputStep, "DriveHigh"); //AP 3-12-18
     	addSequential(new DriveWaypointBackward(wp5, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	addSequential(new WaitCommand(0.1));
     	
