@@ -23,13 +23,13 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class NearFar extends BBCommandGroup {
 
 	
-	Waypoint wp1 = new Waypoint(0,   -230, 0); //Turn to go down path
-	Waypoint wp2 = new Waypoint(212, -230, 0); //Drive to scale
-	Waypoint wp3 = new Waypoint(195, -279, 0); //Dropoff at scale
-	Waypoint wp4 = new Waypoint(180, -223, 0); //Drive to cube
-	Waypoint wp5 = new Waypoint(204, -263, 0); //Drive back to scale
-	Waypoint wp6 = new Waypoint(192, -276, 0); //Second scale dropoff
-	Waypoint wp7 = new Waypoint(160, -220, 0); //Pickup third cube
+	Waypoint wp1 = new Waypoint(0,   -230+5, 0); //Turn to go down path
+	Waypoint wp2 = new Waypoint(212, -230+5, 0); //Drive to scale
+	Waypoint wp3 = new Waypoint(195, -279+5, 0); //Dropoff at scale
+	Waypoint wp4 = new Waypoint(180, -223+5, 0); //Drive to cube
+	Waypoint wp5 = new Waypoint(204, -263+5, 0); //Drive back to scale
+	Waypoint wp6 = new Waypoint(192, -276+5, 0); //Second scale dropoff
+	Waypoint wp7 = new Waypoint(160, -220+5, 0); //Pickup third cube
 
     public NearFar(StartingPosition pos) {
     	

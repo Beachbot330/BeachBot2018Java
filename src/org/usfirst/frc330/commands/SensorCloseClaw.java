@@ -50,14 +50,14 @@ public class SensorCloseClaw extends BBCommand {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return Robot.grabber.hasCubeClose();
+        return Robot.grabber.hasCube();
     }
 
     // Called once after isFinished returns true
     @Override
     protected void end() {
     	Robot.grabber.closeClaw();
-    	Logger.getInstance().println("Has Cube: " + Robot.grabber.hasCubeClose(), Severity.INFO);
+    	Logger.getInstance().println("Has Cube: " + Robot.grabber.hasCube(), Severity.INFO);
     	Logger.getInstance().println("LeftSensor: " + Robot.grabber.getSensorLDistance(), Severity.INFO);
     	Logger.getInstance().println("CenterSensor: " + Robot.grabber.getSensorCDistance(), Severity.INFO);
     	Logger.getInstance().println("RightSensor: " + Robot.grabber.getSensorRDistance(), Severity.INFO);

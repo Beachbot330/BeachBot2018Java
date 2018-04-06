@@ -165,13 +165,13 @@ public class Grabber extends Subsystem {
 		
 		temp = new CSVLoggable(true) {
 			public double get() {
-				if(hasCubeClose())
+				if(hasCube())
 					return 1.0;			
 				else 
 					return 0.0;
 			}			
 		};
-		CSVLogger.getInstance().add("HasCubeClose", temp);
+		CSVLogger.getInstance().add("HasCube", temp);
 		
 		temp = new CSVLoggable(true) {
 			public double get() { return centerKalman.getEstimatedError(); }			
@@ -303,7 +303,7 @@ public class Grabber extends Subsystem {
 	
 	//Note, hasCubeClose uses isAngleWithinMaximumOuterDistance, but doesn't return the result.
 	//Can remove once certain which method to use
-	public boolean hasCubeClose() {
+	public boolean hasCube() {
 		double leftAngle, rightAngle, fullAngle;
 		double sL = getSensorLDistance();
 		double sC = getSensorCDistance();
@@ -314,7 +314,7 @@ public class Grabber extends Subsystem {
 		if (sensorsReceivingInput < 3)
 			return false;
 		
-		//If cube is within max inner distance, robot has cube
+		//If all three sensors read the cube near, it is safe to close
 		if (sL < GrabberConst.centerSensorMaximumInnerDistance &&
 		   sC < GrabberConst.centerSensorMaximumInnerDistance &&
 		   sR < GrabberConst.centerSensorMaximumInnerDistance)
@@ -323,7 +323,7 @@ public class Grabber extends Subsystem {
 		leftAngle = getAngleBetweenSensors(getSensorLDistance(), getSensorCDistance(), GrabberConst.distanceBetweenSensors);
 	    rightAngle = getAngleBetweenSensors(getSensorCDistance(), getSensorRDistance(), GrabberConst.distanceBetweenSensors);
 	    
-		if (sC < sL && sC < sR) {
+		if (sC < sL && sC < sR) { // Corner is coming in (diamond)
 			double shallowAngle = Math.min(leftAngle, rightAngle);
 		    isAngleWithinMaximumOuterDistance(shallowAngle, GrabberConst.distanceBetweenSensors);
 		    
