@@ -30,25 +30,24 @@ public class IntakeCube extends BBCommandGroup {
 
     	
     	//if the cube is in the grabber, loop until it is gone
-    	addSequential(new LoopIfNoCube());
+    	addSequential(new LoopIfWeHaveCube());
     	//if the grabber has no cube in it, execute the following code:
     	
-    	//open grabber
+    	//Prep Grabber
     	addSequential(new OpenClaw());
-    	
     	addSequential(new RollerOn());
     	
     	//lower lift and arm to intake position
     	addParallel(new SetLiftPosition(LiftConst.intakePosition));
     	addSequential(new CoordinatedMove(ArmConst.intakePosition, HandConst.pickUp));
     	
-    	//addSequential(new SetHandAngle(HandConst.pickUp));
-    	
-    	
-    	addSequential(new WaitCommand(0.45));
+    	//Close claw once we have the cube
+    	addSequential(new WaitCommand(0.45)); //Consider shortening
     	addSequential(new SensorCloseClaw());
+    	
     	// Once everything above has been completed and the cube is in the grabber...
-    	addSequential(new RollerUntilCube(0.45, 0.6));
+    	addSequential(new RollerUntilCube(0.6, 2.0));
+    	
     	// DEFENSE MODE!  
     	addSequential(new Defense());
     	addSequential(new IsFinishedFalse());
