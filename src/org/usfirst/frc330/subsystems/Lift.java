@@ -197,10 +197,16 @@ public class Lift extends Subsystem {
 
     public void manualLift() {
     	double gamepadCommand = -Robot.oi.armGamePad.getRawAxis(5);
+    	double triggerLeft = Robot.oi.armGamePad.getRawAxis(2);
+    	double triggerRight = Robot.oi.armGamePad.getRawAxis(3);
+    	double triggerSum = triggerRight - triggerLeft;
     	double position;
     	
     	if (Math.abs(gamepadCommand) > ArmConst.gamepadDeadZone) {
     		this.setThrottle(gamepadCommand/Math.abs(gamepadCommand)*Math.pow(gamepadCommand, 2)*0.4); //scaled to 0.4 max
+    	}
+    	else if (triggerLeft >  ArmConst.triggerDeadZone || triggerRight >  ArmConst.triggerDeadZone) {
+    		this.setThrottle(triggerSum/Math.abs(triggerSum)*Math.pow(triggerSum, 2)*0.7); //scaled to 0.7 max
     	}
     	else if (lift1.getControlMode() != ControlMode.Position && lift1.getControlMode() != ControlMode.MotionMagic) {
 			position = getPosition();

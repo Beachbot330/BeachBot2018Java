@@ -17,6 +17,7 @@ public final class ArmConst {
 	public static final double tolerance        		= 5.0;
 	public static final double deadZone			 		= 0.05;  //AP WAG 1-30-18
 	public static final double gamepadDeadZone   		= 0.40;  //AP WAG 1-30-18
+	public static final double triggerDeadZone   		= 0.10;  //AP WAG 1-30-18
 	public static final double pickupTolerance	 		= 5.0; 	 //AP WAG 1-30-18
 	public static final double defaultTimeout	 		= 5.0;	 //AP WAG 1-30-18
 	public static final int    inertiaCounter	 		= 0;	 //AP 3/3/18
