@@ -12,6 +12,7 @@
 package org.usfirst.frc330.commands;
 import edu.wpi.first.wpilibj.command.BBCommand;
 import org.usfirst.frc330.Robot;
+import org.usfirst.frc330.constants.LiftConst;
 import org.usfirst.frc330.util.Logger;
 
 /**
@@ -19,17 +20,25 @@ import org.usfirst.frc330.util.Logger;
  */
 public class SetLiftPosition extends BBCommand {
 	
-	double position;
+	double position, tolerance;
+	
     public SetLiftPosition(double position) {
-    	
         requires(Robot.lift);
         this.position = position;
+        this.tolerance = LiftConst.tolerance;
+    }
+    
+    public SetLiftPosition(double position, double tolerance) {
+        requires(Robot.lift);
+        this.position = position;
+        this.tolerance = tolerance;
     }
 
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
     	Robot.lift.setLiftPosition(position);
+    	Robot.lift.setLiftAbsoluteTolerance(tolerance);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -46,6 +55,7 @@ public class SetLiftPosition extends BBCommand {
     // Called once after isFinished returns true
     @Override
     protected void end() {
+    	Robot.lift.setLiftAbsoluteTolerance(LiftConst.tolerance);
     	Logger.getInstance().println("Lift Setpoint: " + Robot.lift.getSetpoint(), Logger.Severity.INFO);
     	Logger.getInstance().println("Lift Final Position: " + Robot.lift.getPosition(), Logger.Severity.INFO);
     }
