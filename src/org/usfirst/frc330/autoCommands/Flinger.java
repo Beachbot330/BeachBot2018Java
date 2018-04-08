@@ -25,10 +25,10 @@ public class Flinger extends BBCommandGroup {
 	
 	Waypoint wp1 = new Waypoint(0, -182+5, 0);
 	Waypoint wp2 = new Waypoint(29, -271+5, 0); //Dropoff at scale
-	Waypoint wp3 = new Waypoint(36, -221+5, 0); //Drive to second cube
-	Waypoint wp4 = new Waypoint(25, -263+5, 0); //Drive back to scale
-	Waypoint wp5 = new Waypoint(32, -276+5, 0); // Second drop off
-	Waypoint wp6 = new Waypoint(56+5, -216+5, 0); // Pickup third cube
+	Waypoint wp3 = new Waypoint(36, -221+5+3, 0); //Drive to second cube
+	Waypoint wp4 = new Waypoint(25, -263+5+2, 0); //Drive back to scale
+	Waypoint wp5 = new Waypoint(32, -276+5+2, 0); // Second drop off
+	Waypoint wp6 = new Waypoint(56+5, -216+5-1, 0); // Pickup third cube
 
     public Flinger(StartingPosition pos) {
     	
@@ -71,7 +71,7 @@ public class Flinger extends BBCommandGroup {
     	//Go to pickup a cube
     	addSequential(new Log("Pickup Second Cube"));
     	addSequential(new ShiftLow());
-    	addSequential(new TurnGyroWaypoint(wp3, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new TurnGyroWaypoint(wp3, invertX, ChassisConst.defaultTurnTolerance, 1, ChassisConst.GyroTurnLow));
     	addSequential(new RollerOn());
     	addSequential(new ShiftHigh());
     	addSequential(new WaitCommand(0.2));
@@ -82,9 +82,6 @@ public class Flinger extends BBCommandGroup {
     	addSequential(new WaitCommand(0.4));
     	
     	//Return to prep location
-    	//addSequential(new ShiftLow());
-    	//addSequential(new TurnGyroWaypointBackward(wp4, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
-    	//addSequential(new RollerOff()); //Optimization, use a parallel wait command here
     	addSequential(new ShiftHigh());
     	parallelCommand = new DriveWaypointBackward(wp4, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
     	addParallel(parallelCommand);
@@ -94,7 +91,7 @@ public class Flinger extends BBCommandGroup {
     	
     	//Drive to scale for second dropoff
     	addSequential(new ShiftLow());
-    	addSequential(new TurnGyroWaypointBackward(wp5, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new TurnGyroWaypointBackward(wp5, invertX, ChassisConst.defaultTurnTolerance, 1, ChassisConst.GyroTurnLow));
     	
     	//Start Flinging
     	parallelCommand = new ThrowCubeArm();
@@ -114,7 +111,7 @@ public class Flinger extends BBCommandGroup {
     	
     	//Go to pickup a new cube
     	addSequential(new ShiftLow());
-    	addSequential(new TurnGyroWaypoint(wp6, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new TurnGyroWaypoint(wp6, invertX, ChassisConst.defaultTurnTolerance, 1, ChassisConst.GyroTurnLow));
     	addSequential(new ShiftHigh());
     	addSequential(new DriveWaypoint(wp6, invertX, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
 
@@ -134,7 +131,7 @@ public class Flinger extends BBCommandGroup {
     	
     	//Drive to scale for third dropoff
     	addSequential(new ShiftLow());
-    	addSequential(new TurnGyroWaypointBackward(wp5, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new TurnGyroWaypointBackward(wp5, invertX, ChassisConst.defaultTurnTolerance, 1, ChassisConst.GyroTurnLow));
     	
     	//Fling Cube
     	parallelCommand = new ThrowCubeArm();
