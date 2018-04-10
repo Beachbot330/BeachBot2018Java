@@ -18,13 +18,13 @@ import edu.wpi.first.wpilibj.command.BBCommandGroup;
  */
 public class  DriveDistanceAtAbsAngle extends BBCommandGroup{
     
-    public DriveDistanceAtAbsAngle(double distance, double angle, PIDGains driveGains, PIDGains gyroDriveGains, PIDGains gyroTurnGains)
+    public DriveDistanceAtAbsAngle(double distance, double angle, DrivePIDGains driveGains, DrivePIDGains gyroDriveGains, DrivePIDGains gyroTurnGains)
     {
     	addSequential(new TurnGyroAbs(angle, 5,gyroTurnGains));
         addSequential(new DriveDistanceAtAbsAngle_NoTurn(distance, 6, angle, 5, true, driveGains, gyroDriveGains));
     }
     
-    public DriveDistanceAtAbsAngle(double distance, double distanceTolerance, double angle, double timeout, boolean stopAtEnd, PIDGains driveGains, PIDGains gyroDriveGains, PIDGains gyroTurnGains)
+    public DriveDistanceAtAbsAngle(double distance, double distanceTolerance, double angle, double timeout, boolean stopAtEnd, DrivePIDGains driveGains, DrivePIDGains gyroDriveGains, DrivePIDGains gyroTurnGains)
     {
         addSequential(new TurnGyroAbs(angle,5,1.0,gyroTurnGains));
         addSequential(new DriveDistanceAtAbsAngle_NoTurn(distance, distanceTolerance, angle, timeout, stopAtEnd, driveGains, gyroDriveGains));

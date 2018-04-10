@@ -29,20 +29,20 @@ public class  DriveDistance extends BBCommand {
 	double leftSetpoint, rightSetpoint;
 	double origDistance;
     boolean stopAtEnd = false;
-    PIDGains gains;
+    DrivePIDGains gains;
     
-    public DriveDistance(double distance, PIDGains gains) {
+    public DriveDistance(double distance, DrivePIDGains gains) {
         this(distance, 5, 15, false, gains);
     }
     
-    public DriveDistance(double distance, double tolerance, PIDGains gains)
+    public DriveDistance(double distance, double tolerance, DrivePIDGains gains)
     {
         this(distance, tolerance, 15, false, gains);
     }
     
     
     public DriveDistance(	double distance, double tolerance,
-    						double timeout, boolean stopAtEnd, PIDGains gains) {
+    						double timeout, boolean stopAtEnd, DrivePIDGains gains) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
 	
@@ -63,7 +63,7 @@ public class  DriveDistance extends BBCommand {
     // Called just before this Command runs the first time
     protected void initialize() {
         Robot.chassis.gyroPID.disable();
-        maxOutput = ChassisConst.staticFrictionThrottle; //New in 2018!
+        maxOutput = gains.getMinStartOutput(); //New in 2018!
         
         Robot.chassis.leftDrivePID.setPID(gains);
         Robot.chassis.rightDrivePID.setPID(gains);

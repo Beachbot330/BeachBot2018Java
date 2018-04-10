@@ -58,7 +58,7 @@ public class FarNear extends BBCommandGroup {
     	addSequential(new ShiftLow());
     	addSequential(new TurnGyroWaypointBackward(wp2, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	addSequential(new ShiftHigh());
-    	PIDGains tempDrive  = new PIDGains(0.10, 0, 0.80, 0, 0.6, ChassisConst.defaultMaxOutputStep, "DriveHigh");
+    	DrivePIDGains tempDrive  = new DrivePIDGains(0.10, 0, 0.80, 0, 0.6, ChassisConst.defaultMaxOutputStep, ChassisConst.defaultMinStartOutput, "DriveHigh80%");
     	addSequential(new DriveWaypointBackward(wp2, invertX, ChassisConst.defaultTolerance, 5, false, tempDrive, ChassisConst.GyroDriveHigh));
     	
     	//Aim low and shoot cube
@@ -118,7 +118,7 @@ public class FarNear extends BBCommandGroup {
     	addSequential(new TurnGyroWaypointBackward(wp5, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	//addSequential(new WaitCommand(0.1));
     	addSequential(new ShiftHigh());
-    	tempDrive  = new PIDGains(0.10, 0, 0.80, 0, 0.8,ChassisConst.defaultMaxOutputStep, "DriveHigh"); //AP 3-12-18
+    	tempDrive  = new DrivePIDGains(0.10, 0, 0.80, 0, 0.8,ChassisConst.defaultMaxOutputStep, ChassisConst.defaultMinStartOutput, "DriveHigh80%"); //AP 3-12-18
     	addSequential(new DriveWaypointBackward(wp5, invertX, ChassisConst.defaultTolerance, 5, false, tempDrive, ChassisConst.GyroDriveHigh));
     	addSequential(new WaitCommand(0.1));
     	
@@ -172,7 +172,7 @@ public class FarNear extends BBCommandGroup {
     	addSequential(new TurnGyroWaypointBackward(wp5, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	//addSequential(new WaitCommand(0.1));
     	addSequential(new ShiftHigh());
-    	tempDrive  = new PIDGains(0.050,0,0.70,0,0.8,ChassisConst.defaultMaxOutputStep, "DriveHigh"); //AP 3-12-18
+    	tempDrive  = new DrivePIDGains(0.050,0,0.70,0,0.8,ChassisConst.defaultMaxOutputStep, ChassisConst.defaultMinStartOutput,"DriveHigh80%"); //AP 3-12-18
     	addSequential(new DriveWaypointBackward(wp5, invertX, ChassisConst.defaultTolerance, 5, false, tempDrive, ChassisConst.GyroDriveHigh));
     	addSequential(new WaitCommand(0.1));
     	

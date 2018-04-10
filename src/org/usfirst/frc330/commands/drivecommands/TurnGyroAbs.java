@@ -24,31 +24,31 @@ public class  TurnGyroAbs extends BBCommand {
     double angle, tolerance, maxOutput, maxOutputStep, maxOutputMax;
     boolean stopAtEnd = false;
     boolean enable = true;
-    PIDGains gains;
+    DrivePIDGains gains;
     
-    public TurnGyroAbs(double angle, PIDGains gains) {
+    public TurnGyroAbs(double angle, DrivePIDGains gains) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         this(angle, 0, 15, false, gains);
     }
     
-    public TurnGyroAbs(double angle, double tolerance, PIDGains gains)
+    public TurnGyroAbs(double angle, double tolerance, DrivePIDGains gains)
     {
         this(angle, tolerance, 15, false, gains);
     
     }
     
-    public TurnGyroAbs(double angle, double tolerance, double timeout, PIDGains gains)
+    public TurnGyroAbs(double angle, double tolerance, double timeout, DrivePIDGains gains)
     {
         this(angle, tolerance, timeout, false, gains);
     
     }
     
-    public TurnGyroAbs(double angle, double tolerance, double timeout, boolean stopAtEnd, PIDGains gains) {
+    public TurnGyroAbs(double angle, double tolerance, double timeout, boolean stopAtEnd, DrivePIDGains gains) {
         this(angle, tolerance, timeout, stopAtEnd, true, gains);
     }
     
-    public TurnGyroAbs(double angle, double tolerance, double timeout, boolean stopAtEnd, boolean enable, PIDGains gains) {
+    public TurnGyroAbs(double angle, double tolerance, double timeout, boolean stopAtEnd, boolean enable, DrivePIDGains gains) {
                 // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
 	
@@ -67,7 +67,7 @@ public class  TurnGyroAbs extends BBCommand {
     protected void initialize() {
         Robot.chassis.leftDrivePID.disable();
         Robot.chassis.rightDrivePID.disable();  
-        maxOutput = ChassisConst.staticFrictionThrottle; //New in 2018!
+        maxOutput = gains.getMinStartOutput(); //New in 2018!
         
         Robot.chassis.gyroPID.setPID(gains);
  //       Robot.chassis.gyroPID.setMaxOutput(gains.getMaxOutput());

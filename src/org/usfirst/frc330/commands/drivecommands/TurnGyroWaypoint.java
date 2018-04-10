@@ -17,7 +17,7 @@ public class TurnGyroWaypoint extends TurnGyroAbs {
     double x, y;
     
     
-    public TurnGyroWaypoint(double x, double y, double tolerance, double timeout, PIDGains gains)
+    public TurnGyroWaypoint(double x, double y, double tolerance, double timeout, DrivePIDGains gains)
     {
         super(0,tolerance,timeout,false,true, gains);
         this.x=x;
@@ -25,7 +25,7 @@ public class TurnGyroWaypoint extends TurnGyroAbs {
         
     }
     
-    public TurnGyroWaypoint(Waypoint wp, boolean invertX, double tolerance, double timeout, PIDGains gains) {
+    public TurnGyroWaypoint(Waypoint wp, boolean invertX, double tolerance, double timeout, DrivePIDGains gains) {
     	super(0,tolerance,timeout,false,true, gains);
     	if (invertX)
     		this.x = -wp.getX();

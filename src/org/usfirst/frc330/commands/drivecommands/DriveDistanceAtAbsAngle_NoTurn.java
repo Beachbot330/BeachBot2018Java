@@ -16,19 +16,19 @@ import org.usfirst.frc330.wpilibj.PIDGains;
  */
 public class  DriveDistanceAtAbsAngle_NoTurn extends DriveDistance{
     double angle;
-    PIDGains gyroGains;
+    DrivePIDGains gyroGains;
     
-    public DriveDistanceAtAbsAngle_NoTurn(double distance, double angle, PIDGains driveGains, PIDGains gyroGains)
+    public DriveDistanceAtAbsAngle_NoTurn(double distance, double angle, DrivePIDGains driveGains, DrivePIDGains gyroGains)
     {
         this(distance, 6, angle, -1.0, true, driveGains, gyroGains); //-1 means no timeout
     }
     
-    public DriveDistanceAtAbsAngle_NoTurn(double distance, double angle, double tolerance, PIDGains driveGains, PIDGains gyroGains)
+    public DriveDistanceAtAbsAngle_NoTurn(double distance, double angle, double tolerance, DrivePIDGains driveGains, DrivePIDGains gyroGains)
     {
         this(distance, tolerance, angle, -1.0, true, driveGains, gyroGains); //-1 means no timeout
     }
     
-    public DriveDistanceAtAbsAngle_NoTurn(double distance, double tolerance, double angle, double timeout, boolean stopAtEnd, PIDGains driveGains, PIDGains gyroGains)
+    public DriveDistanceAtAbsAngle_NoTurn(double distance, double tolerance, double angle, double timeout, boolean stopAtEnd, DrivePIDGains driveGains, DrivePIDGains gyroGains)
     {
         super(distance, tolerance, timeout, stopAtEnd, driveGains);
         this.angle = angle;

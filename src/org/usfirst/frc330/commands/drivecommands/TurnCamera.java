@@ -22,7 +22,7 @@ public class TurnCamera extends TurnGyroRel {
 	 * @param stopAtEnd
 	 * @param gains
 	 */
-	public TurnCamera(String cameraName, double tolerance, int toleranceStableCount, double timeout, boolean stopAtEnd, PIDGains gains) {
+	public TurnCamera(String cameraName, double tolerance, int toleranceStableCount, double timeout, boolean stopAtEnd, DrivePIDGains gains) {
 		super(0, tolerance, timeout, stopAtEnd, gains);
 		this.cameraName = cameraName;
 		this.toleranceStableCount = toleranceStableCount;
@@ -36,7 +36,7 @@ public class TurnCamera extends TurnGyroRel {
 	 * @param toleranceStableCount number of iterations to be within tolerance before finishing. Should be 10 or more to account for camera latency.
 	 * @param gains
 	 */
-	public TurnCamera(String cameraName, double tolerance, int toleranceStableCount, PIDGains gains) {
+	public TurnCamera(String cameraName, double tolerance, int toleranceStableCount, DrivePIDGains gains) {
 		super(0, tolerance, gains);
 		this.cameraName = cameraName;
 		this.toleranceStableCount = toleranceStableCount;
