@@ -264,25 +264,30 @@ public class Grabber extends Subsystem {
     
     public void openClaw() {
     	pincher.set(DoubleSolenoid.Value.kReverse);
+    	Logger.getInstance().println("Opening Claw", Logger.Severity.INFO);
     }
     
     public void closeClaw() {
     	pincher.set(DoubleSolenoid.Value.kForward);
+    	Logger.getInstance().println("Closing Claw", Logger.Severity.INFO);
     }
     
     public void rollerOn() {
     	intakeLeft.set(GrabberConst.rollerMaxSpeed);
     	intakeRight.set(GrabberConst.rollerMaxSpeed);
+    	Logger.getInstance().println("Turning Roller On", Logger.Severity.INFO);
     }
     
     public void rollerOff() {
     	intakeLeft.stopMotor();
     	intakeRight.stopMotor();
+    	Logger.getInstance().println("Turning Roller Off", Logger.Severity.INFO);
     }
     
     public void rollerReverse() {
     	intakeLeft.set((GrabberConst.rollerDeploySpeed)); //the negative one is to make it rotate the other way
     	intakeRight.set((GrabberConst.rollerDeploySpeed));
+    	Logger.getInstance().println("Setting Roller To Reverse", Logger.Severity.INFO);
     }
     
 	public void pickupOff() {

@@ -67,6 +67,7 @@ public class  TurnGyroAbs extends BBCommand {
     protected void initialize() {
         Robot.chassis.leftDrivePID.disable();
         Robot.chassis.rightDrivePID.disable();  
+        maxOutput = ChassisConst.staticFrictionThrottle; //New in 2018!
         
         Robot.chassis.gyroPID.setPID(gains);
  //       Robot.chassis.gyroPID.setMaxOutput(gains.getMaxOutput());
