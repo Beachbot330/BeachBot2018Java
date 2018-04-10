@@ -63,7 +63,7 @@ public class  DriveDistance extends BBCommand {
     // Called just before this Command runs the first time
     protected void initialize() {
         Robot.chassis.gyroPID.disable();
-        maxOutput = 0;
+        maxOutput = ChassisConst.staticFrictionThrottle; //New in 2018!
         
         Robot.chassis.leftDrivePID.setPID(gains);
         Robot.chassis.rightDrivePID.setPID(gains);
