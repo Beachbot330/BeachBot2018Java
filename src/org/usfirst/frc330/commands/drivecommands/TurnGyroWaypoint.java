@@ -64,8 +64,8 @@ public class TurnGyroWaypoint extends TurnGyroAbs {
             robotAngle = 0;
         }
  
-        Logger.getInstance().println("Robot angle: " + robotAngle, Severity.DEBUG);
-        Logger.getInstance().println("Calc angle: " + calcAngle, Severity.DEBUG);
+        Logger.getInstance().println("Robot angle: " + robotAngle, Severity.INFO);
+        Logger.getInstance().println("Calc angle: " + calcAngle, Severity.INFO);
         
         if (Math.abs(robotAngle-calcAngle)<180)
         {

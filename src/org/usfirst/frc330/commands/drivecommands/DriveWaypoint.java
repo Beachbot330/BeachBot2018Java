@@ -101,9 +101,6 @@ public class DriveWaypoint extends DriveDistanceAtAbsAngle_NoTurn {
     	boolean third = isTimedOut();
         if (first || second || third)
         {
-        	Logger.getInstance().println("leftDrivePID on target: " + first, Severity.DEBUG);
-        	Logger.getInstance().println("rightDrivePID on target: " + second, Severity.DEBUG);
-        	Logger.getInstance().println("isTimedOut: " + third, Severity.DEBUG);
             return true;            
         }
         return false;

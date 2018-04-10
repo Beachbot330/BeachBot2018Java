@@ -40,13 +40,19 @@ public class NearFar extends BBCommandGroup {
     	
     	boolean invertX = (pos == StartingPosition.LEFT);
     	
+    	//Close Claw Just in Case
     	addSequential(new CloseClaw());
-    	addSequential(new Calibrate());
-    	addSequential(new ShiftHigh());
-    	addParallel(new Defense());
     	
     	//Drive away from wall
-    	addSequential(new DriveWaypointBackward(wp1, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+    	addSequential(new ShiftHigh());
+    	Command parallelCommand = new DriveWaypointBackward(wp1, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
+    	addParallel(parallelCommand);
+    	
+    	//Calibrate while driving
+    	addSequential(new Calibrate());
+    	
+    	//Finish driving away from wall
+    	addSequential(new CheckDone(parallelCommand));
 
     	//Turn down aisle
     	addSequential(new ShiftLow());
@@ -60,7 +66,7 @@ public class NearFar extends BBCommandGroup {
     	addSequential(new ShiftLow());
     	addSequential(new TurnGyroWaypointBackward(wp3, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	addSequential(new ShiftHigh());
-    	Command parallelCommand = new DriveWaypointBackward(wp3, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
+    	parallelCommand = new DriveWaypointBackward(wp3, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
     	addParallel(parallelCommand);
     	
     	//Fling while driving

@@ -46,7 +46,7 @@ public class Flinger extends BBCommandGroup {
     	addParallel(parallelCommand);
     	
     	addSequential(new Calibrate());
-    	addParallel(new Defense());
+    	//addParallel(new Defense());
     	
     	//Finish driving away from wall
     	addSequential(new CheckDone(parallelCommand));
