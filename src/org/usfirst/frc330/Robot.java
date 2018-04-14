@@ -98,8 +98,11 @@ public class Robot extends TimedRobot {
 
         autoProgram.addDefault("Do Nothing", new DoNothing());
         autoProgram.addObject("CenterAuto", new Chooser_CenterStart_Switch());
-        autoProgram.addObject("RightSide", new Chooser_RightLeftStart(StartingPosition.RIGHT));
-        autoProgram.addObject("LeftSide", new Chooser_RightLeftStart(StartingPosition.LEFT));
+        autoProgram.addObject("RightSide_MultiCube", new Chooser_RightLeftStart(StartingPosition.RIGHT));
+        autoProgram.addObject("LeftSide_MultiCube", new Chooser_RightLeftStart(StartingPosition.LEFT));
+        autoProgram.addObject("Coop Right", new Chooser_Coop(StartingPosition.RIGHT));
+        autoProgram.addObject("Coop Left", new Chooser_Coop(StartingPosition.LEFT));
+        autoProgram.addObject("SPECIAL", new Chooser_Special(StartingPosition.RIGHT));
         
         //SimpleAuto
         autoProgram.addObject("Don't Pick This!", new Flinger(StartingPosition.RIGHT));
