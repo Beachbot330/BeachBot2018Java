@@ -26,6 +26,7 @@ public class CenterStartSwitchMulti extends BBCommandGroup {
 	Waypoint wp4;
 	Waypoint wp5;
 	Waypoint wp6;
+	Waypoint wp7, wp8;
 	
 	public enum SwitchPosition{
 		LEFT, RIGHT
@@ -36,20 +37,24 @@ public class CenterStartSwitchMulti extends BBCommandGroup {
     	//boolean invertX = (switchPosition == SwitchPosition.LEFT);
     	
     	if((switchPosition == SwitchPosition.LEFT)) {
-    		wp1 = new Waypoint( -16,  17, 0); //Away from wall
-    		wp2 = new Waypoint( -65,  58, 0); //Jog
-    		wp3 = new Waypoint( -55, 111, 0); //Switch
+    		wp1 = new Waypoint( -16,  17, 0);  // Depricated
+    		wp2 = new Waypoint( -65,  58, 0);  // Jog
+    		wp3 = new Waypoint( -55, 111, 0);  // Switch
+    		wp8 = new Waypoint( -55, 111, 0);  // Switch
     		wp4 = new Waypoint(  -17,  25, 0); //Back
-    		wp5 = new Waypoint(  -17, 75, 0); //Cube
-    		wp6 = new Waypoint(  -17, 65, 0); //Back
+    		wp5 = new Waypoint(  -17, 75, 0);  //Cube
+    		wp6 = new Waypoint(  -17, 65, 0);  //Back
+    		wp7 = new Waypoint(  -17, 75+10, 0); //Third cube
     	}
     	else {
-    		wp1 = new Waypoint(  0,  17, 0);
-    		wp2 = new Waypoint( 46,  58, 0);
-    		wp3 = new Waypoint( 46, 111, 0);
-    		wp4 = new Waypoint(  3,  25, 0);
-    		wp5 = new Waypoint(  3, 75, 0);
-    		wp6 = new Waypoint(  -17, 65, 0);
+    		wp1 = new Waypoint(  0,  17, 0);   // Depricated
+    		wp2 = new Waypoint( 46,  58, 0);   // Jog
+    		wp3 = new Waypoint( 46, 111, 0);   // Switch
+    		wp8 = new Waypoint( 30, 111, 0);   // Second depoly at switch
+    		wp4 = new Waypoint(  3,  25, 0);   //Back
+    		wp5 = new Waypoint(  3, 75-3, 0);    //Cube
+    		wp6 = new Waypoint(  -17, 65, 0);   //Back
+    		wp7 = new Waypoint(  -5, 75+25, 0); //Third cube
     	}
     	
     	//Drive away from the wall
@@ -72,7 +77,7 @@ public class CenterStartSwitchMulti extends BBCommandGroup {
         addParallel(parallelCommand);
         
         //Deploy Cube
-        addSequential(new WaitForPosition(wp3, false, 6));
+        addSequential(new WaitForPosition(wp3, false, 8, 2.0));
         addSequential(new RollerReverse());
         
         //Dropoff first cube
@@ -115,15 +120,40 @@ public class CenterStartSwitchMulti extends BBCommandGroup {
 
         //Drive to switch
         addSequential(new ShiftLow());
-        addSequential(new TurnGyroWaypoint(wp3, false, ChassisConst.defaultTolerance, 5, ChassisConst.GyroTurnLow)); //(double x, double y, double tolerance, double timeout, PIDGains gains
+        addSequential(new TurnGyroWaypoint(wp8, false, ChassisConst.defaultTolerance, 5, ChassisConst.GyroTurnLow)); //(double x, double y, double tolerance, double timeout, PIDGains gains
         addSequential(new ShiftHigh());
-        addSequential(new DriveWaypoint(wp3, false, ChassisConst.defaultTolerance, 2.0, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+        addSequential(new DriveWaypoint(wp8, false, ChassisConst.defaultTolerance, 2.0, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
         
-        //Dropoff first cube
+        //Dropoff second cube
         addSequential(new RollerReverse());
         addSequential(new WaitCommand(0.2));
         addSequential(new OpenClaw());
         addSequential(new WaitCommand(0.5));
        
+        //Drive backwards
+        addSequential(new DriveWaypointBackward(wp4, false, ChassisConst.defaultTolerance, 2.0, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+        
+        addSequential(new OpenClaw());
+    	
+        //Get into pickup position
+        addParallel(new SetLiftPosition(LiftConst.intakePosition + 11));
+    	addParallel(new CoordinatedMove(ArmConst.intakePosition, HandConst.pickUp-5));
+    	addSequential(new RollerOn());
+
+    	//Drive to third cube
+    	addSequential(new ShiftLow());
+        addSequential(new TurnGyroWaypoint(wp7, false, ChassisConst.defaultTolerance, 5, ChassisConst.GyroTurnLow)); //(double x, double y, double tolerance, double timeout, PIDGains gains
+        addSequential(new ShiftHigh());
+        addSequential(new DriveWaypoint(wp7, false, ChassisConst.defaultTolerance, 2.0, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+        
+        //Grab Cube
+        addParallel(new PredictiveCloseClaw(wp7, false, 5)); //Start closing 5 inches early
+    	addSequential(new WaitCommand(0.4));
+    	
+    	//Drive back 10 inches
+    	parallelCommand = new DriveWaypointBackward(wp6, false, ChassisConst.defaultTolerance, 2.0, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
+    	addSequential(parallelCommand);
+    	addSequential(new Defense());
+    	
     }
 }

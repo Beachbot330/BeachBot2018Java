@@ -23,6 +23,16 @@ public class WaitForPosition extends BBCommand {
 	Waypoint wp;
 	double distance;
 	
+	public WaitForPosition(Waypoint wp, boolean invertX, double distance, double timeout) {
+    	this.setRunWhenDisabled(false);
+    	this.wp = wp;
+    	this.distance = distance;
+    	if (invertX) {
+    		this.wp.setX(-wp.getX());
+    	}
+    	this.setTimeout(timeout);
+    }
+	
     public WaitForPosition(Waypoint wp, boolean invertX, double distance) {
     	this.setRunWhenDisabled(false);
     	this.wp = wp;
@@ -45,7 +55,7 @@ public class WaitForPosition extends BBCommand {
     protected boolean isFinished() {
     	double aSQ = Math.pow((wp.getX() - Robot.chassis.getX()), 2);
     	double bSQ = Math.pow((wp.getY() - Robot.chassis.getY()), 2);
-    	return (Math.sqrt(aSQ+bSQ) < distance);
+    	return (Math.sqrt(aSQ+bSQ) < distance) || this.isTimedOut();
     }
 
     protected void end() {
