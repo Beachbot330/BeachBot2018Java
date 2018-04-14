@@ -165,13 +165,13 @@ public class Grabber extends Subsystem {
 		
 		temp = new CSVLoggable(true) {
 			public double get() {
-				if(hasCubeClose())
+				if(hasCube())
 					return 1.0;			
 				else 
 					return 0.0;
 			}			
 		};
-		CSVLogger.getInstance().add("HasCubeClose", temp);
+		CSVLogger.getInstance().add("HasCube", temp);
 		
 		temp = new CSVLoggable(true) {
 			public double get() { return centerKalman.getEstimatedError(); }			
@@ -264,25 +264,30 @@ public class Grabber extends Subsystem {
     
     public void openClaw() {
     	pincher.set(DoubleSolenoid.Value.kReverse);
+    	Logger.getInstance().println("Opening Claw", Logger.Severity.INFO);
     }
     
     public void closeClaw() {
     	pincher.set(DoubleSolenoid.Value.kForward);
+    	Logger.getInstance().println("Closing Claw", Logger.Severity.INFO);
     }
     
     public void rollerOn() {
     	intakeLeft.set(GrabberConst.rollerMaxSpeed);
     	intakeRight.set(GrabberConst.rollerMaxSpeed);
+    	Logger.getInstance().println("Turning Roller On", Logger.Severity.INFO);
     }
     
     public void rollerOff() {
     	intakeLeft.stopMotor();
     	intakeRight.stopMotor();
+    	Logger.getInstance().println("Turning Roller Off", Logger.Severity.INFO);
     }
     
     public void rollerReverse() {
     	intakeLeft.set((GrabberConst.rollerDeploySpeed)); //the negative one is to make it rotate the other way
     	intakeRight.set((GrabberConst.rollerDeploySpeed));
+    	Logger.getInstance().println("Setting Roller To Reverse", Logger.Severity.INFO);
     }
 	
 	public void stopGrabber() {
@@ -299,43 +304,38 @@ public class Grabber extends Subsystem {
 	
 	//Note, hasCubeClose uses isAngleWithinMaximumOuterDistance, but doesn't return the result.
 	//Can remove once certain which method to use
-	public boolean hasCubeClose() {
-		double leftAngle, rightAngle, fullAngle;
+	public boolean hasCube() {
 		double sL = getSensorLDistance();
 		double sC = getSensorCDistance();
 		double sR = getSensorRDistance();
 		
+		//Check that sensors are returning values that aren't outside their range
 		int sensorsReceivingInput = getNumberOfSensorsReceivingInput();
-		
-		if (sensorsReceivingInput < 3)
+		if (sensorsReceivingInput < 3) {
 			return false;
-		
-		//If cube is within max inner distance, robot has cube
-		if (sL < GrabberConst.centerSensorMaximumInnerDistance &&
-		   sC < GrabberConst.centerSensorMaximumInnerDistance &&
-		   sR < GrabberConst.centerSensorMaximumInnerDistance)
-			return true;
-		
-		leftAngle = getAngleBetweenSensors(getSensorLDistance(), getSensorCDistance(), GrabberConst.distanceBetweenSensors);
-	    rightAngle = getAngleBetweenSensors(getSensorCDistance(), getSensorRDistance(), GrabberConst.distanceBetweenSensors);
-	    
-		if (sC < sL && sC < sR) {
-			double shallowAngle = Math.min(leftAngle, rightAngle);
-		    isAngleWithinMaximumOuterDistance(shallowAngle, GrabberConst.distanceBetweenSensors);
-		    
-			return isCubeWithinMaxOuterDistance(true);
 		}
 		
-	    fullAngle = getAngleBetweenSensors(sL, sR, (GrabberConst.distanceBetweenSensors * 2));
-	    
-		if ((sL < sC && sC < sR) || (sL > sC && sC > sR)) {
-			//offset is smallest distance of the three sensors
-			double closetDistance = Math.min(sL, sR);	
-			isAngleWithinMaximumOuterDistance(fullAngle, closetDistance);
+		//If all three sensors read the cube near, it is safe to close
+		if (sL < GrabberConst.centerSensorMaximumInnerDistance &&
+		   sC < GrabberConst.centerSensorMaximumInnerDistance &&
+		   sR < GrabberConst.centerSensorMaximumInnerDistance) {
+			return true;
+		}
+		
+		if (sC < sL && sC < sR) { //Corner is coming in (diamond)
 			
-		    closetDistance = Math.abs(sL - sR);	
+			return sC < GrabberConst.distanceToTriggerOnDiamond;
+		}
+	    
+		if ((sL < sC && sC < sR) || (sL > sC && sC > sR)) { //Coming in at a slant
+			//Calculate the slant angle
+			double slantAngle = getAngleBetweenSensors(sL, sR, (GrabberConst.distanceBetweenSensors * 2));
+			//Assume worst case, one corner of the cube is at the sensor with the smallest reading
+			double closestDistance = Math.min(sL, sR);	
+			//Calculate the furthest point the second corner could be at
+			double secondCorner = closestDistance + Math.sin(Math.toRadians(slantAngle)) * GrabberConst.cubeWidth;
 
-			return isCubeWithinMaxOuterDistance(false);
+			return secondCorner < (GrabberConst.sensorMaximumOuterDistance);
 		}
 		else
 			return false;
@@ -346,38 +346,6 @@ public class Grabber extends Subsystem {
 	// --------------------------- 
     
     private double ExtrapolDistanceFromAngle;
-    
-    private boolean isAngleWithinMaximumOuterDistance(double shallowAngle, double offsetDistance) {
-    	
-    	double sinInRad = Math.sin(Math.toRadians(shallowAngle));
-    	//the distance is the hypotenuse (which is equal to box length)
-        ExtrapolDistanceFromAngle = (sinInRad * 13) + offsetDistance; 		
-    	
-    	return ExtrapolDistanceFromAngle < GrabberConst.sensorMaximumOuterDistance;
-    }
-    
-    private double extrapolDistance;
-    
-    private boolean isCubeWithinMaxOuterDistance(boolean isDiamondCase) {
-    	double distanceBetweenSensors;		
-    	double distance;					//Distance = difference of two sensors to compare
-    	double smallestSensorDistance;		//shortest distance of the three sensors
-		double sL = getSensorLDistance();
-		double sC = getSensorCDistance();
-		double sR = getSensorRDistance();
-    	
-    	if(isDiamondCase) {
-        	return sC < GrabberConst.centerSensorMaximumInnerDistance;
-    	}
-    	else {
-    		distanceBetweenSensors = GrabberConst.distanceBetweenSensors * 2;
-        	distance = Math.abs(sL - sR);
-        	smallestSensorDistance = Math.min(sL, sR);
-    	}
-    	
-    	extrapolDistance = ((distance * (GrabberConst.maxBoxLengthSensor / distanceBetweenSensors))) + smallestSensorDistance;
-    	return (extrapolDistance < GrabberConst.sensorMaximumOuterDistance);
-    }
 
     private int getNumberOfSensorsReceivingInput() { 
     	int numberOfSensorsReceivingInput = 0;
@@ -402,14 +370,6 @@ public class Grabber extends Subsystem {
 		
 		return AngleBetweenSensors;
 	}
-    
-
-//	//hasCube w/ angled sensors on rear of robot & center vertical sensor
-//	public boolean hasCubeCanted() { 	
-//		if(sLstatus && sRstatus) return true;
-//		else if(sC < GrabberConst.centerSensorMaximumInnerDistance) return true;
-//		else return false;
-//	}
 
 	public double getIntakeLeftFirmwareVersion() {
 		int firmwareVersion = intakeLeft.getFirmwareVersion();

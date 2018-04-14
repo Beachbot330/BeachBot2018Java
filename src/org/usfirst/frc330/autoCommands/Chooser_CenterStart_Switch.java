@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.BBCommand;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc330.Robot;
-import org.usfirst.frc330.autoCommands.CenterStart_Switch.SwitchPosition;
+import org.usfirst.frc330.autoCommands.CenterStartSwitchMulti.SwitchPosition;
 import org.usfirst.frc330.commands.drivecommands.DriveDistance;
 import org.usfirst.frc330.constants.ChassisConst;
 import org.usfirst.frc330.util.Logger;
@@ -32,8 +32,10 @@ public class Chooser_CenterStart_Switch extends BBCommand {
 	
     public Chooser_CenterStart_Switch() {
     	this.setRunWhenDisabled(false);
-    	leftSwitch = new CenterStart_Switch(SwitchPosition.LEFT);
-    	rightSwitch = new CenterStart_Switch(SwitchPosition.RIGHT);
+    	//leftSwitch = new CenterStart_Switch(SwitchPosition.LEFT);
+    	//rightSwitch = new CenterStart_Switch(SwitchPosition.RIGHT);
+    	leftSwitch = new CenterStartSwitchMulti(SwitchPosition.LEFT);
+    	rightSwitch = new CenterStartSwitchMulti(SwitchPosition.RIGHT);
     }
 
     protected void initialize() {

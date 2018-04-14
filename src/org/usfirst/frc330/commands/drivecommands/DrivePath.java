@@ -14,7 +14,7 @@ public class DrivePath extends DriveWaypoint {
 	ArrayList<Waypoint> path;
 	
 	public DrivePath(ArrayList<Waypoint> path, double lookahead, double tolerance, double timeout, boolean stopAtEnd, 
-			PIDGains driveGains, PIDGains gyroGains) {
+			DrivePIDGains driveGains, DrivePIDGains gyroGains) {
 		super(0,0,tolerance,timeout,stopAtEnd, driveGains, gyroGains);
 		this.path = path;
 		this.lookahead = lookahead;

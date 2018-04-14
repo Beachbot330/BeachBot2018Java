@@ -168,10 +168,6 @@ public class Chassis extends Subsystem {
         SmartDashboard.putData("leftDrivePID", leftDrivePID);
         SmartDashboard.putData("rightDrivePID", rightDrivePID);
         
-        //VERIFY Create ChassisConst file and put in default values to make this code valid - JB
-        //VERIFY make the period of the PIDControllers 0.02 seconds (50 hz) -JB
-        
-        //VERIFY Find a non-deprecated function to use for this -JB
         LinearDigitalFilter.movingAverage(gyroSource, ChassisConst.gyroTolerancebuffer);
         
         double pulsePerRevolutionLeft, pulsePerRevolutionRight;
@@ -189,19 +185,14 @@ public class Chassis extends Subsystem {
         		ChassisConst.encoderGearRatio/ChassisConst.gearRatio * ChassisConst.Fudgefactor;
         
         driveEncoderRight.setDistancePerPulse(distanceperpulse);
+
         
         driveEncoderLeft.setSamplesToAverage(4);
         driveEncoderRight.setSamplesToAverage(4);
         
-        //VERIFY update to the latest RobotBuilderExtensions so that the deprecated addSensor code below is no longer used. -JB
-        
         //-----------------------------------------------------------------------
         // Logging
         //-----------------------------------------------------------------------
-        
-        //TODO Finish logging. See 2017 for examples
-        //Joe: instead of logging left&right Drive1,2,3, log leftDrive and rightDrive. Don't need to log pitch & roll.
-        //VERIFY above (ldrive, rdrive, remove pitch & roll)
         CSVLoggable temp = new CSVLoggable(true) {
 			public double get() { return driveEncoderLeft.getDistance(); }
     	};

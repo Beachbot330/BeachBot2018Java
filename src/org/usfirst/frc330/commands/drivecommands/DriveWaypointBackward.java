@@ -17,11 +17,11 @@ public class DriveWaypointBackward extends DriveWaypoint {
 //	double leftDistance, rightDistance;
 	
 	
-	public DriveWaypointBackward(double x, double y, double tolerance, double timeout, boolean stopAtEnd, PIDGains driveGains, PIDGains gyroGains){
+	public DriveWaypointBackward(double x, double y, double tolerance, double timeout, boolean stopAtEnd, DrivePIDGains driveGains, DrivePIDGains gyroGains){
         super(x, y, tolerance, timeout, stopAtEnd, driveGains, gyroGains);
     }
 	
-    public DriveWaypointBackward(Waypoint wp, boolean invertX, double tolerance, double timeout, boolean stopAtEnd, PIDGains driveGains, PIDGains gyroGains) {
+    public DriveWaypointBackward(Waypoint wp, boolean invertX, double tolerance, double timeout, boolean stopAtEnd, DrivePIDGains driveGains, DrivePIDGains gyroGains) {
     	super(wp, invertX, tolerance, timeout, stopAtEnd, driveGains, gyroGains);
 
     }

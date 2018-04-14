@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 import org.usfirst.frc330.commands.CoordinatedMove;
 import org.usfirst.frc330.commands.IsFinishedFalse;
-import org.usfirst.frc330.commands.LoopIfNoCube;
+import org.usfirst.frc330.commands.LoopIfWeHaveCube;
 import org.usfirst.frc330.commands.OpenClaw;
 import org.usfirst.frc330.commands.RollerOn;
 import org.usfirst.frc330.commands.RollerUntilCube;

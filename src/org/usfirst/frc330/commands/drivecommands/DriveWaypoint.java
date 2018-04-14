@@ -16,7 +16,7 @@ public class DriveWaypoint extends DriveDistanceAtAbsAngle_NoTurn {
     double x,y;
 
     
-    public DriveWaypoint(double x, double y, double tolerance, double timeout, boolean stopAtEnd, PIDGains driveGains, PIDGains gyroGains) {
+    public DriveWaypoint(double x, double y, double tolerance, double timeout, boolean stopAtEnd, DrivePIDGains driveGains, DrivePIDGains gyroGains) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
         super(0,tolerance,0,timeout, stopAtEnd, driveGains, gyroGains);
@@ -24,7 +24,7 @@ public class DriveWaypoint extends DriveDistanceAtAbsAngle_NoTurn {
         this.y=y;
     }
     
-    public DriveWaypoint(Waypoint wp, boolean invertX, double tolerance, double timeout, boolean stopAtEnd, PIDGains driveGains, PIDGains gyroGains) {
+    public DriveWaypoint(Waypoint wp, boolean invertX, double tolerance, double timeout, boolean stopAtEnd, DrivePIDGains driveGains, DrivePIDGains gyroGains) {
     	super(0,tolerance,0,timeout, stopAtEnd, driveGains, gyroGains);
     	if (invertX)
     		this.x = -wp.getX();
@@ -101,9 +101,6 @@ public class DriveWaypoint extends DriveDistanceAtAbsAngle_NoTurn {
     	boolean third = isTimedOut();
         if (first || second || third)
         {
-        	Logger.getInstance().println("leftDrivePID on target: " + first, Severity.DEBUG);
-        	Logger.getInstance().println("rightDrivePID on target: " + second, Severity.DEBUG);
-        	Logger.getInstance().println("isTimedOut: " + third, Severity.DEBUG);
             return true;            
         }
         return false;

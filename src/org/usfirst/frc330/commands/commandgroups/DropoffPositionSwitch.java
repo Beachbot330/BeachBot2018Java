@@ -27,7 +27,7 @@ public class DropoffPositionSwitch extends BBCommandGroup {
 
     public DropoffPositionSwitch() {
 
-    	addSequential(new SetLiftPosition(LiftConst.switchDropoff));
+    	addSequential(new SetLiftPosition(LiftConst.switchDropoff, 8));
     	addSequential(new CoordinatedMove(ArmConst.switchArm, HandConst.switchDropoff));
     	
     	//addSequential(new SetHandAngleRelArm(HandConst.encFrameSafe));

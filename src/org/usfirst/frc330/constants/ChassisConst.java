@@ -4,6 +4,7 @@
 
 package org.usfirst.frc330.constants;
 
+import org.usfirst.frc330.commands.drivecommands.DrivePIDGains;
 import org.usfirst.frc330.wpilibj.PIDGains;
 
 public final class ChassisConst {
@@ -18,10 +19,7 @@ public final class ChassisConst {
 	public static final double backupThrottle       	  = 0.5;
 	public static final double defaultMaxOutput     	  = 0.9;
 	public static final double defaultMaxOutputStep 	  = 0.05;
-		
-	// Pick Up Speed
-	public static final double pickupSpeed 				  = 1.0;
-	public static final double pickupReverseSpeed         = 2.0;
+	public static final double defaultMinStartOutput      = 0.20;
 	
 	//Encoder Distance Constants
     public static final double wheelDiameter 			  = 6;
@@ -35,15 +33,17 @@ public final class ChassisConst {
     public static final int    gyroTolerancebuffer        = 5;  //JR 3/20
     public static final double gyroTurnMin				  = 0.20; //JB 1/27
     
+    //Tolerances
     public static final double defaultTolerance 		= 3;
     public static final double defaultTurnTolerance		= 2;
     
-    public static final PIDGains DriveLow	   = new PIDGains(0.100,0,0.000,0,defaultMaxOutput,defaultMaxOutputStep, "DriveLow");
-    public static final PIDGains DriveHigh     = new PIDGains(0.050,0,0.70,0,defaultMaxOutput,defaultMaxOutputStep, "DriveHigh"); //AP 3-9-18
-    public static final PIDGains GyroTurnLow   = new PIDGains(0.020,0,0.05,0,0.5,1,"GyroTurnLow");
-    public static final PIDGains GyroTurnHigh  = new PIDGains(0.030,0,0.000,0,1,1, "GyroTurnHigh"); //AP 3-9-18
-    public static final PIDGains GyroDriveLow  = new PIDGains(0.010,0,0.000,0,1,1, "GyroDriveLow");
-    public static final PIDGains GyroDriveHigh = new PIDGains(0.01,0,0.000,0,1,1, "GyroDriveHigh"); //AP 3-9-18
+    //PID Gains
+    public static final DrivePIDGains DriveLow	   = new DrivePIDGains(0.100,0,0.000,0,defaultMaxOutput,defaultMaxOutputStep,defaultMinStartOutput, "DriveLow");
+    public static final DrivePIDGains DriveHigh     = new DrivePIDGains(0.100,0,0.80,0,defaultMaxOutput,defaultMaxOutputStep, defaultMinStartOutput,"DriveHigh"); //AP 3-30-18
+    public static final DrivePIDGains GyroTurnLow   = new DrivePIDGains(0.020,0,0.05,0,0.5,1,0,"GyroTurnLow");
+    public static final DrivePIDGains GyroTurnHigh  = new DrivePIDGains(0.030,0,0.000,0,1,1,0, "GyroTurnHigh"); //AP 3-9-18
+    public static final DrivePIDGains GyroDriveLow  = new DrivePIDGains(0.010,0,0.000,0,1,1,0, "GyroDriveLow");
+    public static final DrivePIDGains GyroDriveHigh = new DrivePIDGains(0.01,0,0.000,0,1,1,0, "GyroDriveHigh"); //AP 3-9-18
     
     //Drive distances
     public static final double driveStraightAuto     = 100;

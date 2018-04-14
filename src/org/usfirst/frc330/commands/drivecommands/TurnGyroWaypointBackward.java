@@ -15,12 +15,12 @@ import org.usfirst.frc330.wpilibj.PIDGains;
 public class TurnGyroWaypointBackward extends TurnGyroWaypoint {
 
     
-    public TurnGyroWaypointBackward(double x, double y, double tolerance, double timeout, PIDGains gains)
+    public TurnGyroWaypointBackward(double x, double y, double tolerance, double timeout, DrivePIDGains gains)
     {
         super(x,y,tolerance,timeout, gains);       
     }
     
-    public TurnGyroWaypointBackward(Waypoint wp, boolean invertX, double tolerance, double timeout, PIDGains gains)
+    public TurnGyroWaypointBackward(Waypoint wp, boolean invertX, double tolerance, double timeout, DrivePIDGains gains)
     {
         super(wp,invertX,tolerance,timeout, gains);       
     }

@@ -52,7 +52,7 @@ public class NearNear extends BBCommandGroup {
     	addSequential(new TurnGyroWaypointBackward(wp2, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	addSequential(new ShiftHigh());
     	addSequential(new CheckDone(parallelGroup));
-    	PIDGains DriveMid     = new PIDGains(0.050,0,0.70,0,0.6,ChassisConst.defaultMaxOutputStep, "DriveHigh"); //AP 3-12-18
+    	DrivePIDGains DriveMid     = new DrivePIDGains(0.050,0,0.70,0,0.6,ChassisConst.defaultMaxOutputStep, ChassisConst.defaultMinStartOutput,"DriveMid"); //AP 3-12-18
     	addSequential(new DriveWaypointBackward(wp2, invertX, ChassisConst.defaultTolerance, 5, false, DriveMid, ChassisConst.GyroDriveHigh));
     	addSequential(new OpenClaw());
     	

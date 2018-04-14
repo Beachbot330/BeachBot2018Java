@@ -18,17 +18,17 @@ public class  DriveDistanceAtCurAngle extends DriveDistance{
     double angle;
     PIDGains gyroGains;
     
-    public DriveDistanceAtCurAngle(double distance, PIDGains driveGains, PIDGains gyroGains)
+    public DriveDistanceAtCurAngle(double distance, DrivePIDGains driveGains, DrivePIDGains gyroGains)
     {
         this(distance, 6, -1.0, true, driveGains, gyroGains); //-1 means no timeout
     }
     
-    public DriveDistanceAtCurAngle(double distance, double tolerance, PIDGains driveGains, PIDGains gyroGains)
+    public DriveDistanceAtCurAngle(double distance, double tolerance, DrivePIDGains driveGains, DrivePIDGains gyroGains)
     {
         this(distance, tolerance, -1.0, true, driveGains, gyroGains); //-1 means no timeout
     }
     
-    public DriveDistanceAtCurAngle(double distance, double tolerance, double timeout, boolean stopAtEnd, PIDGains driveGains, PIDGains gyroGains)
+    public DriveDistanceAtCurAngle(double distance, double tolerance, double timeout, boolean stopAtEnd, DrivePIDGains driveGains, DrivePIDGains gyroGains)
     {
         super(distance, tolerance, timeout, stopAtEnd, driveGains);
         this.gyroGains = gyroGains;

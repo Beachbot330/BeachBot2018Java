@@ -15,32 +15,29 @@ import org.usfirst.frc330.wpilibj.PIDGains;
 import edu.wpi.first.wpilibj.command.BBCommand;
 import edu.wpi.first.wpilibj.command.BBCommandGroup;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
  */
-public class NearFar extends BBCommandGroup {
-
+public class Flinger extends BBCommandGroup {
 	
-	Waypoint wp1 = new Waypoint(0,   -230+5, 0); //Turn to go down path
-	Waypoint wp2 = new Waypoint(212, -230+5, 0); //Drive to scale
-	Waypoint wp3 = new Waypoint(195, -279+5, 0); //Dropoff at scale
-	Waypoint wp4 = new Waypoint(180, -223+5, 0); //Drive to cube
-	Waypoint wp5 = new Waypoint(204, -263+5, 0); //Drive back to scale
-	Waypoint wp6 = new Waypoint(192, -276+5, 0); //Second scale dropoff
-	Waypoint wp7 = new Waypoint(160, -220+5, 0); //Pickup third cube
+	double flingDistance = 60+12;
+	
+	Waypoint wp1 = new Waypoint(0, -182+5, 0);
+	Waypoint wp2 = new Waypoint(29, -271+5, 0); //Dropoff at scale
+	Waypoint wp3 = new Waypoint(36, -221+5+3, 0); //Drive to second cube
+	Waypoint wp4 = new Waypoint(25, -263+5+2, 0); //Drive back to scale
+	Waypoint wp5 = new Waypoint(32, -276+5+2, 0); // Second drop off
+	Waypoint wp6 = new Waypoint(56+5, -216+5-1, 0); // Pickup third cube
 
-    public NearFar(StartingPosition pos) {
+    public Flinger(StartingPosition pos) {
     	
     	if (pos == StartingPosition.LEFT) {
-    		wp4.setX(wp4.getX() + 3);
-    		wp7.setX(wp7.getX() + 3);
+    		wp3.setX(wp3.getX() + 3);
+    		wp6.setX(wp6.getX() + 3);
     	}
-    	
     	boolean invertX = (pos == StartingPosition.LEFT);
     	
-    	//Close Claw Just in Case
     	addSequential(new CloseClaw());
     	
     	//Drive away from wall
@@ -48,31 +45,25 @@ public class NearFar extends BBCommandGroup {
     	Command parallelCommand = new DriveWaypointBackward(wp1, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
     	addParallel(parallelCommand);
     	
-    	//Calibrate while driving
     	addSequential(new Calibrate());
+    	//addParallel(new Defense());
     	
     	//Finish driving away from wall
     	addSequential(new CheckDone(parallelCommand));
-
-    	//Turn down aisle
+    	
+    	//Start Drive to Scale
     	addSequential(new ShiftLow());
     	addSequential(new TurnGyroWaypointBackward(wp2, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
-    	
-    	//Drive down aisle
     	addSequential(new ShiftHigh());
-    	addSequential(new DriveWaypointBackward(wp2, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
-    	
-    	//Drive to Scale
-    	addSequential(new ShiftLow());
-    	addSequential(new TurnGyroWaypointBackward(wp3, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
-    	addSequential(new ShiftHigh());
-    	parallelCommand = new DriveWaypointBackward(wp3, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
+    	//PIDGains tempDrive  = new PIDGains(0.10, 0, 0.80, 0, 0.8, ChassisConst.defaultMaxOutputStep, "DriveHigh");
+    	parallelCommand = new DriveWaypointBackward(wp2, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
     	addParallel(parallelCommand);
     	
     	//Fling while driving
+    	addSequential(new WaitForPosition(wp2, invertX, flingDistance));
     	addSequential(new ThrowCubeArm());
     	addSequential(new CheckDone(parallelCommand)); //Check that we are done driving
-    	
+    	   	
     	//Get into pickup position
     	addParallel(new SetLiftPosition(LiftConst.intakePosition));
     	addParallel(new CoordinatedMove(ArmConst.intakePosition, HandConst.pickUp-10));
@@ -80,19 +71,19 @@ public class NearFar extends BBCommandGroup {
     	//Go to pickup a cube
     	addSequential(new Log("Pickup Second Cube"));
     	addSequential(new ShiftLow());
-    	addSequential(new TurnGyroWaypoint(wp4, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new TurnGyroWaypoint(wp3, invertX, ChassisConst.defaultTurnTolerance, 1, ChassisConst.GyroTurnLow));
     	addSequential(new RollerOn());
     	addSequential(new ShiftHigh());
     	addSequential(new WaitCommand(0.2));
-    	addSequential(new DriveWaypoint(wp4, invertX, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+    	addSequential(new DriveWaypoint(wp3, invertX, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	
     	//Grab the cube
-    	addParallel(new PredictiveCloseClaw(wp4, invertX, 5)); //Start closing 5 inches early
+    	addParallel(new PredictiveCloseClaw(wp3, invertX, 5)); //Start closing 5 inches early
     	addSequential(new WaitCommand(0.4));
     	
     	//Return to prep location
     	addSequential(new ShiftHigh());
-    	parallelCommand = new DriveWaypointBackward(wp5, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
+    	parallelCommand = new DriveWaypointBackward(wp4, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
     	addParallel(parallelCommand);
     	addSequential(new WaitCommand(0.4));
     	addSequential(new RollerOff());
@@ -100,14 +91,14 @@ public class NearFar extends BBCommandGroup {
     	
     	//Drive to scale for second dropoff
     	addSequential(new ShiftLow());
-    	addSequential(new TurnGyroWaypointBackward(wp6, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new TurnGyroWaypointBackward(wp5, invertX, ChassisConst.defaultTurnTolerance, 1, ChassisConst.GyroTurnLow));
     	
     	//Start Flinging
     	parallelCommand = new ThrowCubeArm();
     	addParallel(parallelCommand);
     	
     	addSequential(new ShiftHigh());
-    	addSequential(new DriveWaypointBackward(wp6, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+    	addSequential(new DriveWaypointBackward(wp5, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	addSequential(new WaitCommand(0.1));
     	
     	addSequential(new CheckDone(parallelCommand));
@@ -120,18 +111,18 @@ public class NearFar extends BBCommandGroup {
     	
     	//Go to pickup a new cube
     	addSequential(new ShiftLow());
-    	addSequential(new TurnGyroWaypoint(wp7, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new TurnGyroWaypoint(wp6, invertX, ChassisConst.defaultTurnTolerance, 1, ChassisConst.GyroTurnLow));
     	addSequential(new ShiftHigh());
-    	addSequential(new DriveWaypoint(wp7, invertX, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+    	addSequential(new DriveWaypoint(wp6, invertX, ChassisConst.defaultTolerance, 5, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
 
     	//Grab the cube
-    	addParallel(new PredictiveCloseClaw(wp7, invertX, 5)); //Start closing 5 inches early
+    	addParallel(new PredictiveCloseClaw(wp6, invertX, 5)); //Start closing 5 inches early
     	addSequential(new WaitCommand(0.4));
     	addSequential(new Log("Third cube picked up"));
     	
     	//Return to prep location
     	addSequential(new ShiftHigh());
-    	parallelCommand = new DriveWaypointBackward(wp5, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
+    	parallelCommand = new DriveWaypointBackward(wp4, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
     	addParallel(parallelCommand);
     	addSequential(new WaitCommand(0.6));
     	addSequential(new CheckDone(parallelCommand));
@@ -140,7 +131,7 @@ public class NearFar extends BBCommandGroup {
     	
     	//Drive to scale for third dropoff
     	addSequential(new ShiftLow());
-    	addSequential(new TurnGyroWaypointBackward(wp6, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
+    	addSequential(new TurnGyroWaypointBackward(wp5, invertX, ChassisConst.defaultTurnTolerance, 1, ChassisConst.GyroTurnLow));
     	
     	//Fling Cube
     	parallelCommand = new ThrowCubeArm();
@@ -148,8 +139,9 @@ public class NearFar extends BBCommandGroup {
     	
     	//Drive back
     	addSequential(new ShiftHigh());
-    	addSequential(new DriveWaypointBackward(wp6, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+    	addSequential(new DriveWaypointBackward(wp5, invertX, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
     	addSequential(new WaitCommand(0.1));
+    	
        
     }
 }

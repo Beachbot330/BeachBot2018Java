@@ -11,6 +11,7 @@
 package org.usfirst.frc330;
 
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -29,6 +30,7 @@ import org.usfirst.frc330.subsystems.*;
 //import org.usfirst.frc330.subsystems.Frills.Alarm;
 import org.usfirst.frc330.util.BeachbotLibVersion;
 import org.usfirst.frc330.util.Buzzer;
+import org.usfirst.frc330.util.CSVLoggable;
 import org.usfirst.frc330.util.CSVLogger;
 import org.usfirst.frc330.util.Logger;
 import org.usfirst.frc330.util.Logger.Severity;
@@ -100,7 +102,7 @@ public class Robot extends TimedRobot {
         autoProgram.addObject("LeftSide", new Chooser_RightLeftStart(StartingPosition.LEFT));
         
         //SimpleAuto
-        autoProgram.addObject("Don't Pick This! Allen", new AllenTest());
+        autoProgram.addObject("Don't Pick This!", new Flinger(StartingPosition.RIGHT));
         autoProgram.addObject("Don't Pick This! Joe", new JoeTest());
         
         
@@ -132,6 +134,29 @@ public class Robot extends TimedRobot {
         buzzer.enable(0.4);
         
         SmartDashboard.putData("Auto mode", autoProgram);
+        
+        CSVLoggable temp = new CSVLoggable(false) {
+			public double get() { return RobotController.getBatteryVoltage(); }
+    	};
+    	CSVLogger.getInstance().add("BatteryV", temp);
+    	
+    	temp = new CSVLoggable(false) {
+			public double get() { return DriverStation.getInstance().getMatchTime(); }
+    	};
+    	CSVLogger.getInstance().add("MatchTime", temp);
+    	
+    	temp = new CSVLoggable(false) {
+			public double get() { 
+				if (DriverStation.getInstance().isDisabled())
+					return 0.0;
+				else if (DriverStation.getInstance().isAutonomous())
+					return 1.0;
+				else if (DriverStation.getInstance().isOperatorControl())
+					return 2.0;
+				else
+					return -1.0;}
+    	};
+    	CSVLogger.getInstance().add("RobotMode", temp);
 
     }
 
@@ -206,10 +231,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-        //VERIFY copy over code from 2017 (and update it of course!)
         Logger.getInstance().println("Teleop Init", Severity.INFO);
-    	Logger.getInstance().updateDate();
-    	CSVLogger.getInstance().updateDate();
     	buzzer.enable(1.25);
 		Robot.lift.stopLift();
 		Robot.climber.lockPlatforms();

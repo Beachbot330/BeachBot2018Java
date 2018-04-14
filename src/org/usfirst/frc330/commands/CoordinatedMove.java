@@ -129,7 +129,7 @@ public class CoordinatedMove extends BBCommand {
     		}
     		else if(Robot.arm.getArmOnTarget() && !handSet && armSet) {
     			Logger.getInstance().println("Arm is on target, setting final hand position", Logger.Severity.INFO);
-    			Logger.getInstance().println("Arm Angle: " + Robot.arm.getArmAngle(), Logger.Severity.DEBUG);
+    			//Logger.getInstance().println("Arm Angle: " + Robot.arm.getArmAngle(), Logger.Severity.DEBUG);
     			Robot.hand.setAngle(handAngleRelGround);
     			
     			handSet = true;
@@ -152,8 +152,8 @@ public class CoordinatedMove extends BBCommand {
 
 
     protected void interrupted() {
-    	Logger.getInstance().println("Arm on target: " + Robot.arm.getArmOnTarget(), Severity.WARNING);
-    	Logger.getInstance().println("Hand on target: " + Robot.hand.getHandOnTarget(), Severity.WARNING);
+    	//Logger.getInstance().println("Arm on target: " + Robot.arm.getArmOnTarget(), Severity.WARNING);
+    	//Logger.getInstance().println("Hand on target: " + Robot.hand.getHandOnTarget(), Severity.WARNING);
     	this.end();
     }
 }
