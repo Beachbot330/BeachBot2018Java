@@ -57,7 +57,7 @@ public class PathfinderDrive extends BBCommand {
 		CSVLoggable temp = new CSVLoggable(true) {
 			public double get() { 
 				if (!leftFollow.isFinished())
-					return leftFollow.getSegment().position*12;
+					return leftFollow.getSegment().position;
 				else
 					return 0.0;
 			}
@@ -67,17 +67,37 @@ public class PathfinderDrive extends BBCommand {
     	temp = new CSVLoggable(true) {
 			public double get() { 
 				if (!leftFollow.isFinished())
-					return leftFollow.getSegment().velocity*12;
+					return leftFollow.getSegment().velocity;
 				else
 					return 0.0;
 			}
     	};
     	CSVLogger.getInstance().add("PFLeftVelocity", temp);
     	
+		temp = new CSVLoggable(true) {
+			public double get() { 
+				if (!rightFollow.isFinished())
+					return rightFollow.getSegment().position;
+				else
+					return 0.0;
+			}
+    	};
+    	CSVLogger.getInstance().add("PFRightPosition", temp);
+    	
+    	temp = new CSVLoggable(true) {
+			public double get() { 
+				if (!rightFollow.isFinished())
+					return rightFollow.getSegment().velocity;
+				else
+					return 0.0;
+			}
+    	};
+    	CSVLogger.getInstance().add("PFRightVelocity", temp);
+    	
     	temp = new CSVLoggable(true) {
 			public double get() { 
 				if (!leftFollow.isFinished())
-					return Math.toDegrees(-leftFollow.getSegment().heading);
+					return Math.toDegrees(leftFollow.getSegment().heading);
 				else
 					return 0.0;
 			}
@@ -91,9 +111,9 @@ public class PathfinderDrive extends BBCommand {
 		double left, right, curAngle;
 		left = leftFollow.calculate(Robot.chassis.getLeftDistance()/12);
 		right = rightFollow.calculate(Robot.chassis.getRightDistance()/12);
-		curAngle = -Robot.chassis.getAngle();
+		curAngle = Robot.chassis.getAngle();
 		
-		double desired_heading = Pathfinder.r2d(leftFollow.getHeading());
+		double desired_heading = -Pathfinder.r2d(leftFollow.getHeading());
         double angleDifference = Pathfinder.boundHalfDegrees(desired_heading - curAngle);
         double turn = gyroP * angleDifference;
 		
