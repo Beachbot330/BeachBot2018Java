@@ -278,6 +278,12 @@ public class Grabber extends Subsystem {
     	Logger.getInstance().println("Turning Roller On", Logger.Severity.INFO);
     }
     
+    public void rollerOn(double left, double right) {
+    	intakeLeft.set(left);
+    	intakeRight.set(right);
+    	Logger.getInstance().println("Turning Rollers On: " + left +"   , " + right, Logger.Severity.INFO);
+    }
+    
     public void rollerOff() {
     	intakeLeft.stopMotor();
     	intakeRight.stopMotor();
@@ -287,6 +293,12 @@ public class Grabber extends Subsystem {
     public void rollerReverse() {
     	intakeLeft.set((GrabberConst.rollerDeploySpeed)); //the negative one is to make it rotate the other way
     	intakeRight.set((GrabberConst.rollerDeploySpeed));
+    	Logger.getInstance().println("Setting Roller To Reverse", Logger.Severity.INFO);
+    }
+    
+    public void rollerReverse(double throttle) {
+    	intakeLeft.set((throttle)); //the negative one is to make it rotate the other way
+    	intakeRight.set((throttle));
     	Logger.getInstance().println("Setting Roller To Reverse", Logger.Severity.INFO);
     }
     

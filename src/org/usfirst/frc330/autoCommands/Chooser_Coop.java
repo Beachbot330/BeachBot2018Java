@@ -38,14 +38,12 @@ public class Chooser_Coop extends BBCommand {
     public Chooser_Coop(StartingPosition pos) {
     	this.setRunWhenDisabled(false);
     	driveForward = new DriveWaypointBackward(0, -ChassisConst.driveStraightAuto, ChassisConst.defaultTolerance, 5, false, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
-    	//nearNear = new NearNear(pos);
+
     	nearNear = new Flinger(pos);
-    	//nearNear = new FarNear(pos);
-    	nearFar = new NearFar(pos);
-    	//farFar = new FarFar(pos);
-    	farFar = new NearFar(pos);
-    	//farNear = new FarNear(pos);
+    	nearFar = new NearSwitch(pos);
+    	farFar = new CoopFarFar(pos);
     	farNear = new Flinger(pos);
+    	
     	this.startingPosition = pos;
     	this.setName(this.getName() + ": " + pos.toString());
     }

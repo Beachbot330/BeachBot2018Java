@@ -40,11 +40,11 @@ public class CenterStartSwitchMulti extends BBCommandGroup {
     		wp1 = new Waypoint( -16,  17, 0);  // Depricated
     		wp2 = new Waypoint( -65,  58, 0);  // Jog
     		wp3 = new Waypoint( -55, 111, 0);  // Switch
-    		wp8 = new Waypoint( -55, 111, 0);  // Switch
+    		wp8 = new Waypoint( -40, 111, 0);  // Second Deploy at Switch
     		wp4 = new Waypoint(  -17,  25, 0); //Back
-    		wp5 = new Waypoint(  -17, 75, 0);  //Cube
+    		wp5 = new Waypoint(  -11, 75-3, 0);  //Second Cube
     		wp6 = new Waypoint(  -17, 65, 0);  //Back
-    		wp7 = new Waypoint(  -17, 75+10, 0); //Third cube
+    		wp7 = new Waypoint(  -1, 75+25, 0); //Third cube
     	}
     	else {
     		wp1 = new Waypoint(  0,  17, 0);   // Depricated

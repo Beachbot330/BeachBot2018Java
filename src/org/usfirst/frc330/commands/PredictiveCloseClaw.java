@@ -32,6 +32,11 @@ public class PredictiveCloseClaw extends BBCommand {
     		this.wp.setX(-wp.getX());
     	}
     }
+    
+    public PredictiveCloseClaw(Waypoint wp, boolean invertX, double distance, double timeout) {
+    	this(wp, invertX, distance);
+    	this.setTimeout(timeout);
+    }
 
     protected void initialize() {
     	Logger.getInstance().println("Current Postition: " + Robot.chassis.getX() + ", " + Robot.chassis.getY(), Logger.Severity.INFO);
@@ -46,15 +51,19 @@ public class PredictiveCloseClaw extends BBCommand {
     protected boolean isFinished() {
     	double aSQ = Math.pow((wp.getX() - Robot.chassis.getX()), 2);
     	double bSQ = Math.pow((wp.getY() - Robot.chassis.getY()), 2);
-    	return (Math.sqrt(aSQ+bSQ) < distance);
+    	return (Math.sqrt(aSQ+bSQ) < distance || this.isTimedOut());
     }
 
     protected void end() {
     	Robot.grabber.closeClaw();
-    	Logger.getInstance().println("Position when initiating claw close: " + distance, Logger.Severity.INFO);
+    	Logger.getInstance().println("Distance when initiating claw close: " + distance, Logger.Severity.INFO);
+    	if(this.isTimedOut()) {
+    		Logger.getInstance().println("Distance at timeout: " + distance, Logger.Severity.WARNING);
+    		Logger.getInstance().println("Position at timeout: " + Robot.chassis.getX() + ", " + Robot.chassis.getY(), Logger.Severity.WARNING);
+    	}
     }
 
-
     protected void interrupted() {
+    	this.end();
     }
 }

@@ -53,7 +53,7 @@ public class ThrowCubeArm extends BBCommand {
     @Override
     protected void execute() {
     	if (Robot.arm.getArmAngle() > releaseAngle - 5 && !rollerOn) {
-    		Robot.grabber.rollerReverse();
+    		Robot.grabber.rollerReverse(0.75);
     		timer.reset();
     		timer.start();
     		rollerOn = true;
