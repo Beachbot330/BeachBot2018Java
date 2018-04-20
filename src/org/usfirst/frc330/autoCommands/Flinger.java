@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Flinger extends BBCommandGroup {
 	
-	double flingDistance = 60+12;
+	double flingDistance = 60+12+12;
 	
 	Waypoint wp1 = new Waypoint(0, -182+5, 0);
 	Waypoint wp2 = new Waypoint(29, -274+5, 0); //Dropoff at scale
@@ -61,7 +61,7 @@ public class Flinger extends BBCommandGroup {
     	
     	//Fling while driving
     	addSequential(new WaitForPosition(wp2, invertX, flingDistance));
-    	addSequential(new ThrowCubeArm(0.85));
+    	addSequential(new ThrowCubeArm(10, 65, 1.0, 5));
     	addSequential(new CheckDone(parallelCommand)); //Check that we are done driving
     	   	
     	//Get into pickup position

@@ -41,23 +41,23 @@ public class CenterStartSwitchMulti extends BBCommandGroup {
     	
     	if((switchPosition == SwitchPosition.LEFT)) {
     		wp1 = new Waypoint( -16,  17, 0);  // Depricated
-    		wp2 = new Waypoint( -65,  58, 0);  // Jog
-    		wp3 = new Waypoint( -53, 107, 0);  // Switch
+    		wp2 = new Waypoint( -65,  58, 0);  // Drive away from the wall with a jog
+    		wp3 = new Waypoint( -53, 107, 0);  // First deploy at the switch
     		wp8 = new Waypoint( -40, 111, 0);  // Second Deploy at Switch
-    		wp4 = new Waypoint(  -17,  25, 0); //Back
-    		wp5 = new Waypoint(  -11, 75-3, 0);  //Second Cube
-    		wp6 = new Waypoint(  -17, 65, 0);  //Back
-    		wp7 = new Waypoint(  -1, 75+25, 0); //Third cube
+    		wp4 = new Waypoint(  -17,  25, 0); //First and second drive back
+    		wp5 = new Waypoint(  -11, 75-5, 0);  //Pickup Second Cube
+    		wp6 = new Waypoint(  -25, 45, 0);  //Pull back from pyramid
+    		wp7 = new Waypoint(  -1, 75+20, 0); //Pickup Third cube
     	}
     	else {
     		wp1 = new Waypoint(  0,  17, 0);   // Depricated
     		wp2 = new Waypoint( 46,  58, 0);   // Jog
     		wp3 = new Waypoint( 46, 107, 0);   // Switch (was 111)
-    		wp8 = new Waypoint( 30, 111, 0);   // Second depoly at switch
-    		wp4 = new Waypoint(  3,  25, 0);   //Back
-    		wp5 = new Waypoint(  2, 75-3, 0);    //Cube
-    		wp6 = new Waypoint(  -17, 65, 0);   //Back
-    		wp7 = new Waypoint(  -5, 75+25, 0); //Third cube
+    		wp8 = new Waypoint( 30, 111, 0);   // Second deploy at switch
+    		wp4 = new Waypoint(  3,  25, 0);   //First and second drive back
+    		wp5 = new Waypoint(  2, 75-5, 0);    //Second Cube
+    		wp6 = new Waypoint(  20, 45, 0);   //Pull back from pyramid
+    		wp7 = new Waypoint(  -5, 75+20, 0); //Third cube
     	}
     	
     	//Drive away from the wall
@@ -108,7 +108,7 @@ public class CenterStartSwitchMulti extends BBCommandGroup {
         addParallel(new PredictiveCloseClaw(wp5, false, 5)); //Start closing 5 inches early
     	addSequential(new WaitCommand(0.4));
     	
-    	//Drive back 10 inches
+    	//Drive back from the pyramid
     	parallelCommand = new DriveWaypointBackward(wp6, false, ChassisConst.defaultTolerance, 2.0, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
     	addParallel(parallelCommand);
     	
@@ -151,7 +151,7 @@ public class CenterStartSwitchMulti extends BBCommandGroup {
         addSequential(new DriveWaypoint(wp7, false, ChassisConst.defaultTolerance, 2.0, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
         
         //Grab Cube
-        addParallel(new PredictiveCloseClaw(wp7, false, 5)); //Start closing 5 inches early
+        addSequential(new CloseClaw());
     	addSequential(new WaitCommand(0.4));
     	
     	//Drive back 10 inches

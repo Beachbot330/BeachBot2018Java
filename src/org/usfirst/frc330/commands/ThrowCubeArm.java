@@ -25,6 +25,7 @@ public class ThrowCubeArm extends BBCommand {
 
 	double releaseAngle, stopAngle;
 	double rollerThrottle = 0.75;
+	double rollerPreRelease = 5;
 	
     public ThrowCubeArm(double releaseAngle, double stopAngle) {
     	this.releaseAngle = releaseAngle;
@@ -39,9 +40,10 @@ public class ThrowCubeArm extends BBCommand {
     	this(10, 65);
     }
     
-    public ThrowCubeArm(double rollerThrottle) {
-    	this(10, 65);
+    public ThrowCubeArm(double releaseAngle, double stopAngle, double rollerThrottle, double rollerPreRelease) {
+    	this(releaseAngle, stopAngle);
     	this.rollerThrottle = rollerThrottle;
+    	this.rollerPreRelease = rollerPreRelease;
     }
 
     // Called just before this Command runs the first time
@@ -58,7 +60,7 @@ public class ThrowCubeArm extends BBCommand {
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-    	if (Robot.arm.getArmAngle() > releaseAngle - 5 && !rollerOn) {
+    	if (Robot.arm.getArmAngle() > releaseAngle - rollerPreRelease && !rollerOn) {
     		Robot.grabber.rollerReverse(rollerThrottle);
     		timer.reset();
     		timer.start();

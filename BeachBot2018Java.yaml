@@ -974,7 +974,7 @@ Children:
           name: Command
           type: Command
           validators: *id033
-          value: IntakePortal
+          value: IntakeCube
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id034
           default: whileHeld
@@ -982,7 +982,7 @@ Children:
           validators: null
           value: whileHeld
       Base: Joystick Button
-      Name: IntakePortal_whileHeld_2
+      Name: IntakeCube_whileHeld_2
     - Children: []
       Properties:
         Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
@@ -1003,7 +1003,7 @@ Children:
           name: Command
           type: Command
           validators: *id033
-          value: Defense
+          value: SwitchPopShotPosition
         When to Run: !!robotbuilder.data.properties.ChoicesProperty
           choices: *id034
           default: whileHeld
@@ -1011,7 +1011,7 @@ Children:
           validators: null
           value: whenReleased
       Base: Joystick Button
-      Name: Defense_release_2
+      Name: SwitchShot_release_2
     - Children: []
       Properties:
         Joystick: !!robotbuilder.data.properties.ParentProperty {default: parent,
@@ -2324,6 +2324,31 @@ Children:
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command
     Name: LowerHand
+  - Children: []
+    Properties:
+      Autonomous Selection: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Autonomous Selection, validators: null, value: false}
+      Parameters: !!robotbuilder.data.properties.ParametersProperty
+        default: []
+        name: Parameters
+        validators: null
+        value: []
+      Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
+        name: Run When Disabled, validators: null, value: false}
+      Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
+        default: &id038 []
+        name: Parameter presets
+        validators: null
+        value: *id038
+      Commands: !!robotbuilder.data.properties.ListProperty
+        default: &id039 []
+        name: Commands
+        validators: *id037
+        value: *id039
+      Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
+        name: Button on SmartDashboard, validators: null, value: true}
+    Base: Command Group
+    Name: SwitchPopShotPosition
   Properties: {}
   Base: Commands
   Name: Commands
