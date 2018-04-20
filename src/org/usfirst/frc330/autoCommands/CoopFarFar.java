@@ -25,7 +25,7 @@ public class CoopFarFar extends BBCommandGroup {
 	
 	Waypoint wp1 = new Waypoint(0,   -224, 0); //Turn to go down path
 	Waypoint wp2 = new Waypoint(96, -223, 0); //Drive to scale
-	Waypoint wp3 = new Waypoint(108, -211, 0); //Pickup center cube
+	Waypoint wp3 = new Waypoint(109+4, -209+5, 0); //Pickup center cube
 	Waypoint wp4 = new Waypoint(122, -199, 0); //Drive to shooting location
 	
 	Waypoint wp5 = new Waypoint(42, -225, 0); //Prep for second cube

@@ -202,6 +202,26 @@ public class Grabber extends Subsystem {
 			public double get() { return rightMedian.getFilteredValue(); }			
 		};
 		CSVLogger.getInstance().add("RightMedianDistance", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return getGrabberLeftOutput(); }			
+		};
+		CSVLogger.getInstance().add("intakeLeft", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return getGrabberRightOutput(); }			
+		};
+		CSVLogger.getInstance().add("intakeRight", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return getGrabberLeftVelocity(); }			
+		};
+		CSVLogger.getInstance().add("intakeLeftVelocity", temp);
+		
+		temp = new CSVLoggable(true) {
+			public double get() { return getGrabberRightVelocity(); }			
+		};
+		CSVLogger.getInstance().add("intakeRightVelocity", temp);
     }
 
     @Override
@@ -304,6 +324,22 @@ public class Grabber extends Subsystem {
     
 	public void pickupOff() {
 		intakeLeft.disable();
+	}
+	
+	public double getGrabberLeftOutput() {
+		return intakeLeft.getMotorOutputVoltage()/intakeLeft.getBusVoltage();
+	}
+	
+	public double getGrabberRightOutput() {
+		return intakeRight.getMotorOutputVoltage()/intakeRight.getBusVoltage();
+	}
+	
+	public double getGrabberLeftVelocity() {
+		return intakeLeft.getSelectedSensorVelocity(0);
+	}
+	
+	public double getGrabberRightVelocity() {
+		return intakeRight.getSelectedSensorVelocity(0);
 	}
 	
 	public void stopGrabber() {

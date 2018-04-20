@@ -172,6 +172,7 @@ public class Robot extends TimedRobot {
     @Override
     public void disabledInit(){
     	Logger.getInstance().println("Disabled Init", Severity.INFO);
+    	Logger.getInstance().println("Battery Voltage: " + DriverStation.getInstance().getBatteryVoltage(), Severity.INFO);
 		Scheduler.getInstance().removeAll();
 		Robot.lift.stopLift();
 		Robot.climber.lockPlatforms();

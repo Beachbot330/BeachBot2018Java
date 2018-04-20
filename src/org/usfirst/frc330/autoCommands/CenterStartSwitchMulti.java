@@ -36,10 +36,13 @@ public class CenterStartSwitchMulti extends BBCommandGroup {
     	
     	//boolean invertX = (switchPosition == SwitchPosition.LEFT);
     	
+    	DrivePIDGains DriveHighReduced = new DrivePIDGains(0.100,0,0.80,0,ChassisConst.defaultMaxOutput-0.1,ChassisConst.defaultMaxOutputStep, ChassisConst.defaultMinStartOutput,"DriveHigh"); //AP 4-19-18
+    	DrivePIDGains DriveHighSlowAccel = new DrivePIDGains(0.100,0,0.80,0,ChassisConst.defaultMaxOutput,ChassisConst.defaultMaxOutputStep*0.6, ChassisConst.defaultMinStartOutput,"DriveHigh"); //AP 4-19-18
+    	
     	if((switchPosition == SwitchPosition.LEFT)) {
     		wp1 = new Waypoint( -16,  17, 0);  // Depricated
     		wp2 = new Waypoint( -65,  58, 0);  // Jog
-    		wp3 = new Waypoint( -55, 111, 0);  // Switch
+    		wp3 = new Waypoint( -53, 107, 0);  // Switch
     		wp8 = new Waypoint( -40, 111, 0);  // Second Deploy at Switch
     		wp4 = new Waypoint(  -17,  25, 0); //Back
     		wp5 = new Waypoint(  -11, 75-3, 0);  //Second Cube
@@ -49,10 +52,10 @@ public class CenterStartSwitchMulti extends BBCommandGroup {
     	else {
     		wp1 = new Waypoint(  0,  17, 0);   // Depricated
     		wp2 = new Waypoint( 46,  58, 0);   // Jog
-    		wp3 = new Waypoint( 46, 111, 0);   // Switch
+    		wp3 = new Waypoint( 46, 107, 0);   // Switch (was 111)
     		wp8 = new Waypoint( 30, 111, 0);   // Second depoly at switch
     		wp4 = new Waypoint(  3,  25, 0);   //Back
-    		wp5 = new Waypoint(  3, 75-3, 0);    //Cube
+    		wp5 = new Waypoint(  2, 75-3, 0);    //Cube
     		wp6 = new Waypoint(  -17, 65, 0);   //Back
     		wp7 = new Waypoint(  -5, 75+25, 0); //Third cube
     	}
@@ -63,7 +66,7 @@ public class CenterStartSwitchMulti extends BBCommandGroup {
     	addParallel(parallelCommand);
     	addSequential(new CloseClaw());
     	addSequential(new Calibrate());
-    	addParallel(new SetLiftPosition(LiftConst.switchDropoff + 5, 8));
+    	addParallel(new SetLiftPosition(LiftConst.switchDropoff+2, 8));
         addSequential(new CheckDone(parallelCommand));
         
         //Get into dropoff position
@@ -73,19 +76,20 @@ public class CenterStartSwitchMulti extends BBCommandGroup {
         addSequential(new ShiftLow());
         addSequential(new TurnGyroWaypoint(wp3, false, ChassisConst.defaultTolerance, 5, ChassisConst.GyroTurnLow)); //(double x, double y, double tolerance, double timeout, PIDGains gains
         addSequential(new ShiftHigh());
-        parallelCommand = new DriveWaypoint(wp3, false, ChassisConst.defaultTolerance, 2.0, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh);
+        parallelCommand = new DriveWaypoint(wp3, false, ChassisConst.defaultTolerance, 2.0, true, DriveHighReduced, ChassisConst.GyroDriveHigh);
         addParallel(parallelCommand);
         
         //Deploy Cube
-        addSequential(new WaitForPosition(wp3, false, 8, 2.0));
+        addSequential(new WaitForPosition(wp3, false, 4, 2.0));
         addSequential(new RollerReverse());
+        addSequential(new CheckDone(parallelCommand));
         
         //Dropoff first cube
         //addSequential(new WaitCommand(0.5));
         //addSequential(new OpenClaw());
         
         //Drive backwards
-        addSequential(new DriveWaypointBackward(wp4, false, ChassisConst.defaultTolerance, 2.0, true, ChassisConst.DriveHigh, ChassisConst.GyroDriveHigh));
+        addSequential(new DriveWaypointBackward(wp4, false, ChassisConst.defaultTolerance, 2.0, true, DriveHighSlowAccel, ChassisConst.GyroDriveHigh));
         
         addSequential(new OpenClaw());
     	

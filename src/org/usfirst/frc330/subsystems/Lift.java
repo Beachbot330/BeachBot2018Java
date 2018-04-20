@@ -206,7 +206,7 @@ public class Lift extends Subsystem {
     		this.setThrottle(gamepadCommand/Math.abs(gamepadCommand)*Math.pow(gamepadCommand, 2)*0.4); //scaled to 0.4 max
     	}
     	else if (triggerLeft >  ArmConst.triggerDeadZone || triggerRight >  ArmConst.triggerDeadZone) {
-    		this.setThrottle(triggerSum/Math.abs(triggerSum)*Math.pow(triggerSum, 2)*0.7); //scaled to 0.7 max
+    		this.setThrottle(triggerSum/Math.abs(triggerSum)*Math.pow(triggerSum, 2)*0.8); //scaled to 0.8 max (added 0.1 on 4/18/18)
     	}
     	else if (lift1.getControlMode() != ControlMode.Position && lift1.getControlMode() != ControlMode.MotionMagic) {
 			position = getPosition();

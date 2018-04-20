@@ -24,6 +24,7 @@ import org.usfirst.frc330.util.Logger;
 public class ThrowCubeArm extends BBCommand {
 
 	double releaseAngle, stopAngle;
+	double rollerThrottle = 0.75;
 	
     public ThrowCubeArm(double releaseAngle, double stopAngle) {
     	this.releaseAngle = releaseAngle;
@@ -36,6 +37,11 @@ public class ThrowCubeArm extends BBCommand {
     
     public ThrowCubeArm() {
     	this(10, 65);
+    }
+    
+    public ThrowCubeArm(double rollerThrottle) {
+    	this(10, 65);
+    	this.rollerThrottle = rollerThrottle;
     }
 
     // Called just before this Command runs the first time
@@ -53,7 +59,7 @@ public class ThrowCubeArm extends BBCommand {
     @Override
     protected void execute() {
     	if (Robot.arm.getArmAngle() > releaseAngle - 5 && !rollerOn) {
-    		Robot.grabber.rollerReverse(0.75);
+    		Robot.grabber.rollerReverse(rollerThrottle);
     		timer.reset();
     		timer.start();
     		rollerOn = true;
