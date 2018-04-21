@@ -24,8 +24,8 @@ public class NearSwitch extends BBCommandGroup {
 	double flingDistance = 60+12;
 	
 	Waypoint wp1 = new Waypoint(0, -15*12, 0); //Drive away from wall to center switch
-	Waypoint wp2 = new Waypoint(12, -14*12, 0); //Dropoff at switch
-	Waypoint wp3 = new Waypoint(25, -218, 0); //Pickup second cube
+	Waypoint wp2 = new Waypoint(12, -14.5*12, 0); //Dropoff at switch
+	Waypoint wp3 = new Waypoint(25, -218+10, 0); //Pickup second cube
 	Waypoint wp7 = new Waypoint(36, -221+18, 0); //Deploy second cube
 	Waypoint wp4 = new Waypoint(14, -240, 0); //Drive to prep location 1
 	Waypoint wp8 = new Waypoint(55, -230, 0); //Drive to prep location 2
@@ -53,7 +53,7 @@ public class NearSwitch extends BBCommandGroup {
     	
     	//Turn towards switch
     	addSequential(new ShiftLow());
-    	addParallel(new SetLiftPosition(LiftConst.switchDropoff + 8, 8));
+    	addParallel(new SetLiftPosition(LiftConst.switchDropoff + 10, 8));
     	addSequential(new TurnGyroWaypoint(wp2, invertX, ChassisConst.defaultTurnTolerance, 2, ChassisConst.GyroTurnLow));
     	
     	//Set dropoff position

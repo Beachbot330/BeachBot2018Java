@@ -102,7 +102,7 @@ public class Robot extends TimedRobot {
         autoProgram.addObject("LeftSide_MultiCube", new Chooser_RightLeftStart(StartingPosition.LEFT));
         autoProgram.addObject("Coop Right", new Chooser_Coop(StartingPosition.RIGHT));
         autoProgram.addObject("Coop Left", new Chooser_Coop(StartingPosition.LEFT));
-        autoProgram.addObject("SPECIAL", new Chooser_Special(StartingPosition.RIGHT));
+        autoProgram.addObject("SPECIAL", new NearFar(StartingPosition.LEFT));
         
         //SimpleAuto
         autoProgram.addObject("Don't Pick This!", new Flinger(StartingPosition.RIGHT));

@@ -21,13 +21,13 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Flinger extends BBCommandGroup {
 	
-	double flingDistance = 60+12+12;
+	double flingDistance = 60+12+18;
 	
 	Waypoint wp1 = new Waypoint(0, -182+5, 0);
-	Waypoint wp2 = new Waypoint(29, -274+5, 0); //Dropoff at scale
+	Waypoint wp2 = new Waypoint(29, -274+3, 0); //Dropoff at scale
 	Waypoint wp3 = new Waypoint(36, -221+5+3, 0); //Drive to second cube
 	Waypoint wp4 = new Waypoint(25, -263+5+2, 0); //Drive back to scale
-	Waypoint wp5 = new Waypoint(32, -274+5, 0); // Second drop off
+	Waypoint wp5 = new Waypoint(32, -274, 0); // Second drop off
 	Waypoint wp6 = new Waypoint(56+5, -216+5-1, 0); // Pickup third cube
 
     public Flinger(StartingPosition pos) {
