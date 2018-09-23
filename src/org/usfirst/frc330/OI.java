@@ -198,6 +198,8 @@ public class OI {
         SmartDashboard.putData("dropoffPositionHigh", new dropoffPositionHigh());
         SmartDashboard.putData("RollerUntilCube", new RollerUntilCube());
         SmartDashboard.putData("ThrowCubeArm", new ThrowCubeArm());
+        SmartDashboard.putData("TankDrive", new TankDrive());
+        SmartDashboard.putData("CheesyDrive", new CheesyDrive());
         
         //powerupDropoff1 = new POVButton(armGamePad, 0, 90); //right
         //powerupDropoff2 = new POVButton(armGamePad, 0, 270); //left
