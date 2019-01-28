@@ -264,6 +264,9 @@ public class Robot extends TimedRobot {
             Scheduler.getInstance().run();
             chassis.pidDrive();
         	CSVLogger.getInstance().writeData();
+        	if(Robot.lift.hasMagLimitChangedState()) {
+        		buzzer.enable(0.2);
+        	}
         	buzzer.update();
     }
     

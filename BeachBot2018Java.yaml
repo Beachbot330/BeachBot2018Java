@@ -292,7 +292,7 @@ Children:
         default: []
         name: Constants
         validators: null
-        value: &id014 []
+        value: &id016 []
     Base: Subsystem
     Name: Chassis
   - Children:
@@ -331,15 +331,25 @@ Children:
     - Children: []
       Properties:
         Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
-          choices: &id015 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+          choices: &id014 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
             '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22',
             '23', '24', '25']
           default: '0'
           name: Input Channel (Digital)
-          validators: &id016 [DigitalChannel]
+          validators: &id015 [DigitalChannel]
           value: '7'
       Base: Digital Input
       Name: limitSwitch
+    - Children: []
+      Properties:
+        Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id014
+          default: '0'
+          name: Input Channel (Digital)
+          validators: *id015
+          value: '9'
+      Base: Digital Input
+      Name: magSwitch
     Properties:
       Send to SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Send to SmartDashboard, validators: null, value: true}
@@ -354,7 +364,7 @@ Children:
         default: []
         name: Constants
         validators: null
-        value: *id014
+        value: *id016
     Base: Subsystem
     Name: Lift
   - Children:
@@ -371,10 +381,10 @@ Children:
     - Children: []
       Properties:
         Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id015
+          choices: *id014
           default: '0'
           name: Input Channel (Digital)
-          validators: *id016
+          validators: *id015
           value: '4'
       Base: Digital Input
       Name: limitSwitch
@@ -392,7 +402,7 @@ Children:
         default: []
         name: Constants
         validators: null
-        value: *id014
+        value: *id016
     Base: Subsystem
     Name: Arm
   - Children:
@@ -506,7 +516,7 @@ Children:
         default: []
         name: Constants
         validators: null
-        value: *id014
+        value: *id016
     Base: Subsystem
     Name: Grabber
   - Children:
@@ -585,7 +595,7 @@ Children:
         default: []
         name: Constants
         validators: null
-        value: *id014
+        value: *id016
     Base: Subsystem
     Name: Climber
   - Children:
@@ -604,10 +614,10 @@ Children:
     - Children: []
       Properties:
         Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id015
+          choices: *id014
           default: '0'
           name: Input Channel (Digital)
-          validators: *id016
+          validators: *id015
           value: '6'
       Base: Digital Input
       Name: isPracticeRobot
@@ -625,7 +635,7 @@ Children:
         default: []
         name: Constants
         validators: null
-        value: *id014
+        value: *id016
     Base: Subsystem
     Name: Frills
   - Children:
@@ -642,10 +652,10 @@ Children:
     - Children: []
       Properties:
         Input Channel (Digital): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id015
+          choices: *id014
           default: '0'
           name: Input Channel (Digital)
-          validators: *id016
+          validators: *id015
           value: '8'
       Base: Digital Input
       Name: limitSwitch
@@ -2336,15 +2346,15 @@ Children:
       Run When Disabled: !!robotbuilder.data.properties.BooleanProperty {default: false,
         name: Run When Disabled, validators: null, value: false}
       Parameter presets: !!robotbuilder.data.properties.ParameterSetProperty
-        default: &id038 []
+        default: []
         name: Parameter presets
         validators: null
-        value: *id038
+        value: []
       Commands: !!robotbuilder.data.properties.ListProperty
-        default: &id039 []
+        default: []
         name: Commands
         validators: *id037
-        value: *id039
+        value: []
       Button on SmartDashboard: !!robotbuilder.data.properties.BooleanProperty {default: true,
         name: Button on SmartDashboard, validators: null, value: true}
     Base: Command Group
@@ -2353,7 +2363,7 @@ Children:
   Base: Commands
   Name: Commands
 Properties:
-  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\micro\workspace',
+  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\makfr\workspace',
     extension: null, folder: true, name: Eclipse Workspace, validators: null, value: ..\}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
     name: Export Commands, validators: null, value: true}
@@ -2372,7 +2382,7 @@ Properties:
     name: Export Subsystems, validators: null, value: true}
   Simulation World File: !!robotbuilder.data.properties.StringProperty {default: /usr/share/frcsim/worlds/GearsBotDemo.world,
     name: Simulation World File, validators: null, value: /usr/share/frcsim/worlds/GearsBotDemo.world}
-  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\micro\',
+  Wiring file location: !!robotbuilder.data.properties.FileProperty {default: 'C:\Users\makfr\',
     extension: null, folder: true, name: Wiring file location, validators: null, value: .\}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
     name: Autonomous Command, type: Command, validators: null, value: Autonomous Command}
